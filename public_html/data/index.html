@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7C8W87NTJC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7C8W87NTJC');
+    </script>
+
+    <title>CONEXIÓN DE CAMPEONES - YAAVS</title>
+    
+    <meta property="og:title" content="CONEXIÓN DE CAMPEONES - YAAVS">
+    <meta property="og:description" content="¡Vincula y gana como campeón! Acumula boletos y participa en nuestros sorteos quincenales.">
+    <meta property="og:image" content="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png">
+    <meta property="og:url" content="https://ganayaavs.com">
+    <meta property="og:type" content="website">
+    <meta name="description" content="¡Vincula y gana como campeón con YAAVS! Consulta tus boletos acumulados aquí.">
+    
+    <link rel="manifest" href="manifest.json?v=4">
+    <meta name="theme-color" content="#02060a">
+    <link rel="apple-touch-icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png?v=appIcon">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="YAAVS App">
+
+    <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles_vf.css?v=20260508_v2">
+    
+    <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+    <style>
+        /* =================================================== */
+        /* BOTÓN ESPECIAL MADRES CAMPEONAS                     */
+        /* =================================================== */
+        .btn-madres-especial {
+            margin-top: 35px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #ff3385 0%, #cc0052 100%);
+            color: white !important;
+            text-decoration: none;
+            padding: 18px 36px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid #ff99cc;
+            box-shadow: 0 0 25px rgba(255, 51, 133, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 20;
+        }
+        .btn-madres-especial::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            transform: skewX(-20deg);
+            animation: shineRosa 3s infinite;
+        }
+        @keyframes shineRosa {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+        .btn-madres-especial:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(255, 51, 133, 0.9), inset 0 0 15px rgba(255, 255, 255, 0.6);
+            border-color: #ffffff;
+        }
+        .btn-madres-icon {
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.8));
+        }
+        .btn-ganadores-sorteo {
+            margin-top: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, rgba(34, 255, 94, 0.95) 0%, rgba(0, 174, 239, 0.9) 100%);
+            color: #02060a !important;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--verde-yaavs);
+            box-shadow: 0 0 25px rgba(34, 255, 94, 0.45), inset 0 0 8px rgba(255, 255, 255, 0.35);
+            transition: all 0.3s ease;
+        }
+        .btn-ganadores-sorteo:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(34, 255, 94, 0.65);
+            border-color: #fff;
+        }
+        .hero-cta-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <audio id="sndClick" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+    <audio id="sndDraw" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3" loop></audio>
+    <audio id="sndWin" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
+    <audio id="sndElite" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio>
+
+    <canvas id="particle-canvas"></canvas>
+
+    <div id="intro-overlay" class="intro-v2">
+        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/recurso-6-dRbQkWfZFlakSEfc.png" alt="YAAVS" class="intro-logo-top">
+        <div class="intro-content intro-content--v2" id="welcome-container">
+            <div class="intro-brand-block">
+                <img src="https://assets.zyrosite.com/cfVCqgCxQzd0Fnkg/celebraconfeti-qZQZB2oFhtmc2W6e.png" alt="Yaavsty" class="intro-yaavsty" loading="eager" decoding="async">
+            </div>
+            
+            <h1 class="intro-main-title">
+                <span class="intro-headline-unified--text-only">
+                    <span class="intro-hero-eyebrow-premium">LA VERDADERA CONEXIÓN ESTÁ AQUÍ</span>
+                    <span class="intro-hero-display">
+                        <span class="intro-hero-line intro-hero-line--white">¡CON LOS&nbsp;</span>
+                        <span class="intro-hero-line intro-hero-line--neon">CAMPEONES</span>
+                        <span class="intro-hero-line intro-hero-line--white">!</span>
+                    </span>
+                </span>
+            </h1>
+            <p id="loading-text" class="intro-loading-text blink">CARGANDO SISTEMA DE NAVEGACIÓN...</p>
+            
+            <div class="intro-cta-wrap" style="display: none;" id="intro-cta-wrap">
+                <span class="intro-cta-hex"></span>
+                <canvas id="intro-cta-particles" class="intro-cta-particles" width="400" height="160" aria-hidden="true"></canvas>
+                <button type="button" id="enter-btn" class="intro-cta snd-click snd-hover">INICIAR CONEXIÓN</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="video-overlay" style="display: none;">
+        <div class="video-container">
+            <button id="skip-video-btn" class="btn-clear snd-click snd-hover" style="position: absolute; top: 20px; right: 20px; z-index: 100; font-size: 16px; border: 1px solid var(--blanco); padding: 5px 15px; border-radius: 5px; background: rgba(0,0,0,0.5);">[ SALTAR VIDEO ]</button>
+            <iframe id="welcome-video" src="" data-src="https://player.vimeo.com/video/1189553221?fl=pl&fe=sh&autoplay=1" width="100%" height="520" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div id="main-content" style="display: none;">
+        <div class="floating-socials">
+            <a href="https://www.facebook.com/yaavsmx" class="social-icon snd-hover"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/yaavsmx?fbclid=IwY2xjawRrIidleHRuA2FlbQIxMABicmlkETFzQXY3OU5jRGlra1lSNDF4c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHjTiyPne2o2mbLE1RL0PxcNJPA262tjFil8vw4zJgoD5-Mup7QxdxyzmQq0c_aem_kv5ic8ac1i4UzGEy0PebMA" class="social-icon snd-hover"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@yaavsmx" class="social-icon snd-hover"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+        <div id="scroll-prompt" class="scroll-prompt">
+            <i class="fa-solid fa-angles-down blink-slow" style="font-size: 1.5rem;"></i>
+            <span>DESLIZA HACIA ABAJO</span>
+        </div>
+
+        <div class="centered-header animate-on-scroll">
+            <div style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; width: 100%;">
+                <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/recurso-6-dRbQkWfZFlakSEfc.png" alt="YAAVS" class="logo-company-center">
+                <div class="campaign-logo-wrapper" style="margin-top: 20px;">
+                    <span class="bracket top-left"></span><span class="bracket top-right"></span><span class="bracket bottom-left"></span><span class="bracket bottom-right"></span>
+                    <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" alt="Conexión de Campeones" class="logo-campaign-center">
+                    <div class="scanline"></div>
+                </div>
+                <h1 class="titulo-luz-estadio" style="margin-top: 20px;">
+                     ¡VINCULA Y GANA <br><span class="resaltado-diamante">COMO CAMPEÓN!</span>
+                </h1>
+
+                <div class="hero-cta-buttons">
+                    <a href="ganadores" class="btn-ganadores-sorteo snd-click snd-hover">
+                        <i class="fa-solid fa-trophy"></i>
+                        <span>GANADORES 1º Y 2º SORTEO</span>
+                    </a>
+                    <a href="https://www.ganayaavs.com/madrescampeonas/" class="btn-madres-especial snd-click snd-hover">
+                        <span class="btn-madres-icon">🎀</span>
+                        <span>MADRES CAMPEONAS</span>
+                    </a>
+                </div>
+
+            </motion.div>
+        </div>
+
+        <div class="section-separator animate-on-scroll"></div>
+
+        <div class="container-centered section-boletos-bg animate-on-scroll">
+            <div class="search-area tech-panel" style="max-width: 600px; margin: 0 auto;">
+                <div class="panel-corners"></div>
+                <h2 class="section-title">CONSULTA TUS BOLETOS ACUMULADOS</h2>
+                <p class="section-desc" style="color: var(--azul-puntos); margin-bottom: 20px; font-weight: bold;">INGRESA TU CLAVE ÚNICA DE YAAVSER</p>
+                <div class="input-wrapper">
+                    <input type="text" id="inputClave" placeholder="CLAVE ÚNICA O ID" class="snd-hover">
+                    <div class="botones-consulta-wrap">
+                        <button class="btn-check snd-click snd-hover btn-verificar" onclick="consultar()">VERIFICAR BOLETOS</button>
+                        <button class="btn-clear snd-click snd-hover outline-cyan-btn btn-limpiar" onclick="limpiar()">LIMPIAR</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading" class="loader-balon" style="display: none; margin-top: 40px;">
+                <div class="balon-bounce">⚽</div>
+                <span>DESENCRIPTANDO DATOS...</span>
+            </div>
+
+            <div id="resultados" style="display:none; max-width: 800px; margin: 40px auto 0 auto;" class="crt-monitor tech-panel">
+                <div class="panel-corners"></div>
+                <div class="score-hero">
+                    <span class="score-label" style="font-size: 1.2rem;">YAAVSER ESTÁS PARTICIPANDO DENTRO DE LA</span>
+                    <h3 id="rLiga" class="liga-resultado liga-resultado--placeholder">[ LIGA ]</h3>
+                    <span class="score-label">TOTAL DE BOLETOS ACUMULADOS</span>
+                    <span id="cTotal" class="score-number blink-slow">0</span>
+                </div>
+
+                <div class="cat-card">
+                    <div class="cat-title">SIMS VINCULADAS</div>
+                    <div class="data-grid">
+                        <div><span class="val-now" id="avChipsBait">0</span><span class="lbl-desc lbl-op lbl-op-bait">Bait</span></div>
+                        <div><span class="val-now" id="avChipsMovi">0</span><span class="lbl-desc lbl-op lbl-op-movi">Movistar</span></div>
+                        <div><span class="val-now" id="avChipsUnefon">0</span><span class="lbl-desc lbl-op lbl-op-unefon">AT&amp;T / Unefon</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="data-grid">
+                        <div><span class="val-win" id="totChipsBait">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totChipsMovi">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totChipsUnefon">0</span><span class="lbl-desc">BOLETOS</span></div>
+                    </div>
+                </div>
+
+                <div class="cat-card">
+                    <div class="cat-title">PORTABILIDADES VINCULADAS</div>
+                    <div class="data-grid">
+                        <div><span class="val-now" id="avPortaBait">0</span><span class="lbl-desc lbl-op lbl-op-bait">Bait</span></div>
+                        <div><span class="val-now" id="avPortaMovi">0</span><span class="lbl-desc lbl-op lbl-op-movi">Movistar</span></div>
+                        <div><span class="val-now" id="avPortaUnefon">0</span><span class="lbl-desc lbl-op lbl-op-unefon">AT&amp;T / Unefon</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="data-grid">
+                        <div><span class="val-win" id="totPortaBait">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totPortaMovi">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totPortaUnefon">0</span><span class="lbl-desc">BOLETOS</span></div>
+                    </div>
+                </div>
+
+                <div class="cat-card">
+                    <div class="cat-title">eSIMs VINCULADAS</div>
+                    <div class="data-grid">
+                        <div><span class="val-now" id="avEsimBait">0</span><span class="lbl-desc lbl-op lbl-op-bait">Bait</span></div>
+                        <div><span class="val-now" id="avEsimMovi">0</span><span class="lbl-desc lbl-op lbl-op-movi">Movistar</span></div>
+                        <div><span class="val-now" id="avEsimUnefon">0</span><span class="lbl-desc lbl-op lbl-op-unefon">AT&amp;T / Unefon</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="data-grid">
+                        <div><span class="val-win" id="totEsimBait">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totEsimMovi">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totEsimUnefon">0</span><span class="lbl-desc">BOLETOS</span></div>
+                    </div>
+                </div>
+
+                <div id="boletos-vista" class="ticket-panel" style="display:none;">
+                    <div class="ticket-summary-card">
+                        <div>
+                            <span class="ticket-count-label">BOLETOS EN TU BOLSA</span>
+                            <h3 id="ticket-count" class="ticket-count">0</h3>
+                            <p class="ticket-note">Tus boletos aparecen aquí con estilo dinámico y listos para el sorteo.</p>
+                        </div>
+                        <span class="ticket-status-chip">REVISIÓN DE BOLETOS</span>
+                    </div>
+                    <div id="ticket-grid" class="ticket-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-separator animate-on-scroll"></div>
+
+        <div class="container-centered animate-on-scroll">
+            <h2 class="section-title">¿CÓMO ACUMULO BOLETOS?</h2>
+            <p class="section-desc"><strong class="section-desc-strong">Del 1º de Mayo al 31 de Julio de 2026, todos los YAAVSERS activos</strong> acumulan boletos por cada activación vinculada.</p>
+            
+            <div class="acumulo-boletos-row">
+                <div class="acumulo-boletos-table-wrap table-responsive">
+                    <table class="cyber-table acumulo-boletos-table hover-fx">
+                        <thead>
+                            <tr>
+                                <th>VINCULACIÓN</th>
+                                <th>BOLETOS BASE</th>
+                                <th>BOLETO EXTRA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align: middle; font-weight: bold;">SIMS</td>
+                                <td>
+                                    <span style="display: block; margin-bottom: 8px;">1 BOLETO</span>
+                                    <div style="display: flex; justify-content: center; gap: 10px; align-items: center;">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-01-oViAJMe9HhOpTQcr.png" alt="Bait" style="height: 18px; filter: drop-shadow(0 0 5px rgba(92,255,143,0.3));">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-02-J49rzVNNq8plXJVK.png" alt="Movistar" style="height: 18px; filter: drop-shadow(0 0 5px rgba(77,219,255,0.3));">
+                                    </div>
+                                </td>
+                                <td>
+                                    <span style="display: block; margin-bottom: 8px;">+1 BOLETO</span>
+                                    <div style="display: flex; justify-content: center; gap: 10px; align-items: center;">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-03-96r2tB7yHroEKVSq.png" alt="AT&T" style="height: 18px; filter: drop-shadow(0 0 5px rgba(0,168,224,0.3));">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-04-811BwpTI7LvfQZcq.png" alt="Unefon" style="height: 18px; filter: drop-shadow(0 0 5px rgba(255,210,138,0.3));">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: middle; font-weight: bold;">PORTABILIDADES</td>
+                                <td>
+                                    <span style="display: block; margin-bottom: 8px;">2 BOLETOS</span>
+                                    <div style="display: flex; justify-content: center; gap: 10px; align-items: center;">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-01-oViAJMe9HhOpTQcr.png" alt="Bait" style="height: 18px; filter: drop-shadow(0 0 5px rgba(92,255,143,0.3));">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-02-J49rzVNNq8plXJVK.png" alt="Movistar" style="height: 18px; filter: drop-shadow(0 0 5px rgba(77,219,255,0.3));">
+                                    </div>
+                                </td>
+                                <td>
+                                    <span style="display: block; margin-bottom: 8px;">+1 BOLETO</span>
+                                    <div style="display: flex; justify-content: center; gap: 10px; align-items: center;">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-03-96r2tB7yHroEKVSq.png" alt="AT&T" style="height: 18px; filter: drop-shadow(0 0 5px rgba(0,168,224,0.3));">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-04-811BwpTI7LvfQZcq.png" alt="Unefon" style="height: 18px; filter: drop-shadow(0 0 5px rgba(255,210,138,0.3));">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: middle; font-weight: bold;">eSIMs</td>
+                                <td>
+                                    <span style="display: block; margin-bottom: 8px;">2 BOLETOS</span>
+                                    <div style="display: flex; justify-content: center; gap: 10px; align-items: center;">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-01-oViAJMe9HhOpTQcr.png" alt="Bait" style="height: 18px; filter: drop-shadow(0 0 5px rgba(92,255,143,0.3));">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-02-J49rzVNNq8plXJVK.png" alt="Movistar" style="height: 18px; filter: drop-shadow(0 0 5px rgba(77,219,255,0.3));">
+                                    </div>
+                                </td>
+                                <td>
+                                    <span style="display: block; margin-bottom: 8px;">+1 BOLETO</span>
+                                    <div style="display: flex; justify-content: center; gap: 10px; align-items: center;">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-03-96r2tB7yHroEKVSq.png" alt="AT&T" style="height: 18px; filter: drop-shadow(0 0 5px rgba(0,168,224,0.3));">
+                                        <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/sin-tiitulo-1-04-811BwpTI7LvfQZcq.png" alt="Unefon" style="height: 18px; filter: drop-shadow(0 0 5px rgba(255,210,138,0.3));">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="acumulo-boletos-visual">
+                    <img src="https://assets.zyrosite.com/cfVCqgCxQzd0Fnkg/baloncabezaso-66QTrdAO6MSRPEJA.png" alt="Yaavsty" class="yaavsty-sentado-img" loading="lazy">
+                </div>
+            </div>
+        </div>
+
+        <div class="section-separator animate-on-scroll"></div>
+
+        <div class="container-centered animate-on-scroll categoria-liga-block">
+            <h2 class="section-title">¿EN QUÉ CATEGORÍA COMPITO?</h2>
+            <div class="categoria-liga-row">
+                <div class="categoria-liga-visual" role="img" aria-label="Competencia justa: todos compiten, todos pueden ganar">
+                    <img src="https://assets.zyrosite.com/cfVCqgCxQzd0Fnkg/competencia-justa-ghAStO7zEJNa6yaw.png" alt="Competencia justa: todos compiten, todos pueden ganar" class="competencia-justa-img" loading="lazy">
+                </div>
+                <div class="categoria-liga-table-wrap table-responsive">
+                    <table class="cyber-table categoria-liga-table hover-fx">
+                        <thead><tr><th>CATEGORÍA</th><th>VINCULACIONES POR SEMANA</th><th>TIPO DE YAAVSER</th></tr></thead>
+                        <tbody>
+                            <tr><td class="liga-tag liga-tag--ascenso">LIGA ASCENSO</td><td>DE 0 A 10</td><td>PDV CON <strong class="tipo-volumen tipo-volumen--bajo">BAJO VOLUMEN</strong> DE VINCULACIONES</td></tr>
+                            <tr><td class="liga-tag liga-tag--pro">LIGA PRO</td><td>DE 11 A 21</td><td>PDV CON VOLUMEN <strong class="tipo-volumen tipo-volumen--medio">MEDIO</strong> DE VINCULACIONES</td></tr>
+                            <tr><td class="liga-tag liga-tag--elite">LIGA ELITE</td><td>MÁS DE 21</td><td>PDV CON <strong class="tipo-volumen tipo-volumen--alto">ALTO</strong> VOLUMEN DE VINCULACIONES</td></tr>
+                            <tr><td class="liga-tag liga-tag--cambaceo">LIGA CAMBACEO</td><td>DE 0 A INFINITO</td><td>CAMBACEADORES</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-separator animate-on-scroll"></div>
+
+        <div class="container-centered animate-on-scroll kits-section-wrap" style="position: relative;">
+            <div class="kits-marquee" aria-label="153 kits en juego">
+                <div class="kits-marquee__board">
+                    <div class="kits-marquee__center">
+                        <span class="kits-marquee__num">920</span>
+                        <span class="kits-marquee__label">KITS EN JUEGO</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="kits-grid">
+                <div class="kit-card basic-card snd-hover">
+                    <div class="kit-img-wrapper">
+                        <img src="https://assets.zyrosite.com/cfVCqgCxQzd0Fnkg/gorra-y-cilindro-vtgC3m3pX16KTaE9.png" alt="Kit Básico">
+                    </div>
+                    <div class="kit-info">
+                        <h3 class="kit-title" style="color: var(--verde-yaavs);">KIT BÁSICO</h3>
+                        <p class="kit-desc">Gorra Oficial + Cilindro Deportivo</p>
+                        <div class="kit-stock" style="color: var(--verde-yaavs); border-color: var(--verde-yaavs);">160 DISPONIBLES</div>
+                    </div>
+                </div>
+                <div class="kit-card pro-card snd-hover">
+                    <div class="kit-img-wrapper">
+                        <img src="https://assets.zyrosite.com/cfVCqgCxQzd0Fnkg/playera-gorra-y-termo-vv8oMQBeL00CI06k.png" alt="Kit Pro">
+                    </div>
+                    <div class="kit-info">
+                        <h3 class="kit-title" style="color: var(--azul-puntos);">KIT PRO</h3>
+                        <p class="kit-desc">Playera Verde + Gorra + Cilindro</p>
+                        <div class="kit-stock" style="color: var(--azul-puntos); border-color: var(--azul-puntos);">460 DISPONIBLES</div>
+                    </div>
+                </div>
+                <div class="kit-card elite-card snd-hover">
+                    <div class="kit-img-wrapper">
+                        <img src="https://assets.zyrosite.com/cfVCqgCxQzd0Fnkg/playera-termo-y-baloin-CbrHIeK2xdgxGgrd.png" alt="Kit Elite">
+                    </div>
+                    <div class="kit-info">
+                        <h3 class="kit-title" style="color: var(--oro);">KIT ELITE</h3>
+                        <p class="kit-desc">Playera Verde + Balón Oficial + Cilindro</p>
+                        <div class="kit-stock" style="color: var(--oro); border-color: var(--oro);">300 DISPONIBLES</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-separator animate-on-scroll"></div>
+
+        <div class="container-centered animate-on-scroll">
+            <h2 class="section-title">CALENDARIO DE SORTEOS</h2>
+            <div class="fb-live-banner" role="note">
+                <p class="fb-live-banner__text">
+                    <span class="fb-live-banner__line">TODOS NUESTROS SORTEOS SERÁN TRANSMITIDOS POR NUESTRO</span>
+                    <img src="https://assets.zyrosite.com/cfVCqgCxQzd0Fnkg/pngegg-ClYpj8tw588yBT0h.png" alt="Facebook Live" class="fb-live-banner__logo" width="160" height="32" loading="eager" decoding="async" referrerpolicy="no-referrer">
+                </p>
+            </div>
+            
+            <div class="calendario-super-wrap">
+                <div class="table-responsive">
+                    <table class="calendario-table-unificada">
+                        <thead>
+                            <tr>
+                                <th>SORTEO</th>
+                                <th>FECHA</th>
+                                <th>TOTAL DE KITS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="sorteo-num">1º</span></td><td>15 mayo</td><td>153 · <a href="ganadores" style="color:var(--verde-yaavs);font-weight:800;">Ver ganadores</a></td></tr>
+                            <tr><td><span class="sorteo-num">2º</span></td><td>29 mayo</td><td>153</td></tr>
+                            <tr><td><span class="sorteo-num">3º</span></td><td>12 junio</td><td>153</td></tr>
+                            <tr><td><span class="sorteo-num">4º</span></td><td>26 junio</td><td>153</td></tr>
+                            <tr><td><span class="sorteo-num">5º</span></td><td>10 julio</td><td>153</td></tr>
+                            <tr><td><span class="sorteo-num">6º</span></td><td>31 julio</td><td>153</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <button id="open-sorter-btn" class="btn-check snd-click snd-hover" style="margin-top: 10px; width: auto; padding: 15px 40px; font-size: 1rem;">INICIAR SORTEO</button>
+        </div>
+
+        <section class="support-footer animate-on-scroll" style="margin-top: 60px;">
+            <div class="footer-glow"></div>
+            <h2 class="support-title">¿TIENES ALGUNA DUDA?</h2>
+            <p class="support-subtitle">Consulta las bases de la dinámica o visita las preguntas frecuentes.</p>
+            <div class="support-buttons">
+                <a href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/conexioin-de-campeones-1-_compressed-8KpSOoIZYucsn8np.pdf" download class="support-btn green-btn snd-click snd-hover" target="_blank" rel="noreferrer">BASES DE LA DINÁMICA</a>
+                <button type="button" onclick="openFaqModal()" class="support-btn outline-cyan-btn snd-click snd-hover">PREGUNTAS FRECUENTES</button>
+                <button type="button" onclick="preguntarDescargaApp()" class="support-btn green-btn snd-click snd-hover">
+                    <i class="fa-solid fa-mobile-screen-button" style="margin-right: 8px;"></i> DESCARGAR APP
+                </button>
+            </div>
+            <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/recurso-6-dRbQkWfZFlakSEfc.png" alt="YAAVS Logo Footer" class="footer-logo" style="max-width: 250px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); display: block; margin: 0 auto 30px auto;">
+            <p class="legal-text">
+                1. Registro automático: Cada activación vinculada genera boletos en el sistema a nombre de la clave única de YAAVSER.
+                2. Consulta: El YAAVSER puedrá consultar diariamente sus boletos acumulados en la página web oficial ganayaavs.com
+                3. Transmisión en vivo del sorteo: Cada viernes quincenal a las 3:00 pm (hora CDMX) por el Facebook oficial de YAAVS.
+                4. Sorteo digital: Se utilizará un sorteador propio que elige boletos de entre todos los acumulados en el período. Se realizará un sorteo por cada categoría de cliente en la fecha definida.
+                5. Anuncio de ganadores: Se publica lista en redes sociales y se notifica por WhatsApp a los ganadores.
+                6. Entrega de premios: Los premios se enviarán con el ejecutivo de ventas en un plazo máximo a 8 días.
+                • Participan todos los YAAVSERS ACTIVOS a nivel Nacional (CL y CB)
+                • Una vez realizado el sorteo quincenal, la acumulación de boletos por cada YAAVSER se reinicia.
+                • Cada YAAVSER GANADOR podrá seguir participando en los siguientes sorteos quincenales.
+                • Los boletos acumulado no son transferibles entre YAAVSERS.
+                • La participación implica la aceptación total de estas bases.
+                • Todas las operaciones estarán sujetas a validación por YAAVS.
+            </p>
+        </section>
+    </div>
+
+    <div id="faq-modal" class="faq-modal-root" style="display: none;" aria-modal="true" role="dialog" aria-labelledby="faq-modal-title">
+        <div class="faq-modal__backdrop snd-click" onclick="closeFaqModal()" aria-hidden="true"></div>
+        <div class="faq-modal__panel tech-panel">
+            <div class="panel-corners"></div>
+            <button type="button" class="faq-modal__close snd-click" onclick="closeFaqModal()" aria-label="Cerrar preguntas frecuentes">×</button>
+            <h2 id="faq-modal-title" class="faq-modal__title">PREGUNTAS FRECUENTES</h2>
+            <div id="faq-modal-list" class="faq-modal__list"></div>
+        </div>
+    </div>
+    
+    <button type="button" id="faq-float-btn" class="faq-float-btn snd-click snd-hover" onclick="openFaqModal()" aria-label="Preguntas frecuentes">
+        <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+        <span class="faq-float-btn__label">PREGUNTAS FRECUENTES</span>
+    </button>
+
+    <div id="password-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); z-index: 25000; justify-content: center; align-items: center;">
+        <div class="tech-panel" style="width: 90%; max-width: 400px; text-align: center;">
+            <div class="panel-corners"></div>
+            <button onclick="cerrarPassword()" class="btn-clear snd-click" style="position: absolute; top: 10px; right: 15px; color: #ff4d4d; font-weight: bold; border: none; background: transparent; cursor: pointer;">[ X ]</button>
+            <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 20px; color: var(--or);">ACCESO RESTRINGIDO</h2>
+            <p style="color: #ccc; margin-bottom: 20px; font-family: Arial;">Ingrese credenciales de administrador para iniciar el evento en vivo.</p>
+            <input type="password" id="inputPassword" placeholder="CONTRASEÑA" style="margin-bottom: 20px;">
+            <button class="btn-check snd-click" style="width: 100%;" onclick="verificarPassword()">AUTENTICAR</button>
+            <p id="error-password" style="color: #ff4d4d; margin-top: 10px; display: none; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <div id="sorter-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.98); z-index: 30000; justify-content: center; align-items: center; overflow-y: auto;">
+        <style>
+            #sorter-modal .wrapper { width: 100%; max-width: 600px; margin: auto; padding: 20px; text-align: center; z-index: 10; font-family: 'Montserrat', sans-serif; }
+            #sorter-modal .screen { display: none; flex-direction: column; align-items: center; }
+            #sorter-modal .screen.active { display: flex; animation: stadiumIntro 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+            @keyframes stadiumIntro { 0% { opacity: 0; transform: scale(1.2) translateY(50px); filter: blur(15px); } 100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); } }
+            #sorter-modal .logo-main { width: 220px; filter: drop-shadow(0 0 20px var(--cc)); margin-bottom: 20px; }
+            #sorter-modal .btn-ui { width: 100%; padding: 22px; font-size: 1.5rem; background: var(--cc); color: #000; border: none; border-radius: 50px; font-weight: 900; cursor: pointer; box-shadow: 0 0 30px var(--cc); text-transform: uppercase; transition: 0.3s; text-shadow: none; }
+            #sorter-modal .btn-ui:hover { transform: scale(1.05); filter: brightness(1.2); }
+            #sorter-modal .btn-historial { width: 100%; padding: 25px; font-size: 1.2rem; background: #222; color: #fff; border: 3px solid var(--sk); border-radius: 20px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: 0.3s; }
+            #sorter-modal .btn-reset { background: #ff4d4d; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: sans-serif; font-weight: bold; margin-top: 40px; opacity: 0.7; }
+            #sorter-modal .btn-exit { width: 100%; padding: 18px 20px; font-size: 1rem; background: rgba(255,255,255,0.08); color: #fff; border: 2px solid rgba(255,255,255,0.15); border-radius: 20px; font-weight: 700; cursor: pointer; margin-top: 18px; backdrop-filter: blur(12px); transition: 0.25s ease; }
+            #sorter-modal .btn-exit:hover { background: rgba(255,255,255,0.12); transform: translateY(-1px); }
+            #sorter-modal .loader-container { position: relative; width: 150px; height: 150px; margin: 20px; }
+            #sorter-modal .radar { width: 100%; height: 100%; border: 4px solid var(--cc); border-radius: 50%; position: absolute; animation: pulse 2s infinite; }
+            #sorter-modal .scanner { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(from 0deg, transparent, var(--cc)); opacity: 0.3; animation: spin 2s linear infinite; }
+            @keyframes spin { 100% { transform: rotate(360deg); } }
+            @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.3); opacity: 0; } }
+            #sorter-modal:has(#screen-stadium.active) .wrapper { max-width: min(720px, 94vw); }
+            #sorter-modal #stadium {
+                background: rgba(0, 18, 45, 0.95);
+                border: 4px solid var(--cc);
+                border-radius: 40px;
+                padding: 26px 22px 22px;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+                width: 100%;
+                box-sizing: border-box;
+                text-align: center;
+            }
+            #sorter-modal #stadium > img {
+                width: 150px;
+                height: auto;
+                margin-bottom: 6px;
+                filter: drop-shadow(0 0 16px var(--cc));
+            }
+            #sorter-modal #selLiga {
+                width: 100%;
+                background: #000;
+                color: #fff;
+                border: 2px solid var(--cc);
+                padding: 10px;
+                border-radius: 10px;
+                margin: 10px 0 0;
+                font-weight: bold;
+                box-sizing: border-box;
+            }
+            #sorter-modal #prizeCard {
+                background: rgba(255, 215, 0, 0.1);
+                border: 2px solid var(--or);
+                border-radius: 20px;
+                padding: 14px 16px;
+                margin: 14px 0;
+            }
+            #sorter-modal #pName { color: var(--or); margin: 0; font-size: 1.2rem; }
+            #sorter-modal #pDesc { font-size: 0.88rem; margin: 6px 0 0; opacity: 0.9; font-weight: bold; }
+            #sorter-modal .display-area {
+                background: rgba(0, 0, 0, 0.8);
+                border: 2px dashed var(--cc);
+                border-radius: 25px;
+                min-height: 140px;
+                max-height: min(50vh, 460px);
+                overflow-x: hidden;
+                overflow-y: auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px 12px;
+                padding: 16px 14px;
+                margin: 0 0 16px;
+                align-content: start;
+                -webkit-overflow-scrolling: touch;
+            }
+            #sorter-modal .winner-tag {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.7rem;
+                font-weight: 700;
+                color: var(--cc);
+                background: rgba(255, 255, 255, 0.05);
+                padding: 10px 8px;
+                border-radius: 12px;
+                border: 1px solid var(--cc);
+                animation: pop 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+                line-height: 1.35;
+                word-break: break-all;
+                text-align: center;
+                text-shadow: 0 0 5px #000;
+            }
+            #sorter-modal .winner-tag__ticket {
+                display: block;
+                width: 100%;
+            }
+            #sorter-modal .winner-tag__estado {
+                display: block;
+                margin-top: 5px;
+                font-size: 0.62rem;
+                font-weight: 800;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: var(--or);
+                word-break: normal;
+            }
+            @media (max-width: 520px) {
+                #sorter-modal .display-area { grid-template-columns: 1fr; }
+                #sorter-modal .winner-tag { font-size: 0.78rem; }
+            }
+            @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+            h1, h2, h3, p { text-shadow: 2px 2px 10px #000; }
+            #modalH { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.97); z-index: 35000; overflow-y: auto; padding: 24px 16px 40px; }
+            #modalH .modalH-inner { max-width: 1180px; margin: 0 auto; }
+            #modalH .modalH-toolbar { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; margin-bottom: 24px; position: relative; padding: 0 48px; }
+            #modalH .modalH-toolbar h1 { color: var(--nv); font-family: 'Montserrat', sans-serif; font-weight: 900; margin: 0; font-size: clamp(1.2rem, 3vw, 1.8rem); text-shadow: 0 0 15px rgba(34,255,94,0.4); flex: 1 1 100%; text-align: center; }
+            #modalH .modalH-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; width: 100%; }
+            #modalH .btn-resultado { border: none; border-radius: 12px; padding: 12px 16px; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.8rem; cursor: pointer; text-transform: uppercase; transition: transform 0.2s; }
+            #modalH .btn-resultado:hover { transform: translateY(-2px); }
+            #modalH .btn-resultado--excel { background: var(--sk); color: #001018; box-shadow: 0 0 18px rgba(0, 229, 255, 0.35); }
+            #modalH .btn-resultado--captura { background: var(--verde-yaavs); color: #02060a; box-shadow: 0 0 18px rgba(34, 255, 94, 0.35); }
+            #modalH .btn-resultado--cerrar { position: absolute; right: 0; top: 0; background: transparent; color: #ff4d4d; border: 2px solid #ff4d4d; }
+            #modalH .resultados-captura { background: linear-gradient(180deg, #041018 0%, #061121 100%); border: 2px solid rgba(0, 229, 255, 0.35); border-radius: 28px; padding: 24px 20px 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+            #modalH .resultados-captura-header { text-align: center; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            #modalH .resultados-captura-header img { width: min(280px, 80vw); margin-bottom: 12px; filter: drop-shadow(0 0 20px rgba(34,255,94,0.35)); }
+            #modalH .resultados-captura-header h2 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: clamp(1.1rem, 3vw, 1.6rem); color: #fff; margin: 0 0 8px; letter-spacing: 1px; }
+            #modalH .resultados-meta__sorteo { color: var(--verde-yaavs); font-weight: 900; font-size: 1.1rem; margin: 0 0 4px; }
+            #modalH .resultados-meta__total { color: var(--sk); font-weight: 700; margin: 0 0 4px; }
+            #modalH .resultados-meta__fecha { color: rgba(255,255,255,0.55); font-size: 0.85rem; margin: 0; }
+            #modalH .captura-hint { display: none; text-align: center; color: var(--verde-yaavs); font-size: 0.85rem; font-weight: 700; margin-bottom: 16px; }
+            #modalH.modalH--captura { padding: 20px; background: #02060a; }
+            #modalH.modalH--captura .modalH-toolbar .modalH-actions,
+            #modalH.modalH--captura .modalH-toolbar .btn-resultado--cerrar { display: none !important; }
+            #modalH.modalH--captura .captura-hint { display: block; }
+            #modalH.modalH--captura .resultados-captura { border-color: var(--verde-yaavs); max-width: 1100px; margin: 0 auto; }
+            #modalH .h-liga-box { background: rgba(0,0,0,0.35); border: 2px solid var(--sk); border-radius: 20px; margin-bottom: 24px; padding: 18px; }
+            #modalH .h-liga-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+            #modalH .h-liga-title { margin: 0; font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 900; }
+            #modalH .h-liga-count { font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+            #modalH .h-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+            @media (max-width: 900px) { #modalH .h-grid { grid-template-columns: 1fr; } }
+            #modalH .h-col { background: rgba(255,255,255,0.03); padding: 12px; border-radius: 14px; text-align: left; border-top: 3px solid rgba(255,255,255,0.15); }
+            #modalH .h-col--basico { border-top-color: var(--verde-yaavs); }
+            #modalH .h-col--pro { border-top-color: var(--sk); }
+            #modalH .h-col--elite { border-top-color: var(--oro); }
+            #modalH .h-col-title { font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: rgba(255,255,255,0.85); }
+            #modalH .h-col-list { display: flex; flex-direction: column; gap: 8px; }
+            #modalH .h-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 12px; line-height: 1.35; }
+            #modalH .h-item-kit { display: inline-block; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; margin-bottom: 4px; background: rgba(255,255,255,0.1); }
+            #modalH .h-item--B .h-item-kit { color: var(--verde-yaavs); }
+            #modalH .h-item--P .h-item-kit { color: var(--sk); }
+            #modalH .h-item--E .h-item-kit { color: var(--oro); }
+            #modalH .h-item-clave { display: block; font-size: 0.95rem; color: #fff; margin-bottom: 2px; }
+            #modalH .h-item-boleto { display: block; font-size: 0.72rem; color: rgba(0, 229, 255, 0.85); word-break: break-all; }
+            #modalH .h-item-time { display: block; font-size: 0.65rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
+            #modalH .h-item-estado {
+                display: block;
+                font-size: 0.72rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                color: var(--oro);
+                margin: 4px 0 2px;
+            }
+            #modalH .h-liga-box {
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 12px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            }
+            #modalH .h-liga-box::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background: linear-gradient(90deg, transparent, var(--liga-accent, var(--sk)), transparent);
+                opacity: 0.9;
+            }
+            #modalH .h-liga-head__left { display: flex; flex-direction: column; gap: 4px; }
+            #modalH .btn-captura-liga {
+                flex-shrink: 0;
+                padding: 10px 14px;
+                font-size: 0.72rem;
+            }
+            #modalH .h-liga-captura {
+                border-radius: 16px;
+                padding: 4px 2px 2px;
+            }
+            #modalH .h-liga-captura__banner {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                padding: 16px 18px;
+                margin-bottom: 16px;
+                border-radius: 16px;
+                background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0.25) 100%);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+            #modalH .h-liga-captura__banner img {
+                width: 72px;
+                height: auto;
+                filter: drop-shadow(0 0 12px rgba(34, 255, 94, 0.35));
+            }
+            #modalH .h-liga-captura__eyebrow {
+                margin: 0 0 4px;
+                font-size: 0.65rem;
+                font-weight: 800;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: rgba(255, 255, 255, 0.5);
+            }
+            #modalH .h-liga-captura__title {
+                margin: 0 0 6px;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 1.35rem;
+                font-weight: 900;
+                text-shadow: 0 0 20px currentColor;
+            }
+            #modalH .h-liga-captura__meta {
+                margin: 0;
+                font-size: 0.8rem;
+                color: rgba(255, 255, 255, 0.65);
+                font-weight: 600;
+            }
+            #modalH .h-col {
+                box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.25);
+                min-height: 120px;
+            }
+            #modalH .h-item {
+                transition: border-color 0.2s, transform 0.2s;
+            }
+            #modalH .h-item:hover {
+                border-color: rgba(0, 229, 255, 0.35);
+                transform: translateX(3px);
+            }
+            #modalH .h-col-list { max-height: 420px; overflow-y: auto; padding-right: 4px; }
+            #modalH .h-col-list::-webkit-scrollbar { width: 5px; }
+            #modalH .h-col-list::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.35); border-radius: 4px; }
+            #modalH.capturando .no-captura { visibility: hidden !important; pointer-events: none; }
+            @media print {
+                #modalH { display: block !important; position: static; background: #fff; padding: 0; }
+                #modalH .modalH-toolbar { display: none !important; }
+                #modalH .resultados-captura { border: none; box-shadow: none; color: #000; }
+            }
+        </style>
+        <div class="wrapper">
+            <div id="screen-welcome" class="screen active">
+                <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" class="logo-main" alt="Conexión de Campeones">
+                <h1 style="font-size: 2.5rem; color: var(--nv);">¡ESTAMOS EN VIVO!</h1>
+                <button class="btn-ui" onclick="iniciarConEspera()">INICIAR SORTEO (ENTER)</button>
+            </div>
+            <div id="screen-radar" class="screen">
+                <div class="loader-container">
+                    <div class="radar"></div>
+                    <div class="scanner"></div>
+                </div>
+                <h2 id="radar-text" style="color:var(--cc)">SINCRONIZANDO NUBE...</h2>
+                <p id="radar-sub">Buscando base de datos en tiempo real</p>
+                <div id="timer-ui" style="font-size: 2rem; color: var(--or); margin-top: 10px;">10</div>
+            </div>
+            <div id="screen-drop" class="screen">
+                <h2 style="color:var(--or)">CONEXIÓN REMOTA FALLIDA</h2>
+                <p>Carga el archivo local para continuar el evento</p>
+                <input type="file" id="f" hidden onchange="pA(this)">
+                <label for="f" class="btn-ui" style="display:block">📄 CARGAR EXCEL LOCAL</label>
+            </div>
+            <div id="screen-stadium" class="screen">
+                <div id="stadium">
+                    <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" alt="Conexión de Campeones">
+                    <select id="selLiga" onchange="cambioManual()" aria-label="Liga"></select>
+                    <div id="prizeCard">
+                        <h3 id="pName"></h3>
+                        <p id="pDesc"></p>
+                    </div>
+                    <div class="display-area" id="caja"></div>
+                    <button id="btnS" class="btn-ui" onclick="sorteo()">SORTEAR (ENTER)</button>
+                    <button type="button" class="btn-historial" onclick="abrirH()">🏆 VER TABLERO DE GANADORES</button>
+                    <button type="button" class="btn-reset" onclick="reiniciarTodo()">⚠️ REINICIAR TODO</button>
+                    <button type="button" class="btn-exit" onclick="cerrarSorteador()">SALIR DEL SORTEADOR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalH">
+        <div class="modalH-inner">
+            <div class="modalH-toolbar no-captura">
+                <h1>🏆 TABLERO FINAL</h1>
+                <div class="modalH-actions">
+                    <button type="button" class="btn-resultado btn-resultado--captura" onclick="capturarTableroGeneral()">📸 CAPTURA GENERAL</button>
+                    <button type="button" class="btn-resultado btn-resultado--excel" onclick="exportarExcel()">⬇️ DESCARGAR EXCEL</button>
+                    <button type="button" class="btn-resultado btn-resultado--cerrar" onclick="cerrarH()">CERRAR ✕</button>
+                </div>
+            </div>
+            <div id="tableroCapturaWrap" class="resultados-captura">
+                <div class="resultados-captura-header">
+                    <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" alt="Conexión de Campeones">
+                    <h2>CONEXIÓN DE CAMPEONES</h2>
+                    <p class="resultados-meta__sorteo" id="tableroMetaSorteo">2.º SORTEO QUINCENAL</p>
+                    <p class="resultados-meta__total" id="tableroMetaTotal">0 ganadores</p>
+                    <p class="resultados-meta__fecha" id="tableroMetaFecha"></p>
+                </div>
+                <div id="hContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <h4 style="color: var(--verde-yaavs); margin-bottom: 5px; font-family: 'Montserrat', sans-serif; font-weight: 900;">SISTEMA DE CONEXIÓN SEGURA</h4>
+                <p style="font-size: 0.85rem; color: #ccc; font-family: 'Arial', sans-serif;">Esta página tiene cookies para mayor seguridad.</p>
+            </div>
+            <div class="cookie-actions">
+                <button id="accept-cookies" class="btn-check snd-click snd-hover" style="padding: 10px 20px; font-size: 0.85rem; border-radius: 5px; border: none; white-space: nowrap;">ACEPTAR</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="yaavs-easter-egg" class="game-overlay" aria-hidden="true">
+        <div class="game-box egg-box">
+            <button type="button" class="game-close snd-click snd-hover" onclick="closeYaavsEasterEgg()">×</button>
+            <h2>ATARI EASTER EGG</h2>
+            <p class="egg-instructions">Arriba, Arriba, Abajo, Abajo, Izquierda, Derecha, Izquierda, Derecha, B, A</p>
+            <div id="yaavs-egg-details" class="egg-details">
+                <div class="egg-card">
+                    <div class="egg-avatar">JD</div>
+                    <div class="egg-copy">
+                        <p class="egg-title">ESTOY, SOY YO SU CREADOR XD</p>
+                        <p class="egg-subtitle">Jorddy Dylan Rivera Lopez jajaja</p>
+                        <div class="egg-socials">
+                            <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i> @jorddydylan</a>
+                            <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i> @jorddydylan</a>
+                            <a href="#" target="_blank"><i class="fa-brands fa-tiktok"></i> @jorddydylan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="yaavs-game-status" class="egg-status">Encontraste el código secreto. Bienvenido, creador.</div>
+            <button type="button" class="game-action-btn snd-click snd-hover" onclick="showCreatorEasterEgg()">VER DE NUEVO</button>
+        </div>
+    </div>
+
+    <script src="script_vf.js?v=20260529_excel_claves"></script>
+</body>
+</html>

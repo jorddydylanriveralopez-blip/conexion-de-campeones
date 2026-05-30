@@ -1,0 +1,23 @@
+{
+  "name": "Gana Yaavs",
+  "short_name": "Gana Yaavs",
+  "description": "¡Vincula y gana como campeón con YAAVS!",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#02060a",
+  "theme_color": "#22ff5e",
+  "icons": [
+    {
+      "src": "https://assets.zyrosite.com/EnigzBPrgZr5GxnU/688561636_1585574196908728_9130570143925923664_n-fgFZq17pPJCrGCog.jpg",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://assets.zyrosite.com/EnigzBPrgZr5GxnU/logo-conexion-de-campeones-EtXJAuhtXsAHmlBL.pngz",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+/vendor/
+/data/push_vapid.local.php
+/data/push_subscribers.json
+.DS_Store
+**/.DS_Store

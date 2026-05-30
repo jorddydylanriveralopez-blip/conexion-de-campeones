@@ -1,0 +1,2 @@
+# Apache: no exponer suscriptores ni claves por URL directa
+Require all denied

@@ -1,0 +1,1078 @@
+{
+  "sorteo": 1,
+  "fecha": "15 de mayo de 2026",
+  "total": 153,
+  "ganadores": [
+    {
+      "clave": "19CL04452",
+      "nombre": "ANTONIO HERNANDEZ",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "19CL04452"
+    },
+    {
+      "clave": "21CL11381JN5",
+      "nombre": "CRISTINA GALLARDO HERNÁNDEZ",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "21CL11381JN5"
+    },
+    {
+      "clave": "23CL01681ETF",
+      "nombre": "ELENA MORALES",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CL01681ETF"
+    },
+    {
+      "clave": "25CL01064462",
+      "nombre": "GABRIELA GARCIA RODRÍGUEZ",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CL01064462"
+    },
+    {
+      "clave": "21CL17086TVY",
+      "nombre": "IRVING JIMÉNEZ",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "21CL17086TVY"
+    },
+    {
+      "clave": "22CL04821",
+      "nombre": "JORGE CARRASCO",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "22CL04821"
+    },
+    {
+      "clave": "23CL03319BA2",
+      "nombre": "JOSE DE JESÚS DÍAZ GODINEZ",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CL03319BA2"
+    },
+    {
+      "clave": "23CL06784ZGI",
+      "nombre": "JOSEFINA VELÁZQUEZ",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CL06784ZGI"
+    },
+    {
+      "clave": "23CL06365SBN",
+      "nombre": "JOSIMAR SAUCEDO",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CL06365SBN"
+    },
+    {
+      "clave": "23CL06800",
+      "nombre": "YUBEL GUERRERO",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CL06800"
+    },
+    {
+      "clave": "24CL0387964F",
+      "nombre": "DAVID CASTRO",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "24CL0387964F"
+    },
+    {
+      "clave": "26CL00793D4B",
+      "nombre": "ELIAN APARICIO 3 MERCADO",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "26CL00793D4B"
+    },
+    {
+      "clave": "21CL16598",
+      "nombre": "GRISELDA CÁRCAMO RAMÍREZ",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "21CL16598"
+    },
+    {
+      "clave": "19CL01174489",
+      "nombre": "JONATHAN PELAEZ",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "19CL01174489"
+    },
+    {
+      "clave": "21CL14889S15",
+      "nombre": "JUAN CARLOS LOPEZ SANCHEZ",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "21CL14889S15"
+    },
+    {
+      "clave": "24CL0413522F",
+      "nombre": "KARLA MORALES",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "24CL0413522F"
+    },
+    {
+      "clave": "19CL00746",
+      "nombre": "NORMA SARAHI PEREZ OLGUIN GAM",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "19CL00746"
+    },
+    {
+      "clave": "24CL03629EDC",
+      "nombre": "OSCAR CAMACHO",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "24CL03629EDC"
+    },
+    {
+      "clave": "24CL01567D3F",
+      "nombre": "RAUL ARELLANO FLORES",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "24CL01567D3F"
+    },
+    {
+      "clave": "24CL0701169B",
+      "nombre": "S2C5 MARIANA REYES CORTES",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "24CL0701169B"
+    },
+    {
+      "clave": "25CL0707048C",
+      "nombre": "VÍCTOR MANUEL COBARRUBIAS VÁZQUEZ",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "25CL0707048C"
+    },
+    {
+      "clave": "25CL02310624",
+      "nombre": "ADRIAN LÓPEZ",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "25CL02310624"
+    },
+    {
+      "clave": "26CL01697F11",
+      "nombre": "AHMED HABIF CHAVARRIA EL SALADO",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "26CL01697F11"
+    },
+    {
+      "clave": "25CL039632E6",
+      "nombre": "ARMANDO JINEZ TELLEZ CENTRO TEHUACÁN",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "25CL039632E6"
+    },
+    {
+      "clave": "23CL07113SGE",
+      "nombre": "ELIAS JUAREZ",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "23CL07113SGE"
+    },
+    {
+      "clave": "23CL07850",
+      "nombre": "EVERARDO LÓPEZ COYOTE 2",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "23CL07850"
+    },
+    {
+      "clave": "24CL01019",
+      "nombre": "GEVONI PÉREZ HERNÁNDEZ",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "24CL01019"
+    },
+    {
+      "clave": "21CL11402SN1",
+      "nombre": "KARLA RIVERA - SJR",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "21CL11402SN1"
+    },
+    {
+      "clave": "23CL08074C6Z",
+      "nombre": "LUIS CASTRO",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "23CL08074C6Z"
+    },
+    {
+      "clave": "20CL09731",
+      "nombre": "MIGUEL ANGEL VALDEZ CAMACHO",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "20CL09731"
+    },
+    {
+      "clave": "23CL04142",
+      "nombre": "S1C2-GABRIELA NÁJERA",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "23CL04142"
+    },
+    {
+      "clave": "25CL07392E4D",
+      "nombre": "ALEXIS MORENO LOCAL",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CL07392E4D"
+    },
+    {
+      "clave": "23CL03539",
+      "nombre": "CRECENCIO MORALES",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CL03539"
+    },
+    {
+      "clave": "22CL08645",
+      "nombre": "CRISTIAN PORTILLO AC GAM N",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "22CL08645"
+    },
+    {
+      "clave": "21CL15959",
+      "nombre": "DANIEL PEREZ RIOS EX GAMC",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "21CL15959"
+    },
+    {
+      "clave": "24CL01190",
+      "nombre": "DIEGO GÓMEZ",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "24CL01190"
+    },
+    {
+      "clave": "24CL00244",
+      "nombre": "JAVIER CERVANTES",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "24CL00244"
+    },
+    {
+      "clave": "21CL138063LA",
+      "nombre": "JOSE LUIS HERNANDEZ JUAREZ",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "21CL138063LA"
+    },
+    {
+      "clave": "19CL01227",
+      "nombre": "NICOLÁS NÚÑEZ",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "19CL01227"
+    },
+    {
+      "clave": "22CL02327NIB",
+      "nombre": "VELAZQUEZ VILCHIS DIEGO",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "22CL02327NIB"
+    },
+    {
+      "clave": "23CL03370LN4",
+      "nombre": "ABELARDO RIBERA",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "23CL03370LN4"
+    },
+    {
+      "clave": "20CL06537F40",
+      "nombre": "ABRAHAM SANCHEZ PACHECO",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "20CL06537F40"
+    },
+    {
+      "clave": "22CL07962PA2",
+      "nombre": "ANTONIO DE LEÓN RIVERA",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "22CL07962PA2"
+    },
+    {
+      "clave": "21CL16049",
+      "nombre": "ARELI LEYVA CASTELLANOS",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "21CL16049"
+    },
+    {
+      "clave": "25CL02446C30",
+      "nombre": "CARLOS ADAN HERRERO SANCHEZ",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "25CL02446C30"
+    },
+    {
+      "clave": "26CL0146753E",
+      "nombre": "CITY CELL (XONA INDEPENDENCIA)",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "26CL0146753E"
+    },
+    {
+      "clave": "22CL00659",
+      "nombre": "DANIELA JIMÉNEZ (LAS VIGAS)",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "22CL00659"
+    },
+    {
+      "clave": "19CL00880BBW",
+      "nombre": "GABRIELA BARREIRO",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "19CL00880BBW"
+    },
+    {
+      "clave": "22CL060079W6",
+      "nombre": "JOEL HERNÁNDEZ",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "22CL060079W6"
+    },
+    {
+      "clave": "22CL04011",
+      "nombre": "JOSÉ LUIS VÁZQUEZ MEDINA",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "22CL04011"
+    },
+    {
+      "clave": "23CL00926ALF",
+      "nombre": "MARCO ANTONIO LINARES SÁNCHEZ",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "23CL00926ALF"
+    },
+    {
+      "clave": "19CL00223",
+      "nombre": "MAURICIO AGUILAR AC TLALNE",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "19CL00223"
+    },
+    {
+      "clave": "22CL04390",
+      "nombre": "RICARDO CASTILLO TAPIA",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "22CL04390"
+    },
+    {
+      "clave": "25CL0373887A",
+      "nombre": "S1C2-RAUL  / CAMBACEO",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "25CL0373887A"
+    },
+    {
+      "clave": "19CL03365",
+      "nombre": "S2C4 MIGUEL MARTINEZ",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "19CL03365"
+    },
+    {
+      "clave": "24CL00456",
+      "nombre": "SALVADOR ROJAS CAZARES",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "24CL00456"
+    },
+    {
+      "clave": "19CL00155SFE",
+      "nombre": "YOLANDA RAYAS LOCAL",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "19CL00155SFE"
+    },
+    {
+      "clave": "19CL04252SJK",
+      "nombre": "ALEJANDRO MUÑOZ",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "19CL04252SJK"
+    },
+    {
+      "clave": "21CL13440",
+      "nombre": "ALONSO GERVACIO BELLO",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "21CL13440"
+    },
+    {
+      "clave": "19CL06263ET3",
+      "nombre": "ANGELICA FLORES CASTILLO",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "19CL06263ET3"
+    },
+    {
+      "clave": "26CL001457A8",
+      "nombre": "CITY CELL LERMA",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "26CL001457A8"
+    },
+    {
+      "clave": "25CL018656DB",
+      "nombre": "ENRIQUE BERTHELY (CUITLÁHUAC)",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "25CL018656DB"
+    },
+    {
+      "clave": "21CL13815",
+      "nombre": "EYBAR MORENO REPARACIÓN",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "21CL13815"
+    },
+    {
+      "clave": "21CL14608",
+      "nombre": "JAVIER GARCIA MELCHOR 2",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "21CL14608"
+    },
+    {
+      "clave": "22CL02218ECS",
+      "nombre": "JOSE ALFREDO LÓPEZ",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "22CL02218ECS"
+    },
+    {
+      "clave": "21CL15530P8F",
+      "nombre": "LUIS GERARDO CHICO ESPINOZA",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "21CL15530P8F"
+    },
+    {
+      "clave": "22CL07921",
+      "nombre": "MARIA GUADALUPE SANTIAGO VERA GAM A",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "22CL07921"
+    },
+    {
+      "clave": "21CL14002",
+      "nombre": "OSWALDO PEREZ FLORES",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "21CL14002"
+    },
+    {
+      "clave": "19CL06102",
+      "nombre": "VERONICA SANCHEZ",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "19CL06102"
+    },
+    {
+      "clave": "20CL076234V9",
+      "nombre": "YEUDIEL LUGARDO NEIRA",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "20CL076234V9"
+    },
+    {
+      "clave": "25CL0190448E",
+      "nombre": "IUNEXT CAMBACEO HUEJOTZINGO",
+      "liga": "Elite",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CL0190448E"
+    },
+    {
+      "clave": "25CL06102C10",
+      "nombre": "PAY JOY LAS PALMAS",
+      "liga": "Elite",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CL06102C10"
+    },
+    {
+      "clave": "21CL14185",
+      "nombre": "S2C6-VALENTINA FLORES ROJAS",
+      "liga": "Elite",
+      "kit": "KIT BÁSICO",
+      "ticket": "21CL14185"
+    },
+    {
+      "clave": "23CL00351",
+      "nombre": "ADOLFO RAMÍREZ ESTRADA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "23CL00351"
+    },
+    {
+      "clave": "19CL03404S1E",
+      "nombre": "ALBERTO AGUILAR",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL03404S1E"
+    },
+    {
+      "clave": "19CL00792SWE",
+      "nombre": "ALBERTO PERALTA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL00792SWE"
+    },
+    {
+      "clave": "22CL03175",
+      "nombre": "ALEJANDRO HDZ SAN JUAN DE ABAJO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "22CL03175"
+    },
+    {
+      "clave": "19CL05801",
+      "nombre": "ALEJANDRO JIMENEZ",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL05801"
+    },
+    {
+      "clave": "26CL010761DE",
+      "nombre": "ANGÉLICA GALINDO CALIXTO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "26CL010761DE"
+    },
+    {
+      "clave": "21CL12334",
+      "nombre": "AXEL RODRIGUEZ TLANE AC",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "21CL12334"
+    },
+    {
+      "clave": "22CL06495PDJ",
+      "nombre": "CITLALLI VAZQUEZ EX AIFA 2",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "22CL06495PDJ"
+    },
+    {
+      "clave": "22CL06488TJV",
+      "nombre": "CITLALLI VAZQUEZ EX AIFA1",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "22CL06488TJV"
+    },
+    {
+      "clave": "21CL12279R2U",
+      "nombre": "DANIEL GÓMEZ DOLORES",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "21CL12279R2U"
+    },
+    {
+      "clave": "19CL00396SCV",
+      "nombre": "EFRAIN SANTIAGO GARCIA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL00396SCV"
+    },
+    {
+      "clave": "22CL08411V7I",
+      "nombre": "EVELIA MARIBEL ANGELES CASTILLO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "22CL08411V7I"
+    },
+    {
+      "clave": "19CL01128",
+      "nombre": "FABIOLA HUERTA GAMC",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL01128"
+    },
+    {
+      "clave": "25CL050213AC",
+      "nombre": "HÉCTOR CONTRERAS SECUNDARIO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "25CL050213AC"
+    },
+    {
+      "clave": "25CL042813A6",
+      "nombre": "ISMAEL PÉREZ MARTÍNEZ",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "25CL042813A6"
+    },
+    {
+      "clave": "20CL07619GC7",
+      "nombre": "JESSIE COLIN LOCAL PUERTO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "20CL07619GC7"
+    },
+    {
+      "clave": "25CL02574870",
+      "nombre": "JOTSHAN ROJAS",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "25CL02574870"
+    },
+    {
+      "clave": "20CL09133P54",
+      "nombre": "JULIÁN LUGO VACA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "20CL09133P54"
+    },
+    {
+      "clave": "23CL05055",
+      "nombre": "MIKITA UAM",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "23CL05055"
+    },
+    {
+      "clave": "25CL00061272",
+      "nombre": "NORMA TORRES",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "25CL00061272"
+    },
+    {
+      "clave": "19CL01517571",
+      "nombre": "OMAR LOPEZ",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL01517571"
+    },
+    {
+      "clave": "19CL01914",
+      "nombre": "S1C4-MIGUEL ARREOLA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL01914"
+    },
+    {
+      "clave": "21CL15439YJ9",
+      "nombre": "VICTOR MANUEL COVARRUBIAS VAZQUEZ",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "21CL15439YJ9"
+    },
+    {
+      "clave": "24CL04208F4B",
+      "nombre": "ZURY DE LA LUZ CENTRO TEHUACAN",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "24CL04208F4B"
+    },
+    {
+      "clave": "24CL027957D5",
+      "nombre": "ALFREDO SÁNCHEZ RAZO LOCAL 1",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "24CL027957D5"
+    },
+    {
+      "clave": "22CL04686",
+      "nombre": "ALICIA REYES LUNA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "22CL04686"
+    },
+    {
+      "clave": "25CL01511061",
+      "nombre": "ANTONIO RÍOS GARCIA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "25CL01511061"
+    },
+    {
+      "clave": "19CL00149",
+      "nombre": "CARLOS ORTIZ",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL00149"
+    },
+    {
+      "clave": "24CL06852B94",
+      "nombre": "CINTHYA ANAYELI TREJO LÓPEZ",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "24CL06852B94"
+    },
+    {
+      "clave": "25CL036022EB",
+      "nombre": "DANIELA JIMÉNEZ MERCADO",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "25CL036022EB"
+    },
+    {
+      "clave": "19CL03943N0F",
+      "nombre": "FERNANDO ESPINDOLA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL03943N0F"
+    },
+    {
+      "clave": "19CL01201",
+      "nombre": "GABRIELA DOMINGUEZ GAMC",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL01201"
+    },
+    {
+      "clave": "21CL16411DVF",
+      "nombre": "HUGO SANCHEZ TEMAS2",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "21CL16411DVF"
+    },
+    {
+      "clave": "21CL14269S9W",
+      "nombre": "HUMBERTO HERNANDEZ LOPEZ",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "21CL14269S9W"
+    },
+    {
+      "clave": "23CL08575REX",
+      "nombre": "JESÚS EMMANUEL COLÍN SÁNCHEZ/ELEKTRA TOWNCENTER",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "23CL08575REX"
+    },
+    {
+      "clave": "20CL08789",
+      "nombre": "JOSE HURTADO ALVAREZ TULTI OTE",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "20CL08789"
+    },
+    {
+      "clave": "22CL03018",
+      "nombre": "MALENA VILLANUEVA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "22CL03018"
+    },
+    {
+      "clave": "19CL00163SW1",
+      "nombre": "OMAR NAVARRO AC",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL00163SW1"
+    },
+    {
+      "clave": "23CL04288SS4",
+      "nombre": "PABLO REYES / TOCUILA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "23CL04288SS4"
+    },
+    {
+      "clave": "19CL01883",
+      "nombre": "S1C6-ARMANDO MORALES",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL01883"
+    },
+    {
+      "clave": "24CL059791DF",
+      "nombre": "alan Meza",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "24CL059791DF"
+    },
+    {
+      "clave": "24CB03224701",
+      "nombre": "CARLOS CASTELO",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "24CB03224701"
+    },
+    {
+      "clave": "25CB02725E0B",
+      "nombre": "CARLOS RAMÓN DE LA CRUZ",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CB02725E0B"
+    },
+    {
+      "clave": "23CB05296",
+      "nombre": "EXPERT CELL CAMBACEO",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CB05296"
+    },
+    {
+      "clave": "23CB02498",
+      "nombre": "HUMBERTO NAVARRETE BENÍTEZ",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CB02498"
+    },
+    {
+      "clave": "24CB04654D93",
+      "nombre": "JOSEFINA CALDERÓN BARRIGA CAMBACEO",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "24CB04654D93"
+    },
+    {
+      "clave": "25CB04405B9B",
+      "nombre": "ROSA ISELA BAUTISTA CAMBACEO",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CB04405B9B"
+    },
+    {
+      "clave": "25CB01791922",
+      "nombre": "SONIA DOMÍNGUEZ VÁZQUEZ",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CB01791922"
+    },
+    {
+      "clave": "26CB00341C68",
+      "nombre": "VIOLETA JUAREZ",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "26CB00341C68"
+    },
+    {
+      "clave": "24CB0667656C",
+      "nombre": "ANA LAURA RAMÍREZ Yovani",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "24CB0667656C"
+    },
+    {
+      "clave": "25CB009350C8",
+      "nombre": "AZUCENA ZACAMOLPA ORDOÑEZ",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB009350C8"
+    },
+    {
+      "clave": "26CB009291B6",
+      "nombre": "CAMBACEO MARIA IMELDA PEÑA BALAM",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "26CB009291B6"
+    },
+    {
+      "clave": "25CB05731304",
+      "nombre": "CECILIA TEPOLE XOCUA CAMBACEO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB05731304"
+    },
+    {
+      "clave": "24CB04340BF2",
+      "nombre": "DANIEL PIÑA",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "24CB04340BF2"
+    },
+    {
+      "clave": "22CB03746BW2",
+      "nombre": "DEBORA NIETO CUELLAR",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "22CB03746BW2"
+    },
+    {
+      "clave": "24CB05894B61",
+      "nombre": "EUNICE VALDEZ",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "24CB05894B61"
+    },
+    {
+      "clave": "25CB001398FB",
+      "nombre": "FERNANDO GÓMEZ ZAMUDIO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB001398FB"
+    },
+    {
+      "clave": "23CB06923A99",
+      "nombre": "GUDELIA HERNÁNDEZ AMADOR",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "23CB06923A99"
+    },
+    {
+      "clave": "26CB0104802D",
+      "nombre": "JOSE PROCOPIO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "26CB0104802D"
+    },
+    {
+      "clave": "23CB02174",
+      "nombre": "LUIS ANGEL CUAUTLE MUÑOZ",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "23CB02174"
+    },
+    {
+      "clave": "26CB008523D4",
+      "nombre": "LÓPEZ HERNÁNDEZ VICTORINO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "26CB008523D4"
+    },
+    {
+      "clave": "25CB017880EF",
+      "nombre": "MARCELO CARRASCO CORTÉS",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB017880EF"
+    },
+    {
+      "clave": "25CB04492120",
+      "nombre": "MARIA DEL SOL MIRANDA NAVARRETE",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB04492120"
+    },
+    {
+      "clave": "22CB04620",
+      "nombre": "MIGUEL CASTELLANOS",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "22CB04620"
+    },
+    {
+      "clave": "24CB0502649E",
+      "nombre": "MIGUEL CONTRERAS",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "24CB0502649E"
+    },
+    {
+      "clave": "26CB01099501",
+      "nombre": "MIGUEL ROJAS \"CAMBACEO TELCEL\" DÍAZ MIRÓN",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "26CB01099501"
+    },
+    {
+      "clave": "25CB01778227",
+      "nombre": "OMAR PADUA SAN LORENZO OYAMEL",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB01778227"
+    },
+    {
+      "clave": "25CB05733A3B",
+      "nombre": "OSIRIS NOEMÍ ROJAS CRUZ",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB05733A3B"
+    },
+    {
+      "clave": "25CB015251DB",
+      "nombre": "SARAI LIZETH HERNÁNDEZ IBARRA",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB015251DB"
+    },
+    {
+      "clave": "26CB014722B3",
+      "nombre": "VERÓNICA RAMIREZ JIMÉNEZ",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "26CB014722B3"
+    },
+    {
+      "clave": "25CB00542ED8",
+      "nombre": "VERÓNICA VÁZQUEZ",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB00542ED8"
+    },
+    {
+      "clave": "26CB01141D25",
+      "nombre": "VICTOR MANUEL JEREZ VELASCO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "26CB01141D25"
+    },
+    {
+      "clave": "26CB00758D11",
+      "nombre": "ALDO GUTIERREZ FLORES AURRERÁ PALOMAS",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "26CB00758D11"
+    },
+    {
+      "clave": "24CB028577BD",
+      "nombre": "ALEJANDRO VILLEGAS CAMBACEO",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "24CB028577BD"
+    },
+    {
+      "clave": "25CB0654511C",
+      "nombre": "ERIKA BIBIANA MELGOZA SÁNCHEZ",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "25CB0654511C"
+    },
+    {
+      "clave": "25CB01633E9E",
+      "nombre": "ESMERALDA AMAIRANI OCOTLÁN",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "25CB01633E9E"
+    },
+    {
+      "clave": "23CB02214",
+      "nombre": "MARÍA GUADALUPE ALARCON MARTINEZ",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "23CB02214"
+    },
+    {
+      "clave": "24CB0200562C",
+      "nombre": "Mendieta Rosa",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "24CB0200562C"
+    },
+    {
+      "clave": "26CB01332083",
+      "nombre": "PATZY DONAJI MELGOZA SÁNCHEZ",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "26CB01332083"
+    },
+    {
+      "clave": "25CB06108DC6",
+      "nombre": "WENDY SAMANTHA MOLINA MELGOZA",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "25CB06108DC6"
+    }
+  ]
+}
