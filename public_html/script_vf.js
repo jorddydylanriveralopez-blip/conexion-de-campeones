@@ -926,27 +926,77 @@ const L = [
     { id: 'Elite', c: '#FFD700', q: { B: 3, P: 28, E: 19 } },
     { id: 'Cambaceo', c: '#d500ff', q: { B: 5, P: 20, E: 6 } },
 ];
-const SORTEO_TICKET_SUFFIX = 'sorteo-2';
-/** Ganadores del 1.er sorteo (no pueden volver a ganar en sorteos siguientes) */
-const URL_GANADORES_SORTEO_1 = 'ganadores/ganadores.json';
+/** Calendario oficial de sorteos quincenales (hora CDMX) */
+const CALENDARIO_SORTEOS = [
+    { num: 1, fecha: '2026-05-15', label: '15 DE MAYO 2026' },
+    { num: 2, fecha: '2026-05-29', label: '29 DE MAYO 2026' },
+    { num: 3, fecha: '2026-06-12', label: '12 DE JUNIO 2026' },
+    { num: 4, fecha: '2026-06-26', label: '26 DE JUNIO 2026' },
+    { num: 5, fecha: '2026-07-10', label: '10 DE JULIO 2026' },
+    { num: 6, fecha: '2026-07-31', label: '31 DE JULIO 2026' },
+];
+
+function hoyEnCDMX() {
+    const partes = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Mexico_City',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    }).formatToParts(new Date());
+    const y = partes.find((p) => p.type === 'year').value;
+    const m = partes.find((p) => p.type === 'month').value;
+    const d = partes.find((p) => p.type === 'day').value;
+    return `${y}-${m}-${d}`;
+}
+
+/** Próximo sorteo según calendario; al pasar su fecha avanza al siguiente */
+function resolverSorteoVigente(fechaHoy = hoyEnCDMX()) {
+    for (const s of CALENDARIO_SORTEOS) {
+        if (s.fecha >= fechaHoy) return s;
+    }
+    return CALENDARIO_SORTEOS[CALENDARIO_SORTEOS.length - 1];
+}
+
+const sorteoVigente = resolverSorteoVigente();
+const SORTEO_NUMERO_ACTUAL = sorteoVigente.num;
+const SORTEO_TICKET_SUFFIX = `sorteo-${sorteoVigente.num}`;
+
+function urlGanadoresSorteo(n) {
+    return n === 1 ? 'ganadores/ganadores.json' : `ganadores/ganadores-sorteo-${n}.json`;
+}
 
 function normalizarNomenclaturaBoleto(ticket) {
     return String(ticket)
-        .replace(/-Qna2$/i, '-sorteo-2')
-        .replace(/-Qna1$/i, '-sorteo-1');
+        .replace(/-Qna(\d+)$/i, (_, n) => `-sorteo-${n}`)
+        .replace(/-sorteo-(\d+)$/i, (m, n) => `-sorteo-${n}`);
 }
 
-const SORTEO_PUBLICACION = {
-    'sorteo-1': { fecha: '15 DE MAYO 2026', titulo: 'GANADORES DEL SORTEO' },
-    'sorteo-2': { fecha: '29 DE MAYO 2026', titulo: 'GANADORES DEL SORTEO' },
-};
+const SORTEO_PUBLICACION = Object.fromEntries(
+    CALENDARIO_SORTEOS.map((s) => [
+        `sorteo-${s.num}`,
+        { fecha: s.label, titulo: 'GANADORES DEL SORTEO' },
+    ]),
+);
 
 function infoSorteoActual() {
     return SORTEO_PUBLICACION[SORTEO_TICKET_SUFFIX] || {
-        fecha: '',
+        fecha: sorteoVigente.label,
         titulo: 'GANADORES DEL SORTEO',
     };
 }
+
+function etiquetaOrdinalSorteo(n) {
+    const ordinales = { 1: '1.er', 2: '2.º', 3: '3.er', 4: '4.º', 5: '5.º', 6: '6.º' };
+    return `${ordinales[n] || `${n}.º`} SORTEO`;
+}
+
+function etiquetaSorteoActual() {
+    return etiquetaOrdinalSorteo(SORTEO_NUMERO_ACTUAL);
+}
+
+console.info(
+    `[Sorteador] Sorteo vigente: ${SORTEO_TICKET_SUFFIX} (${sorteoVigente.label}) · hoy CDMX: ${hoyEnCDMX()}`,
+);
 
 function actualizarEncabezadoResultados() {
     const info = infoSorteoActual();
@@ -1025,7 +1075,12 @@ function sacarGanadorDelBolillero(pool, ligaId, kitType) {
         const idx = Math.floor(Math.random() * pool.length);
         const item = pool.splice(idx, 1)[0];
         const clave = extraerClaveDeTicket(item.n);
-        if (!clave || claveYaGanoEnEsteSorteo(clave) || claveYaGanoEnBloque(clave, ligaId, kitType)) {
+        if (
+            !clave ||
+            !claveElegibleParaSorteo(clave) ||
+            claveYaGanoEnEsteSorteo(clave) ||
+            claveYaGanoEnBloque(clave, ligaId, kitType)
+        ) {
             continue;
         }
         for (let j = pool.length - 1; j >= 0; j--) {
@@ -1092,7 +1147,7 @@ function municipioDeClave(clave) {
     return (c && mapaMunicipioPorClave.get(c)) || '';
 }
 
-/** Claves YAAVSER que ya ganaron en sorteos anteriores (p. ej. 1.er sorteo) */
+/** Claves YAAVSER que ya ganaron en sorteos anteriores (no pueden volver a ganar) */
 const clavesExcluidasSorteosPrevios = new Set();
 let ganadoresPreviosCargados = false;
 
@@ -1100,28 +1155,47 @@ function normalizarClaveYaavser(clave) {
     return String(clave ?? '').trim().toUpperCase();
 }
 
+function extraerClaveDeGanadorHistorico(g) {
+    const claveDirecta = normalizarClaveYaavser(g?.clave);
+    if (claveDirecta) return claveDirecta;
+    const ticket = normalizarNomenclaturaBoleto(g?.ticket || '');
+    const conBoleto = ticket.match(/^(.+)-\d+-sorteo-\d+$/i);
+    if (conBoleto) return normalizarClaveYaavser(conBoleto[1]);
+    return normalizarClaveYaavser(ticket.split('-')[0]);
+}
+
 async function cargarGanadoresSorteosPrevios() {
     clavesExcluidasSorteosPrevios.clear();
     ganadoresPreviosCargados = false;
-    if (SORTEO_TICKET_SUFFIX === 'sorteo-1') {
+    if (SORTEO_NUMERO_ACTUAL <= 1) {
         ganadoresPreviosCargados = true;
         return;
     }
-    try {
-        const res = await fetch(URL_GANADORES_SORTEO_1, { cache: 'no-store' });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        (data.ganadores || []).forEach((g) => {
-            const clave = normalizarClaveYaavser(g.clave || g.ticket);
-            if (clave) clavesExcluidasSorteosPrevios.add(clave);
-        });
-        ganadoresPreviosCargados = true;
-        console.info(
-            `[Sorteador] ${clavesExcluidasSorteosPrevios.size} ganadores del 1.er sorteo excluidos.`,
-        );
-    } catch (e) {
-        console.warn('[Sorteador] No se cargó lista del 1.er sorteo:', e);
+    const resumenPorSorteo = [];
+    for (let n = 1; n < SORTEO_NUMERO_ACTUAL; n++) {
+        let agregados = 0;
+        try {
+            const res = await fetch(urlGanadoresSorteo(n), { cache: 'no-store' });
+            if (!res.ok) {
+                console.warn(`[Sorteador] No se encontró lista del sorteo ${n} (HTTP ${res.status})`);
+                continue;
+            }
+            const data = await res.json();
+            const antes = clavesExcluidasSorteosPrevios.size;
+            (data.ganadores || []).forEach((g) => {
+                const clave = extraerClaveDeGanadorHistorico(g);
+                if (clave) clavesExcluidasSorteosPrevios.add(clave);
+            });
+            agregados = clavesExcluidasSorteosPrevios.size - antes;
+            resumenPorSorteo.push(`${n}.º: ${agregados}`);
+        } catch (e) {
+            console.warn(`[Sorteador] No se cargó lista del sorteo ${n}:`, e);
+        }
     }
+    ganadoresPreviosCargados = true;
+    console.info(
+        `[Sorteador] ${clavesExcluidasSorteosPrevios.size} claves excluidas de sorteos previos (${resumenPorSorteo.join(', ') || 'sin listas'}).`,
+    );
 }
 
 function claveElegibleParaSorteo(clave) {
@@ -1142,7 +1216,7 @@ async function iniciarSorteador() {
     est = 'W';
     detenerMusicaSorteo();
     showSorterScreen('welcome');
-    if (!ganadoresPreviosCargados && SORTEO_TICKET_SUFFIX !== 'sorteo-1') {
+    if (!ganadoresPreviosCargados && SORTEO_NUMERO_ACTUAL > 1) {
         await cargarGanadoresSorteosPrevios();
     }
 }
@@ -1523,8 +1597,7 @@ function actualizarMetaTablero() {
     const totalEl = document.getElementById('tableroMetaTotal');
     const fechaEl = document.getElementById('tableroMetaFecha');
     if (sorteoEl) {
-        sorteoEl.textContent =
-            SORTEO_TICKET_SUFFIX === 'sorteo-2' ? '2.º SORTEO QUINCENAL' : 'SORTEO QUINCENAL';
+        sorteoEl.textContent = `${etiquetaSorteoActual()} QUINCENAL`;
     }
     if (totalEl) {
         totalEl.textContent = `${total} ganador${total === 1 ? '' : 'es'} registrados`;

@@ -4,7 +4,7 @@ const urlsToCache = [
   './',
   './index.html',
   './styles_vf.css?v=20260508_v2',
-  './script_vf.js?v=20260529_excel_claves'
+  './script_vf.js?v=20260610_excluir_ganadores'
 ];
 
 self.addEventListener('install', event => {
