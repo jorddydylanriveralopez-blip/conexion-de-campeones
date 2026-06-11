@@ -666,8 +666,8 @@
                 background: linear-gradient(270deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.6) 55%, transparent 100%);
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-end;
-                gap: 14px;
+                justify-content: flex-start;
+                gap: 12px;
             }
             #sorter-modal .sorter-live-sidebar__header {
                 flex-shrink: 0;
@@ -704,24 +704,47 @@
                 color: rgba(255, 255, 255, 0.55);
             }
             #sorter-modal .sorter-live-comments {
+                flex: 1;
+                min-height: 0;
                 display: flex;
                 flex-direction: column;
+                justify-content: flex-end;
                 gap: 8px;
-                max-height: min(58vh, 520px);
                 overflow: hidden;
-                mask-image: linear-gradient(to top, #000 85%, transparent 100%);
-                -webkit-mask-image: linear-gradient(to top, #000 85%, transparent 100%);
+                mask-image: linear-gradient(to top, #000 88%, transparent 100%);
+                -webkit-mask-image: linear-gradient(to top, #000 88%, transparent 100%);
             }
             #sorter-modal .sorter-live-comment {
+                display: flex;
+                align-items: flex-start;
+                gap: 8px;
                 text-align: left;
                 animation: sorterLiveCommentIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+            #sorter-modal .sorter-live-comment__avatar {
+                flex-shrink: 0;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                background: #333;
             }
             @keyframes sorterLiveCommentIn {
                 from { opacity: 0; transform: translateY(18px) scale(0.96); }
                 to { opacity: 1; transform: translateY(0) scale(1); }
             }
+            #sorter-modal .sorter-live-viewers.is-ticking {
+                animation: sorterViewersTick 0.35s ease;
+            }
+            @keyframes sorterViewersTick {
+                0% { opacity: 0.55; transform: translateY(2px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
             #sorter-modal .sorter-live-comment__pill {
                 display: inline-block;
+                flex: 1;
+                min-width: 0;
                 max-width: 100%;
                 padding: 8px 12px;
                 border-radius: 18px;
@@ -1098,6 +1121,6 @@
         </div>
     </div>
 
-    <script src="script_vf.js?v=20260612_fblive2"></script>
+    <script src="script_vf.js?v=20260612_fblive3"></script>
 </body>
 </html>

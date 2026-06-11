@@ -1971,33 +1971,87 @@ const SORTEO_LIVE_COMENTARIOS = [
     { nombre: 'Óscar W.', texto: '¡EN VIVO en Facebook y con todo! 🎉' },
     { nombre: 'Verónica K.', texto: 'Suerte campeones, los sigo en el live' },
 ];
+const SORTEO_LIVE_AVATAR_CACHE = new Map();
 let comentariosLiveTimer = null;
+let viewersLiveTimer = null;
 let ultimoComentarioLiveIdx = -1;
+let liveViewersCount = 0;
+
+function hashNombreLive(nombre) {
+    let hash = 0;
+    for (let i = 0; i < nombre.length; i++) {
+        hash = nombre.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash);
+}
+
+function avatarUrlParaNombre(nombre) {
+    if (SORTEO_LIVE_AVATAR_CACHE.has(nombre)) return SORTEO_LIVE_AVATAR_CACHE.get(nombre);
+    const id = (hashNombreLive(nombre) % 70) + 1;
+    const url = `https://i.pravatar.cc/64?img=${id}`;
+    SORTEO_LIVE_AVATAR_CACHE.set(nombre, url);
+    return url;
+}
+
+function formatearViewersLive(n) {
+    if (n >= 1000) return `${(n / 1000).toFixed(1).replace('.0', '')}K viendo`;
+    return `${n} viendo`;
+}
+
+function pintarViewersLive() {
+    const viewersEl = document.getElementById('sorter-live-viewers');
+    if (!viewersEl) return;
+    viewersEl.textContent = formatearViewersLive(liveViewersCount);
+    viewersEl.classList.remove('is-ticking');
+    void viewersEl.offsetWidth;
+    viewersEl.classList.add('is-ticking');
+}
+
+function fluctuarViewersLive() {
+    const delta = Math.floor(Math.random() * 19) - 6;
+    liveViewersCount = Math.max(892, Math.min(1680, liveViewersCount + delta));
+    pintarViewersLive();
+}
+
+function iniciarViewersLive() {
+    detenerViewersLive();
+    liveViewersCount = 940 + Math.floor(Math.random() * 280);
+    pintarViewersLive();
+    const programarFluctuacion = () => {
+        viewersLiveTimer = setTimeout(() => {
+            fluctuarViewersLive();
+            programarFluctuacion();
+        }, 1800 + Math.random() * 2800);
+    };
+    programarFluctuacion();
+}
+
+function detenerViewersLive() {
+    if (viewersLiveTimer) {
+        clearTimeout(viewersLiveTimer);
+        viewersLiveTimer = null;
+    }
+}
 
 function iniciarComentariosLive() {
     detenerComentariosLive();
     const overlay = document.getElementById('sorter-live-overlay');
     const panel = document.getElementById('sorter-live-comments');
-    const viewersEl = document.getElementById('sorter-live-viewers');
     if (!overlay || !panel) return;
 
     overlay.classList.add('visible');
     overlay.setAttribute('aria-hidden', 'false');
     panel.innerHTML = '';
     ultimoComentarioLiveIdx = -1;
+    iniciarViewersLive();
 
-    if (viewersEl) {
-        const base = 980 + Math.floor(Math.random() * 520);
-        viewersEl.textContent = base >= 1000 ? `${(base / 1000).toFixed(1).replace('.0', '')}K viendo` : `${base} viendo`;
-    }
-
-    for (let i = 0; i < 5; i++) agregarComentarioLive(panel);
+    for (let i = 0; i < 11; i++) agregarComentarioLive(panel);
 
     const programarSiguiente = () => {
         comentariosLiveTimer = setTimeout(() => {
             agregarComentarioLive(panel);
             programarSiguiente();
-        }, 1800 + Math.random() * 2200);
+        }, 1600 + Math.random() * 2000);
     };
     programarSiguiente();
 }
@@ -2007,6 +2061,7 @@ function detenerComentariosLive() {
         clearTimeout(comentariosLiveTimer);
         comentariosLiveTimer = null;
     }
+    detenerViewersLive();
     const overlay = document.getElementById('sorter-live-overlay');
     if (overlay) {
         overlay.classList.remove('visible');
@@ -2024,16 +2079,25 @@ function agregarComentarioLive(panel) {
     ultimoComentarioLiveIdx = idx;
 
     const item = SORTEO_LIVE_COMENTARIOS[idx];
+    const avatarUrl = avatarUrlParaNombre(item.nombre);
     const el = document.createElement('div');
     el.className = 'sorter-live-comment';
     el.innerHTML = `
+        <img class="sorter-live-comment__avatar" src="${avatarUrl}" alt="" width="32" height="32" loading="lazy" decoding="async">
         <div class="sorter-live-comment__pill">
             <span class="sorter-live-comment__name">${item.nombre}</span>
             <span class="sorter-live-comment__text">${item.texto}</span>
         </div>
     `;
+    const img = el.querySelector('.sorter-live-comment__avatar');
+    if (img) {
+        img.addEventListener('error', () => {
+            const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(item.nombre)}&background=1877f2&color=fff&size=64`;
+            img.src = fallback;
+        }, { once: true });
+    }
     panel.appendChild(el);
-    while (panel.children.length > 14) panel.removeChild(panel.firstChild);
+    while (panel.children.length > 18) panel.removeChild(panel.firstChild);
 }
 
 window.addEventListener('keydown', (e) => {
