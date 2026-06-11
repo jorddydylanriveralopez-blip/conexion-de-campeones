@@ -1936,10 +1936,18 @@ async function iniciarSorteador() {
     sorterModal.style.display = 'flex';
     est = 'W';
     detenerMusicaSorteo();
+    actualizarBienvenidaSorteador();
     showSorterScreen('welcome');
     if (!ganadoresPreviosCargados && SORTEO_NUMERO_ACTUAL > 1) {
         await cargarGanadoresSorteosPrevios();
     }
+}
+
+function actualizarBienvenidaSorteador() {
+    const sorteoEl = document.getElementById('sorter-welcome-sorteo');
+    const fechaEl = document.getElementById('sorter-welcome-fecha');
+    if (sorteoEl) sorteoEl.textContent = etiquetaOrdinalSorteo(SORTEO_NUMERO_ACTUAL);
+    if (fechaEl && sorteoVigente) fechaEl.textContent = sorteoVigente.label;
 }
 
 window.addEventListener('keydown', (e) => {

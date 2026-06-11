@@ -635,6 +635,41 @@
             #sorter-modal .logo-main { width: 220px; filter: drop-shadow(0 0 20px var(--cc)); margin-bottom: 20px; }
             #sorter-modal .btn-ui { width: 100%; padding: 22px; font-size: 1.5rem; background: var(--cc); color: #000; border: none; border-radius: 50px; font-weight: 900; cursor: pointer; box-shadow: 0 0 30px var(--cc); text-transform: uppercase; transition: 0.3s; text-shadow: none; }
             #sorter-modal .btn-ui:hover { transform: scale(1.05); filter: brightness(1.2); }
+            #sorter-modal .btn-ui--pulse {
+                animation: sorterBtnPulse 1.6s ease-in-out infinite;
+            }
+            #sorter-modal .btn-ui--pulse:hover {
+                animation: none;
+                transform: scale(1.06);
+                filter: brightness(1.15);
+            }
+            @keyframes sorterBtnPulse {
+                0%, 100% {
+                    transform: scale(1);
+                    box-shadow: 0 0 24px var(--cc), 0 0 0 0 rgba(57, 255, 20, 0.45);
+                }
+                50% {
+                    transform: scale(1.05);
+                    box-shadow: 0 0 48px var(--cc), 0 0 0 14px rgba(57, 255, 20, 0);
+                }
+            }
+            #sorter-modal .sorter-welcome-sorteo {
+                margin: 0 0 6px;
+                font-size: clamp(1.35rem, 4vw, 1.85rem);
+                font-weight: 900;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: var(--or);
+                text-shadow: 0 0 18px rgba(255, 215, 0, 0.45);
+            }
+            #sorter-modal .sorter-welcome-fecha {
+                margin: 0 0 18px;
+                font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+                font-weight: 700;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--sk);
+            }
             #sorter-modal .btn-historial { width: 100%; padding: 25px; font-size: 1.2rem; background: #222; color: #fff; border: 3px solid var(--sk); border-radius: 20px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: 0.3s; }
             #sorter-modal .btn-reset { background: #ff4d4d; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: sans-serif; font-weight: bold; margin-top: 40px; opacity: 0.7; }
             #sorter-modal .btn-exit { width: 100%; padding: 18px 20px; font-size: 1rem; background: rgba(255,255,255,0.08); color: #fff; border: 2px solid rgba(255,255,255,0.15); border-radius: 20px; font-weight: 700; cursor: pointer; margin-top: 18px; backdrop-filter: blur(12px); transition: 0.25s ease; }
@@ -872,8 +907,10 @@
         <div class="wrapper">
             <div id="screen-welcome" class="screen active">
                 <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" class="logo-main" alt="Conexión de Campeones">
-                <h1 style="font-size: 2.5rem; color: var(--nv);">¡ESTAMOS EN VIVO!</h1>
-                <button class="btn-ui" onclick="iniciarConEspera()">INICIAR SORTEO (ENTER)</button>
+                <p id="sorter-welcome-sorteo" class="sorter-welcome-sorteo">3.er SORTEO</p>
+                <p id="sorter-welcome-fecha" class="sorter-welcome-fecha">12 DE JUNIO 2026</p>
+                <h1 style="font-size: 2.5rem; color: var(--nv); margin: 0 0 22px;">¡ESTAMOS EN VIVO!</h1>
+                <button type="button" id="btn-iniciar-sorteo-live" class="btn-ui btn-ui--pulse" onclick="iniciarConEspera()">INICIAR SORTEO (ENTER)</button>
             </div>
             <div id="screen-radar" class="screen">
                 <div class="loader-container">
@@ -968,6 +1005,6 @@
     </div>
 
     <script src="minijuego-futbol-yaavs.js?v=20260611_futbol4"></script>
-    <script src="script_vf.js?v=20260611_scroll3"></script>
+    <script src="script_vf.js?v=20260612_sorteo_live"></script>
 </body>
 </html>
