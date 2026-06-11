@@ -1110,6 +1110,15 @@ window.addEventListener('scroll', () => {
     updateBodyScrollTheme();
 });
 
+function iniciarEntradaPagina() {
+    if (document.body.classList.contains('page-enter')) return;
+    requestAnimationFrame(() => {
+        document.body.classList.add('page-enter');
+        const hero = document.querySelector('.centered-header');
+        if (hero) hero.classList.add('in-view');
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const intro = document.getElementById('intro-overlay');
     const videoOverlay = document.getElementById('video-overlay');
@@ -1124,6 +1133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (main) {
             main.style.display = 'block';
             updateBodyScrollTheme();
+            iniciarEntradaPagina();
         }
         return; 
     }
@@ -1171,6 +1181,7 @@ document.addEventListener('DOMContentLoaded', function () {
             videoOverlay.style.display = 'none';
             main.style.display = 'block';
             updateBodyScrollTheme();
+            iniciarEntradaPagina();
         }, 500);
     }
 

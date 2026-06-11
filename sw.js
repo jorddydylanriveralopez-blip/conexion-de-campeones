@@ -3,8 +3,8 @@ const CACHE_NAME = 'yaavs-pwa-v10';
 const urlsToCache = [
   './',
   './index.html',
-  './styles_vf.css?v=20260611_cromo_refine',
-  './script_vf.js?v=20260611_cromo_refine'
+  './styles_vf.css?v=20260611_page_enter',
+  './script_vf.js?v=20260611_page_enter'
 ];
 
 self.addEventListener('install', event => {
