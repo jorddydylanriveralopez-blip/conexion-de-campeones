@@ -7,7 +7,7 @@ declare(strict_types=1);
  * Configura la URL después de implementar google-apps-script-formulario.gs
  * (debe terminar en /exec).
  */
-const FORMULARIO_SHEETS_WEBAPP = 'https://script.google.com/macros/s/AKfycbzVDPUM_JpJrR2YnXksz4j3gJ73B-iB9rt9BcJRbHq6Q9PWM37zbmtV051YgVtIQIIqzA/exec';
+const FORMULARIO_SHEETS_WEBAPP = 'https://script.google.com/macros/s/AKfycbycc4hjE6m-GwWYC35MV0lXJ9vnHLVLfn1HvA76lPANgTRzrM-FyxTYB-Vej_nIQCoZ2w/exec';
 
 /** Misma URL CSV que vinculaciones.js (base de claves válidas) */
 const VINCULACIONES_CSV_URL =
@@ -173,18 +173,27 @@ if (FORMULARIO_SHEETS_TOKEN !== '') {
     $data['token'] = FORMULARIO_SHEETS_TOKEN;
 }
 
-$payload = json_encode($data, JSON_UNESCAPED_UNICODE);
-if ($payload === false) {
-    http_response_code(400);
-    echo json_encode(['ok' => false, 'error' => 'No se pudo codificar la solicitud'], JSON_UNESCAPED_UNICODE);
-    exit;
+$query = [
+    'action' => 'submit',
+    'nombre' => (string) ($data['nombre'] ?? ''),
+    'telefono' => (string) ($data['telefono'] ?? ''),
+    'clave' => (string) ($data['clave'] ?? ''),
+    'motivo' => (string) ($data['motivo'] ?? ''),
+    'titular' => (string) ($data['titular'] ?? ''),
+    'banco' => (string) ($data['banco'] ?? ''),
+    'clabe' => (string) ($data['clabe'] ?? ''),
+    'mensaje' => (string) ($data['mensaje'] ?? ''),
+    'origen' => (string) ($data['origen'] ?? 'ganayaavs.com/vinculaciones'),
+];
+if (FORMULARIO_SHEETS_TOKEN !== '') {
+    $query['token'] = FORMULARIO_SHEETS_TOKEN;
 }
 
-$ch = curl_init(FORMULARIO_SHEETS_WEBAPP);
+$webAppUrl = FORMULARIO_SHEETS_WEBAPP . '?' . http_build_query($query);
+
+$ch = curl_init($webAppUrl);
 curl_setopt_array($ch, [
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $payload,
-    CURLOPT_HTTPHEADER => ['Content-Type: text/plain;charset=utf-8'],
+    CURLOPT_HTTPGET => true,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_TIMEOUT => 25,
