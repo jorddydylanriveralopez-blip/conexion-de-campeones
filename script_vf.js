@@ -101,10 +101,28 @@ function claseLigaCarrusel(liga) {
 }
 
 function carruselGanadoresPorVista() {
-    if (window.innerWidth >= 1400) return 4;
-    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 1200) return 3;
     if (window.innerWidth >= 720) return 2;
     return 1;
+}
+
+function pausarAutoCarruselGanadores() {
+    if (carruselGanadoresState.timer) clearInterval(carruselGanadoresState.timer);
+    carruselGanadoresState.timer = null;
+}
+
+function cromoAlbumYaVisto() {
+    try {
+        return sessionStorage.getItem('yaavs_cromo_album') === '1';
+    } catch (_) {
+        return false;
+    }
+}
+
+function marcarCromoAlbumVisto() {
+    try {
+        sessionStorage.setItem('yaavs_cromo_album', '1');
+    } catch (_) {}
 }
 
 function escaparHtmlCarrusel(texto) {
@@ -291,6 +309,10 @@ function cerrarCromoModal() {
         resetRevealCromo(cromoRevealActivo);
         cromoRevealActivo = null;
     }
+    const root = document.getElementById('carrusel-ganadores');
+    if (root && !root.matches(':hover')) {
+        reiniciarAutoCarruselGanadores();
+    }
 }
 
 function abrirCromoModalDesdeReveal(el) {
@@ -314,6 +336,7 @@ function abrirCromoModalDesdeReveal(el) {
     num.textContent = el.dataset.numero || '';
 
     cromoRevealActivo = el;
+    marcarCromoAlbumVisto();
     modal.classList.add('is-visible');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('cromo-modal-open');
@@ -333,7 +356,7 @@ function cromoRevealEnCurso(el) {
     );
 }
 
-function iniciarRevealCromo(el) {
+function iniciarRevealCromo(el, opts = {}) {
     if (document.getElementById('cromo-modal')?.classList.contains('is-visible')) return;
     if (cromoRevealEnCurso(el)) return;
     resetRevealCromo(el);
@@ -344,22 +367,36 @@ function iniciarRevealCromo(el) {
         return;
     }
 
-    const timers = [
-        setTimeout(() => el.classList.add('is-shake-1'), 80),
-        setTimeout(() => {
-            el.classList.remove('is-shake-1');
-            el.classList.add('is-shake-2');
-        }, 650),
-        setTimeout(() => {
-            el.classList.remove('is-shake-2');
-            el.classList.add('is-shake-3');
-        }, 1300),
-        setTimeout(() => {
-            el.classList.remove('is-shake-3');
-            el.classList.add('is-burst');
-        }, 1950),
-        setTimeout(() => abrirCromoModalDesdeReveal(el), 2400),
-    ];
+    const rapido = opts.rapido || cromoAlbumYaVisto();
+    const timers = rapido
+        ? [
+              setTimeout(() => el.classList.add('is-shake-1'), 30),
+              setTimeout(() => {
+                  el.classList.remove('is-shake-1');
+                  el.classList.add('is-shake-2');
+              }, 180),
+              setTimeout(() => {
+                  el.classList.remove('is-shake-2');
+                  el.classList.add('is-burst');
+              }, 420),
+              setTimeout(() => abrirCromoModalDesdeReveal(el), 580),
+          ]
+        : [
+              setTimeout(() => el.classList.add('is-shake-1'), 80),
+              setTimeout(() => {
+                  el.classList.remove('is-shake-1');
+                  el.classList.add('is-shake-2');
+              }, 650),
+              setTimeout(() => {
+                  el.classList.remove('is-shake-2');
+                  el.classList.add('is-shake-3');
+              }, 1300),
+              setTimeout(() => {
+                  el.classList.remove('is-shake-3');
+                  el.classList.add('is-burst');
+              }, 1950),
+              setTimeout(() => abrirCromoModalDesdeReveal(el), 2400),
+          ];
     CROMO_REVEAL_TIMERS.set(el, timers);
 }
 
@@ -388,9 +425,9 @@ function enlazarRevealCromos(track) {
         let touchHandled = false;
 
         const activar = (opts = {}) => {
-            if (carruselGanadoresState.timer) clearInterval(carruselGanadoresState.timer);
+            pausarAutoCarruselGanadores();
             if (opts.vibrar) vibrarSobreCromo();
-            iniciarRevealCromo(el);
+            iniciarRevealCromo(el, { rapido: !!opts.rapido });
         };
 
         if (hoverFine) {
@@ -407,7 +444,7 @@ function enlazarRevealCromos(track) {
                 touchHandled = false;
                 return;
             }
-            activar({ vibrar: !hoverFine });
+            activar({ vibrar: !hoverFine, rapido: true });
         });
 
         el.addEventListener('focusin', () => activar());
@@ -421,7 +458,7 @@ function enlazarRevealCromos(track) {
                 touchTimer = setTimeout(() => {
                     if (!touchMoved && !cromoRevealEnCurso(el)) {
                         touchHandled = true;
-                        activar({ vibrar: true });
+                        activar({ vibrar: true, rapido: cromoAlbumYaVisto() });
                     }
                 }, 480);
             },
@@ -441,7 +478,7 @@ function enlazarRevealCromos(track) {
             if (touchTimer) clearTimeout(touchTimer);
             if (!touchMoved && !touchHandled && !cromoRevealEnCurso(el)) {
                 touchHandled = true;
-                activar({ vibrar: true });
+                activar({ vibrar: true, rapido: cromoAlbumYaVisto() });
             }
         };
 
@@ -461,9 +498,11 @@ function moverCarruselGanadores(delta) {
 }
 
 function reiniciarAutoCarruselGanadores() {
-    if (carruselGanadoresState.timer) clearInterval(carruselGanadoresState.timer);
+    pausarAutoCarruselGanadores();
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    carruselGanadoresState.timer = setInterval(() => moverCarruselGanadores(1), 4500);
+    if (document.getElementById('cromo-modal')?.classList.contains('is-visible')) return;
+    if (cromoRevealActivo && cromoRevealEnCurso(cromoRevealActivo)) return;
+    carruselGanadoresState.timer = setInterval(() => moverCarruselGanadores(1), 5500);
 }
 
 function enlazarControlesCarruselGanadores(root) {
@@ -486,10 +525,12 @@ function enlazarControlesCarruselGanadores(root) {
         aplicarFiltroCarruselGanadores();
         reiniciarAutoCarruselGanadores();
     });
-    root.addEventListener('mouseenter', () => {
-        if (carruselGanadoresState.timer) clearInterval(carruselGanadoresState.timer);
+    root.addEventListener('mouseenter', pausarAutoCarruselGanadores);
+    root.addEventListener('mouseleave', () => {
+        if (document.getElementById('cromo-modal')?.classList.contains('is-visible')) return;
+        reiniciarAutoCarruselGanadores();
     });
-    root.addEventListener('mouseleave', reiniciarAutoCarruselGanadores);
+    root.addEventListener('touchstart', pausarAutoCarruselGanadores, { passive: true });
     window.addEventListener('resize', () => renderCarruselGanadores());
 }
 
@@ -499,7 +540,7 @@ async function initCarruselGanadores() {
 
     try {
         const [cfgRes, s1Res, s2Res] = await Promise.all([
-            fetch('ganadores/carrusel-ganadores.json?v=20260611_cromo_touch').catch(() => null),
+            fetch('ganadores/carrusel-ganadores.json?v=20260611_cromo_refine').catch(() => null),
             fetch(urlGanadoresSorteo(1) + '?v=20260610'),
             fetch(urlGanadoresSorteo(2) + '?v=20260610'),
         ]);

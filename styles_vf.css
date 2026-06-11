@@ -264,7 +264,7 @@ img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
 }
 .carrusel-ganadores--album .carrusel-ganadores__viewport {
     width: 100%;
-    min-height: clamp(420px, 48vh, 620px);
+    min-height: clamp(480px, 54vh, 720px);
     border-radius: 14px;
     background:
         radial-gradient(circle at 12% 18%, rgba(212, 175, 55, 0.14), transparent 28%),
@@ -294,10 +294,16 @@ img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
 .carrusel-ganadores--album .carrusel-ganadores__slide {
     padding: clamp(14px, 2vw, 22px) clamp(8px, 1.2vw, 14px) clamp(18px, 2.5vw, 28px);
 }
-@media (min-width: 1400px) {
+@media (min-width: 720px) {
     .carrusel-ganadores--album .carrusel-ganadores__slide {
-        flex: 0 0 25%;
-        min-width: 25%;
+        flex: 0 0 50%;
+        min-width: 50%;
+    }
+}
+@media (min-width: 1200px) {
+    .carrusel-ganadores--album .carrusel-ganadores__slide {
+        flex: 0 0 33.333%;
+        min-width: 33.333%;
     }
 }
 .carrusel-ganadores__slide.cromo-tilt-1 { --cromo-rot: -4deg; }
@@ -1033,12 +1039,12 @@ body.cromo-modal-open { overflow: hidden; }
 .carrusel-ganadores--album .carrusel-ganadores__card--poster {
     border: none;
     background: transparent;
-    height: clamp(380px, 42vh, 560px);
+    height: clamp(440px, 50vh, 660px);
     overflow: visible;
 }
 @media (min-width: 1200px) {
     .carrusel-ganadores--album .carrusel-ganadores__card--poster {
-        height: clamp(420px, 44vh, 580px);
+        height: clamp(480px, 52vh, 680px);
     }
 }
 .carrusel-ganadores--album .carrusel-ganadores__card--poster .carrusel-ganadores__img {
@@ -1710,10 +1716,10 @@ input[type='text']:focus, input[type='password']:focus { outline: none; border-c
         padding: 0 36px;
     }
     .carrusel-ganadores--album .carrusel-ganadores__viewport {
-        min-height: clamp(380px, 62vw, 480px);
+        min-height: clamp(420px, 68vw, 540px);
     }
     .carrusel-ganadores--album .carrusel-ganadores__card--poster {
-        height: clamp(320px, 58vw, 440px);
+        height: clamp(360px, 62vw, 480px);
     }
     .support-footer { padding: 40px 15px; margin-top: 30px; }
     .kits-grid { gap: 15px; margin-top: 20px; }
