@@ -295,7 +295,7 @@ async function initCarruselGanadores() {
 
     try {
         const [cfgRes, s1Res, s2Res] = await Promise.all([
-            fetch('ganadores/carrusel-ganadores.json?v=20260521_cromos_wide').catch(() => null),
+            fetch('ganadores/carrusel-ganadores.json?v=20260611_deploy_test').catch(() => null),
             fetch(urlGanadoresSorteo(1) + '?v=20260610'),
             fetch(urlGanadoresSorteo(2) + '?v=20260610'),
         ]);

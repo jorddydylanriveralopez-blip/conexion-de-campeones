@@ -1,6 +1,6 @@
 {
   "titulo": "ÁLBUM DE CAMPEONES",
-  "subtitulo": "Ganadores del sorteo — Conexión de Campeones YAAVS",
+  "subtitulo": "Ganadores del sorteo — deploy automático activo ✓",
   "imagenes": [
     { "numero": "02", "variante": "comun", "src": "ganadores/fotos/sorteo-1/ganador-02.png", "alt": "Cromo ganador del sorteo", "poster": true },
     { "numero": "03", "variante": "cromado", "src": "ganadores/fotos/sorteo-1/ganador-03.png", "alt": "Cromo ganador del sorteo", "poster": true },
