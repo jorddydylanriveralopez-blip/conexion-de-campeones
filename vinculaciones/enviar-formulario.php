@@ -7,7 +7,7 @@ declare(strict_types=1);
  * Configura la URL después de implementar google-apps-script-formulario.gs
  * (debe terminar en /exec).
  */
-const FORMULARIO_SHEETS_WEBAPP = 'https://script.google.com/macros/s/AKfycbw1RzE3NP_RilmnVfQLMHwkHchW7kO4074EQjHqll5naBSF_PN0QIHL06D9RW3ul9q7Hw/exec';
+const FORMULARIO_SHEETS_WEBAPP = 'https://script.google.com/macros/s/AKfycbwlwrz_N2Y_rw4NR3ZPJGbt8yUAarepZw5GCwMIegxf1hGYz-ffXshys5PEsIuxV9_dqQ/exec';
 
 /** Misma URL CSV que vinculaciones.js (base de claves válidas) */
 const VINCULACIONES_CSV_URL =
@@ -208,4 +208,15 @@ if (is_array($decoded)) {
     exit;
 }
 
-echo json_encode(['ok' => true, 'raw' => $response], JSON_UNESCAPED_UNICODE);
+$paginaNoEncontrada = stripos($response, 'Page Not Found') !== false
+    || stripos($response, 'No se encontró la página') !== false;
+http_response_code(502);
+echo json_encode(
+    [
+        'ok' => false,
+        'error' => $paginaNoEncontrada
+            ? 'Google Apps Script no responde. Vuelve a implementar el Web App (acceso: Cualquiera) y actualiza la URL /exec.'
+            : 'Google Sheets devolvió una respuesta inválida. Intenta de nuevo en unos minutos.',
+    ],
+    JSON_UNESCAPED_UNICODE,
+);
