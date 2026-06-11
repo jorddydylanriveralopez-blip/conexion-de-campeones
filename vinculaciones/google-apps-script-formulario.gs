@@ -77,7 +77,7 @@ function guardarFormulario(data) {
     String(data.origen || 'ganayaavs.com/vinculaciones')
   ]);
 
-  return jsonOut({ ok: true });
+  return jsonOut({ ok: true, saved: true });
 }
 
 function doGet(e) {
@@ -86,7 +86,7 @@ function doGet(e) {
     if (params.action === 'submit') {
       return guardarFormulario(params);
     }
-    return jsonOut({ ok: true, message: 'Web App formulario vinculaciones activa' });
+    return jsonOut({ ok: true, message: 'Web App formulario vinculaciones activa', version: 2 });
   } catch (err) {
     return jsonOut({ ok: false, error: String(err) });
   }
