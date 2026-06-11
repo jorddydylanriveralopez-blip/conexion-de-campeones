@@ -12,13 +12,11 @@
  *    · Quién tiene acceso: Cualquiera
  * 5) Copia la URL /exec en vinculaciones/enviar-formulario.php
  *
- * NOTIFICACIONES (correo al llenar el formulario):
- * En Apps Script → Configuración del proyecto → Propiedades del script → Añadir:
- *   FORM_NOTIFY_EMAIL = tu-correo@gmail.com
- * (varios correos separados por coma). La primera vez pedirá permiso de Gmail.
+ * NOTIFICACIONES: cada envío manda correo a NOTIFY_EMAIL_DEFAULT (o FORM_NOTIFY_EMAIL en propiedades).
  */
 
 var HOJA_FORMULARIO = 'Formulario Vinculaciones';
+var NOTIFY_EMAIL_DEFAULT = 'jorddydylan2001@gmail.com';
 var COLS_FORMULARIO = 10;
 
 var ESTILO = {
@@ -235,10 +233,7 @@ function escapeHtml(text) {
 function notificarNuevoFormulario(data, fecha) {
   try {
     var props = PropertiesService.getScriptProperties();
-    var emailsRaw = props.getProperty('FORM_NOTIFY_EMAIL');
-    if (!emailsRaw) {
-      return;
-    }
+    var emailsRaw = props.getProperty('FORM_NOTIFY_EMAIL') || NOTIFY_EMAIL_DEFAULT;
 
     var destinatarios = emailsRaw.split(',').map(function (s) {
       return s.trim();
