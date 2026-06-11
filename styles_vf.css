@@ -808,6 +808,29 @@ img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
 .cromo-reveal.is-shake-2 .cromo-pack { animation: cromoShake2 0.09s ease-in-out infinite; }
 .cromo-reveal.is-shake-3 .cromo-pack { animation: cromoShake3 0.06s ease-in-out infinite; }
 
+@media (hover: hover) and (pointer: fine) {
+    .cromo-reveal:hover:not(.is-shake-1):not(.is-shake-2):not(.is-shake-3):not(.is-burst) .cromo-pack {
+        transform: rotate(0deg) translateY(-6px) scale(1.03);
+    }
+    .cromo-reveal:hover:not(.is-shake-1):not(.is-shake-2):not(.is-shake-3):not(.is-burst) .cromo-pack__flap--top {
+        transform: perspective(500px) rotateX(-18deg) translateY(-6px);
+    }
+    .cromo-reveal:hover:not(.is-shake-1):not(.is-shake-2):not(.is-shake-3):not(.is-burst) .cromo-pack__flap--left {
+        transform: perspective(400px) rotateY(32deg) translateX(-10px);
+    }
+    .cromo-reveal:hover:not(.is-shake-1):not(.is-shake-2):not(.is-shake-3):not(.is-burst) .cromo-pack__flap--right {
+        transform: perspective(400px) rotateY(-32deg) translateX(10px);
+    }
+    .cromo-reveal:hover:not(.is-shake-1):not(.is-shake-2):not(.is-shake-3):not(.is-burst) .cromo-pack__seal {
+        transform: scale(1.08);
+        box-shadow: 0 0 18px rgba(255, 215, 0, 0.55);
+    }
+    .cromo-reveal:hover:not(.is-shake-1):not(.is-shake-2):not(.is-shake-3):not(.is-burst) .cromo-sticker {
+        filter: brightness(1.08);
+        box-shadow: 0 0 28px rgba(34, 255, 94, 0.35);
+    }
+}
+
 /* Modal flotante */
 body.cromo-modal-open { overflow: hidden; }
 .cromo-modal {
@@ -1083,9 +1106,41 @@ body.cromo-modal-open { overflow: hidden; }
     text-shadow: 0 0 24px rgba(34, 255, 94, 0.35);
 }
 .carrusel-ganadores__sub {
-    margin: 0 0 18px;
+    margin: 0 0 10px;
     font-size: clamp(0.85rem, 2vw, 1rem);
     color: rgba(255, 255, 255, 0.72);
+}
+.carrusel-ganadores__hint {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    margin: 0 0 20px;
+    padding: 10px 18px;
+    max-width: min(640px, 94vw);
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    background: rgba(0, 0, 0, 0.35);
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.78rem, 1.8vw, 0.92rem);
+    font-weight: 700;
+    color: #f5e6a8;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+.carrusel-ganadores__hint-icon {
+    color: var(--verde-yaavs);
+    animation: hintHandBob 1.6s ease-in-out infinite;
+}
+@keyframes hintHandBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+.carrusel-ganadores__hint-mobile { display: none; }
+@media (max-width: 768px), (hover: none) {
+    .carrusel-ganadores__hint-desktop { display: none; }
+    .carrusel-ganadores__hint-mobile { display: inline; }
 }
 .carrusel-ganadores__filtros {
     display: flex;

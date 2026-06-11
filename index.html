@@ -33,7 +33,7 @@
     <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles_vf.css?v=20260611_cromo_modal_lg">
+    <link rel="stylesheet" href="styles_vf.css?v=20260611_cromo_touch">
     
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -300,6 +300,11 @@
                     <span class="carrusel-ganadores__eyebrow"><i class="fa-solid fa-book-open"></i> Colección oficial</span>
                     <h2 class="carrusel-ganadores__titulo" id="carrusel-ganadores-titulo">Álbum de campeones</h2>
                     <p class="carrusel-ganadores__sub" id="carrusel-ganadores-sub">Ganadores del sorteo — como cromos del mundial</p>
+                    <p class="carrusel-ganadores__hint" id="carrusel-ganadores-hint" aria-live="polite">
+                        <i class="fa-solid fa-hand-pointer carrusel-ganadores__hint-icon" aria-hidden="true"></i>
+                        <span class="carrusel-ganadores__hint-desktop">Deja el mouse arriba del sobre y descubre la magia</span>
+                        <span class="carrusel-ganadores__hint-mobile">Mantén presionado el sobre (vibra) o toca para abrir el cromo</span>
+                    </p>
                 </div>
                 <div class="carrusel-ganadores__loader" id="carrusel-ganadores-loader">
                     <i class="fa-solid fa-circle-notch fa-spin"></i> Cargando ganadores...
@@ -925,6 +930,6 @@
         </div>
     </div>
 
-    <script src="script_vf.js?v=20260611_cromo_modal_lg"></script>
+    <script src="script_vf.js?v=20260611_cromo_touch"></script>
 </body>
 </html>
