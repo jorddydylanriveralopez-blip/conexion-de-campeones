@@ -212,7 +212,25 @@ if ($response === false) {
 
 $decoded = json_decode($response, true);
 if (is_array($decoded)) {
-    http_response_code($httpCode >= 200 && $httpCode < 300 ? 200 : 502);
+    if (!empty($decoded['saved'])) {
+        http_response_code(200);
+        echo json_encode(['ok' => true], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    if (isset($decoded['message']) && stripos((string) $decoded['message'], 'activa') !== false) {
+        http_response_code(502);
+        echo json_encode(
+            [
+                'ok' => false,
+                'error' => 'Google Apps Script tiene código viejo. En la hoja Vinculaciones 2026 → Extensiones → Apps Script: borra todo, pega google-apps-script-formulario.gs completo, Guardar, ejecuta testGuardarFormulario, Implementar → Nueva versión (Yo + Cualquiera).',
+            ],
+            JSON_UNESCAPED_UNICODE,
+        );
+        exit;
+    }
+
+    http_response_code($httpCode >= 200 && $httpCode < 300 && !empty($decoded['ok']) ? 200 : 502);
     echo json_encode($decoded, JSON_UNESCAPED_UNICODE);
     exit;
 }
