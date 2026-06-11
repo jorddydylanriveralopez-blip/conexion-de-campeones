@@ -1,0 +1,15 @@
+{
+  "titulo": "ÁLBUM DE CAMPEONES",
+  "subtitulo": "Ganadores del sorteo — Conexión de Campeones YAAVS",
+  "imagenes": [
+    { "numero": "02", "variante": "comun", "src": "ganadores/fotos/sorteo-1/ganador-02.png", "alt": "Cromo ganador del sorteo", "poster": true },
+    { "numero": "03", "variante": "cromado", "src": "ganadores/fotos/sorteo-1/ganador-03.png", "alt": "Cromo ganador del sorteo", "poster": true },
+    { "numero": "04", "variante": "edicion-especial", "src": "ganadores/fotos/sorteo-1/ganador-04.png", "alt": "Cromo ganador del sorteo", "poster": true },
+    { "numero": "05", "variante": "brillante", "src": "ganadores/fotos/sorteo-1/ganador-05.png", "alt": "Cromo ganador del sorteo", "poster": true },
+    { "numero": "06", "variante": "cromado", "src": "ganadores/fotos/sorteo-1/ganador-06.png", "alt": "Cromo ganador del sorteo", "poster": true },
+    { "numero": "07", "variante": "leyenda", "src": "ganadores/fotos/sorteo-1/ganador-07.png", "alt": "Cromo ganador del sorteo", "poster": true },
+    { "numero": "08", "variante": "comun", "src": "ganadores/fotos/sorteo-1/ganador-08.png", "alt": "Cromo ganador del sorteo", "poster": true },
+    { "numero": "09", "variante": "edicion-especial", "src": "ganadores/fotos/sorteo-1/ganador-09.png", "alt": "Cromo ganador del sorteo", "poster": true },
+    { "numero": "10", "variante": "cromado", "src": "ganadores/fotos/sorteo-1/ganador-10.png", "alt": "Cromo ganador del sorteo", "poster": true }
+  ]
+}

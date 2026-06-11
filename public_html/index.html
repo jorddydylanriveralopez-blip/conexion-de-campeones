@@ -33,7 +33,7 @@
     <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles_vf.css?v=20260508_v2">
+    <link rel="stylesheet" href="styles_vf.css?v=20260521_cromos_wide">
     
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -186,10 +186,17 @@
                      ¡VINCULA Y GANA <br><span class="resaltado-diamante">COMO CAMPEÓN!</span>
                 </h1>
 
+                <div id="aviso-sorteo" class="aviso-sorteo-proximo" role="status" style="display:none;">
+                    <span id="aviso-sorteo-badge" class="aviso-sorteo-proximo__badge"></span>
+                    <p id="aviso-sorteo-titulo" class="aviso-sorteo-proximo__titulo"></p>
+                    <p id="aviso-sorteo-fecha" class="aviso-sorteo-proximo__fecha"></p>
+                    <p id="aviso-sorteo-texto" class="aviso-sorteo-proximo__texto"></p>
+                </div>
+
                 <div class="hero-cta-buttons">
                     <a href="ganadores" class="btn-ganadores-sorteo snd-click snd-hover">
                         <i class="fa-solid fa-trophy"></i>
-                        <span>GANADORES 1º Y 2º SORTEO</span>
+                        <span>GANADORES DEL SORTEO</span>
                     </a>
                     <a href="https://www.ganayaavs.com/madrescampeonas/" class="btn-madres-especial snd-click snd-hover">
                         <span class="btn-madres-icon">🎀</span>
@@ -197,7 +204,7 @@
                     </a>
                 </div>
 
-            </motion.div>
+            </div>
         </div>
 
         <div class="section-separator animate-on-scroll"></div>
@@ -287,6 +294,34 @@
                     <div id="ticket-grid" class="ticket-grid"></div>
                 </div>
             </div>
+
+            <section id="carrusel-ganadores" class="carrusel-ganadores carrusel-ganadores--album animate-on-scroll" aria-label="Ganadores del sorteo">
+                <div class="carrusel-ganadores__header">
+                    <span class="carrusel-ganadores__eyebrow"><i class="fa-solid fa-book-open"></i> Colección oficial</span>
+                    <h2 class="carrusel-ganadores__titulo" id="carrusel-ganadores-titulo">Álbum de campeones</h2>
+                    <p class="carrusel-ganadores__sub" id="carrusel-ganadores-sub">Ganadores del sorteo — como cromos del mundial</p>
+                </div>
+                <div class="carrusel-ganadores__loader" id="carrusel-ganadores-loader">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i> Cargando ganadores...
+                </div>
+                <div class="carrusel-ganadores__stage" id="carrusel-ganadores-stage" style="display:none;">
+                    <button type="button" class="carrusel-ganadores__nav carrusel-ganadores__nav--prev" id="carrusel-ganadores-prev" aria-label="Anterior">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div class="carrusel-ganadores__viewport">
+                        <div class="carrusel-ganadores__track" id="carrusel-ganadores-track"></div>
+                    </div>
+                    <button type="button" class="carrusel-ganadores__nav carrusel-ganadores__nav--next" id="carrusel-ganadores-next" aria-label="Siguiente">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="carrusel-ganadores__dots" id="carrusel-ganadores-dots"></div>
+                <div class="carrusel-ganadores__footer">
+                    <a href="ganadores" class="carrusel-ganadores__link snd-click snd-hover">
+                        <i class="fa-solid fa-list"></i> Ver todos los ganadores
+                    </a>
+                </div>
+            </section>
         </div>
 
         <div class="section-separator animate-on-scroll"></div>
@@ -456,12 +491,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><span class="sorteo-num">1º</span></td><td>15 mayo</td><td>153 · <a href="ganadores" style="color:var(--verde-yaavs);font-weight:800;">Ver ganadores</a></td></tr>
-                            <tr><td><span class="sorteo-num">2º</span></td><td>29 mayo</td><td>153 · <a href="ganadores?sorteo=2" style="color:var(--verde-yaavs);font-weight:800;">Ver ganadores</a></td></tr>
-                            <tr><td><span class="sorteo-num">3º</span></td><td>12 junio</td><td>153</td></tr>
-                            <tr><td><span class="sorteo-num">4º</span></td><td>26 junio</td><td>153</td></tr>
-                            <tr><td><span class="sorteo-num">5º</span></td><td>10 julio</td><td>153</td></tr>
-                            <tr><td><span class="sorteo-num">6º</span></td><td>31 julio</td><td>153</td></tr>
+                            <tr data-sorteo="1"><td><span class="sorteo-num">1º</span></td><td>15 mayo</td><td>153 · <a href="ganadores" style="color:var(--verde-yaavs);font-weight:800;">Ver ganadores</a></td></tr>
+                            <tr data-sorteo="2"><td><span class="sorteo-num">2º</span></td><td>29 mayo</td><td>153 · <a href="ganadores?sorteo=2" style="color:var(--verde-yaavs);font-weight:800;">Ver ganadores</a></td></tr>
+                            <tr data-sorteo="3"><td><span class="sorteo-num">3º</span></td><td>12 junio</td><td>153</td></tr>
+                            <tr data-sorteo="4"><td><span class="sorteo-num">4º</span></td><td>26 junio</td><td>153</td></tr>
+                            <tr data-sorteo="5"><td><span class="sorteo-num">5º</span></td><td>10 julio</td><td>153</td></tr>
+                            <tr data-sorteo="6"><td><span class="sorteo-num">6º</span></td><td>31 julio</td><td>153</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -799,7 +834,7 @@
                         <p id="pDesc"></p>
                     </div>
                     <div class="display-area" id="caja"></div>
-                    <button id="btnS" class="btn-ui" onclick="sorteo()">SORTEAR (ENTER)</button>
+                    <button id="btnS" class="btn-ui" onclick="accionSorteadorPrincipal()">SORTEAR (ENTER)</button>
                     <button type="button" class="btn-historial" onclick="abrirH()">🏆 VER TABLERO DE GANADORES</button>
                     <button type="button" class="btn-reset" onclick="reiniciarTodo()">⚠️ REINICIAR TODO</button>
                     <button type="button" class="btn-exit" onclick="cerrarSorteador()">SALIR DEL SORTEADOR</button>
@@ -867,6 +902,6 @@
         </div>
     </div>
 
-    <script src="script_vf.js?v=20260610_excluir_ganadores"></script>
+    <script src="script_vf.js?v=20260521_cromos_wide"></script>
 </body>
 </html>

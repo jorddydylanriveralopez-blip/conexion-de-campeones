@@ -175,6 +175,907 @@ img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
 .liga-resultado--elite { color: var(--liga-elite); text-shadow: 0 0 26px rgba(34, 255, 94, 0.45); }
 .liga-resultado--cambaceo { color: var(--liga-cambaceo); text-shadow: 0 0 24px rgba(213, 0, 255, 0.5); }
 
+.aviso-sorteo-proximo {
+    max-width: 640px;
+    width: calc(100% - 32px);
+    margin: 22px auto 8px;
+    padding: clamp(16px, 3vw, 22px) clamp(18px, 3.5vw, 28px);
+    border-radius: 16px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(34, 255, 94, 0.14), rgba(0, 174, 239, 0.1));
+    border: 2px solid var(--verde-yaavs);
+    box-shadow: 0 0 28px rgba(34, 255, 94, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.06);
+    animation: avisoSorteoPulse 2.8s ease-in-out infinite;
+}
+@keyframes avisoSorteoPulse {
+    0%, 100% { box-shadow: 0 0 28px rgba(34, 255, 94, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.06); }
+    50% { box-shadow: 0 0 42px rgba(34, 255, 94, 0.55), 0 0 18px rgba(0, 229, 255, 0.25), inset 0 0 12px rgba(255, 255, 255, 0.08); }
+}
+.aviso-sorteo-proximo__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #02060a;
+    background: linear-gradient(135deg, var(--verde-yaavs), var(--azul-puntos));
+}
+.aviso-sorteo-proximo__titulo {
+    margin: 12px 0 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.2rem, 3.2vw, 1.65rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(34, 255, 94, 0.45);
+}
+.aviso-sorteo-proximo__fecha {
+    margin: 0 0 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    font-weight: 700;
+    color: var(--azul-puntos);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.aviso-sorteo-proximo__texto {
+    margin: 0;
+    font-size: clamp(0.82rem, 1.8vw, 0.95rem);
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.45;
+}
+
+.carrusel-ganadores {
+    max-width: 1120px;
+    margin: 48px auto 8px;
+    padding: 0 20px;
+    position: relative;
+}
+.carrusel-ganadores--album {
+    width: 100vw;
+    max-width: 100vw;
+    margin: 56px calc(50% - 50vw) 20px;
+    padding: clamp(28px, 4vw, 48px) clamp(12px, 2.5vw, 40px) clamp(20px, 3vw, 36px);
+    box-sizing: border-box;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26, 71, 42, 0.35), transparent 70%),
+        linear-gradient(180deg, rgba(2, 20, 12, 0.5) 0%, transparent 100%);
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+.carrusel-ganadores--album .carrusel-ganadores__eyebrow {
+    background: linear-gradient(135deg, #d4af37, #1a472a);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.carrusel-ganadores--album .carrusel-ganadores__titulo {
+    color: #fff;
+    text-shadow: 0 2px 0 #1a472a, 0 0 28px rgba(212, 175, 55, 0.45);
+}
+.carrusel-ganadores--album .carrusel-ganadores__stage {
+    padding: 0 clamp(44px, 5vw, 64px);
+    max-width: min(1520px, 100%);
+    margin: 0 auto;
+}
+.carrusel-ganadores--album .carrusel-ganadores__viewport {
+    width: 100%;
+    min-height: clamp(420px, 48vh, 620px);
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(212, 175, 55, 0.14), transparent 28%),
+        radial-gradient(circle at 88% 82%, rgba(26, 71, 42, 0.12), transparent 30%),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 11px,
+            rgba(0, 0, 0, 0.04) 11px,
+            rgba(0, 0, 0, 0.04) 12px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 11px,
+            rgba(0, 0, 0, 0.025) 11px,
+            rgba(0, 0, 0, 0.025) 12px
+        ),
+        linear-gradient(180deg, #f7f3ea 0%, #ebe4d4 48%, #e2dac8 100%);
+    border: 4px solid #c9a227;
+    box-shadow:
+        inset 0 0 60px rgba(0, 0, 0, 0.07),
+        inset 0 2px 0 rgba(255, 255, 255, 0.65),
+        0 24px 60px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.carrusel-ganadores--album .carrusel-ganadores__slide {
+    padding: clamp(14px, 2vw, 22px) clamp(8px, 1.2vw, 14px) clamp(18px, 2.5vw, 28px);
+}
+@media (min-width: 1400px) {
+    .carrusel-ganadores--album .carrusel-ganadores__slide {
+        flex: 0 0 25%;
+        min-width: 25%;
+    }
+}
+.carrusel-ganadores__slide.cromo-tilt-1 { --cromo-rot: -4deg; }
+.carrusel-ganadores__slide.cromo-tilt-2 { --cromo-rot: 3deg; }
+.carrusel-ganadores__slide.cromo-tilt-3 { --cromo-rot: -2deg; }
+.carrusel-ganadores__slide.cromo-tilt-4 { --cromo-rot: 4deg; }
+.carrusel-ganadores__slide.cromo-tilt-5 { --cromo-rot: -1deg; }
+.carrusel-ganadores__slide.is-center { --cromo-rot: 0deg; }
+
+.cromo-sticker {
+    position: relative;
+    height: 100%;
+    padding: 12px 12px 16px;
+    background: linear-gradient(155deg, #ffffff 0%, #f8f6f0 55%, #f0ece2 100%);
+    border-radius: 6px;
+    box-shadow:
+        0 0 0 2px #ffffff,
+        0 0 0 4px #d4af37,
+        0 0 0 6px #1a472a,
+        0 14px 32px rgba(0, 0, 0, 0.42),
+        0 4px 10px rgba(0, 0, 0, 0.22);
+    transform: rotate(var(--cromo-rot, -2deg));
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s;
+}
+.carrusel-ganadores__slide.is-center .cromo-sticker {
+    transform: rotate(0deg) translateY(-8px) scale(1.04);
+    box-shadow:
+        0 0 0 2px #ffffff,
+        0 0 0 4px #ffd700,
+        0 0 0 6px #1a472a,
+        0 22px 44px rgba(0, 0, 0, 0.5),
+        0 0 28px rgba(212, 175, 55, 0.35);
+    z-index: 2;
+}
+.cromo-sticker__num {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    z-index: 4;
+    min-width: 38px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #1a472a;
+    background: linear-gradient(180deg, #fff9e6, #f0d878);
+    border: 2px solid #1a472a;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+.cromo-sticker__frame {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 3px;
+    border: 2px solid rgba(26, 71, 42, 0.35);
+    background: #02060a;
+}
+.cromo-sticker__holo {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 6px;
+    background: linear-gradient(
+        125deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.45) 42%,
+        rgba(0, 229, 255, 0.25) 48%,
+        rgba(255, 215, 0, 0.3) 52%,
+        rgba(34, 255, 94, 0.2) 56%,
+        transparent 68%
+    );
+    background-size: 220% 220%;
+    animation: cromoHolo 5s ease-in-out infinite;
+    mix-blend-mode: soft-light;
+    opacity: 0.55;
+}
+@keyframes cromoHolo {
+    0%, 100% { background-position: 0% 50%; opacity: 0.35; }
+    50% { background-position: 100% 50%; opacity: 0.7; }
+}
+.cromo-sticker__perforacion {
+    position: absolute;
+    top: 4px;
+    left: 10px;
+    right: 10px;
+    height: 6px;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 5px,
+        rgba(26, 71, 42, 0.25) 5px,
+        rgba(26, 71, 42, 0.25) 7px
+    );
+    opacity: 0.5;
+}
+.cromo-sticker__sello {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    z-index: 5;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.2;
+    color: #fff;
+    background: #1a472a;
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.cromo-sticker__sparkles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 6px;
+    opacity: 0;
+}
+@keyframes cromoChrome {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes cromoFoil {
+    0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+    50% { filter: hue-rotate(18deg) brightness(1.12); }
+}
+@keyframes cromoSparkle {
+    0%, 100% { opacity: 0.25; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+/* —— Básico (común) —— */
+.cromo-sticker--comun {
+    background: linear-gradient(155deg, #ffffff 0%, #f4f2ec 100%);
+    box-shadow:
+        0 0 0 2px #ffffff,
+        0 0 0 4px #8fa88a,
+        0 0 0 6px #1a472a,
+        0 12px 28px rgba(0, 0, 0, 0.35);
+}
+.cromo-sticker--comun .cromo-sticker__holo { display: none; }
+.cromo-sticker--comun .cromo-sticker__num {
+    background: linear-gradient(180deg, #f5f5f0, #d8ddd4);
+    color: #1a472a;
+}
+.cromo-sticker--comun .cromo-sticker__sello {
+    background: #4a6b52;
+}
+
+/* —— Cromado (holográfico) —— */
+.cromo-sticker--cromado {
+    background:
+        linear-gradient(135deg, #e8eef5 0%, #c5d0e0 25%, #f0e8f8 50%, #d4f0e8 75%, #e8eef5 100%);
+    background-size: 300% 300%;
+    animation: cromoChrome 4s ease infinite;
+    box-shadow:
+        0 0 0 2px #ffffff,
+        0 0 0 4px #a8b8d0,
+        0 0 0 6px #4a6080,
+        0 0 20px rgba(120, 180, 255, 0.45),
+        0 14px 32px rgba(0, 0, 0, 0.42);
+}
+.cromo-sticker--cromado .cromo-sticker__frame {
+    border-color: rgba(100, 140, 200, 0.55);
+}
+.cromo-sticker--cromado .cromo-sticker__holo {
+    display: block;
+    background: linear-gradient(
+        115deg,
+        transparent 15%,
+        rgba(255, 255, 255, 0.7) 28%,
+        rgba(0, 200, 255, 0.45) 36%,
+        rgba(180, 100, 255, 0.4) 44%,
+        rgba(255, 220, 80, 0.45) 52%,
+        rgba(80, 255, 160, 0.35) 60%,
+        transparent 75%
+    );
+    background-size: 250% 250%;
+    animation: cromoHolo 3s ease-in-out infinite;
+    mix-blend-mode: color-dodge;
+    opacity: 0.75;
+}
+.cromo-sticker--cromado .cromo-sticker__num {
+    background: linear-gradient(135deg, #c0d0f0, #8090b8, #e0c8f8);
+    color: #1a2840;
+    border-color: #4a6080;
+}
+.cromo-sticker--cromado .cromo-sticker__sello {
+    background: linear-gradient(135deg, #6a8ab8, #3a5080);
+    border-color: rgba(200, 220, 255, 0.6);
+}
+.carrusel-ganadores__slide.is-center .cromo-sticker--cromado {
+    box-shadow:
+        0 0 0 2px #ffffff,
+        0 0 0 4px #b8d0f0,
+        0 0 0 6px #4a6080,
+        0 0 36px rgba(100, 180, 255, 0.65),
+        0 22px 44px rgba(0, 0, 0, 0.5);
+}
+
+/* —— Edición especial —— */
+.cromo-sticker--edicion-especial {
+    background: linear-gradient(160deg, #1a1a22 0%, #2a2030 40%, #1a1828 100%);
+    box-shadow:
+        0 0 0 2px #3a3040,
+        0 0 0 4px #d4af37,
+        0 0 0 6px #0a0810,
+        0 0 18px rgba(212, 175, 55, 0.35),
+        0 14px 32px rgba(0, 0, 0, 0.55);
+}
+.cromo-sticker--edicion-especial .cromo-sticker__frame {
+    border: 2px solid #d4af37;
+    box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.15);
+}
+.cromo-sticker--edicion-especial .cromo-sticker__holo {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(212, 175, 55, 0.25) 45%,
+        rgba(255, 230, 150, 0.35) 50%,
+        rgba(212, 175, 55, 0.25) 55%,
+        transparent
+    );
+    background-size: 200% 100%;
+    animation: cromoHolo 6s ease-in-out infinite;
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+}
+.cromo-sticker--edicion-especial .cromo-sticker__num {
+    background: linear-gradient(180deg, #ffd700, #b8860b);
+    color: #1a1020;
+    border-color: #ffd700;
+}
+.cromo-sticker--edicion-especial .cromo-sticker__sello {
+    background: linear-gradient(135deg, #8b0000, #5a1020);
+    border-color: #d4af37;
+    color: #ffd700;
+    letter-spacing: 0.5px;
+}
+.cromo-sticker--edicion-especial .cromo-sticker__perforacion {
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 5px,
+        rgba(212, 175, 55, 0.4) 5px,
+        rgba(212, 175, 55, 0.4) 7px
+    );
+}
+.carrusel-ganadores__slide.is-center .cromo-sticker--edicion-especial {
+    box-shadow:
+        0 0 0 2px #3a3040,
+        0 0 0 4px #ffd700,
+        0 0 0 6px #0a0810,
+        0 0 32px rgba(212, 175, 55, 0.55),
+        0 22px 44px rgba(0, 0, 0, 0.55);
+}
+
+/* —— Brillante (foil dorado) —— */
+.cromo-sticker--brillante {
+    background:
+        linear-gradient(145deg, #fff8e0 0%, #f5d878 30%, #fff0b0 55%, #e8c050 80%, #fff8e0 100%);
+    background-size: 200% 200%;
+    animation: cromoFoil 5s ease-in-out infinite;
+    box-shadow:
+        0 0 0 2px #fff8e0,
+        0 0 0 4px #e8b830,
+        0 0 0 6px #8b6914,
+        0 0 16px rgba(255, 200, 50, 0.4),
+        0 14px 32px rgba(0, 0, 0, 0.4);
+}
+.cromo-sticker--brillante .cromo-sticker__frame {
+    border-color: #c9a020;
+}
+.cromo-sticker--brillante .cromo-sticker__holo {
+    background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255, 255, 220, 0.6) 48%,
+        rgba(255, 215, 0, 0.5) 52%,
+        transparent 68%
+    );
+    background-size: 180% 180%;
+    animation: cromoHolo 4s ease-in-out infinite;
+    mix-blend-mode: soft-light;
+    opacity: 0.65;
+}
+.cromo-sticker--brillante .cromo-sticker__num {
+    background: linear-gradient(180deg, #fff5c0, #e8a820);
+    color: #5a3a00;
+    border-color: #8b6914;
+}
+.cromo-sticker--brillante .cromo-sticker__sello {
+    background: linear-gradient(135deg, #c9a020, #8b6914);
+    color: #fff8e0;
+}
+
+/* —— Leyenda (ultra raro) —— */
+.cromo-sticker--leyenda {
+    background:
+        radial-gradient(ellipse at 20% 0%, rgba(180, 100, 255, 0.35), transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(255, 215, 0, 0.25), transparent 45%),
+        linear-gradient(155deg, #1a0830 0%, #2a1050 45%, #1a0830 100%);
+    box-shadow:
+        0 0 0 2px #4a2080,
+        0 0 0 4px #ffd700,
+        0 0 0 6px #1a0830,
+        0 0 28px rgba(160, 80, 255, 0.5),
+        0 0 12px rgba(255, 215, 0, 0.35),
+        0 16px 36px rgba(0, 0, 0, 0.55);
+}
+.cromo-sticker--leyenda .cromo-sticker__frame {
+    border: 2px solid #b080ff;
+    box-shadow: inset 0 0 24px rgba(160, 80, 255, 0.2);
+}
+.cromo-sticker--leyenda .cromo-sticker__holo {
+    background: conic-gradient(
+        from 0deg,
+        rgba(255, 215, 0, 0.3),
+        rgba(180, 100, 255, 0.35),
+        rgba(0, 229, 255, 0.25),
+        rgba(255, 100, 180, 0.3),
+        rgba(255, 215, 0, 0.3)
+    );
+    animation: cromoSparkle 3s ease-in-out infinite;
+    mix-blend-mode: screen;
+    opacity: 0.55;
+}
+.cromo-sticker--leyenda .cromo-sticker__sparkles {
+    opacity: 1;
+    background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.9) 0, transparent 3px),
+        radial-gradient(circle at 75% 18%, rgba(255, 215, 0, 0.85) 0, transparent 2.5px),
+        radial-gradient(circle at 55% 72%, rgba(200, 150, 255, 0.8) 0, transparent 3px),
+        radial-gradient(circle at 88% 65%, rgba(255, 255, 255, 0.7) 0, transparent 2px),
+        radial-gradient(circle at 30% 80%, rgba(255, 215, 0, 0.75) 0, transparent 2.5px);
+    animation: cromoSparkle 2.5s ease-in-out infinite;
+}
+.cromo-sticker--leyenda .cromo-sticker__num {
+    background: linear-gradient(135deg, #ffd700, #b080ff, #ffd700);
+    color: #1a0830;
+    border-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+.cromo-sticker--leyenda .cromo-sticker__sello {
+    background: linear-gradient(135deg, #6a20a0, #3a0860);
+    border-color: #ffd700;
+    color: #ffd700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+.cromo-sticker--leyenda .cromo-sticker__perforacion {
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 5px,
+        rgba(180, 100, 255, 0.45) 5px,
+        rgba(180, 100, 255, 0.45) 7px
+    );
+}
+.carrusel-ganadores__slide.is-center .cromo-sticker--leyenda {
+    box-shadow:
+        0 0 0 2px #6a30a0,
+        0 0 0 4px #ffd700,
+        0 0 0 6px #1a0830,
+        0 0 40px rgba(180, 100, 255, 0.65),
+        0 0 20px rgba(255, 215, 0, 0.45),
+        0 24px 48px rgba(0, 0, 0, 0.55);
+}
+
+.carrusel-ganadores--album .carrusel-ganadores__card--poster {
+    border: none;
+    background: transparent;
+    height: clamp(380px, 42vh, 560px);
+    overflow: visible;
+}
+@media (min-width: 1200px) {
+    .carrusel-ganadores--album .carrusel-ganadores__card--poster {
+        height: clamp(420px, 44vh, 580px);
+    }
+}
+.carrusel-ganadores--album .carrusel-ganadores__card--poster .carrusel-ganadores__img {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #02060a;
+    transform: none;
+}
+.carrusel-ganadores--album .carrusel-ganadores__slide.is-center .carrusel-ganadores__card--poster .carrusel-ganadores__img {
+    transform: none;
+}
+.carrusel-ganadores--album .carrusel-ganadores__nav {
+    width: clamp(44px, 4.5vw, 56px);
+    height: clamp(44px, 4.5vw, 56px);
+    border-color: #d4af37;
+    color: #d4af37;
+    background: rgba(26, 71, 42, 0.92);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(212, 175, 55, 0.25);
+    z-index: 3;
+}
+.carrusel-ganadores--album .carrusel-ganadores__nav--prev { left: clamp(4px, 1vw, 12px); }
+.carrusel-ganadores--album .carrusel-ganadores__nav--next { right: clamp(4px, 1vw, 12px); }
+.carrusel-ganadores--album .carrusel-ganadores__header {
+    max-width: min(900px, 92%);
+    margin-left: auto;
+    margin-right: auto;
+}
+.carrusel-ganadores--album .carrusel-ganadores__dot.active {
+    background: #d4af37;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.65);
+}
+.carrusel-ganadores--album .carrusel-ganadores__link {
+    background: linear-gradient(135deg, #d4af37, #1a472a);
+    color: #fff;
+}
+.carrusel-ganadores__header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+.carrusel-ganadores__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #02060a;
+    background: linear-gradient(135deg, var(--verde-yaavs), var(--azul-puntos));
+    margin-bottom: 12px;
+}
+.carrusel-ganadores__titulo {
+    margin: 0 0 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.35rem, 3.5vw, 2rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 24px rgba(34, 255, 94, 0.35);
+}
+.carrusel-ganadores__sub {
+    margin: 0 0 18px;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: rgba(255, 255, 255, 0.72);
+}
+.carrusel-ganadores__filtros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+.carrusel-ganadores__filtro {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+.carrusel-ganadores__filtro.active,
+.carrusel-ganadores__filtro:hover {
+    border-color: var(--verde-yaavs);
+    background: rgba(34, 255, 94, 0.18);
+    color: var(--verde-yaavs);
+    box-shadow: 0 0 16px rgba(34, 255, 94, 0.25);
+}
+.carrusel-ganadores__stage {
+    position: relative;
+    padding: 0 48px;
+}
+.carrusel-ganadores__viewport {
+    overflow: hidden;
+    border-radius: 20px;
+    background: radial-gradient(ellipse at center, rgba(34, 255, 94, 0.08), rgba(0, 0, 0, 0.5));
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 30px rgba(34, 255, 94, 0.12);
+}
+.carrusel-ganadores__track {
+    display: flex;
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+.carrusel-ganadores__slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+    padding: 18px;
+    box-sizing: border-box;
+}
+@media (min-width: 720px) {
+    .carrusel-ganadores__slide {
+        flex: 0 0 50%;
+        min-width: 50%;
+    }
+}
+@media (min-width: 1024px) {
+    .carrusel-ganadores__slide {
+        flex: 0 0 33.333%;
+        min-width: 33.333%;
+    }
+}
+.carrusel-ganadores__card--poster {
+    border-color: rgba(34, 255, 94, 0.5);
+    background: #02060a;
+}
+.carrusel-ganadores__card--poster .carrusel-ganadores__img {
+    object-fit: contain;
+    object-position: center;
+    transform: none;
+    background: radial-gradient(ellipse at center, rgba(34, 255, 94, 0.06), #02060a 70%);
+}
+.carrusel-ganadores__slide.is-center .carrusel-ganadores__card--poster .carrusel-ganadores__img {
+    transform: scale(1.02);
+}
+.carrusel-ganadores__card--poster {
+    height: clamp(360px, 55vw, 520px);
+}
+
+.carrusel-ganadores__card {
+    position: relative;
+    height: clamp(280px, 42vw, 380px);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid rgba(34, 255, 94, 0.35);
+    background: linear-gradient(160deg, rgba(8, 20, 14, 0.95), rgba(2, 8, 16, 0.98));
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    transition: transform 0.35s ease, border-color 0.35s, box-shadow 0.35s;
+}
+.carrusel-ganadores__slide.is-center .carrusel-ganadores__card {
+    transform: scale(1.03);
+    border-color: var(--verde-yaavs);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 28px rgba(34, 255, 94, 0.28);
+}
+.carrusel-ganadores__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transform: scale(1.02);
+    transition: transform 6s ease;
+}
+.carrusel-ganadores__slide.is-center .carrusel-ganadores__img {
+    transform: scale(1.08);
+}
+.carrusel-ganadores__fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(34, 255, 94, 0.18), transparent 45%),
+        radial-gradient(circle at 70% 80%, rgba(0, 229, 255, 0.12), transparent 40%),
+        linear-gradient(160deg, #06120c, #02060a);
+}
+.carrusel-ganadores__fallback-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: #02060a;
+    background: linear-gradient(135deg, var(--verde-yaavs), var(--azul-puntos));
+    box-shadow: 0 0 24px rgba(34, 255, 94, 0.5);
+}
+.carrusel-ganadores__fallback-inicial {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--verde-yaavs);
+    text-shadow: 0 0 20px rgba(34, 255, 94, 0.4);
+}
+.carrusel-ganadores__shine {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.12) 50%, transparent 65%);
+    transform: translateX(-120%);
+    animation: carruselShine 4s ease-in-out infinite;
+}
+@keyframes carruselShine {
+    0%, 70% { transform: translateX(-120%); }
+    100% { transform: translateX(120%); }
+}
+.carrusel-ganadores__overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 16px 18px 18px;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.88) 35%);
+}
+.carrusel-ganadores__sorteo {
+    display: inline-block;
+    margin-bottom: 6px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #02060a;
+    background: var(--verde-yaavs);
+}
+.carrusel-ganadores__nombre {
+    margin: 0 0 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.25;
+    color: #fff;
+}
+.carrusel-ganadores__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.carrusel-ganadores__badge {
+    font-size: 0.62rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.9);
+}
+.carrusel-ganadores__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid var(--verde-yaavs);
+    background: rgba(0, 0, 0, 0.75);
+    color: var(--verde-yaavs);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    z-index: 2;
+    transition: all 0.25s;
+    box-shadow: 0 0 16px rgba(34, 255, 94, 0.3);
+}
+.carrusel-ganadores__nav:hover {
+    background: rgba(34, 255, 94, 0.2);
+    transform: translateY(-50%) scale(1.08);
+}
+.carrusel-ganadores__nav--prev { left: 0; }
+.carrusel-ganadores__nav--next { right: 0; }
+.carrusel-ganadores__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+.carrusel-ganadores__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    transition: all 0.25s;
+}
+.carrusel-ganadores__dot.active {
+    background: var(--verde-yaavs);
+    box-shadow: 0 0 12px rgba(34, 255, 94, 0.6);
+    transform: scale(1.15);
+}
+.carrusel-ganadores__footer {
+    text-align: center;
+    margin-top: 20px;
+}
+.carrusel-ganadores__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #02060a;
+    background: linear-gradient(135deg, var(--verde-yaavs), var(--azul-puntos));
+    box-shadow: 0 8px 24px rgba(34, 255, 94, 0.35);
+    transition: transform 0.25s;
+}
+.carrusel-ganadores__link:hover {
+    transform: translateY(-2px);
+}
+.carrusel-ganadores__loader {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--azul-puntos);
+    font-weight: 700;
+}
+@media (prefers-reduced-motion: reduce) {
+    .carrusel-ganadores__track,
+    .carrusel-ganadores__img,
+    .carrusel-ganadores__shine { transition: none; animation: none; }
+}
+.calendario-table-unificada tr.sorteo-proximo td {
+    background: rgba(34, 255, 94, 0.12);
+    border-color: rgba(34, 255, 94, 0.45);
+    box-shadow: inset 0 0 0 1px rgba(34, 255, 94, 0.25);
+}
+.calendario-table-unificada tr.sorteo-proximo .sorteo-num {
+    color: var(--verde-yaavs);
+    text-shadow: 0 0 12px rgba(34, 255, 94, 0.6);
+}
+.aviso-sorteo-proximo--hoy {
+    border-color: #ffd700;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(34, 255, 94, 0.12));
+    animation: avisoSorteoHoy 1.5s ease-in-out infinite;
+}
+@keyframes avisoSorteoHoy {
+    0%, 100% { box-shadow: 0 0 32px rgba(255, 215, 0, 0.45), inset 0 0 12px rgba(255, 255, 255, 0.08); }
+    50% { box-shadow: 0 0 48px rgba(255, 215, 0, 0.7), 0 0 22px rgba(34, 255, 94, 0.35), inset 0 0 14px rgba(255, 255, 255, 0.1); }
+}
+.aviso-sorteo-proximo--hoy .aviso-sorteo-proximo__badge {
+    background: linear-gradient(135deg, #ffd700, var(--verde-yaavs));
+}
+.calendario-table-unificada tr.sorteo-hoy td {
+    background: rgba(255, 215, 0, 0.14);
+    border-color: rgba(255, 215, 0, 0.55);
+    box-shadow: inset 0 0 0 1px rgba(255, 215, 0, 0.3);
+}
+.calendario-table-unificada tr.sorteo-hoy .sorteo-num {
+    color: #ffd700;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.65);
+}
+.sorteo-estado-tag,
+.sorteo-proximo-tag {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #02060a;
+    background: var(--verde-yaavs);
+    vertical-align: middle;
+}
+.sorteo-hoy-tag {
+    background: #ffd700;
+}
+
 .fb-live-banner { max-width: 920px; margin: 16px auto 28px; padding: clamp(16px, 3vw, 22px) clamp(18px, 3vw, 28px); border-radius: 14px; background: linear-gradient(135deg, rgba(8, 24, 18, 0.75), rgba(2, 12, 20, 0.65)); border: 1px solid rgba(0, 229, 255, 0.35); box-shadow: 0 0 0 1px rgba(34, 255, 94, 0.2), 0 12px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06); }
 .fb-live-banner__text { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: clamp(0.95rem, 2.2vw, 1.15rem); font-weight: 700; color: #ffffff; text-align: center; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.5; text-shadow: 0 0 18px rgba(0, 229, 255, 0.35); display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 16px; }
 .fb-live-banner__line { flex: 1 1 280px; max-width: 100%; }
@@ -409,6 +1310,22 @@ input[type='text']:focus, input[type='password']:focus { outline: none; border-c
     .section-separator { margin: 25px auto; }
     .centered-header { min-height: auto; padding-bottom: 20px; }
     .section-boletos-bg { padding: 20px 10px 25px; margin-top: 0; }
+    .carrusel-ganadores--album {
+        width: calc(100% + 20px);
+        max-width: calc(100% + 20px);
+        margin-left: -10px;
+        margin-right: -10px;
+        padding: 24px 6px 16px;
+    }
+    .carrusel-ganadores--album .carrusel-ganadores__stage {
+        padding: 0 36px;
+    }
+    .carrusel-ganadores--album .carrusel-ganadores__viewport {
+        min-height: clamp(380px, 62vw, 480px);
+    }
+    .carrusel-ganadores--album .carrusel-ganadores__card--poster {
+        height: clamp(320px, 58vw, 440px);
+    }
     .support-footer { padding: 40px 15px; margin-top: 30px; }
     .kits-grid { gap: 15px; margin-top: 20px; }
     .calendarios-wrap { flex-direction: column; margin-top: 15px; }

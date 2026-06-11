@@ -9,6 +9,430 @@ let indiceBoletoVisible = 0;
 const BOLETOS_POR_PAGINA = 100;
 
 /* =========================================================
+   CALENDARIO DE SORTEOS (compartido: aviso web + sorteador)
+   ========================================================= */
+const CALENDARIO_SORTEOS = [
+    { num: 1, fecha: '2026-05-15', label: '15 DE MAYO 2026' },
+    { num: 2, fecha: '2026-05-29', label: '29 DE MAYO 2026' },
+    { num: 3, fecha: '2026-06-12', label: '12 DE JUNIO 2026' },
+    { num: 4, fecha: '2026-06-26', label: '26 DE JUNIO 2026' },
+    { num: 5, fecha: '2026-07-10', label: '10 DE JULIO 2026' },
+    { num: 6, fecha: '2026-07-31', label: '31 DE JULIO 2026' },
+];
+const HORA_SORTEO_TEXTO = '3:00 pm (hora CDMX)';
+
+function hoyEnCDMX() {
+    const partes = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Mexico_City',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    }).formatToParts(new Date());
+    const y = partes.find((p) => p.type === 'year').value;
+    const m = partes.find((p) => p.type === 'month').value;
+    const d = partes.find((p) => p.type === 'day').value;
+    return `${y}-${m}-${d}`;
+}
+
+/** Próximo sorteo según calendario; al pasar su fecha avanza al siguiente */
+function resolverSorteoVigente(fechaHoy = hoyEnCDMX()) {
+    for (const s of CALENDARIO_SORTEOS) {
+        if (s.fecha >= fechaHoy) return s;
+    }
+    return CALENDARIO_SORTEOS[CALENDARIO_SORTEOS.length - 1];
+}
+
+function etiquetaOrdinalSorteo(n) {
+    const ordinales = { 1: '1.er', 2: '2.º', 3: '3.er', 4: '4.º', 5: '5.º', 6: '6.º' };
+    return `${ordinales[n] || `${n}.º`} SORTEO`;
+}
+
+function resolverEstadoAvisoSorteo(fechaHoy = hoyEnCDMX()) {
+    for (const s of CALENDARIO_SORTEOS) {
+        if (s.fecha >= fechaHoy) {
+            return { tipo: s.fecha === fechaHoy ? 'hoy' : 'proximo', sorteo: s };
+        }
+    }
+    return { tipo: 'fin', sorteo: null };
+}
+
+function actualizarCalendarioSorteosUI(estado) {
+    document.querySelectorAll('.calendario-table-unificada tbody tr[data-sorteo]').forEach((row) => {
+        row.classList.remove('sorteo-proximo', 'sorteo-hoy');
+        const tagViejo = row.querySelector('.sorteo-estado-tag');
+        if (tagViejo) tagViejo.remove();
+        if (!estado) return;
+        const num = Number(row.dataset.sorteo);
+        if (num !== estado.sorteo.num) return;
+        row.classList.add(estado.tipo === 'hoy' ? 'sorteo-hoy' : 'sorteo-proximo');
+        const td = row.querySelector('td');
+        if (!td) return;
+        const tag = document.createElement('span');
+        tag.className = `sorteo-estado-tag ${estado.tipo === 'hoy' ? 'sorteo-hoy-tag' : 'sorteo-proximo-tag'}`;
+        tag.textContent = estado.tipo === 'hoy' ? '¡Hoy!' : 'Próximo';
+        td.appendChild(tag);
+    });
+}
+
+const carruselGanadoresState = {
+    slides: [],
+    filtrados: [],
+    indice: 0,
+    filtro: 'todos',
+    timer: null,
+    porVista: 1,
+};
+
+function inicialesDeNombre(nombre, clave) {
+    const base = String(nombre || clave || '?').trim();
+    if (!base) return '?';
+    const partes = base.split(/\s+/).filter(Boolean);
+    if (partes.length >= 2) return (partes[0][0] + partes[1][0]).toUpperCase();
+    return base.slice(0, 2).toUpperCase();
+}
+
+function claseLigaCarrusel(liga) {
+    const u = String(liga || '').toUpperCase();
+    if (u.includes('ASCENSO')) return 'liga-ascenso';
+    if (u.includes('PRO')) return 'liga-pro';
+    if (u.includes('ELITE')) return 'liga-elite';
+    if (u.includes('CAMBACEO')) return 'liga-cambaceo';
+    return '';
+}
+
+function carruselGanadoresPorVista() {
+    if (window.innerWidth >= 1400) return 4;
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 720) return 2;
+    return 1;
+}
+
+function escaparHtmlCarrusel(texto) {
+    return String(texto ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+const VARIANTES_CROMO = ['comun', 'cromado', 'edicion-especial', 'brillante', 'leyenda'];
+const ETIQUETAS_CROMO = {
+    comun: 'Básico',
+    cromado: 'Cromado',
+    'edicion-especial': 'Ed. Esp.',
+    brillante: 'Brillante',
+    leyenda: 'Leyenda',
+};
+
+function varianteCromoValida(v) {
+    return VARIANTES_CROMO.includes(v) ? v : 'comun';
+}
+
+function crearSlideGanadorHTML(g, fotoSrc) {
+    const esPoster = !!g.poster;
+    const nombre = g.nombre && g.nombre.toUpperCase() !== (g.clave || '').toUpperCase() ? g.nombre : 'Campeón YAAVS';
+    const iniciales = inicialesDeNombre(nombre, g.clave);
+    const src = fotoSrc || g.foto || '';
+    const alt = escaparHtmlCarrusel(g.alt || nombre);
+
+    if (esPoster && src) {
+        const variante = varianteCromoValida(g.variante);
+        const numero = escaparHtmlCarrusel(g.numero || '');
+        const sello = escaparHtmlCarrusel(g.varianteLabel || ETIQUETAS_CROMO[variante] || 'Cromo');
+        const numHtml = numero
+            ? `<span class="cromo-sticker__num" aria-hidden="true">${numero}</span>`
+            : '';
+        return `
+            <article class="carrusel-ganadores__card carrusel-ganadores__card--poster cromo-sticker cromo-sticker--${variante}">
+                <span class="cromo-sticker__sello" aria-hidden="true">${sello}</span>
+                ${numHtml}
+                <div class="cromo-sticker__frame">
+                    <img src="${escaparHtmlCarrusel(src)}" alt="${alt}" class="carrusel-ganadores__img" loading="lazy" decoding="async">
+                </div>
+                <span class="cromo-sticker__holo" aria-hidden="true"></span>
+                <span class="cromo-sticker__sparkles" aria-hidden="true"></span>
+                <span class="cromo-sticker__perforacion" aria-hidden="true"></span>
+            </article>
+        `;
+    }
+
+    const imgHtml = src
+        ? `<img src="${escaparHtmlCarrusel(src)}" alt="${alt}" class="carrusel-ganadores__img" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">`
+        : '';
+    const fallbackDisplay = src ? 'none' : 'flex';
+    return `
+        <article class="carrusel-ganadores__card">
+            ${imgHtml}
+            <div class="carrusel-ganadores__fallback" style="display:${fallbackDisplay}">
+                <span class="carrusel-ganadores__fallback-icon"><i class="fa-solid fa-trophy"></i></span>
+                <span class="carrusel-ganadores__fallback-inicial">${escaparHtmlCarrusel(iniciales)}</span>
+            </div>
+            <span class="carrusel-ganadores__shine" aria-hidden="true"></span>
+            <div class="carrusel-ganadores__overlay">
+                <span class="carrusel-ganadores__sorteo">${escaparHtmlCarrusel(g.sorteoLabel)}</span>
+                <h3 class="carrusel-ganadores__nombre">${escaparHtmlCarrusel(nombre)}</h3>
+                <div class="carrusel-ganadores__meta">
+                    <span class="carrusel-ganadores__badge ${claseLigaCarrusel(g.liga)}">${escaparHtmlCarrusel(g.liga || 'Liga')}</span>
+                    <span class="carrusel-ganadores__badge">${escaparHtmlCarrusel(g.kit || 'Kit')}</span>
+                </div>
+            </div>
+        </article>
+    `;
+}
+
+function aplicarFiltroCarruselGanadores() {
+    const { slides, filtro } = carruselGanadoresState;
+    carruselGanadoresState.filtrados =
+        filtro === 'todos' ? slides : slides.filter((s) => String(s.sorteo) === String(filtro));
+    carruselGanadoresState.indice = 0;
+    renderCarruselGanadores();
+}
+
+function renderCarruselGanadores() {
+    const track = document.getElementById('carrusel-ganadores-track');
+    const dots = document.getElementById('carrusel-ganadores-dots');
+    const stage = document.getElementById('carrusel-ganadores-stage');
+    const loader = document.getElementById('carrusel-ganadores-loader');
+    if (!track || !dots) return;
+
+    const { filtrados } = carruselGanadoresState;
+    carruselGanadoresState.porVista = carruselGanadoresPorVista();
+
+    if (!filtrados.length) {
+        if (loader) {
+            loader.style.display = 'block';
+            loader.textContent = 'No hay ganadores para este filtro.';
+        }
+        if (stage) stage.style.display = 'none';
+        track.innerHTML = '';
+        dots.innerHTML = '';
+        return;
+    }
+
+    if (loader) loader.style.display = 'none';
+    if (stage) stage.style.display = '';
+
+    track.innerHTML = filtrados
+        .map(
+            (g, i) =>
+                `<div class="carrusel-ganadores__slide cromo-tilt-${(i % 5) + 1}">${crearSlideGanadorHTML(g, g.foto)}</div>`,
+        )
+        .join('');
+
+    const maxIndice = Math.max(0, filtrados.length - carruselGanadoresState.porVista);
+    if (carruselGanadoresState.indice > maxIndice) {
+        carruselGanadoresState.indice = 0;
+    }
+
+    const pct = (100 / carruselGanadoresState.porVista) * carruselGanadoresState.indice;
+    track.style.transform = `translateX(-${pct}%)`;
+
+    const slideEls = track.querySelectorAll('.carrusel-ganadores__slide');
+    slideEls.forEach((el, i) => {
+        el.classList.toggle('is-center', i === carruselGanadoresState.indice + Math.floor(carruselGanadoresState.porVista / 2));
+    });
+
+    const totalDots = maxIndice + 1;
+    dots.innerHTML = '';
+    for (let i = 0; i < totalDots; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `carrusel-ganadores__dot${i === carruselGanadoresState.indice ? ' active' : ''}`;
+        btn.setAttribute('aria-label', `Ir al grupo ${i + 1}`);
+        btn.addEventListener('click', () => {
+            carruselGanadoresState.indice = i;
+            renderCarruselGanadores();
+            reiniciarAutoCarruselGanadores();
+        });
+        dots.appendChild(btn);
+    }
+}
+
+function moverCarruselGanadores(delta) {
+    const maxIndice = Math.max(0, carruselGanadoresState.filtrados.length - carruselGanadoresState.porVista);
+    carruselGanadoresState.indice += delta;
+    if (carruselGanadoresState.indice > maxIndice) carruselGanadoresState.indice = 0;
+    if (carruselGanadoresState.indice < 0) carruselGanadoresState.indice = maxIndice;
+    renderCarruselGanadores();
+}
+
+function reiniciarAutoCarruselGanadores() {
+    if (carruselGanadoresState.timer) clearInterval(carruselGanadoresState.timer);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    carruselGanadoresState.timer = setInterval(() => moverCarruselGanadores(1), 4500);
+}
+
+function enlazarControlesCarruselGanadores(root) {
+    if (root.dataset.controlesListos === '1') return;
+    root.dataset.controlesListos = '1';
+    document.getElementById('carrusel-ganadores-prev')?.addEventListener('click', () => {
+        moverCarruselGanadores(-1);
+        reiniciarAutoCarruselGanadores();
+    });
+    document.getElementById('carrusel-ganadores-next')?.addEventListener('click', () => {
+        moverCarruselGanadores(1);
+        reiniciarAutoCarruselGanadores();
+    });
+    document.getElementById('carrusel-ganadores-filtros')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.carrusel-ganadores__filtro');
+        if (!btn) return;
+        document.querySelectorAll('.carrusel-ganadores__filtro').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        carruselGanadoresState.filtro = btn.dataset.filtro;
+        aplicarFiltroCarruselGanadores();
+        reiniciarAutoCarruselGanadores();
+    });
+    root.addEventListener('mouseenter', () => {
+        if (carruselGanadoresState.timer) clearInterval(carruselGanadoresState.timer);
+    });
+    root.addEventListener('mouseleave', reiniciarAutoCarruselGanadores);
+    window.addEventListener('resize', () => renderCarruselGanadores());
+}
+
+async function initCarruselGanadores() {
+    const root = document.getElementById('carrusel-ganadores');
+    if (!root) return;
+
+    try {
+        const [cfgRes, s1Res, s2Res] = await Promise.all([
+            fetch('ganadores/carrusel-ganadores.json?v=20260521_cromos_wide').catch(() => null),
+            fetch(urlGanadoresSorteo(1) + '?v=20260610'),
+            fetch(urlGanadoresSorteo(2) + '?v=20260610'),
+        ]);
+
+        const cfg = cfgRes?.ok ? await cfgRes.json() : {};
+        const s1 = s1Res.ok ? await s1Res.json() : { ganadores: [] };
+        const s2 = s2Res.ok ? await s2Res.json() : { ganadores: [] };
+
+        if (cfg.titulo) {
+            const t = document.getElementById('carrusel-ganadores-titulo');
+            if (t) t.textContent = cfg.titulo;
+        }
+        if (cfg.subtitulo) {
+            const s = document.getElementById('carrusel-ganadores-sub');
+            if (s) s.textContent = cfg.subtitulo;
+        }
+
+        if (Array.isArray(cfg.imagenes) && cfg.imagenes.length) {
+            carruselGanadoresState.slides = cfg.imagenes.map((img, i) => {
+                const sorteo = Number(img.sorteo) || 1;
+                const variante = varianteCromoValida(img.variante || VARIANTES_CROMO[i % VARIANTES_CROMO.length]);
+                return {
+                    sorteo,
+                    numero: img.numero || String(i + 1).padStart(2, '0'),
+                    variante,
+                    varianteLabel: img.varianteLabel || ETIQUETAS_CROMO[variante],
+                    sorteoLabel: 'Ganador del sorteo',
+                    nombre: img.nombre || 'Campeón YAAVS',
+                    liga: img.liga || 'Ganador',
+                    kit: img.kit || 'Premio',
+                    foto: img.src,
+                    poster: img.poster !== false,
+                    alt: img.alt || img.nombre || 'Ganador del sorteo',
+                };
+            });
+            aplicarFiltroCarruselGanadores();
+            reiniciarAutoCarruselGanadores();
+            enlazarControlesCarruselGanadores(root);
+            return;
+        }
+
+        const mapaGanadores = new Map();
+        (s1.ganadores || []).forEach((g) => {
+            const clave = normalizarClaveYaavser(g.clave);
+            if (clave) mapaGanadores.set(clave, { ...g, sorteo: 1, sorteoLabel: '1.er sorteo' });
+        });
+        (s2.ganadores || []).forEach((g) => {
+            const clave = normalizarClaveYaavser(g.clave);
+            if (clave) mapaGanadores.set(`${clave}|2`, { ...g, sorteo: 2, sorteoLabel: '2.º sorteo' });
+        });
+
+        const fotosPorClave = new Map();
+        (cfg.fotos || []).forEach((f) => {
+            const clave = normalizarClaveYaavser(f.clave);
+            if (clave && f.src) fotosPorClave.set(`${clave}|${f.sorteo}`, f.src);
+        });
+
+        const clavesDestacadas = [];
+        const pushClave = (clave, sorteo) => {
+            const c = normalizarClaveYaavser(clave);
+            if (!c) return;
+            const key = `${c}|${sorteo}`;
+            if (!clavesDestacadas.includes(key)) clavesDestacadas.push(key);
+        };
+
+        Object.entries(cfg.destacados || {}).forEach(([sorteo, lista]) => {
+            (lista || []).forEach((clave) => pushClave(clave, Number(sorteo)));
+        });
+
+        if (!clavesDestacadas.length) {
+            (s1.ganadores || []).slice(0, 6).forEach((g) => pushClave(g.clave, 1));
+            (s2.ganadores || []).slice(0, 6).forEach((g) => pushClave(g.clave, 2));
+        }
+
+        carruselGanadoresState.slides = clavesDestacadas
+            .map((key) => {
+                const [clave, sorteoStr] = key.split('|');
+                const sorteo = Number(sorteoStr);
+                const g = sorteo === 2 ? mapaGanadores.get(key) : mapaGanadores.get(clave);
+                if (!g) return null;
+                return {
+                    ...g,
+                    clave,
+                    sorteo,
+                    sorteoLabel: sorteo === 1 ? '1.er sorteo' : '2.º sorteo',
+                    foto: fotosPorClave.get(key) || fotosPorClave.get(`${clave}|${sorteo}`) || '',
+                };
+            })
+            .filter(Boolean);
+
+        aplicarFiltroCarruselGanadores();
+        reiniciarAutoCarruselGanadores();
+        enlazarControlesCarruselGanadores(root);
+    } catch (err) {
+        console.warn('[Carrusel ganadores]', err);
+        const loader = document.getElementById('carrusel-ganadores-loader');
+        if (loader) loader.textContent = 'No se pudo cargar el carrusel de ganadores.';
+    }
+}
+
+function actualizarAvisoSorteoEnPagina() {
+    const banner = document.getElementById('aviso-sorteo');
+    if (!banner) return;
+
+    const estado = resolverEstadoAvisoSorteo();
+    if (estado.tipo === 'fin') {
+        banner.style.display = 'none';
+        actualizarCalendarioSorteosUI(null);
+        return;
+    }
+
+    const { tipo, sorteo } = estado;
+    const ordinal = etiquetaOrdinalSorteo(sorteo.num);
+    const badge = document.getElementById('aviso-sorteo-badge');
+    const titulo = document.getElementById('aviso-sorteo-titulo');
+    const fecha = document.getElementById('aviso-sorteo-fecha');
+    const texto = document.getElementById('aviso-sorteo-texto');
+
+    banner.style.display = '';
+    banner.classList.toggle('aviso-sorteo-proximo--hoy', tipo === 'hoy');
+
+    if (tipo === 'hoy') {
+        if (badge) badge.innerHTML = '<i class="fa-solid fa-trophy"></i> ¡Es hoy!';
+        if (titulo) titulo.textContent = `¡Es el ${ordinal}!`;
+        if (fecha) fecha.textContent = `Hoy · ${HORA_SORTEO_TEXTO}`;
+        if (texto) texto.textContent = '¡Rápido, revisa tus boletos! Nos vemos en la transmisión en vivo.';
+    } else {
+        if (badge) badge.innerHTML = '<i class="fa-solid fa-bell"></i> ¡Ya casi!';
+        if (titulo) titulo.textContent = `Se acerca el ${ordinal}`;
+        if (fecha) fecha.textContent = `${sorteo.label} · ${HORA_SORTEO_TEXTO}`;
+        if (texto) texto.textContent = '¡Rápido, revisa tus boletos y sigue vinculando para participar!';
+    }
+
+    actualizarCalendarioSorteosUI(estado);
+}
+
+/* =========================================================
    BASE DE DATOS: PREGUNTAS FRECUENTES (FAQ)
    ========================================================= */
 window.FAQ_ENTRIES = [
@@ -926,37 +1350,6 @@ const L = [
     { id: 'Elite', c: '#FFD700', q: { B: 3, P: 28, E: 19 } },
     { id: 'Cambaceo', c: '#d500ff', q: { B: 5, P: 20, E: 6 } },
 ];
-/** Calendario oficial de sorteos quincenales (hora CDMX) */
-const CALENDARIO_SORTEOS = [
-    { num: 1, fecha: '2026-05-15', label: '15 DE MAYO 2026' },
-    { num: 2, fecha: '2026-05-29', label: '29 DE MAYO 2026' },
-    { num: 3, fecha: '2026-06-12', label: '12 DE JUNIO 2026' },
-    { num: 4, fecha: '2026-06-26', label: '26 DE JUNIO 2026' },
-    { num: 5, fecha: '2026-07-10', label: '10 DE JULIO 2026' },
-    { num: 6, fecha: '2026-07-31', label: '31 DE JULIO 2026' },
-];
-
-function hoyEnCDMX() {
-    const partes = new Intl.DateTimeFormat('en-CA', {
-        timeZone: 'America/Mexico_City',
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-    }).formatToParts(new Date());
-    const y = partes.find((p) => p.type === 'year').value;
-    const m = partes.find((p) => p.type === 'month').value;
-    const d = partes.find((p) => p.type === 'day').value;
-    return `${y}-${m}-${d}`;
-}
-
-/** Próximo sorteo según calendario; al pasar su fecha avanza al siguiente */
-function resolverSorteoVigente(fechaHoy = hoyEnCDMX()) {
-    for (const s of CALENDARIO_SORTEOS) {
-        if (s.fecha >= fechaHoy) return s;
-    }
-    return CALENDARIO_SORTEOS[CALENDARIO_SORTEOS.length - 1];
-}
-
 const sorteoVigente = resolverSorteoVigente();
 const SORTEO_NUMERO_ACTUAL = sorteoVigente.num;
 const SORTEO_TICKET_SUFFIX = `sorteo-${sorteoVigente.num}`;
@@ -983,11 +1376,6 @@ function infoSorteoActual() {
         fecha: sorteoVigente.label,
         titulo: 'GANADORES DEL SORTEO',
     };
-}
-
-function etiquetaOrdinalSorteo(n) {
-    const ordinales = { 1: '1.er', 2: '2.º', 3: '3.er', 4: '4.º', 5: '5.º', 6: '6.º' };
-    return `${ordinales[n] || `${n}.º`} SORTEO`;
 }
 
 function etiquetaSorteoActual() {
@@ -1239,6 +1627,7 @@ window.addEventListener('keydown', (e) => {
             e.preventDefault();
             if (est == 'W') iniciarConEspera();
             else if (est == 'S') sorteo();
+            else if (est == 'FIN_KIT') continuarDespuesDeKit();
             else if (est == 'FIN_LIGA') irAIntermedio();
         }
     }
@@ -1474,6 +1863,34 @@ function updUI() {
     }
 }
 
+/** Tras terminar una tanda: mantener nombre del kit que acaba de sortearse */
+function mostrarEstadoKitCompletado(kitType) {
+    const b = document.getElementById('btnS');
+    document.getElementById('pName').innerText = K[kitType].n;
+    document.getElementById('pDesc').innerText = K[kitType].d;
+    const finLiga = inv.B <= 0 && inv.P <= 0 && inv.E <= 0;
+    b.innerText = finLiga ? 'SIGUIENTE LIGA (ENTER)' : 'SIGUIENTE KIT (ENTER)';
+    b.style.display = 'block';
+    est = 'FIN_KIT';
+}
+
+function continuarDespuesDeKit() {
+    const finLiga = inv.B <= 0 && inv.P <= 0 && inv.E <= 0;
+    if (finLiga) {
+        mostrarGanadoresLigaActualEnCaja();
+        updUI();
+    } else {
+        limpiarCajaGanadores();
+        updUI();
+    }
+}
+
+function accionSorteadorPrincipal() {
+    if (est === 'S') sorteo();
+    else if (est === 'FIN_KIT') continuarDespuesDeKit();
+    else if (est === 'FIN_LIGA') irAIntermedio();
+}
+
 function sorteo() {
     if (est !== 'S') return;
     const t = inv.B > 0 ? 'B' : inv.P > 0 ? 'P' : inv.E > 0 ? 'E' : null;
@@ -1490,8 +1907,6 @@ function sorteo() {
         );
         return;
     }
-    inv[t] = 0;
-    
     const c = document.getElementById('caja');
     c.innerHTML = '';
     document.getElementById('btnS').style.display = 'none';
@@ -1532,8 +1947,9 @@ function sorteo() {
             i++;
             setTimeout(addWinner, velocity);
         } else {
+            inv[t] = 0;
             celebrarCierreSorteo(t);
-            updUI();
+            mostrarEstadoKitCompletado(t);
         }
     }
     addWinner();
@@ -1852,6 +2268,8 @@ function bootCountersAndFaq() {
     initCookies();
     iniciarContador();
     renderFaqModal();
+    actualizarAvisoSorteoEnPagina();
+    initCarruselGanadores();
 }
 
 if (document.readyState === 'loading') {
