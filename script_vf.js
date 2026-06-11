@@ -1305,6 +1305,12 @@ async function consultar() {
         return;
     }
 
+    if (inputBusqueda === 'YAAVS' && typeof window.abrirMinijuegoFutbol === 'function') {
+        document.getElementById('inputClave').value = '';
+        window.abrirMinijuegoFutbol();
+        return;
+    }
+
     loader.style.display = 'block';
     resDiv.style.display = 'none';
 

@@ -3,8 +3,9 @@ const CACHE_NAME = 'yaavs-pwa-v10';
 const urlsToCache = [
   './',
   './index.html',
-  './styles_vf.css?v=20260611_logo_enter',
-  './script_vf.js?v=20260611_logo_enter'
+  './styles_vf.css?v=20260611_futbol',
+  './script_vf.js?v=20260611_futbol',
+  './minijuego-futbol-yaavs.js?v=20260611_futbol'
 ];
 
 self.addEventListener('install', event => {
