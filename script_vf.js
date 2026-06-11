@@ -1952,27 +1952,25 @@ function actualizarBienvenidaSorteador() {
 }
 
 const SORTEO_LIVE_COMENTARIOS = [
-    { nombre: 'Carlos M.', iniciales: 'CM', color: '#1877f2', texto: '¡Ya estoy conectado, vamos YAAVS! 🔥' },
-    { nombre: 'Ana R.', iniciales: 'AR', color: '#e91e8c', texto: 'Este sorteo va a estar épico 💪' },
-    { nombre: 'Luis G.', iniciales: 'LG', color: '#00b894', texto: 'Suerte a todos los campeones ⚽' },
-    { nombre: 'María P.', iniciales: 'MP', color: '#6c5ce7', texto: '¡Por fin llegó el 3.er sorteo!' },
-    { nombre: 'Roberto S.', iniciales: 'RS', color: '#fdcb6e', texto: 'Conectados desde Guadalajara 🙌' },
-    { nombre: 'Diana L.', iniciales: 'DL', color: '#00cec9', texto: '¡Vamos por ese kit elite!' },
-    { nombre: 'Jorge H.', iniciales: 'JH', color: '#e17055', texto: 'Ya tengo mi boleto listo 🎟️' },
-    { nombre: 'Patricia V.', iniciales: 'PV', color: '#a29bfe', texto: '¡Qué emoción verlo en vivo!' },
-    { nombre: 'Fernando T.', iniciales: 'FT', color: '#0984e3', texto: 'Conexión de Campeones es lo máximo 🔥' },
-    { nombre: 'Sofía N.', iniciales: 'SN', color: '#d63031', texto: '¡Ánimo a todos los de Liga Pro!' },
-    { nombre: 'Miguel A.', iniciales: 'MA', color: '#00b894', texto: 'Hoy se gana, se siente 💚' },
-    { nombre: 'Laura C.', iniciales: 'LC', color: '#e84393', texto: 'Compartiendo con toda la familia 👨‍👩‍👧' },
-    { nombre: 'Ricardo B.', iniciales: 'RB', color: '#2d3436', texto: '¡Dale al botón, ya quiero ver ganadores!' },
-    { nombre: 'Elena D.', iniciales: 'ED', color: '#6c5ce7', texto: 'Transmisión súper fluida 👏' },
-    { nombre: 'Héctor F.', iniciales: 'HF', color: '#fd79a8', texto: '¡Vamos Ascenso! 🚀' },
-    { nombre: 'Claudia J.', iniciales: 'CJ', color: '#00aeef', texto: 'Ya vi los ganadores anteriores, hoy toca a alguien más' },
-    { nombre: 'Óscar W.', iniciales: 'OW', color: '#55efc4', texto: '¡EN VIVO y con todo! 🎉' },
-    { nombre: 'Verónica K.', iniciales: 'VK', color: '#fab1a0', texto: 'Suerte campeones, se lo merecen' },
+    { nombre: 'Carlos M.', texto: '¡Llegué al live de Facebook, vamos YAAVS! 🔥' },
+    { nombre: 'Ana R.', texto: 'Este live del sorteo va a estar épico 💪' },
+    { nombre: 'Luis G.', texto: 'Saludos desde el live, suerte campeones ⚽' },
+    { nombre: 'María P.', texto: '¡Por fin el 3.er sorteo en Facebook Live!' },
+    { nombre: 'Roberto S.', texto: 'Viendo desde Guadalajara en el live 🙌' },
+    { nombre: 'Diana L.', texto: 'Compartí el live con mi equipo, ¡ánimo!' },
+    { nombre: 'Jorge H.', texto: 'Ya estoy en el live con mi boleto listo 🎟️' },
+    { nombre: 'Patricia V.', texto: '¡Qué emoción este Facebook Live!' },
+    { nombre: 'Fernando T.', texto: 'El live de Conexión de Campeones es lo máximo 🔥' },
+    { nombre: 'Sofía N.', texto: 'Saludos a todos los del live de Liga Pro' },
+    { nombre: 'Miguel A.', texto: 'Hoy se gana, lo decía en el chat del live 💚' },
+    { nombre: 'Laura C.', texto: 'Viendo el live en familia 👨‍👩‍👧' },
+    { nombre: 'Ricardo B.', texto: '¡Dale, ya quiero ver ganadores en el live!' },
+    { nombre: 'Elena D.', texto: 'El live se ve súper fluido en Facebook 👏' },
+    { nombre: 'Héctor F.', texto: '¡Vamos Ascenso! Saludos desde el live 🚀' },
+    { nombre: 'Claudia J.', texto: 'Vi los sorteos pasados, hoy toca en este live' },
+    { nombre: 'Óscar W.', texto: '¡EN VIVO en Facebook y con todo! 🎉' },
+    { nombre: 'Verónica K.', texto: 'Suerte campeones, los sigo en el live' },
 ];
-
-const SORTEO_LIVE_AVATAR_COLORS = ['#1877f2', '#e91e8c', '#00b894', '#6c5ce7', '#e17055', '#0984e3', '#d63031', '#00cec9'];
 let comentariosLiveTimer = null;
 let ultimoComentarioLiveIdx = -1;
 
@@ -2026,14 +2024,12 @@ function agregarComentarioLive(panel) {
     ultimoComentarioLiveIdx = idx;
 
     const item = SORTEO_LIVE_COMENTARIOS[idx];
-    const color = item.color || SORTEO_LIVE_AVATAR_COLORS[idx % SORTEO_LIVE_AVATAR_COLORS.length];
     const el = document.createElement('div');
     el.className = 'sorter-live-comment';
     el.innerHTML = `
-        <div class="sorter-live-comment__avatar" style="background:${color}">${item.iniciales}</div>
-        <div class="sorter-live-comment__bubble">
-            <p class="sorter-live-comment__name">${item.nombre}</p>
-            <p class="sorter-live-comment__text">${item.texto}</p>
+        <div class="sorter-live-comment__pill">
+            <span class="sorter-live-comment__name">${item.nombre}</span>
+            <span class="sorter-live-comment__text">${item.texto}</span>
         </div>
     `;
     panel.appendChild(el);
