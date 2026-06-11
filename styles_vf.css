@@ -429,12 +429,38 @@ body.futbol-minigame-open { overflow: hidden; }
 .consulta-hint i { margin-right: 6px; opacity: 0.85; }
 
 .codigo-secreto {
-    margin: 0 0 16px;
-    padding: 14px 16px 12px;
+    margin: 0 0 14px;
+    padding: 12px 14px 10px;
     border-radius: 14px;
-    border: 1px dashed rgba(34, 255, 94, 0.35);
-    background: rgba(0, 0, 0, 0.28);
+    border: 1px dashed rgba(34, 255, 94, 0.28);
+    background: rgba(0, 0, 0, 0.22);
     text-align: center;
+    animation: codigoSecretoIn 0.35s ease;
+}
+.codigo-secreto[hidden] { display: none !important; }
+@keyframes codigoSecretoIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: none; }
+}
+.codigo-secreto-whisper {
+    margin: 10px 0 0;
+    text-align: center;
+    font-size: 0.72rem;
+    color: rgba(34, 255, 94, 0.22);
+    opacity: 0.55;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    user-select: none;
+}
+.codigo-secreto-whisper i {
+    animation: codigoBalonPulse 3.5s ease-in-out infinite;
+}
+.codigo-secreto-whisper.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
 }
 .codigo-secreto__intro {
     margin: 0 0 10px;
@@ -482,18 +508,9 @@ body.futbol-minigame-open { overflow: hidden; }
     box-shadow: 0 0 16px rgba(34, 255, 94, 0.35);
     transform: scale(1.06);
 }
-.codigo-secreto__slot.is-wrong {
-    animation: codigoSlotShake 0.4s ease;
-    border-color: rgba(255, 80, 80, 0.7);
-}
 @keyframes codigoSlotHint {
     0%, 100% { box-shadow: 0 0 0 rgba(34, 255, 94, 0); }
     50% { box-shadow: 0 0 14px rgba(34, 255, 94, 0.35); }
-}
-@keyframes codigoSlotShake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    75% { transform: translateX(4px); }
 }
 .codigo-secreto__pista {
     margin: 0;

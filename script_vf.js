@@ -1316,7 +1316,7 @@ function ensureMinijuegoFutbol(callback) {
         return;
     }
     const s = document.createElement('script');
-    s.src = 'minijuego-futbol-yaavs.js?v=20260611_futbol3';
+    s.src = 'minijuego-futbol-yaavs.js?v=20260611_futbol4';
     s.dataset.minijuegoFutbol = '1';
     s.onload = () => {
         if (typeof window.enlazarMinijuegoFutbolConsulta === 'function') {
@@ -1344,8 +1344,9 @@ async function consultar() {
         return;
     }
 
-    if (inputBusqueda === 'YAAVS' || inputBusqueda.endsWith('YAAVS')) {
+    if (inputBusqueda === 'YAAVS') {
         document.getElementById('inputClave').value = '';
+        if (typeof window.resetCodigoSecretoUI === 'function') window.resetCodigoSecretoUI();
         abrirMinijuegoFutbolDesdeConsulta();
         return;
     }

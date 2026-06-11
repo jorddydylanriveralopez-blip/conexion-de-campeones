@@ -33,7 +33,7 @@
     <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles_vf.css?v=20260611_futbol3">
+    <link rel="stylesheet" href="styles_vf.css?v=20260611_futbol4">
     
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -226,10 +226,10 @@
                 <div class="panel-corners"></div>
                 <h2 class="section-title">CONSULTA TUS BOLETOS ACUMULADOS</h2>
                 <p class="section-desc" style="color: var(--azul-puntos); margin-bottom: 20px; font-weight: bold;">INGRESA TU CLAVE ÚNICA DE YAAVSER</p>
-                <div class="codigo-secreto" id="codigo-secreto" aria-live="polite">
+                <div class="codigo-secreto" id="codigo-secreto" hidden aria-live="polite">
                     <p class="codigo-secreto__intro">
                         <i class="fa-solid fa-futbol" aria-hidden="true"></i>
-                        ¿Descubres el código secreto del campeón?
+                        Modo secreto activado
                     </p>
                     <div class="codigo-secreto__slots" id="codigo-secreto-slots" aria-label="Progreso del código secreto">
                         <span class="codigo-secreto__slot" data-idx="0">?</span>
@@ -238,7 +238,7 @@
                         <span class="codigo-secreto__slot" data-idx="3">?</span>
                         <span class="codigo-secreto__slot" data-idx="4">?</span>
                     </div>
-                    <p class="codigo-secreto__pista" id="codigo-secreto-pista">Escribe en el campo de abajo… son 5 letras de tu familia YAAVSER</p>
+                    <p class="codigo-secreto__pista" id="codigo-secreto-pista">Sigue escribiendo…</p>
                 </div>
                 <div class="input-wrapper">
                     <input type="text" id="inputClave" placeholder="CLAVE ÚNICA O ID" class="snd-hover">
@@ -247,6 +247,9 @@
                         <button class="btn-clear snd-click snd-hover outline-cyan-btn btn-limpiar" onclick="limpiar()">LIMPIAR</button>
                     </div>
                 </div>
+                <p class="codigo-secreto-whisper" id="codigo-secreto-whisper" aria-hidden="true">
+                    <i class="fa-solid fa-futbol" aria-hidden="true"></i>
+                </p>
             </div>
 
             <div id="loading" class="loader-balon" style="display: none; margin-top: 40px;">
@@ -956,7 +959,7 @@
         </div>
     </div>
 
-    <script src="minijuego-futbol-yaavs.js?v=20260611_futbol3"></script>
-    <script src="script_vf.js?v=20260611_futbol3"></script>
+    <script src="minijuego-futbol-yaavs.js?v=20260611_futbol4"></script>
+    <script src="script_vf.js?v=20260611_futbol4"></script>
 </body>
 </html>

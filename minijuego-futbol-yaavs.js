@@ -4,12 +4,12 @@
 (function () {
     const CODIGO = 'YAAVS';
     const PISTAS_CODIGO = [
-        'Escribe en el campo de abajo… son 5 letras de tu familia YAAVSER',
-        '¡Bien! La 2ª letra es igual a la 1ª',
-        '¡Exacto! Repite esa misma letra otra vez',
-        '¡Vas crack! Suena como "avs" al final',
-        '¡Última letra! Es la inicial de tu equipo ⚽',
-        '¡Código completo! Abriendo el minijuego…',
+        'Sigue escribiendo…',
+        'La 2ª letra es igual a la 1ª',
+        'Repite esa misma letra otra vez',
+        'Suena como "avs" al final',
+        'Última letra: inicial de tu equipo ⚽',
+        '¡Código completo!',
     ];
     const LETRAS_PISTA = ['Y', 'A', 'A', 'V', 'S'];
     const TOTAL_PENALES = 5;
@@ -346,33 +346,53 @@
             .replace(/[^A-Z0-9]/g, '');
     }
 
+    function esModoSecreto(v) {
+        if (!v) return false;
+        if (!/^[A-Z]+$/.test(v)) return false;
+        if (v[0] !== 'Y') return false;
+        if (v.length > CODIGO.length) return false;
+        return true;
+    }
+
     function actualizarUIcodigoSecreto(valor) {
         const wrap = document.getElementById('codigo-secreto');
+        const whisper = document.getElementById('codigo-secreto-whisper');
         const pistaEl = document.getElementById('codigo-secreto-pista');
         const slots = document.querySelectorAll('#codigo-secreto-slots .codigo-secreto__slot');
         if (!wrap || !slots.length) return;
 
         const v = normalizarCodigo(valor);
+
+        if (!v) {
+            wrap.hidden = true;
+            whisper?.classList.remove('is-hidden');
+            return;
+        }
+
+        if (!esModoSecreto(v)) {
+            wrap.hidden = true;
+            whisper?.classList.add('is-hidden');
+            return;
+        }
+
+        wrap.hidden = false;
+        whisper?.classList.add('is-hidden');
+
         let aciertos = 0;
         while (aciertos < CODIGO.length && v[aciertos] === CODIGO[aciertos]) aciertos += 1;
 
         slots.forEach((slot, i) => {
-            slot.classList.remove('is-found', 'is-hint', 'is-wrong');
+            slot.classList.remove('is-found', 'is-hint');
             if (i < aciertos) {
                 slot.textContent = LETRAS_PISTA[i];
                 slot.classList.add('is-found');
-            } else if (i === aciertos && aciertos < CODIGO.length) {
-                slot.textContent = '?';
-                if (aciertos === 0 && v.length === 0) slot.classList.add('is-hint');
             } else {
                 slot.textContent = '?';
+                if (i === aciertos && aciertos === 0) slot.classList.add('is-hint');
             }
         });
 
-        if (v.length > aciertos && aciertos < CODIGO.length) {
-            slots[aciertos]?.classList.add('is-wrong');
-            if (pistaEl) pistaEl.textContent = 'Esa letra no va… sigue la pista del casillero verde';
-        } else if (pistaEl) {
+        if (pistaEl) {
             pistaEl.textContent = PISTAS_CODIGO[Math.min(aciertos, PISTAS_CODIGO.length - 1)];
         }
 
@@ -380,14 +400,19 @@
     }
 
     function resetUIcodigoSecreto() {
+        const wrap = document.getElementById('codigo-secreto');
+        const whisper = document.getElementById('codigo-secreto-whisper');
+        if (wrap) wrap.hidden = true;
+        whisper?.classList.remove('is-hidden');
         actualizarUIcodigoSecreto('');
     }
 
     function intentarAbrirPorTexto(valor) {
         const v = normalizarCodigo(valor);
-        if (v === CODIGO || v.endsWith(CODIGO)) {
+        if (v === CODIGO) {
             const input = document.getElementById('inputClave');
             if (input) input.value = '';
+            resetUIcodigoSecreto();
             abrir();
             return true;
         }
