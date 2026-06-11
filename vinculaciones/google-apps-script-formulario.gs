@@ -1,17 +1,12 @@
 /**
  * FORMULARIO VINCULACIONES → Google Sheets
  *
- * 1) Crea una hoja de cálculo nueva (o usa una existente).
- * 2) Extensiones → Apps Script → pega este archivo.
- * 3) Ejecuta una vez la función setupFormularioSheet (autoriza permisos).
- * 4) Implementar → Nueva implementación → Tipo: Aplicación web
- *    - Ejecutar como: Yo
- *    - Quién tiene acceso: Cualquiera
- * 5) Copia la URL que termina en /exec y pégala en:
- *    vinculaciones/enviar-formulario.php  →  FORMULARIO_SHEETS_WEBAPP
+ * IMPORTANTE: Borra TODO el código en Apps Script y pega ESTE archivo completo.
  *
- * Opcional — Propiedades del script:
- *   FORM_TOKEN = token secreto (el mismo en enviar-formulario.php si lo usas)
+ * Pasos:
+ * 1) Ejecuta setupFormularioSheet (una vez) → acepta permisos
+ * 2) Implementar → Nueva implementación → Web app → Cualquiera
+ * 3) Copia la URL /exec en vinculaciones/enviar-formulario.php
  */
 
 var HOJA_FORMULARIO = 'Formulario Vinculaciones';
@@ -33,7 +28,7 @@ function setupFormularioSheet() {
       'Banco',
       'CLABE',
       'Mensaje',
-      'Origen',
+      'Origen'
     ]);
     sheet.getRange(1, 1, 1, 10).setFontWeight('bold');
     sheet.setFrozenRows(1);
@@ -41,16 +36,19 @@ function setupFormularioSheet() {
 }
 
 function jsonOut(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(
-    ContentService.MimeType.JSON,
-  );
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 function doPost(e) {
   try {
     var props = PropertiesService.getScriptProperties();
     var tokenEsperado = props.getProperty('FORM_TOKEN');
-    var raw = (e && e.postData && e.postData.contents) || '{}';
+    var raw = '{}';
+    if (e && e.postData && e.postData.contents) {
+      raw = e.postData.contents;
+    }
     var data = JSON.parse(raw);
 
     if (tokenEsperado && data.token !== tokenEsperado) {
@@ -66,7 +64,7 @@ function doPost(e) {
     var fecha = Utilities.formatDate(
       new Date(),
       'America/Mexico_City',
-      'yyyy-MM-dd HH:mm:ss',
+      'yyyy-MM-dd HH:mm:ss'
     );
 
     sheet.appendRow([
@@ -79,7 +77,7 @@ function doPost(e) {
       String(data.banco || ''),
       String(data.clabe || ''),
       String(data.mensaje || ''),
-      String(data.origen || 'ganayaavs.com/vinculaciones'),
+      String(data.origen || 'ganayaavs.com/vinculaciones')
     ]);
 
     return jsonOut({ ok: true });
