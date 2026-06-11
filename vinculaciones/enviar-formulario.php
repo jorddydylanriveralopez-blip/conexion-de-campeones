@@ -7,7 +7,7 @@ declare(strict_types=1);
  * Configura la URL después de implementar google-apps-script-formulario.gs
  * (debe terminar en /exec).
  */
-const FORMULARIO_SHEETS_WEBAPP = 'https://script.google.com/macros/s/AKfycbycc4hjE6m-GwWYC35MV0lXJ9vnHLVLfn1HvA76lPANgTRzrM-FyxTYB-Vej_nIQCoZ2w/exec';
+const FORMULARIO_SHEETS_WEBAPP = 'https://script.google.com/macros/s/AKfycby0WX9APv7sA98HHTRDaolGhl2TxvPSRogzoz7MgfhLEXdwSgjE8wn3EovrAqXx1RkmSg/exec';
 
 /** Misma URL CSV que vinculaciones.js (base de claves válidas) */
 const VINCULACIONES_CSV_URL =
