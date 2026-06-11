@@ -7,7 +7,7 @@ declare(strict_types=1);
  * Configura la URL después de implementar google-apps-script-formulario.gs
  * (debe terminar en /exec).
  */
-const FORMULARIO_SHEETS_WEBAPP = '';
+const FORMULARIO_SHEETS_WEBAPP = 'https://script.google.com/macros/s/AKfycbw1RzE3NP_RilmnVfQLMHwkHchW7kO4074EQjHqll5naBSF_PN0QIHL06D9RW3ul9q7Hw/exec';
 
 /** Opcional: mismo valor que FORM_TOKEN en Apps Script → Propiedades del script */
 const FORMULARIO_SHEETS_TOKEN = '';
