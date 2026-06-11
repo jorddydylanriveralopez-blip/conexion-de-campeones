@@ -33,7 +33,7 @@
     <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles_vf.css?v=20260611_page_enter">
+    <link rel="stylesheet" href="styles_vf.css?v=20260611_logo_enter">
     
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -129,7 +129,19 @@
 
     <canvas id="particle-canvas"></canvas>
 
-    <div id="intro-overlay" class="intro-v2">
+    <div id="logo-enter-splash" class="logo-enter-splash" aria-hidden="true">
+        <div class="logo-enter-splash__glow" aria-hidden="true"></div>
+        <div class="campaign-logo-wrapper campaign-logo-wrapper--enter">
+            <span class="bracket top-left"></span>
+            <span class="bracket top-right"></span>
+            <span class="bracket bottom-left"></span>
+            <span class="bracket bottom-right"></span>
+            <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" alt="" class="logo-campaign-center logo-campaign-center--enter">
+            <div class="scanline scanline--enter"></div>
+        </div>
+    </div>
+
+    <div id="intro-overlay" class="intro-v2" hidden>
         <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/recurso-6-dRbQkWfZFlakSEfc.png" alt="YAAVS" class="intro-logo-top">
         <div class="intro-content intro-content--v2" id="welcome-container">
             <div class="intro-brand-block">
@@ -176,8 +188,8 @@
 
         <div class="centered-header">
             <div style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; width: 100%;">
-                <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/recurso-6-dRbQkWfZFlakSEfc.png" alt="YAAVS" class="logo-company-center page-enter-el page-enter-el--d1">
-                <div class="campaign-logo-wrapper page-enter-el page-enter-el--d2" style="margin-top: 20px;">
+                <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/recurso-6-dRbQkWfZFlakSEfc.png" alt="YAAVS" class="logo-company-center page-enter-el page-enter-el--d2">
+                <div class="campaign-logo-wrapper" style="margin-top: 20px;">
                     <span class="bracket top-left"></span><span class="bracket top-right"></span><span class="bracket bottom-left"></span><span class="bracket bottom-right"></span>
                     <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" alt="Conexión de Campeones" class="logo-campaign-center">
                     <div class="scanline"></div>
@@ -930,6 +942,6 @@
         </div>
     </div>
 
-    <script src="script_vf.js?v=20260611_page_enter"></script>
+    <script src="script_vf.js?v=20260611_logo_enter"></script>
 </body>
 </html>

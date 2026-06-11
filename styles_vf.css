@@ -126,12 +126,11 @@ body.page-enter #main-content {
 body.page-enter .page-enter-el {
     animation: pageEnterRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-body.page-enter .page-enter-el--d1 { animation-delay: 0.06s; }
-body.page-enter .page-enter-el--d2 { animation-delay: 0.16s; }
-body.page-enter .page-enter-el--d3 { animation-delay: 0.28s; }
-body.page-enter .page-enter-el--d4 { animation-delay: 0.4s; }
-body.page-enter .page-enter-el--d5 { animation-delay: 0.52s; }
-body.page-enter .page-enter-el--d6 { animation-delay: 0.62s; }
+body.page-enter .page-enter-el--d2 { animation-delay: 0.14s; }
+body.page-enter .page-enter-el--d3 { animation-delay: 0.26s; }
+body.page-enter .page-enter-el--d4 { animation-delay: 0.38s; }
+body.page-enter .page-enter-el--d5 { animation-delay: 0.5s; }
+body.page-enter .page-enter-el--d6 { animation-delay: 0.6s; }
 @keyframes pageEnterRise {
     from {
         opacity: 0;
@@ -171,6 +170,101 @@ body.page-enter #main-content::before {
     }
     body.page-enter #main-content::before {
         display: none;
+    }
+}
+
+/* —— Splash logo Conexión de Campeones (entrada directa) —— */
+.logo-enter-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 12000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse 70% 50% at 50% 42%, rgba(26, 71, 42, 0.35), transparent 65%),
+        rgba(2, 8, 14, 0.98);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.55s ease, visibility 0.55s ease;
+    pointer-events: none;
+}
+.logo-enter-splash.is-done {
+    opacity: 0;
+    visibility: hidden;
+}
+.logo-enter-splash__glow {
+    position: absolute;
+    width: min(520px, 80vw);
+    height: min(520px, 80vw);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34, 255, 94, 0.22), transparent 68%);
+    animation: logoSplashGlow 1.35s ease-out forwards;
+}
+@keyframes logoSplashGlow {
+    0% { opacity: 0; transform: scale(0.7); }
+    35% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 0.45; transform: scale(1.15); }
+}
+.campaign-logo-wrapper--enter {
+    position: relative;
+    padding: clamp(22px, 4vw, 36px);
+    animation: none;
+}
+.logo-enter-splash.is-active .campaign-logo-wrapper--enter {
+    animation: campaignLogoEnterWrap 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.logo-enter-splash.is-active .logo-campaign-center--enter {
+    height: clamp(140px, 28vw, 260px);
+    animation: campaignLogoEnterImg 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.logo-enter-splash.is-active .campaign-logo-wrapper--enter .bracket {
+    opacity: 0;
+    animation: bracketEnterPop 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.logo-enter-splash.is-active .campaign-logo-wrapper--enter .bracket.top-left { animation-delay: 0.35s; }
+.logo-enter-splash.is-active .campaign-logo-wrapper--enter .bracket.top-right { animation-delay: 0.42s; }
+.logo-enter-splash.is-active .campaign-logo-wrapper--enter .bracket.bottom-left { animation-delay: 0.49s; }
+.logo-enter-splash.is-active .campaign-logo-wrapper--enter .bracket.bottom-right { animation-delay: 0.56s; }
+.logo-enter-splash.is-active .scanline--enter {
+    animation: scan 2.2s linear 0.2s infinite, scanlineEnter 0.4s ease 0.5s forwards;
+    opacity: 0;
+}
+@keyframes campaignLogoEnterWrap {
+    0% { opacity: 0; transform: scale(0.78) translateY(24px); filter: blur(10px); }
+    55% { opacity: 1; transform: scale(1.05) translateY(0); filter: blur(0); }
+    100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+@keyframes campaignLogoEnterImg {
+    0% { filter: drop-shadow(0 0 0 transparent) brightness(0.65); }
+    45% { filter: drop-shadow(0 0 48px rgba(34, 255, 94, 0.95)) brightness(1.12); }
+    100% { filter: drop-shadow(0 0 30px rgba(34, 255, 94, 0.75)) brightness(1); }
+}
+@keyframes bracketEnterPop {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 0.9; transform: scale(1); }
+}
+@keyframes scanlineEnter {
+    to { opacity: 0.6; }
+}
+body:not(.page-enter) .centered-header .campaign-logo-wrapper:not(.campaign-logo-wrapper--enter) {
+    opacity: 0;
+}
+body.page-enter .centered-header .campaign-logo-wrapper:not(.campaign-logo-wrapper--enter) {
+    animation: logoHeroSettle 0.65s ease 0.05s forwards;
+}
+@keyframes logoHeroSettle {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .logo-enter-splash { display: none !important; }
+    body:not(.page-enter) .centered-header .campaign-logo-wrapper:not(.campaign-logo-wrapper--enter) {
+        opacity: 1;
+    }
+    body.page-enter .centered-header .campaign-logo-wrapper:not(.campaign-logo-wrapper--enter) {
+        animation: none;
+        opacity: 1;
     }
 }
 .container-centered { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; text-align: center; position: relative; z-index: 10; }

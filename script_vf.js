@@ -1119,88 +1119,47 @@ function iniciarEntradaPagina() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+function finalizarSplashLogo(callback) {
+    const splash = document.getElementById('logo-enter-splash');
+    if (!splash || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        if (splash) splash.remove();
+        callback();
+        return;
+    }
+    splash.classList.add('is-active');
+    setTimeout(() => {
+        splash.classList.add('is-done');
+        callback();
+        setTimeout(() => splash.remove(), 580);
+    }, 1350);
+}
+
+function entrarDirectoAlSitio() {
     const intro = document.getElementById('intro-overlay');
     const videoOverlay = document.getElementById('video-overlay');
     const main = document.getElementById('main-content');
-    const enterBtn = document.getElementById('enter-btn');
-    const loadingText = document.getElementById('loading-text');
-
-    // === ESTO EVITA QUE VUELVA A SALIR LA INTRO SI YA ENTRÓ ANTES ===
-    if (localStorage.getItem('yaavs_intro_visto') === 'true') {
-        if (intro) intro.style.display = 'none';
-        if (videoOverlay) videoOverlay.style.display = 'none';
-        if (main) {
-            main.style.display = 'block';
-            updateBodyScrollTheme();
-            iniciarEntradaPagina();
-        }
-        return; 
-    }
-
-    setTimeout(() => {
-        if (loadingText) loadingText.style.display = 'none';
-        const ctaWrap = document.getElementById('intro-cta-wrap');
-        if (ctaWrap) {
-            ctaWrap.style.display = 'inline-block';
-            initIntroCtaParticles();
-        }
-    }, 3000);
-
     const vidElement = document.getElementById('welcome-video');
-    const originalVideoSrc = vidElement ? vidElement.dataset.src : null;
 
-    if (enterBtn) {
-        const enterHandler = () => {
-            intro.style.opacity = '0';
-            setTimeout(() => {
-                intro.style.display = 'none';
-                videoOverlay.style.display = 'flex';
-                if (vidElement && originalVideoSrc) {
-                    vidElement.src = originalVideoSrc;
-                }
-            }, 500);
-        };
-        enterBtn.addEventListener('click', enterHandler);
-        document.addEventListener('keydown', (event) => {
-            if (!intro || intro.style.display === 'none') return;
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                enterHandler();
-            }
-        });
+    if (intro) {
+        intro.style.display = 'none';
+        intro.hidden = true;
     }
+    if (videoOverlay) videoOverlay.style.display = 'none';
+    if (vidElement) vidElement.src = '';
+    if (main) main.style.display = 'block';
 
-    function showDashboard() {
-        // === GUARDAR SESIÓN AL ENTRAR AL PANEL PARA NO REPETIR EL VIDEO ===
+    try {
         localStorage.setItem('yaavs_intro_visto', 'true');
-        
-        if (vidElement && originalVideoSrc) vidElement.src = '';
-        videoOverlay.style.opacity = '0';
-        setTimeout(() => {
-            videoOverlay.style.display = 'none';
-            main.style.display = 'block';
-            updateBodyScrollTheme();
-            iniciarEntradaPagina();
-        }, 500);
-    }
+    } catch (_) {}
 
-    const skipBtn = document.getElementById('skip-video-btn');
-    if (skipBtn) {
-        skipBtn.addEventListener('click', () => { showDashboard(); });
-    }
-    if (videoOverlay) {
-        videoOverlay.addEventListener('click', (event) => {
-            const container = event.target.closest('.video-container');
-            if (!container) showDashboard();
-        });
-    }
-    document.addEventListener('keydown', (event) => {
-        if (videoOverlay && videoOverlay.style.display === 'flex' && event.key === 'Escape') {
-            showDashboard();
-        }
+    updateBodyScrollTheme();
+
+    finalizarSplashLogo(() => {
+        iniciarEntradaPagina();
     });
-});
+}
+
+document.addEventListener('DOMContentLoaded', entrarDirectoAlSitio);
 
 /* =========================================================
    SISTEMA DE CONSULTA REAL CON GOOGLE SHEETS
