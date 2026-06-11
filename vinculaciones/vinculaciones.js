@@ -7,6 +7,9 @@
 const URL_CSV_VINCULACIONES =
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vS2w41eevnV1hTtq1Fr4dGToReWKLlNRNDMfzlHlLzAE384PQS7yfZvJKysKuRdwAajK3fG4lIEaF64/pub?gid=2006712567&single=true&output=csv';
 
+/** Endpoint local que reenvía al Google Sheet (configurar enviar-formulario.php) */
+const URL_FORMULARIO_ENVIO = 'enviar-formulario.php';
+
 /** Columnas Excel del CSV publicado (gid 2006712567) — J = Piso ATT */
 const COL_PISO_ATT = 'J';
 const COL_PISO_MOVI = 'L';
@@ -606,9 +609,10 @@ async function consultarVinculacion() {
   }
 }
 
-function enviarFormulario(e) {
+async function enviarFormulario(e) {
   e.preventDefault();
   const status = document.getElementById('form-status');
+  const btn = e.target.querySelector('.btn-enviar');
   const data = {
     nombre: document.getElementById('form-nombre')?.value?.trim(),
     telefono: document.getElementById('form-telefono')?.value?.trim(),
@@ -618,7 +622,7 @@ function enviarFormulario(e) {
     banco: document.getElementById('form-banco')?.value?.trim(),
     clabe: document.getElementById('form-clabe')?.value?.trim(),
     mensaje: document.getElementById('form-mensaje')?.value?.trim(),
-    fecha: new Date().toISOString(),
+    origen: 'ganayaavs.com/vinculaciones',
   };
 
   if (!data.nombre || !data.telefono || !data.clave) {
@@ -638,30 +642,48 @@ function enviarFormulario(e) {
     data.clabe = data.clabe.replace(/\s/g, '');
   }
 
+  if (btn) btn.disabled = true;
+  mostrarStatus(status, 'info', 'Enviando solicitud…');
+
   try {
-    const prev = JSON.parse(localStorage.getItem('yaavs_vinc_form') || '[]');
-    prev.push(data);
-    localStorage.setItem('yaavs_vinc_form', JSON.stringify(prev.slice(-50)));
-  } catch {
-    /* ignore */
+    const res = await fetch(URL_FORMULARIO_ENVIO, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      body: JSON.stringify(data),
+      cache: 'no-store',
+    });
+
+    let json = null;
+    try {
+      json = await res.json();
+    } catch {
+      json = null;
+    }
+
+    if (!res.ok || !json?.ok) {
+      const msg =
+        json?.error ||
+        (res.status === 503
+          ? 'El formulario aún se está conectando al Google Sheet. Intenta en unos minutos.'
+          : 'No se pudo enviar. Intenta de nuevo.');
+      throw new Error(msg);
+    }
+
+    mostrarStatus(
+      status,
+      'ok',
+      '¡Listo! Tu solicitud quedó registrada. Te contactaremos si hace falta.',
+    );
+    e.target.reset();
+  } catch (err) {
+    mostrarStatus(
+      status,
+      'error',
+      err instanceof Error ? err.message : 'Error al enviar. Intenta de nuevo.',
+    );
+  } finally {
+    if (btn) btn.disabled = false;
   }
-
-  let textoWa = `Hola YAAVS — Vinculaciones\nClave: ${data.clave}\nNombre: ${data.nombre}\nTel: ${data.telefono}\nMotivo: ${data.motivo}`;
-  if (data.titular) {
-    textoWa += `\nTitular: ${data.titular}\nBanco: ${data.banco}\nCLABE: ${data.clabe}`;
-  }
-  if (data.mensaje) textoWa += `\n${data.mensaje}`;
-
-  const wa = `https://wa.me/5212345678900?text=${encodeURIComponent(textoWa)}`;
-
-  mostrarStatus(
-    status,
-    'ok',
-    'Solicitud registrada. Si no se abre WhatsApp, guardamos tu datos en este dispositivo.',
-  );
-  e.target.reset();
-
-  window.open(wa, '_blank', 'noopener,noreferrer');
 }
 
 /** Formulario visible desde el 1 de junio de 2026 (hora local del navegador). */
