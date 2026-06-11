@@ -1610,6 +1610,7 @@ inputPass.addEventListener('keypress', function (event) {
 });
 function cerrarSorteador() {
     if (confirm('¿Es seguro de cerrar el evento en vivo? Se perderá el progreso no guardado.')) {
+        detenerComentariosLive();
         detenerMusicaSorteo();
         sorterModal.style.display = 'none';
         location.reload();
@@ -1950,6 +1951,95 @@ function actualizarBienvenidaSorteador() {
     if (fechaEl && sorteoVigente) fechaEl.textContent = sorteoVigente.label;
 }
 
+const SORTEO_LIVE_COMENTARIOS = [
+    { nombre: 'Carlos M.', iniciales: 'CM', color: '#1877f2', texto: '¡Ya estoy conectado, vamos YAAVS! 🔥' },
+    { nombre: 'Ana R.', iniciales: 'AR', color: '#e91e8c', texto: 'Este sorteo va a estar épico 💪' },
+    { nombre: 'Luis G.', iniciales: 'LG', color: '#00b894', texto: 'Suerte a todos los campeones ⚽' },
+    { nombre: 'María P.', iniciales: 'MP', color: '#6c5ce7', texto: '¡Por fin llegó el 3.er sorteo!' },
+    { nombre: 'Roberto S.', iniciales: 'RS', color: '#fdcb6e', texto: 'Conectados desde Guadalajara 🙌' },
+    { nombre: 'Diana L.', iniciales: 'DL', color: '#00cec9', texto: '¡Vamos por ese kit elite!' },
+    { nombre: 'Jorge H.', iniciales: 'JH', color: '#e17055', texto: 'Ya tengo mi boleto listo 🎟️' },
+    { nombre: 'Patricia V.', iniciales: 'PV', color: '#a29bfe', texto: '¡Qué emoción verlo en vivo!' },
+    { nombre: 'Fernando T.', iniciales: 'FT', color: '#0984e3', texto: 'Conexión de Campeones es lo máximo 🔥' },
+    { nombre: 'Sofía N.', iniciales: 'SN', color: '#d63031', texto: '¡Ánimo a todos los de Liga Pro!' },
+    { nombre: 'Miguel A.', iniciales: 'MA', color: '#00b894', texto: 'Hoy se gana, se siente 💚' },
+    { nombre: 'Laura C.', iniciales: 'LC', color: '#e84393', texto: 'Compartiendo con toda la familia 👨‍👩‍👧' },
+    { nombre: 'Ricardo B.', iniciales: 'RB', color: '#2d3436', texto: '¡Dale al botón, ya quiero ver ganadores!' },
+    { nombre: 'Elena D.', iniciales: 'ED', color: '#6c5ce7', texto: 'Transmisión súper fluida 👏' },
+    { nombre: 'Héctor F.', iniciales: 'HF', color: '#fd79a8', texto: '¡Vamos Ascenso! 🚀' },
+    { nombre: 'Claudia J.', iniciales: 'CJ', color: '#00aeef', texto: 'Ya vi los ganadores anteriores, hoy toca a alguien más' },
+    { nombre: 'Óscar W.', iniciales: 'OW', color: '#55efc4', texto: '¡EN VIVO y con todo! 🎉' },
+    { nombre: 'Verónica K.', iniciales: 'VK', color: '#fab1a0', texto: 'Suerte campeones, se lo merecen' },
+];
+
+const SORTEO_LIVE_AVATAR_COLORS = ['#1877f2', '#e91e8c', '#00b894', '#6c5ce7', '#e17055', '#0984e3', '#d63031', '#00cec9'];
+let comentariosLiveTimer = null;
+let ultimoComentarioLiveIdx = -1;
+
+function iniciarComentariosLive() {
+    detenerComentariosLive();
+    const overlay = document.getElementById('sorter-live-overlay');
+    const panel = document.getElementById('sorter-live-comments');
+    const viewersEl = document.getElementById('sorter-live-viewers');
+    if (!overlay || !panel) return;
+
+    overlay.classList.add('visible');
+    overlay.setAttribute('aria-hidden', 'false');
+    panel.innerHTML = '';
+    ultimoComentarioLiveIdx = -1;
+
+    if (viewersEl) {
+        const base = 980 + Math.floor(Math.random() * 520);
+        viewersEl.textContent = base >= 1000 ? `${(base / 1000).toFixed(1).replace('.0', '')}K viendo` : `${base} viendo`;
+    }
+
+    for (let i = 0; i < 5; i++) agregarComentarioLive(panel);
+
+    const programarSiguiente = () => {
+        comentariosLiveTimer = setTimeout(() => {
+            agregarComentarioLive(panel);
+            programarSiguiente();
+        }, 1800 + Math.random() * 2200);
+    };
+    programarSiguiente();
+}
+
+function detenerComentariosLive() {
+    if (comentariosLiveTimer) {
+        clearTimeout(comentariosLiveTimer);
+        comentariosLiveTimer = null;
+    }
+    const overlay = document.getElementById('sorter-live-overlay');
+    if (overlay) {
+        overlay.classList.remove('visible');
+        overlay.setAttribute('aria-hidden', 'true');
+    }
+    const panel = document.getElementById('sorter-live-comments');
+    if (panel) panel.innerHTML = '';
+}
+
+function agregarComentarioLive(panel) {
+    let idx;
+    do {
+        idx = Math.floor(Math.random() * SORTEO_LIVE_COMENTARIOS.length);
+    } while (idx === ultimoComentarioLiveIdx && SORTEO_LIVE_COMENTARIOS.length > 1);
+    ultimoComentarioLiveIdx = idx;
+
+    const item = SORTEO_LIVE_COMENTARIOS[idx];
+    const color = item.color || SORTEO_LIVE_AVATAR_COLORS[idx % SORTEO_LIVE_AVATAR_COLORS.length];
+    const el = document.createElement('div');
+    el.className = 'sorter-live-comment';
+    el.innerHTML = `
+        <div class="sorter-live-comment__avatar" style="background:${color}">${item.iniciales}</div>
+        <div class="sorter-live-comment__bubble">
+            <p class="sorter-live-comment__name">${item.nombre}</p>
+            <p class="sorter-live-comment__text">${item.texto}</p>
+        </div>
+    `;
+    panel.appendChild(el);
+    while (panel.children.length > 14) panel.removeChild(panel.firstChild);
+}
+
 window.addEventListener('keydown', (e) => {
     const overlay = document.getElementById('yaavs-easter-egg');
     const isOverlayVisible = overlay && overlay.classList.contains('visible');
@@ -1978,6 +2068,8 @@ function showSorterScreen(id) {
     document.querySelectorAll('#sorter-modal .screen').forEach((s) => s.classList.remove('active'));
     document.getElementById('screen-' + id).classList.add('active');
     if (id === 'stadium') est = 'S';
+    if (id === 'welcome') iniciarComentariosLive();
+    else detenerComentariosLive();
 }
 
 /** Confetti + sonido solo al cerrar una tanda (kit) o una liga completa */
