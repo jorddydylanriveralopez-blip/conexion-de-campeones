@@ -33,7 +33,7 @@
     <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles_vf.css?v=20260611_cromo_reveal">
+    <link rel="stylesheet" href="styles_vf.css?v=20260611_cromo_modal">
     
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -322,6 +322,29 @@
                     </a>
                 </div>
             </section>
+
+            <div id="cromo-modal" class="cromo-modal" aria-hidden="true">
+                <div class="cromo-modal__backdrop" data-cromo-modal-close></div>
+                <div class="cromo-modal__burst" aria-hidden="true"></div>
+                <div class="cromo-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="cromo-modal-nombre">
+                    <button type="button" class="cromo-modal__close" data-cromo-modal-close aria-label="Cerrar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <div class="cromo-modal__card cromo-sticker" id="cromo-modal-card">
+                        <span class="cromo-sticker__sello" id="cromo-modal-sello"></span>
+                        <span class="cromo-sticker__num" id="cromo-modal-num"></span>
+                        <div class="cromo-sticker__frame">
+                            <img id="cromo-modal-img" src="" alt="" class="carrusel-ganadores__img">
+                        </div>
+                        <span class="cromo-sticker__holo" aria-hidden="true"></span>
+                    </div>
+                    <div class="cromo-modal__body">
+                        <span class="cromo-modal__eyebrow"><i class="fa-solid fa-trophy"></i> ¡Felicidades!</span>
+                        <h3 class="cromo-modal__nombre" id="cromo-modal-nombre"></h3>
+                        <p class="cromo-modal__msg" id="cromo-modal-msg"></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="section-separator animate-on-scroll"></div>
@@ -902,6 +925,6 @@
         </div>
     </div>
 
-    <script src="script_vf.js?v=20260611_cromo_reveal"></script>
+    <script src="script_vf.js?v=20260611_cromo_modal"></script>
 </body>
 </html>

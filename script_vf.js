@@ -147,12 +147,14 @@ function crearSlideGanadorHTML(g, fotoSrc) {
             ? `<span class="cromo-sticker__num" aria-hidden="true">${numero}</span>`
             : '';
         return `
-            <div class="cromo-reveal" tabindex="0">
-                <aside class="cromo-reveal__toast" aria-live="polite">
-                    <span class="cromo-reveal__toast-eyebrow"><i class="fa-solid fa-trophy"></i> ¡Felicidades!</span>
-                    <strong class="cromo-reveal__toast-nombre">${nombreToast}</strong>
-                    <p class="cromo-reveal__toast-msg">${msgToast}</p>
-                </aside>
+            <div class="cromo-reveal" tabindex="0"
+                data-nombre="${nombreToast}"
+                data-msg="${msgToast}"
+                data-img="${escaparHtmlCarrusel(src)}"
+                data-variante="${variante}"
+                data-sello="${sello}"
+                data-numero="${numero}"
+                data-alt="${alt}">
                 <div class="cromo-pack">
                     <div class="cromo-pack__shine" aria-hidden="true"></div>
                     <div class="cromo-pack__flap cromo-pack__flap--top" aria-hidden="true"></div>
@@ -269,58 +271,114 @@ function renderCarruselGanadores() {
 }
 
 const CROMO_REVEAL_TIMERS = new WeakMap();
+let cromoRevealActivo = null;
 
 function resetRevealCromo(el) {
+    if (cromoRevealActivo === el && document.getElementById('cromo-modal')?.classList.contains('is-visible')) return;
     const timers = CROMO_REVEAL_TIMERS.get(el);
     if (timers) timers.forEach(clearTimeout);
     CROMO_REVEAL_TIMERS.delete(el);
-    el.classList.remove('is-shake-1', 'is-shake-2', 'is-shake-3', 'is-open');
-    el.closest('.carrusel-ganadores__slide')?.classList.remove('is-reveal-open');
+    el.classList.remove('is-shake-1', 'is-shake-2', 'is-shake-3', 'is-burst');
+}
+
+function cerrarCromoModal() {
+    const modal = document.getElementById('cromo-modal');
+    if (!modal) return;
+    modal.classList.remove('is-visible');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('cromo-modal-open');
+    if (cromoRevealActivo) {
+        resetRevealCromo(cromoRevealActivo);
+        cromoRevealActivo = null;
+    }
+}
+
+function abrirCromoModalDesdeReveal(el) {
+    const modal = document.getElementById('cromo-modal');
+    if (!modal) return;
+
+    const card = document.getElementById('cromo-modal-card');
+    const img = document.getElementById('cromo-modal-img');
+    const nombre = document.getElementById('cromo-modal-nombre');
+    const msg = document.getElementById('cromo-modal-msg');
+    const sello = document.getElementById('cromo-modal-sello');
+    const num = document.getElementById('cromo-modal-num');
+
+    const variante = varianteCromoValida(el.dataset.variante);
+    card.className = `cromo-modal__card cromo-sticker cromo-sticker--${variante}`;
+    img.src = el.dataset.img || '';
+    img.alt = el.dataset.alt || '';
+    nombre.textContent = el.dataset.nombre || 'Campeón YAAVS';
+    msg.textContent = el.dataset.msg || '';
+    sello.textContent = el.dataset.sello || '';
+    num.textContent = el.dataset.numero || '';
+
+    cromoRevealActivo = el;
+    modal.classList.add('is-visible');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('cromo-modal-open');
+    modal.querySelector('.cromo-modal__close')?.focus();
 }
 
 function iniciarRevealCromo(el) {
+    if (document.getElementById('cromo-modal')?.classList.contains('is-visible')) return;
+    resetRevealCromo(el);
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        el.classList.add('is-open');
-        el.closest('.carrusel-ganadores__slide')?.classList.add('is-reveal-open');
+        el.classList.add('is-burst');
+        abrirCromoModalDesdeReveal(el);
         return;
     }
-    resetRevealCromo(el);
-    const slide = el.closest('.carrusel-ganadores__slide');
+
     const timers = [
         setTimeout(() => el.classList.add('is-shake-1'), 80),
         setTimeout(() => {
             el.classList.remove('is-shake-1');
             el.classList.add('is-shake-2');
-        }, 700),
+        }, 650),
         setTimeout(() => {
             el.classList.remove('is-shake-2');
             el.classList.add('is-shake-3');
-        }, 1400),
+        }, 1300),
         setTimeout(() => {
             el.classList.remove('is-shake-3');
-            el.classList.add('is-open');
-            slide?.classList.add('is-reveal-open');
-        }, 2100),
+            el.classList.add('is-burst');
+        }, 1950),
+        setTimeout(() => abrirCromoModalDesdeReveal(el), 2400),
     ];
     CROMO_REVEAL_TIMERS.set(el, timers);
 }
 
+function initCromoModalGlobal() {
+    const modal = document.getElementById('cromo-modal');
+    if (!modal || modal.dataset.listo === '1') return;
+    modal.dataset.listo = '1';
+    modal.querySelectorAll('[data-cromo-modal-close]').forEach((btn) => {
+        btn.addEventListener('click', cerrarCromoModal);
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-visible')) cerrarCromoModal();
+    });
+}
+
 function enlazarRevealCromos(track) {
+    initCromoModalGlobal();
     track.querySelectorAll('.cromo-reveal').forEach((el) => {
         if (el.dataset.revealListo === '1') return;
         el.dataset.revealListo = '1';
 
-        el.addEventListener('mouseenter', () => {
+        const activar = () => {
             if (carruselGanadoresState.timer) clearInterval(carruselGanadoresState.timer);
             iniciarRevealCromo(el);
-        });
-        el.addEventListener('mouseleave', () => resetRevealCromo(el));
-        el.addEventListener('focusin', () => {
-            if (carruselGanadoresState.timer) clearInterval(carruselGanadoresState.timer);
-            iniciarRevealCromo(el);
-        });
-        el.addEventListener('focusout', (e) => {
-            if (!el.contains(e.relatedTarget)) resetRevealCromo(el);
+        };
+
+        el.addEventListener('mouseenter', activar);
+        el.addEventListener('click', activar);
+        el.addEventListener('focusin', activar);
+        el.addEventListener('mouseleave', () => {
+            if (!document.getElementById('cromo-modal')?.classList.contains('is-visible')) {
+                resetRevealCromo(el);
+            }
         });
     });
 }
