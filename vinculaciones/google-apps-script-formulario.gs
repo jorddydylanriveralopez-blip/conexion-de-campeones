@@ -5,8 +5,11 @@
  *
  * Pasos:
  * 1) Ejecuta setupFormularioSheet (una vez) → acepta permisos
- * 2) Implementar → Nueva implementación → Web app → Cualquiera
- * 3) Copia la URL /exec en vinculaciones/enviar-formulario.php
+ * 2) Ejecuta testDoPost (una vez) → acepta permisos de escritura en la hoja
+ * 3) Implementar → Nueva implementación → Web app
+ *    · Ejecutar como: Yo
+ *    · Quién tiene acceso: Cualquiera
+ * 4) Copia la URL /exec en vinculaciones/enviar-formulario.php
  */
 
 var HOJA_FORMULARIO = 'Formulario Vinculaciones';
@@ -88,4 +91,20 @@ function doPost(e) {
 
 function doGet() {
   return jsonOut({ ok: true, message: 'Web App formulario vinculaciones activa' });
+}
+
+/** Ejecutar una vez en el editor antes de implementar (activa permisos de doPost). */
+function testDoPost() {
+  var result = doPost({
+    postData: {
+      contents: JSON.stringify({
+        nombre: 'Prueba Apps Script',
+        telefono: '0000000000',
+        clave: 'TEST',
+        motivo: 'Prueba',
+        origen: 'test editor',
+      }),
+    },
+  });
+  Logger.log(result.getContent());
 }
