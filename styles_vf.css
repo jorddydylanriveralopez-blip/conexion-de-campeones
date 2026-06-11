@@ -305,13 +305,14 @@ body.futbol-minigame-open { overflow: hidden; }
     background: rgba(2, 10, 8, 0.92);
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 .futbol-minigame.is-visible {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
-.futbol-minigame[hidden] { display: none !important; }
 .futbol-minigame__panel {
     position: relative;
     width: min(94vw, 420px);
@@ -321,6 +322,7 @@ body.futbol-minigame-open { overflow: hidden; }
     border: 2px solid rgba(34, 255, 94, 0.35);
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65), 0 0 40px rgba(34, 255, 94, 0.12);
     text-align: center;
+    pointer-events: auto;
 }
 .futbol-minigame__cerrar {
     position: absolute;
@@ -391,6 +393,9 @@ body.futbol-minigame-open { overflow: hidden; }
     font-weight: 800;
     cursor: pointer;
     transition: transform 0.15s, background 0.15s;
+    pointer-events: auto;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 .futbol-minigame__dir--main {
     background: rgba(34, 255, 94, 0.18);

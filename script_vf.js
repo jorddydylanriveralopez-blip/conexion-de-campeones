@@ -1156,6 +1156,9 @@ function entrarDirectoAlSitio() {
 
     finalizarSplashLogo(() => {
         iniciarEntradaPagina();
+        if (typeof window.enlazarMinijuegoFutbolConsulta === 'function') {
+            window.enlazarMinijuegoFutbolConsulta();
+        }
     });
 }
 
@@ -1294,9 +1297,44 @@ function applyRligaDisplay(el, ligaNombre) {
     el.className = 'liga-resultado ' + (map[ligaNombre] || 'liga-resultado--placeholder');
 }
 
+function normalizarCodigoFutbol(valor) {
+    return String(valor || '')
+        .trim()
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, '');
+}
+
+function ensureMinijuegoFutbol(callback) {
+    if (typeof window.abrirMinijuegoFutbol === 'function') {
+        callback();
+        return;
+    }
+    const existente = document.querySelector('script[data-minijuego-futbol="1"]');
+    if (existente) {
+        existente.addEventListener('load', () => callback(), { once: true });
+        return;
+    }
+    const s = document.createElement('script');
+    s.src = 'minijuego-futbol-yaavs.js?v=20260611_futbol2';
+    s.dataset.minijuegoFutbol = '1';
+    s.onload = () => {
+        if (typeof window.enlazarMinijuegoFutbolConsulta === 'function') {
+            window.enlazarMinijuegoFutbolConsulta();
+        }
+        callback();
+    };
+    document.body.appendChild(s);
+}
+
+function abrirMinijuegoFutbolDesdeConsulta() {
+    ensureMinijuegoFutbol(() => {
+        if (typeof window.abrirMinijuegoFutbol === 'function') window.abrirMinijuegoFutbol();
+    });
+}
+
 async function consultar() {
     initAudio();
-    const inputBusqueda = document.getElementById('inputClave').value.trim().toUpperCase();
+    const inputBusqueda = normalizarCodigoFutbol(document.getElementById('inputClave').value);
     const loader = document.getElementById('loading');
     const resDiv = document.getElementById('resultados');
 
@@ -1305,9 +1343,9 @@ async function consultar() {
         return;
     }
 
-    if (inputBusqueda === 'YAAVS' && typeof window.abrirMinijuegoFutbol === 'function') {
+    if (inputBusqueda === 'YAAVS' || inputBusqueda.endsWith('YAAVS')) {
         document.getElementById('inputClave').value = '';
-        window.abrirMinijuegoFutbol();
+        abrirMinijuegoFutbolDesdeConsulta();
         return;
     }
 

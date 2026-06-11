@@ -39,10 +39,7 @@
         overlay = document.createElement('div');
         overlay.id = 'futbol-minigame';
         overlay.className = 'futbol-minigame';
-        overlay.hidden = true;
-        overlay.setAttribute('role', 'dialog');
-        overlay.setAttribute('aria-modal', 'true');
-        overlay.setAttribute('aria-label', 'Minijuego de penales YAAVS');
+        overlay.setAttribute('aria-hidden', 'true');
         overlay.innerHTML = `
             <div class="futbol-minigame__panel">
                 <button type="button" class="futbol-minigame__cerrar" aria-label="Cerrar">&times;</button>
@@ -96,9 +93,22 @@
             return;
         }
         if (animando || intento >= TOTAL_PENALES) return;
-        if (e.key === 'ArrowLeft' || e.key === '1') disparar('left');
-        if (e.key === 'ArrowUp' || e.key === '2' || e.key === ' ') disparar('center');
-        if (e.key === 'ArrowRight' || e.key === '3') disparar('right');
+        if (e.key === 'ArrowLeft' || e.key === '1') {
+            e.preventDefault();
+            disparar('left');
+        }
+        if (e.key === 'ArrowUp' || e.key === '2') {
+            e.preventDefault();
+            disparar('center');
+        }
+        if (e.key === 'ArrowRight' || e.key === '3') {
+            e.preventDefault();
+            disparar('right');
+        }
+        if (e.key === ' ' || e.code === 'Space') {
+            e.preventDefault();
+            disparar('center');
+        }
     }
 
     function dibujarCancha() {
@@ -258,7 +268,7 @@
     }
 
     function setBtns(on) {
-        btnWrap?.querySelectorAll('button').forEach((b) => {
+        btnWrap?.querySelectorAll('[data-dir]').forEach((b) => {
             b.disabled = !on;
         });
     }
@@ -296,33 +306,37 @@
     function abrir() {
         crearOverlay();
         reiniciarPartida();
-        overlay.hidden = false;
         overlay.classList.add('is-visible');
+        overlay.setAttribute('aria-hidden', 'false');
         abierto = true;
         document.body.classList.add('futbol-minigame-open');
         if (rafId) cancelAnimationFrame(rafId);
         rafId = requestAnimationFrame(loop);
         if (typeof initAudio === 'function') initAudio();
         if (typeof playClick === 'function') playClick();
-        overlay.querySelector('.futbol-minigame__dir--main')?.focus();
+        setTimeout(() => overlay.querySelector('.futbol-minigame__dir--main')?.focus(), 50);
     }
 
     function cerrar() {
         if (!overlay) return;
-        overlay.hidden = true;
         overlay.classList.remove('is-visible');
+        overlay.setAttribute('aria-hidden', 'true');
         abierto = false;
         document.body.classList.remove('futbol-minigame-open');
         if (rafId) cancelAnimationFrame(rafId);
         rafId = null;
     }
 
-    function intentarAbrirPorTexto(valor) {
-        const v = String(valor || '')
+    function normalizarCodigo(valor) {
+        return String(valor || '')
             .trim()
             .toUpperCase()
-            .replace(/\s/g, '');
-        if (v === CODIGO) {
+            .replace(/[^A-Z0-9]/g, '');
+    }
+
+    function intentarAbrirPorTexto(valor) {
+        const v = normalizarCodigo(valor);
+        if (v === CODIGO || v.endsWith(CODIGO)) {
             const input = document.getElementById('inputClave');
             if (input) input.value = '';
             abrir();
@@ -341,20 +355,24 @@
         });
 
         input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                if (intentarAbrirPorTexto(input.value)) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
+            if (e.key === 'Enter' && intentarAbrirPorTexto(input.value)) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
             }
         });
     }
 
     window.abrirMinijuegoFutbol = abrir;
+    window.enlazarMinijuegoFutbolConsulta = enlazarInput;
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', enlazarInput);
-    } else {
+    function bootMinijuegoFutbol() {
         enlazarInput();
     }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bootMinijuegoFutbol);
+    } else {
+        bootMinijuegoFutbol();
+    }
+    window.addEventListener('load', bootMinijuegoFutbol);
 })();
