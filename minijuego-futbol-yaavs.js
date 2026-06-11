@@ -3,6 +3,15 @@
  */
 (function () {
     const CODIGO = 'YAAVS';
+    const PISTAS_CODIGO = [
+        'Escribe en el campo de abajo… son 5 letras de tu familia YAAVSER',
+        '¡Bien! La 2ª letra es igual a la 1ª',
+        '¡Exacto! Repite esa misma letra otra vez',
+        '¡Vas crack! Suena como "avs" al final',
+        '¡Última letra! Es la inicial de tu equipo ⚽',
+        '¡Código completo! Abriendo el minijuego…',
+    ];
+    const LETRAS_PISTA = ['Y', 'A', 'A', 'V', 'S'];
     const TOTAL_PENALES = 5;
     const W = 360;
     const H = 420;
@@ -337,6 +346,43 @@
             .replace(/[^A-Z0-9]/g, '');
     }
 
+    function actualizarUIcodigoSecreto(valor) {
+        const wrap = document.getElementById('codigo-secreto');
+        const pistaEl = document.getElementById('codigo-secreto-pista');
+        const slots = document.querySelectorAll('#codigo-secreto-slots .codigo-secreto__slot');
+        if (!wrap || !slots.length) return;
+
+        const v = normalizarCodigo(valor);
+        let aciertos = 0;
+        while (aciertos < CODIGO.length && v[aciertos] === CODIGO[aciertos]) aciertos += 1;
+
+        slots.forEach((slot, i) => {
+            slot.classList.remove('is-found', 'is-hint', 'is-wrong');
+            if (i < aciertos) {
+                slot.textContent = LETRAS_PISTA[i];
+                slot.classList.add('is-found');
+            } else if (i === aciertos && aciertos < CODIGO.length) {
+                slot.textContent = '?';
+                if (aciertos === 0 && v.length === 0) slot.classList.add('is-hint');
+            } else {
+                slot.textContent = '?';
+            }
+        });
+
+        if (v.length > aciertos && aciertos < CODIGO.length) {
+            slots[aciertos]?.classList.add('is-wrong');
+            if (pistaEl) pistaEl.textContent = 'Esa letra no va… sigue la pista del casillero verde';
+        } else if (pistaEl) {
+            pistaEl.textContent = PISTAS_CODIGO[Math.min(aciertos, PISTAS_CODIGO.length - 1)];
+        }
+
+        wrap.classList.toggle('is-complete', aciertos >= CODIGO.length);
+    }
+
+    function resetUIcodigoSecreto() {
+        actualizarUIcodigoSecreto('');
+    }
+
     function intentarAbrirPorTexto(valor) {
         const v = normalizarCodigo(valor);
         if (v === CODIGO || v.endsWith(CODIGO)) {
@@ -354,6 +400,7 @@
         input.dataset.futbolListo = '1';
 
         input.addEventListener('input', () => {
+            actualizarUIcodigoSecreto(input.value);
             intentarAbrirPorTexto(input.value);
         });
 
@@ -363,10 +410,13 @@
                 e.stopImmediatePropagation();
             }
         });
+
+        resetUIcodigoSecreto();
     }
 
     window.abrirMinijuegoFutbol = abrir;
     window.enlazarMinijuegoFutbolConsulta = enlazarInput;
+    window.resetCodigoSecretoUI = resetUIcodigoSecreto;
 
     function bootMinijuegoFutbol() {
         enlazarInput();

@@ -1204,6 +1204,7 @@ function parseCSV(text) {
 
 function limpiar() {
     document.getElementById('inputClave').value = '';
+    if (typeof window.resetCodigoSecretoUI === 'function') window.resetCodigoSecretoUI();
     document.getElementById('resultados').style.display = 'none';
     const ticketPanel = document.getElementById('boletos-vista');
     if (ticketPanel) ticketPanel.style.display = 'none';
@@ -1315,7 +1316,7 @@ function ensureMinijuegoFutbol(callback) {
         return;
     }
     const s = document.createElement('script');
-    s.src = 'minijuego-futbol-yaavs.js?v=20260611_futbol2';
+    s.src = 'minijuego-futbol-yaavs.js?v=20260611_futbol3';
     s.dataset.minijuegoFutbol = '1';
     s.onload = () => {
         if (typeof window.enlazarMinijuegoFutbolConsulta === 'function') {
