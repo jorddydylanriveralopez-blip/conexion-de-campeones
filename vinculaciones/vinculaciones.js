@@ -546,6 +546,33 @@ async function cargarDatos() {
   return cacheDatos;
 }
 
+async function validarClaveEnBase(claveInput) {
+  const clave = claveInput?.trim();
+  if (!clave) {
+    return { ok: false, error: 'Escribe tu clave de cliente.' };
+  }
+
+  try {
+    const datos = await cargarDatos();
+    const row = buscarPorClave(datos, clave);
+    if (!row) {
+      return {
+        ok: false,
+        error: `No encontramos la clave «${clave}». Solo puedes enviar el formulario con una clave registrada.`,
+      };
+    }
+    return { ok: true, row };
+  } catch (err) {
+    return {
+      ok: false,
+      error:
+        err instanceof Error
+          ? err.message
+          : 'No se pudo verificar la clave. Intenta de nuevo.',
+    };
+  }
+}
+
 async function consultarVinculacion() {
   const input = document.getElementById('clave-cliente');
   const status = document.getElementById('consulta-status');
@@ -643,6 +670,15 @@ async function enviarFormulario(e) {
   }
 
   if (btn) btn.disabled = true;
+  mostrarStatus(status, 'info', 'Verificando clave de cliente…');
+
+  const validacionClave = await validarClaveEnBase(data.clave);
+  if (!validacionClave.ok) {
+    mostrarStatus(status, 'error', validacionClave.error);
+    if (btn) btn.disabled = false;
+    return;
+  }
+
   mostrarStatus(status, 'info', 'Enviando solicitud…');
 
   try {
@@ -808,6 +844,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   document.getElementById('form-vinculaciones')?.addEventListener('submit', enviarFormulario);
+
+  document.getElementById('form-clave')?.addEventListener('blur', async () => {
+    const input = document.getElementById('form-clave');
+    const status = document.getElementById('form-status');
+    const clave = input?.value?.trim();
+    if (!clave) return;
+
+    const validacion = await validarClaveEnBase(clave);
+    if (!validacion.ok) {
+      mostrarStatus(status, 'error', validacion.error);
+      input?.focus();
+      return;
+    }
+    ocultarStatus(status);
+  });
 
   const adminNote = document.getElementById('admin-csv-note');
   const demoHint = document.getElementById('demo-claves-hint');
