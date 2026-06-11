@@ -105,6 +105,30 @@ function claveExisteEnCsv(string $claveInput): ?bool
     return false;
 }
 
+function notificarFormularioVinculacion(array $data): void
+{
+    $pushPath = dirname(__DIR__) . '/push_send.php';
+    if (!is_file($pushPath)) {
+        return;
+    }
+
+    require_once $pushPath;
+
+    $nombre = trim((string) ($data['nombre'] ?? ''));
+    $motivo = trim((string) ($data['motivo'] ?? ''));
+    $clave = trim((string) ($data['clave'] ?? ''));
+    $titulo = 'Nuevo formulario vinculaciones';
+    $cuerpo = $nombre !== ''
+        ? $nombre . ' — ' . ($motivo !== '' ? $motivo : 'nueva solicitud')
+        : 'Clave ' . $clave;
+
+    try {
+        yaavs_push_broadcast($titulo, $cuerpo, 'https://ganayaavs.com/vinculaciones');
+    } catch (Throwable) {
+        // No bloquear la respuesta al usuario si falla el push.
+    }
+}
+
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
@@ -213,6 +237,7 @@ if ($response === false) {
 $decoded = json_decode($response, true);
 if (is_array($decoded)) {
     if (!empty($decoded['saved'])) {
+        notificarFormularioVinculacion($data);
         http_response_code(200);
         echo json_encode(['ok' => true], JSON_UNESCAPED_UNICODE);
         exit;
