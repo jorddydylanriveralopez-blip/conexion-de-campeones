@@ -5,7 +5,7 @@
  *
  * Pasos:
  * 1) Ejecuta setupFormularioSheet (una vez) → acepta permisos
- * 2) Ejecuta testDoPost (una vez) → acepta permisos de escritura en la hoja
+ * 2) Ejecuta testGuardarFormulario (una vez) → acepta permisos de escritura
  * 3) Implementar → Nueva implementación → Web app
  *    · Ejecutar como: Yo
  *    · Quién tiene acceso: Cualquiera
@@ -44,67 +44,74 @@ function jsonOut(obj) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-function doPost(e) {
+function guardarFormulario(data) {
+  var props = PropertiesService.getScriptProperties();
+  var tokenEsperado = props.getProperty('FORM_TOKEN');
+
+  if (tokenEsperado && data.token !== tokenEsperado) {
+    return jsonOut({ ok: false, error: 'Token inválido' });
+  }
+
+  if (!data.nombre || !data.telefono || !data.clave) {
+    return jsonOut({ ok: false, error: 'Faltan campos obligatorios' });
+  }
+
+  setupFormularioSheet();
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(HOJA_FORMULARIO);
+  var fecha = Utilities.formatDate(
+    new Date(),
+    'America/Mexico_City',
+    'yyyy-MM-dd HH:mm:ss'
+  );
+
+  sheet.appendRow([
+    fecha,
+    String(data.nombre || ''),
+    String(data.telefono || ''),
+    String(data.clave || ''),
+    String(data.motivo || ''),
+    String(data.titular || ''),
+    String(data.banco || ''),
+    String(data.clabe || ''),
+    String(data.mensaje || ''),
+    String(data.origen || 'ganayaavs.com/vinculaciones')
+  ]);
+
+  return jsonOut({ ok: true });
+}
+
+function doGet(e) {
   try {
-    var props = PropertiesService.getScriptProperties();
-    var tokenEsperado = props.getProperty('FORM_TOKEN');
-    var raw = '{}';
-    if (e && e.postData && e.postData.contents) {
-      raw = e.postData.contents;
+    var params = (e && e.parameter) || {};
+    if (params.action === 'submit') {
+      return guardarFormulario(params);
     }
-    var data = JSON.parse(raw);
-
-    if (tokenEsperado && data.token !== tokenEsperado) {
-      return jsonOut({ ok: false, error: 'Token inválido' });
-    }
-
-    if (!data.nombre || !data.telefono || !data.clave) {
-      return jsonOut({ ok: false, error: 'Faltan campos obligatorios' });
-    }
-
-    setupFormularioSheet();
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(HOJA_FORMULARIO);
-    var fecha = Utilities.formatDate(
-      new Date(),
-      'America/Mexico_City',
-      'yyyy-MM-dd HH:mm:ss'
-    );
-
-    sheet.appendRow([
-      fecha,
-      String(data.nombre || ''),
-      String(data.telefono || ''),
-      String(data.clave || ''),
-      String(data.motivo || ''),
-      String(data.titular || ''),
-      String(data.banco || ''),
-      String(data.clabe || ''),
-      String(data.mensaje || ''),
-      String(data.origen || 'ganayaavs.com/vinculaciones')
-    ]);
-
-    return jsonOut({ ok: true });
+    return jsonOut({ ok: true, message: 'Web App formulario vinculaciones activa' });
   } catch (err) {
     return jsonOut({ ok: false, error: String(err) });
   }
 }
 
-function doGet() {
-  return jsonOut({ ok: true, message: 'Web App formulario vinculaciones activa' });
+function doPost(e) {
+  try {
+    var raw = '{}';
+    if (e && e.postData && e.postData.contents) {
+      raw = e.postData.contents;
+    }
+    return guardarFormulario(JSON.parse(raw));
+  } catch (err) {
+    return jsonOut({ ok: false, error: String(err) });
+  }
 }
 
-/** Ejecutar una vez en el editor antes de implementar (activa permisos de doPost). */
-function testDoPost() {
-  var result = doPost({
-    postData: {
-      contents: JSON.stringify({
-        nombre: 'Prueba Apps Script',
-        telefono: '0000000000',
-        clave: 'TEST',
-        motivo: 'Prueba',
-        origen: 'test editor',
-      }),
-    },
+/** Ejecutar una vez en el editor antes de implementar (activa permisos). */
+function testGuardarFormulario() {
+  var result = guardarFormulario({
+    nombre: 'Prueba Apps Script',
+    telefono: '0000000000',
+    clave: 'TEST',
+    motivo: 'Prueba',
+    origen: 'test editor',
   });
   Logger.log(result.getContent());
 }
