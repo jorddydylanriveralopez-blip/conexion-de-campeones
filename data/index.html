@@ -622,14 +622,17 @@
                 gap: 8px;
                 padding: 8px 14px;
                 border-radius: 8px;
-                background: rgba(0, 0, 0, 0.72);
-                border: 1px solid rgba(255, 59, 59, 0.45);
+                background: rgba(0, 0, 0, 0.78);
+                border: 1px solid rgba(24, 119, 242, 0.55);
                 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
                 font-size: 0.78rem;
                 font-weight: 800;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
+                letter-spacing: 0.06em;
                 color: #fff;
+            }
+            #sorter-modal .sorter-live-fb-icon {
+                color: #1877f2;
+                font-size: 1rem;
             }
             #sorter-modal .sorter-live-dot {
                 width: 9px;
@@ -656,28 +659,60 @@
                 position: fixed;
                 top: 0;
                 right: 0;
-                width: min(340px, 30vw);
+                width: min(360px, 32vw);
                 height: 100%;
                 z-index: 30001;
-                padding: 72px 18px 28px;
-                background: linear-gradient(270deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.55) 55%, transparent 100%);
+                padding: 18px 16px 24px;
+                background: linear-gradient(270deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.6) 55%, transparent 100%);
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
+                gap: 14px;
+            }
+            #sorter-modal .sorter-live-sidebar__header {
+                flex-shrink: 0;
+                padding: 12px 14px;
+                border-radius: 12px;
+                background: rgba(24, 119, 242, 0.14);
+                border: 1px solid rgba(24, 119, 242, 0.35);
+                text-align: left;
+            }
+            #sorter-modal .sorter-live-fb-brand {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.95rem;
+                font-weight: 800;
+                color: #fff;
+            }
+            #sorter-modal .sorter-live-fb-brand i {
+                color: #1877f2;
+                font-size: 1.15rem;
+            }
+            #sorter-modal .sorter-live-stream-title {
+                margin: 6px 0 2px;
+                font-size: 0.82rem;
+                font-weight: 700;
+                color: rgba(255, 255, 255, 0.92);
+            }
+            #sorter-modal .sorter-live-stream-sub {
+                margin: 0;
+                font-size: 0.72rem;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                color: rgba(255, 255, 255, 0.55);
             }
             #sorter-modal .sorter-live-comments {
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
-                max-height: min(72vh, 640px);
+                gap: 8px;
+                max-height: min(58vh, 520px);
                 overflow: hidden;
-                mask-image: linear-gradient(to top, #000 82%, transparent 100%);
-                -webkit-mask-image: linear-gradient(to top, #000 82%, transparent 100%);
+                mask-image: linear-gradient(to top, #000 85%, transparent 100%);
+                -webkit-mask-image: linear-gradient(to top, #000 85%, transparent 100%);
             }
             #sorter-modal .sorter-live-comment {
-                display: flex;
-                align-items: flex-start;
-                gap: 10px;
                 text-align: left;
                 animation: sorterLiveCommentIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
             }
@@ -685,39 +720,25 @@
                 from { opacity: 0; transform: translateY(18px) scale(0.96); }
                 to { opacity: 1; transform: translateY(0) scale(1); }
             }
-            #sorter-modal .sorter-live-comment__avatar {
-                flex-shrink: 0;
-                width: 34px;
-                height: 34px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.72rem;
-                font-weight: 800;
-                color: #fff;
-                background: linear-gradient(135deg, #1877f2, #0d5bb5);
-            }
-            #sorter-modal .sorter-live-comment__bubble {
-                flex: 1;
-                min-width: 0;
-                padding: 10px 12px;
-                border-radius: 16px;
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.08);
+            #sorter-modal .sorter-live-comment__pill {
+                display: inline-block;
+                max-width: 100%;
+                padding: 8px 12px;
+                border-radius: 18px;
+                background: rgba(0, 0, 0, 0.55);
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                line-height: 1.4;
             }
             #sorter-modal .sorter-live-comment__name {
-                margin: 0 0 3px;
-                font-size: 0.78rem;
+                font-size: 0.84rem;
                 font-weight: 800;
-                color: #8ec5ff;
+                color: #fff;
+                margin-right: 6px;
             }
             #sorter-modal .sorter-live-comment__text {
-                margin: 0;
-                font-size: 0.88rem;
-                line-height: 1.35;
-                color: #f5f5f5;
+                font-size: 0.84rem;
+                color: rgba(255, 255, 255, 0.92);
                 word-break: break-word;
             }
             @media (max-width: 900px) {
@@ -960,11 +981,20 @@
         </style>
         <div id="sorter-live-overlay" class="sorter-live-overlay" aria-hidden="true">
             <div class="sorter-live-badge">
+                <i class="fa-brands fa-facebook sorter-live-fb-icon" aria-hidden="true"></i>
                 <span class="sorter-live-dot" aria-hidden="true"></span>
-                <span>EN VIVO</span>
+                <span>Facebook Live</span>
                 <span class="sorter-live-viewers" id="sorter-live-viewers">1.2K viendo</span>
             </div>
             <aside class="sorter-live-sidebar">
+                <div class="sorter-live-sidebar__header">
+                    <div class="sorter-live-fb-brand">
+                        <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                        <span>Facebook Live</span>
+                    </div>
+                    <p class="sorter-live-stream-title">Conexión de Campeones · YAAVS</p>
+                    <p class="sorter-live-stream-sub">Comentarios en vivo</p>
+                </div>
                 <div id="sorter-live-comments" class="sorter-live-comments"></div>
             </aside>
         </div>
@@ -1068,6 +1098,6 @@
         </div>
     </div>
 
-    <script src="script_vf.js?v=20260612_fblive"></script>
+    <script src="script_vf.js?v=20260612_fblive2"></script>
 </body>
 </html>
