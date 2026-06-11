@@ -1,15 +1,87 @@
 {
   "titulo": "ÁLBUM DE CAMPEONES",
-  "subtitulo": "Ganadores del sorteo — deploy automático activo ✓",
+  "subtitulo": "Ganadores del sorteo — Conexión de Campeones YAAVS",
   "imagenes": [
-    { "numero": "02", "variante": "comun", "src": "ganadores/fotos/sorteo-1/ganador-02.png", "alt": "Cromo ganador del sorteo", "poster": true },
-    { "numero": "03", "variante": "cromado", "src": "ganadores/fotos/sorteo-1/ganador-03.png", "alt": "Cromo ganador del sorteo", "poster": true },
-    { "numero": "04", "variante": "edicion-especial", "src": "ganadores/fotos/sorteo-1/ganador-04.png", "alt": "Cromo ganador del sorteo", "poster": true },
-    { "numero": "05", "variante": "brillante", "src": "ganadores/fotos/sorteo-1/ganador-05.png", "alt": "Cromo ganador del sorteo", "poster": true },
-    { "numero": "06", "variante": "cromado", "src": "ganadores/fotos/sorteo-1/ganador-06.png", "alt": "Cromo ganador del sorteo", "poster": true },
-    { "numero": "07", "variante": "leyenda", "src": "ganadores/fotos/sorteo-1/ganador-07.png", "alt": "Cromo ganador del sorteo", "poster": true },
-    { "numero": "08", "variante": "comun", "src": "ganadores/fotos/sorteo-1/ganador-08.png", "alt": "Cromo ganador del sorteo", "poster": true },
-    { "numero": "09", "variante": "edicion-especial", "src": "ganadores/fotos/sorteo-1/ganador-09.png", "alt": "Cromo ganador del sorteo", "poster": true },
-    { "numero": "10", "variante": "cromado", "src": "ganadores/fotos/sorteo-1/ganador-10.png", "alt": "Cromo ganador del sorteo", "poster": true }
+    {
+      "numero": "02",
+      "variante": "comun",
+      "nombre": "Campeón YAAVS",
+      "agradecimiento": "¡Gracias por demostrar que con esfuerzo y constancia se llega lejos! Tu victoria enciende a toda la familia YAAVS.",
+      "src": "ganadores/fotos/sorteo-1/ganador-02.png",
+      "alt": "Cromo ganador del sorteo",
+      "poster": true
+    },
+    {
+      "numero": "03",
+      "variante": "cromado",
+      "nombre": "Campeona YAAVS",
+      "agradecimiento": "¡Brillaste en el sorteo como brillas en cada vinculación! Este cromo cromado celebra tu camino de campeona.",
+      "src": "ganadores/fotos/sorteo-1/ganador-03.png",
+      "alt": "Cromo ganador del sorteo",
+      "poster": true
+    },
+    {
+      "numero": "04",
+      "variante": "edicion-especial",
+      "nombre": "Campeón YAAVS",
+      "agradecimiento": "Edición especial para un YAAVSER especial: gracias por ser parte de Conexión de Campeones y llevar el orgullo en alto.",
+      "src": "ganadores/fotos/sorteo-1/ganador-04.png",
+      "alt": "Cromo ganador del sorteo",
+      "poster": true
+    },
+    {
+      "numero": "05",
+      "variante": "brillante",
+      "nombre": "Campeona YAAVS",
+      "agradecimiento": "¡Tu dedicación reluce! Este premio es para ti, campeona, por creer en el juego y en tu equipo hasta el final.",
+      "src": "ganadores/fotos/sorteo-1/ganador-05.png",
+      "alt": "Cromo ganador del sorteo",
+      "poster": true
+    },
+    {
+      "numero": "06",
+      "variante": "cromado",
+      "nombre": "Campeón YAAVS",
+      "agradecimiento": "¡Felicidades, crack! Ganaste con actitud de campeón. YAAVS celebra contigo este momento único.",
+      "src": "ganadores/fotos/sorteo-1/ganador-06.png",
+      "alt": "Cromo ganador del sorteo",
+      "poster": true
+    },
+    {
+      "numero": "07",
+      "variante": "leyenda",
+      "nombre": "Campeona YAAVS",
+      "agradecimiento": "Cromo leyenda para una leyenda: gracias por inspirar a todos los YAAVSERS. Tu nombre queda en el álbum para siempre.",
+      "src": "ganadores/fotos/sorteo-1/ganador-07.png",
+      "alt": "Cromo ganador del sorteo",
+      "poster": true
+    },
+    {
+      "numero": "08",
+      "variante": "comun",
+      "nombre": "Campeón YAAVS",
+      "agradecimiento": "¡Eres parte de la historia del primer sorteo! Gracias por confiar en YAAVS y celebrar este triunfo con nosotros.",
+      "src": "ganadores/fotos/sorteo-1/ganador-08.png",
+      "alt": "Cromo ganador del sorteo",
+      "poster": true
+    },
+    {
+      "numero": "09",
+      "variante": "edicion-especial",
+      "nombre": "Campeona YAAVS",
+      "agradecimiento": "Premio edición especial para quien lo dio todo en la cancha y en la conexión. ¡Felicidades, campeona YAAVS!",
+      "src": "ganadores/fotos/sorteo-1/ganador-09.png",
+      "alt": "Cromo ganador del sorteo",
+      "poster": true
+    },
+    {
+      "numero": "10",
+      "variante": "cromado",
+      "nombre": "Campeón YAAVS",
+      "agradecimiento": "¡Gracias por representar el espíritu de campeón! Tu cromo brilla porque tú brillaste en el sorteo.",
+      "src": "ganadores/fotos/sorteo-1/ganador-10.png",
+      "alt": "Cromo ganador del sorteo",
+      "poster": true
+    }
   ]
 }

@@ -322,15 +322,8 @@ img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
     transform: rotate(var(--cromo-rot, -2deg));
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s;
 }
-.carrusel-ganadores__slide.is-center .cromo-sticker {
-    transform: rotate(0deg) translateY(-8px) scale(1.04);
-    box-shadow:
-        0 0 0 2px #ffffff,
-        0 0 0 4px #ffd700,
-        0 0 0 6px #1a472a,
-        0 22px 44px rgba(0, 0, 0, 0.5),
-        0 0 28px rgba(212, 175, 55, 0.35);
-    z-index: 2;
+.cromo-reveal .cromo-sticker {
+    transform: none;
 }
 .cromo-sticker__num {
     position: absolute;
@@ -671,6 +664,238 @@ img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
         0 0 40px rgba(180, 100, 255, 0.65),
         0 0 20px rgba(255, 215, 0, 0.45),
         0 24px 48px rgba(0, 0, 0, 0.55);
+}
+
+/* —— Cromo reveal: vibración + paquete + felicitación —— */
+.cromo-reveal {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+    height: 100%;
+    outline: none;
+    cursor: pointer;
+}
+.carrusel-ganadores__slide.is-reveal-open {
+    z-index: 40;
+    overflow: visible;
+}
+.carrusel-ganadores--album .carrusel-ganadores__viewport:has(.is-reveal-open) {
+    overflow: visible;
+    z-index: 5;
+}
+.cromo-pack {
+    position: relative;
+    flex: 0 0 auto;
+    width: 100%;
+    height: 100%;
+    transform: rotate(var(--cromo-rot, -2deg));
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.carrusel-ganadores__slide.is-center .cromo-pack {
+    transform: rotate(0deg) translateY(-8px) scale(1.04);
+    z-index: 2;
+}
+.cromo-reveal.is-open .cromo-pack {
+    transform: rotate(0deg) scale(1.02);
+    width: min(100%, 220px);
+}
+.cromo-pack__shine {
+    position: absolute;
+    inset: -10px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #fff8dc, #d4af37 40%, #8b6914 70%, #fff0a0);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    z-index: 1;
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s;
+    pointer-events: none;
+}
+.cromo-pack__flap {
+    position: absolute;
+    background: linear-gradient(160deg, #f5e6a8, #c9a020);
+    border: 1px solid rgba(139, 105, 20, 0.5);
+    z-index: 3;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s;
+    pointer-events: none;
+}
+.cromo-pack__flap--top {
+    top: -6px;
+    left: -4px;
+    right: -4px;
+    height: 42%;
+    border-radius: 8px 8px 2px 2px;
+    transform-origin: top center;
+}
+.cromo-pack__flap--left {
+    top: 8px;
+    left: -6px;
+    width: 48%;
+    bottom: 8px;
+    border-radius: 6px 2px 2px 6px;
+    transform-origin: left center;
+}
+.cromo-pack__flap--right {
+    top: 8px;
+    right: -6px;
+    width: 48%;
+    bottom: 8px;
+    border-radius: 2px 6px 6px 2px;
+    transform-origin: right center;
+}
+.cromo-pack__seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    color: #1a472a;
+    background: radial-gradient(circle at 30% 30%, #fff9e0, #d4af37);
+    border: 2px solid #8b6914;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    transition: transform 0.4s, opacity 0.35s;
+    pointer-events: none;
+}
+.cromo-reveal.is-open .cromo-pack__flap--top {
+    transform: perspective(500px) rotateX(-88deg) translateY(-12px);
+    opacity: 0.15;
+}
+.cromo-reveal.is-open .cromo-pack__flap--left {
+    transform: perspective(400px) rotateY(75deg) translateX(-16px);
+    opacity: 0.2;
+}
+.cromo-reveal.is-open .cromo-pack__flap--right {
+    transform: perspective(400px) rotateY(-75deg) translateX(16px);
+    opacity: 0.2;
+}
+.cromo-reveal.is-open .cromo-pack__seal {
+    transform: scale(0) rotate(180deg);
+    opacity: 0;
+}
+.cromo-reveal.is-open .cromo-pack__shine {
+    transform: scale(1.08);
+    opacity: 0.35;
+}
+.cromo-reveal .cromo-sticker {
+    position: relative;
+    z-index: 2;
+    transform: none;
+    height: 100%;
+}
+.carrusel-ganadores__slide.is-center .cromo-reveal .cromo-sticker {
+    transform: none;
+}
+.cromo-reveal.is-open .cromo-sticker {
+    animation: cromoPopReveal 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes cromoPopReveal {
+    0% { transform: scale(0.88); filter: brightness(0.85); }
+    60% { transform: scale(1.06); filter: brightness(1.1); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+@keyframes cromoShake1 {
+    0%, 100% { transform: rotate(var(--cromo-rot, -2deg)) translate(0, 0); }
+    25% { transform: rotate(var(--cromo-rot, -2deg)) translate(-1px, 1px); }
+    75% { transform: rotate(var(--cromo-rot, -2deg)) translate(1px, -1px); }
+}
+@keyframes cromoShake2 {
+    0%, 100% { transform: rotate(var(--cromo-rot, -2deg)) translate(0, 0); }
+    20% { transform: rotate(calc(var(--cromo-rot, -2deg) + 1deg)) translate(-3px, 2px); }
+    40% { transform: rotate(calc(var(--cromo-rot, -2deg) - 1deg)) translate(3px, -2px); }
+    60% { transform: rotate(calc(var(--cromo-rot, -2deg) + 2deg)) translate(-4px, 1px); }
+    80% { transform: rotate(calc(var(--cromo-rot, -2deg) - 2deg)) translate(4px, -3px); }
+}
+@keyframes cromoShake3 {
+    0%, 100% { transform: rotate(var(--cromo-rot, -2deg)) translate(0, 0); }
+    10% { transform: rotate(calc(var(--cromo-rot, -2deg) + 3deg)) translate(-6px, 4px); }
+    30% { transform: rotate(calc(var(--cromo-rot, -2deg) - 3deg)) translate(6px, -4px); }
+    50% { transform: rotate(calc(var(--cromo-rot, -2deg) + 4deg)) translate(-8px, 3px); }
+    70% { transform: rotate(calc(var(--cromo-rot, -2deg) - 4deg)) translate(8px, -5px); }
+    90% { transform: rotate(calc(var(--cromo-rot, -2deg) + 2deg)) translate(-5px, 2px); }
+}
+.cromo-reveal.is-shake-1 .cromo-pack { animation: cromoShake1 0.12s ease-in-out infinite; }
+.cromo-reveal.is-shake-2 .cromo-pack { animation: cromoShake2 0.09s ease-in-out infinite; }
+.cromo-reveal.is-shake-3 .cromo-pack { animation: cromoShake3 0.06s ease-in-out infinite; }
+.cromo-reveal__toast {
+    flex: 0 0 0;
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    align-self: center;
+    padding: 0;
+    border-radius: 10px;
+    background: linear-gradient(155deg, rgba(26, 71, 42, 0.97), rgba(2, 20, 12, 0.98));
+    border: 2px solid #d4af37;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 20px rgba(34, 255, 94, 0.15);
+    transform: translateX(16px) scale(0.95);
+    transition: flex 0.5s, width 0.5s, opacity 0.45s, transform 0.5s, padding 0.45s;
+    pointer-events: none;
+}
+.cromo-reveal.is-open {
+    justify-content: flex-start;
+    gap: clamp(10px, 1.5vw, 16px);
+}
+.cromo-reveal.is-open .cromo-reveal__toast {
+    flex: 1 1 auto;
+    width: min(240px, 42vw);
+    opacity: 1;
+    padding: 14px 16px;
+    transform: translateX(0) scale(1);
+    pointer-events: auto;
+}
+.cromo-reveal__toast-eyebrow {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 6px;
+}
+.cromo-reveal__toast-nombre {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--verde-yaavs);
+    margin-bottom: 8px;
+    line-height: 1.2;
+    text-shadow: 0 0 16px rgba(34, 255, 94, 0.35);
+}
+.cromo-reveal__toast-msg {
+    margin: 0;
+    font-size: clamp(0.72rem, 1.6vw, 0.85rem);
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.88);
+}
+@media (max-width: 900px) {
+    .cromo-reveal.is-open {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cromo-reveal.is-open .cromo-pack {
+        width: 100%;
+    }
+    .cromo-reveal.is-open .cromo-reveal__toast {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cromo-reveal.is-shake-1 .cromo-pack,
+    .cromo-reveal.is-shake-2 .cromo-pack,
+    .cromo-reveal.is-shake-3 .cromo-pack {
+        animation: none;
+    }
 }
 
 .carrusel-ganadores--album .carrusel-ganadores__card--poster {

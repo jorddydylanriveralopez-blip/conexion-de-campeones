@@ -139,20 +139,38 @@ function crearSlideGanadorHTML(g, fotoSrc) {
         const variante = varianteCromoValida(g.variante);
         const numero = escaparHtmlCarrusel(g.numero || '');
         const sello = escaparHtmlCarrusel(g.varianteLabel || ETIQUETAS_CROMO[variante] || 'Cromo');
+        const nombreToast = escaparHtmlCarrusel(g.nombre || 'Campeón YAAVS');
+        const msgToast = escaparHtmlCarrusel(
+            g.agradecimiento || '¡Felicidades! Gracias por ser parte de Conexión de Campeones YAAVS.',
+        );
         const numHtml = numero
             ? `<span class="cromo-sticker__num" aria-hidden="true">${numero}</span>`
             : '';
         return `
-            <article class="carrusel-ganadores__card carrusel-ganadores__card--poster cromo-sticker cromo-sticker--${variante}">
-                <span class="cromo-sticker__sello" aria-hidden="true">${sello}</span>
-                ${numHtml}
-                <div class="cromo-sticker__frame">
-                    <img src="${escaparHtmlCarrusel(src)}" alt="${alt}" class="carrusel-ganadores__img" loading="lazy" decoding="async">
+            <div class="cromo-reveal" tabindex="0">
+                <aside class="cromo-reveal__toast" aria-live="polite">
+                    <span class="cromo-reveal__toast-eyebrow"><i class="fa-solid fa-trophy"></i> ¡Felicidades!</span>
+                    <strong class="cromo-reveal__toast-nombre">${nombreToast}</strong>
+                    <p class="cromo-reveal__toast-msg">${msgToast}</p>
+                </aside>
+                <div class="cromo-pack">
+                    <div class="cromo-pack__shine" aria-hidden="true"></div>
+                    <div class="cromo-pack__flap cromo-pack__flap--top" aria-hidden="true"></div>
+                    <div class="cromo-pack__flap cromo-pack__flap--left" aria-hidden="true"></div>
+                    <div class="cromo-pack__flap cromo-pack__flap--right" aria-hidden="true"></div>
+                    <div class="cromo-pack__seal" aria-hidden="true"><i class="fa-solid fa-futbol"></i></div>
+                    <article class="carrusel-ganadores__card carrusel-ganadores__card--poster cromo-sticker cromo-sticker--${variante}">
+                        <span class="cromo-sticker__sello" aria-hidden="true">${sello}</span>
+                        ${numHtml}
+                        <div class="cromo-sticker__frame">
+                            <img src="${escaparHtmlCarrusel(src)}" alt="${alt}" class="carrusel-ganadores__img" loading="lazy" decoding="async">
+                        </div>
+                        <span class="cromo-sticker__holo" aria-hidden="true"></span>
+                        <span class="cromo-sticker__sparkles" aria-hidden="true"></span>
+                        <span class="cromo-sticker__perforacion" aria-hidden="true"></span>
+                    </article>
                 </div>
-                <span class="cromo-sticker__holo" aria-hidden="true"></span>
-                <span class="cromo-sticker__sparkles" aria-hidden="true"></span>
-                <span class="cromo-sticker__perforacion" aria-hidden="true"></span>
-            </article>
+            </div>
         `;
     }
 
@@ -246,6 +264,65 @@ function renderCarruselGanadores() {
         });
         dots.appendChild(btn);
     }
+
+    enlazarRevealCromos(track);
+}
+
+const CROMO_REVEAL_TIMERS = new WeakMap();
+
+function resetRevealCromo(el) {
+    const timers = CROMO_REVEAL_TIMERS.get(el);
+    if (timers) timers.forEach(clearTimeout);
+    CROMO_REVEAL_TIMERS.delete(el);
+    el.classList.remove('is-shake-1', 'is-shake-2', 'is-shake-3', 'is-open');
+    el.closest('.carrusel-ganadores__slide')?.classList.remove('is-reveal-open');
+}
+
+function iniciarRevealCromo(el) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.classList.add('is-open');
+        el.closest('.carrusel-ganadores__slide')?.classList.add('is-reveal-open');
+        return;
+    }
+    resetRevealCromo(el);
+    const slide = el.closest('.carrusel-ganadores__slide');
+    const timers = [
+        setTimeout(() => el.classList.add('is-shake-1'), 80),
+        setTimeout(() => {
+            el.classList.remove('is-shake-1');
+            el.classList.add('is-shake-2');
+        }, 700),
+        setTimeout(() => {
+            el.classList.remove('is-shake-2');
+            el.classList.add('is-shake-3');
+        }, 1400),
+        setTimeout(() => {
+            el.classList.remove('is-shake-3');
+            el.classList.add('is-open');
+            slide?.classList.add('is-reveal-open');
+        }, 2100),
+    ];
+    CROMO_REVEAL_TIMERS.set(el, timers);
+}
+
+function enlazarRevealCromos(track) {
+    track.querySelectorAll('.cromo-reveal').forEach((el) => {
+        if (el.dataset.revealListo === '1') return;
+        el.dataset.revealListo = '1';
+
+        el.addEventListener('mouseenter', () => {
+            if (carruselGanadoresState.timer) clearInterval(carruselGanadoresState.timer);
+            iniciarRevealCromo(el);
+        });
+        el.addEventListener('mouseleave', () => resetRevealCromo(el));
+        el.addEventListener('focusin', () => {
+            if (carruselGanadoresState.timer) clearInterval(carruselGanadoresState.timer);
+            iniciarRevealCromo(el);
+        });
+        el.addEventListener('focusout', (e) => {
+            if (!el.contains(e.relatedTarget)) resetRevealCromo(el);
+        });
+    });
 }
 
 function moverCarruselGanadores(delta) {
@@ -295,7 +372,7 @@ async function initCarruselGanadores() {
 
     try {
         const [cfgRes, s1Res, s2Res] = await Promise.all([
-            fetch('ganadores/carrusel-ganadores.json?v=20260611_deploy_test').catch(() => null),
+            fetch('ganadores/carrusel-ganadores.json?v=20260611_cromo_reveal').catch(() => null),
             fetch(urlGanadoresSorteo(1) + '?v=20260610'),
             fetch(urlGanadoresSorteo(2) + '?v=20260610'),
         ]);
@@ -329,6 +406,7 @@ async function initCarruselGanadores() {
                     foto: img.src,
                     poster: img.poster !== false,
                     alt: img.alt || img.nombre || 'Ganador del sorteo',
+                    agradecimiento: img.agradecimiento || '',
                 };
             });
             aplicarFiltroCarruselGanadores();
