@@ -39,6 +39,9 @@
         overlay = document.createElement('div');
         overlay.id = 'futbol-minigame';
         overlay.className = 'futbol-minigame';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'Minijuego de penales YAAVS');
         overlay.setAttribute('aria-hidden', 'true');
         overlay.innerHTML = `
             <div class="futbol-minigame__panel">
