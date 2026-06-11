@@ -1914,11 +1914,113 @@ body.cromo-modal-open { overflow: hidden; }
 .social-icon { width: 45px; height: 45px; background: rgba(0, 0, 0, 0.8); border: 1px solid var(--verde-yaavs); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--blanco); font-size: 1.2rem; text-decoration: none; transition: 0.3s; pointer-events: auto; box-shadow: 0 0 10px rgba(34, 255, 94, 0.3); }
 .social-icon:hover { background: var(--verde-yaavs); color: var(--bg-dark); box-shadow: 0 0 20px var(--verde-yaavs); }
 
-/* SCROLL PROMPT DESKTOP */
-.scroll-prompt { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 5px; z-index: 9000; color: var(--verde-yaavs); font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.9rem; letter-spacing: 2px; animation: float 2s infinite ease-in-out; pointer-events: none; transition: 0.5s; background: rgba(0, 0, 0, 0.85); padding: 12px 25px; border-radius: 40px; border: 2px solid var(--verde-yaavs); box-shadow: 0 0 20px rgba(34, 255, 94, 0.5); }
-@keyframes float { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -10px); } }
+/* SCROLL PROMPT — dentro del hero, centrado abajo, animado */
+.scroll-prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    z-index: 25;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+}
 
-.centered-header { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 20px 64px; width: 100%; min-height: 72vh; overflow: hidden; box-sizing: border-box; }
+.scroll-prompt.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-prompt.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(18px);
+}
+
+.scroll-prompt__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 28px 10px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--verde-yaavs);
+    box-shadow:
+        0 0 32px rgba(34, 255, 94, 0.55),
+        0 12px 40px rgba(0, 0, 0, 0.6);
+    will-change: transform;
+    animation: scrollPromptBob 1.8s ease-in-out infinite;
+}
+
+.scroll-prompt__glow {
+    position: absolute;
+    inset: -12px;
+    border-radius: 999px;
+    border: 2px solid rgba(34, 255, 94, 0.55);
+    animation: scrollPromptPulse 1.6s ease-out infinite;
+    pointer-events: none;
+}
+
+.scroll-prompt__chevrons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    line-height: 0.5;
+    margin-bottom: 2px;
+}
+
+.scroll-prompt__chev {
+    color: var(--verde-yaavs);
+    font-size: 1rem;
+    filter: drop-shadow(0 0 8px rgba(34, 255, 94, 0.9));
+    animation: scrollPromptChev 1.2s ease-in-out infinite;
+}
+
+.scroll-prompt__chev:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.scroll-prompt__chev:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.scroll-prompt__label {
+    color: var(--verde-yaavs);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
+    text-transform: uppercase;
+    text-shadow: 0 0 14px rgba(34, 255, 94, 0.65);
+    animation: scrollPromptTextGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollPromptBob {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-16px) scale(1.03); }
+}
+
+@keyframes scrollPromptChev {
+    0%, 100% { transform: translateY(-2px); opacity: 0.25; }
+    50% { transform: translateY(8px); opacity: 1; }
+}
+
+@keyframes scrollPromptPulse {
+    0% { transform: scale(0.95); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes scrollPromptTextGlow {
+    0%, 100% { opacity: 0.75; letter-spacing: 0.18em; }
+    50% { opacity: 1; letter-spacing: 0.24em; }
+}
+
+.centered-header { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 20px 72px; width: 100%; min-height: 72vh; overflow: hidden; box-sizing: border-box; }
 .centered-header::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 85% 65% at 50% 35%, rgba(0, 229, 255, 0.06), transparent 55%), radial-gradient(ellipse 100% 50% at 50% 100%, rgba(34, 255, 94, 0.06), transparent 50%); }
 .centered-header > * { position: relative; z-index: 1; }
 .logo-company-center { height: clamp(40px, 6vw, 70px); filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 36px rgba(0, 229, 255, 0.12)); margin-bottom: 10px; }
@@ -2073,21 +2175,32 @@ input[type='text']:focus, input[type='password']:focus { outline: none; border-c
         box-shadow: 0 0 15px var(--verde-yaavs);
     }
 
-    /* 3. NUEVO DISEÑO FLOTANTE PARA EL "DESLIZA HACIA ABAJO" EN CELULAR */
+    /* Scroll prompt en móvil */
     .scroll-prompt {
-        bottom: 85px; /* Más arriba para no tapar FAQ */
-        background: rgba(0, 0, 0, 0.75);
-        backdrop-filter: blur(8px);
-        border: 1px solid var(--azul-puntos);
-        border-radius: 50px;
-        padding: 8px 20px;
-        flex-direction: row; /* Horizontal para el celu, se ve mucho más pro */
-        gap: 10px;
-        box-shadow: 0 5px 20px rgba(0, 229, 255, 0.2);
+        bottom: 4px;
     }
-    
-    .scroll-prompt i {
-        font-size: 1.2rem !important;
+
+    .scroll-prompt__card {
+        flex-direction: row;
+        gap: 10px;
+        padding: 8px 18px;
+    }
+
+    .scroll-prompt__chevrons {
+        flex-direction: row;
+        line-height: 1;
+        margin-bottom: 0;
+        gap: 1px;
+    }
+
+    .scroll-prompt__chev {
+        font-size: 0.75rem;
+    }
+
+    .scroll-prompt__label {
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-indent: 0;
     }
 
     /* 4. OCULTAR FACEBOOK LIVE EN CELULAR */

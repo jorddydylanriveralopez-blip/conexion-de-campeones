@@ -1104,9 +1104,71 @@ function updateBodyScrollTheme() {
         }, 850);
     }
 }
-window.addEventListener('scroll', () => {
+function ocultarScrollPrompt(permanente) {
     const p = document.getElementById('scroll-prompt');
-    if (p) p.style.opacity = window.scrollY > 100 ? '0' : '1';
+    if (!p || p.classList.contains('is-hidden')) return;
+    p.classList.remove('is-active');
+    p.classList.add('is-hidden');
+    p.setAttribute('aria-hidden', 'true');
+    if (permanente) {
+        try {
+            sessionStorage.setItem('yaavs_scroll_prompt_visto', '1');
+        } catch (_) {}
+    }
+}
+
+function initScrollPrompt() {
+    const p = document.getElementById('scroll-prompt');
+    if (!p) return;
+
+    let visto = false;
+    try {
+        visto = sessionStorage.getItem('yaavs_scroll_prompt_visto') === '1';
+    } catch (_) {}
+
+    if (visto || window.scrollY > 40) {
+        ocultarScrollPrompt(false);
+        return;
+    }
+
+    const mostrar = () => {
+        if (window.scrollY > 40 || p.classList.contains('is-hidden')) return;
+        p.classList.add('is-active');
+        p.setAttribute('aria-hidden', 'false');
+    };
+
+    setTimeout(mostrar, 700);
+
+    const dismiss = () => ocultarScrollPrompt(true);
+
+    window.addEventListener(
+        'scroll',
+        () => {
+            if (window.scrollY > 40) dismiss();
+        },
+        { passive: true },
+    );
+
+    window.addEventListener(
+        'wheel',
+        (ev) => {
+            if (ev.deltaY > 0) dismiss();
+        },
+        { passive: true },
+    );
+
+    window.addEventListener(
+        'touchstart',
+        () => {
+            window.setTimeout(() => {
+                if (window.scrollY > 15) dismiss();
+            }, 120);
+        },
+        { passive: true },
+    );
+}
+
+window.addEventListener('scroll', () => {
     updateBodyScrollTheme();
 });
 
@@ -1156,6 +1218,7 @@ function entrarDirectoAlSitio() {
 
     finalizarSplashLogo(() => {
         iniciarEntradaPagina();
+        initScrollPrompt();
         if (typeof window.enlazarMinijuegoFutbolConsulta === 'function') {
             window.enlazarMinijuegoFutbolConsulta();
         }
