@@ -1939,6 +1939,7 @@ async function iniciarSorteador() {
     detenerMusicaSorteo();
     actualizarBienvenidaSorteador();
     showSorterScreen('welcome');
+    iniciarComentariosLive();
     if (!ganadoresPreviosCargados && SORTEO_NUMERO_ACTUAL > 1) {
         await cargarGanadoresSorteosPrevios();
     }
@@ -2128,8 +2129,6 @@ function showSorterScreen(id) {
     document.querySelectorAll('#sorter-modal .screen').forEach((s) => s.classList.remove('active'));
     document.getElementById('screen-' + id).classList.add('active');
     if (id === 'stadium') est = 'S';
-    if (id === 'welcome') iniciarComentariosLive();
-    else detenerComentariosLive();
 }
 
 /** Confetti + sonido solo al cerrar una tanda (kit) o una liga completa */
