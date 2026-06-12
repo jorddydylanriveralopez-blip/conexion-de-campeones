@@ -33,7 +33,7 @@
     <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles_vf.css?v=20260611_scroll3">
+    <link rel="stylesheet" href="styles_vf.css?v=20260612_cromo_modal">
     
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -364,29 +364,6 @@
                     </a>
                 </div>
             </section>
-
-            <div id="cromo-modal" class="cromo-modal" aria-hidden="true">
-                <div class="cromo-modal__backdrop" data-cromo-modal-close></div>
-                <div class="cromo-modal__burst" aria-hidden="true"></div>
-                <div class="cromo-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="cromo-modal-nombre">
-                    <button type="button" class="cromo-modal__close" data-cromo-modal-close aria-label="Cerrar">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                    <div class="cromo-modal__card cromo-sticker" id="cromo-modal-card">
-                        <span class="cromo-sticker__sello" id="cromo-modal-sello"></span>
-                        <span class="cromo-sticker__num" id="cromo-modal-num"></span>
-                        <div class="cromo-sticker__frame">
-                            <img id="cromo-modal-img" src="" alt="" class="carrusel-ganadores__img">
-                        </div>
-                        <span class="cromo-sticker__holo" aria-hidden="true"></span>
-                    </div>
-                    <div class="cromo-modal__body">
-                        <span class="cromo-modal__eyebrow"><i class="fa-solid fa-trophy"></i> ¡Felicidades!</span>
-                        <h3 class="cromo-modal__nombre" id="cromo-modal-nombre"></h3>
-                        <p class="cromo-modal__msg" id="cromo-modal-msg"></p>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="section-separator animate-on-scroll"></div>
@@ -980,6 +957,37 @@
         </div>
     </div>
 
+    <div id="cromo-modal" class="cromo-modal" aria-hidden="true">
+        <div class="cromo-modal__backdrop" data-cromo-modal-close></div>
+        <div class="cromo-modal__burst" aria-hidden="true"></div>
+        <div class="cromo-modal__rotate" aria-hidden="true">
+            <div class="cromo-modal__rotate-icon" aria-hidden="true">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <p class="cromo-modal__rotate-title">Voltea tu dispositivo</p>
+            <p class="cromo-modal__rotate-sub">Gira a horizontal para ver el cromo completo</p>
+            <button type="button" class="cromo-modal__rotate-close" data-cromo-modal-close>Cerrar</button>
+        </div>
+        <div class="cromo-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="cromo-modal-nombre">
+            <button type="button" class="cromo-modal__close" data-cromo-modal-close aria-label="Cerrar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="cromo-modal__card cromo-sticker" id="cromo-modal-card">
+                <span class="cromo-sticker__sello" id="cromo-modal-sello"></span>
+                <span class="cromo-sticker__num" id="cromo-modal-num"></span>
+                <div class="cromo-sticker__frame">
+                    <img id="cromo-modal-img" src="" alt="" class="carrusel-ganadores__img">
+                </div>
+                <span class="cromo-sticker__holo" aria-hidden="true"></span>
+            </div>
+            <div class="cromo-modal__body">
+                <span class="cromo-modal__eyebrow"><i class="fa-solid fa-trophy"></i> ¡Felicidades!</span>
+                <h3 class="cromo-modal__nombre" id="cromo-modal-nombre"></h3>
+                <p class="cromo-modal__msg" id="cromo-modal-msg"></p>
+            </div>
+        </div>
+    </div>
+
     <div id="yaavs-easter-egg" class="game-overlay" aria-hidden="true">
         <div class="game-box egg-box">
             <button type="button" class="game-close snd-click snd-hover" onclick="closeYaavsEasterEgg()">×</button>
@@ -1005,6 +1013,6 @@
     </div>
 
     <script src="minijuego-futbol-yaavs.js?v=20260611_futbol4"></script>
-    <script src="script_vf.js?v=20260612_no_fblive"></script>
+    <script src="script_vf.js?v=20260612_cromo_modal"></script>
 </body>
 </html>

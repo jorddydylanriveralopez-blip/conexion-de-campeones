@@ -404,9 +404,18 @@ function initCromoModalGlobal() {
     const modal = document.getElementById('cromo-modal');
     if (!modal || modal.dataset.listo === '1') return;
     modal.dataset.listo = '1';
+    const dialog = modal.querySelector('.cromo-modal__dialog');
     modal.querySelectorAll('[data-cromo-modal-close]').forEach((btn) => {
-        btn.addEventListener('click', cerrarCromoModal);
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            cerrarCromoModal();
+        });
     });
+    modal.addEventListener('click', () => {
+        if (modal.classList.contains('is-visible')) cerrarCromoModal();
+    });
+    dialog?.addEventListener('click', (e) => e.stopPropagation());
+    modal.querySelector('.cromo-modal__rotate')?.addEventListener('click', (e) => e.stopPropagation());
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('is-visible')) cerrarCromoModal();
     });
