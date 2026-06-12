@@ -1,0 +1,1231 @@
+{
+  "sorteo": 3,
+  "fecha": "12 de junio de 2026",
+  "total": 153,
+  "ganadores": [
+    {
+      "clave": "19CL05920IJU",
+      "nombre": "19CL05920IJU",
+      "municipio": "TEXCOCO",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "19CL05920IJU-2-sorteo-3"
+    },
+    {
+      "clave": "19CL06101",
+      "nombre": "19CL06101",
+      "municipio": "CHICOLOAPAN",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "19CL06101-2-sorteo-3"
+    },
+    {
+      "clave": "23CL01850ID5",
+      "nombre": "23CL01850ID5",
+      "municipio": "PUEBLA",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CL01850ID5-1-sorteo-3"
+    },
+    {
+      "clave": "23CL08024",
+      "nombre": "23CL08024",
+      "municipio": "CUAUTITLÁN IZCALLI",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CL08024-1-sorteo-3"
+    },
+    {
+      "clave": "23CL06011867Q",
+      "nombre": "23CL06011867Q",
+      "municipio": "TIJUANA",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CL06011867Q-3-sorteo-3"
+    },
+    {
+      "clave": "24CL0663394A",
+      "nombre": "24CL0663394A",
+      "municipio": "TULANCINGO DE BRAVO",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "24CL0663394A-2-sorteo-3"
+    },
+    {
+      "clave": "24CL05807672",
+      "nombre": "24CL05807672",
+      "municipio": "ÁLVARO OBREGÓN",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "24CL05807672-1-sorteo-3"
+    },
+    {
+      "clave": "25CL01909270",
+      "nombre": "25CL01909270",
+      "municipio": "PEROTE",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CL01909270-1-sorteo-3"
+    },
+    {
+      "clave": "26CL00772B87",
+      "nombre": "26CL00772B87",
+      "municipio": "TEXCOCO",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "26CL00772B87-2-sorteo-3"
+    },
+    {
+      "clave": "26CL02093D81",
+      "nombre": "26CL02093D81",
+      "municipio": "EMILIANO ZAPATA",
+      "liga": "Ascenso",
+      "kit": "KIT BÁSICO",
+      "ticket": "26CL02093D81-1-sorteo-3"
+    },
+    {
+      "clave": "19CL03150N0F",
+      "nombre": "19CL03150N0F",
+      "municipio": "ATIZAPÁN DE ZARAGOZA",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "19CL03150N0F-6-sorteo-3"
+    },
+    {
+      "clave": "21CL15221MQP",
+      "nombre": "21CL15221MQP",
+      "municipio": "TOLUCA",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "21CL15221MQP-1-sorteo-3"
+    },
+    {
+      "clave": "21CL16050",
+      "nombre": "21CL16050",
+      "municipio": "NAUCALPAN DE JUÁREZ",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "21CL16050-5-sorteo-3"
+    },
+    {
+      "clave": "22CL00600",
+      "nombre": "22CL00600",
+      "municipio": "COATZACOALCOS",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "22CL00600-1-sorteo-3"
+    },
+    {
+      "clave": "23CL00959",
+      "nombre": "23CL00959",
+      "municipio": "SALAMANCA",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "23CL00959-8-sorteo-3"
+    },
+    {
+      "clave": "23CL00977",
+      "nombre": "23CL00977",
+      "municipio": "TULTEPEC",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "23CL00977-2-sorteo-3"
+    },
+    {
+      "clave": "23CL06203",
+      "nombre": "23CL06203",
+      "municipio": "NEZAHUALCÓYOTL",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "23CL06203-1-sorteo-3"
+    },
+    {
+      "clave": "23CL08286S4H",
+      "nombre": "23CL08286S4H",
+      "municipio": "ECATEPEC DE MORELOS",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "23CL08286S4H-2-sorteo-3"
+    },
+    {
+      "clave": "24CL074046AD",
+      "nombre": "24CL074046AD",
+      "municipio": "ÁLVARO OBREGÓN",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "24CL074046AD-2-sorteo-3"
+    },
+    {
+      "clave": "25CL01303A14",
+      "nombre": "25CL01303A14",
+      "municipio": "MÉRIDA",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "25CL01303A14-2-sorteo-3"
+    },
+    {
+      "clave": "25CL05316BD9",
+      "nombre": "25CL05316BD9",
+      "municipio": "TONALÁ",
+      "liga": "Ascenso",
+      "kit": "KIT PRO",
+      "ticket": "25CL05316BD9-1-sorteo-3"
+    },
+    {
+      "clave": "21CL13710",
+      "nombre": "21CL13710",
+      "municipio": "JIUTEPEC",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "21CL13710-1-sorteo-3"
+    },
+    {
+      "clave": "21CL15058",
+      "nombre": "21CL15058",
+      "municipio": "XOXOCOTLA",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "21CL15058-2-sorteo-3"
+    },
+    {
+      "clave": "22CL05790978",
+      "nombre": "22CL05790978",
+      "municipio": "PUEBLA",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "22CL05790978-1-sorteo-3"
+    },
+    {
+      "clave": "23CL04440F59",
+      "nombre": "23CL04440F59",
+      "municipio": "PUEBLA",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "23CL04440F59-2-sorteo-3"
+    },
+    {
+      "clave": "23CL020586HM",
+      "nombre": "23CL020586HM",
+      "municipio": "TULA DE ALLENDE",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "23CL020586HM-1-sorteo-3"
+    },
+    {
+      "clave": "24CL05262BB5",
+      "nombre": "24CL05262BB5",
+      "municipio": "COATZACOALCOS",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "24CL05262BB5-1-sorteo-3"
+    },
+    {
+      "clave": "24CL05848E23",
+      "nombre": "24CL05848E23",
+      "municipio": "JUÁREZ",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "24CL05848E23-2-sorteo-3"
+    },
+    {
+      "clave": "24CL01969372",
+      "nombre": "24CL01969372",
+      "municipio": "ATLACOMULCO",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "24CL01969372-1-sorteo-3"
+    },
+    {
+      "clave": "24CL06802408",
+      "nombre": "24CL06802408",
+      "municipio": "MEDELLÍN DE BRAVO",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "24CL06802408-4-sorteo-3"
+    },
+    {
+      "clave": "25CL044727EB",
+      "nombre": "25CL044727EB",
+      "municipio": "TECÁMAC",
+      "liga": "Ascenso",
+      "kit": "KIT ELITE",
+      "ticket": "25CL044727EB-1-sorteo-3"
+    },
+    {
+      "clave": "19CL01258JJM",
+      "nombre": "19CL01258JJM",
+      "municipio": "ECATEPEC DE MORELOS",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "19CL01258JJM-8-sorteo-3"
+    },
+    {
+      "clave": "20CL07750RGT",
+      "nombre": "20CL07750RGT",
+      "municipio": "TIZAYUCA",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "20CL07750RGT-3-sorteo-3"
+    },
+    {
+      "clave": "21CL11193LRD",
+      "nombre": "21CL11193LRD",
+      "municipio": "TULTEPEC",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "21CL11193LRD-2-sorteo-3"
+    },
+    {
+      "clave": "22CL09444TGD",
+      "nombre": "22CL09444TGD",
+      "municipio": "TEXCOCO",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "22CL09444TGD-4-sorteo-3"
+    },
+    {
+      "clave": "23CL04506SWE",
+      "nombre": "23CL04506SWE",
+      "municipio": "APAN",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CL04506SWE-3-sorteo-3"
+    },
+    {
+      "clave": "24CL072107C6",
+      "nombre": "24CL072107C6",
+      "municipio": "CUAUTLA",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "24CL072107C6-1-sorteo-3"
+    },
+    {
+      "clave": "24CL0621647E",
+      "nombre": "24CL0621647E",
+      "municipio": "ÁLVARO OBREGÓN",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "24CL0621647E-7-sorteo-3"
+    },
+    {
+      "clave": "25CL0355998E",
+      "nombre": "25CL0355998E",
+      "municipio": "CAÑADA MORELOS",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CL0355998E-9-sorteo-3"
+    },
+    {
+      "clave": "25CL0395366A",
+      "nombre": "25CL0395366A",
+      "municipio": "CHIMALHUACÁN",
+      "liga": "Pro",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CL0395366A-1-sorteo-3"
+    },
+    {
+      "clave": "19CL00372",
+      "nombre": "19CL00372",
+      "municipio": "TLALNEPANTLA DE BAZ",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "19CL00372-7-sorteo-3"
+    },
+    {
+      "clave": "19CL02080",
+      "nombre": "19CL02080",
+      "municipio": "ATIZAPÁN DE ZARAGOZA",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "19CL02080-1-sorteo-3"
+    },
+    {
+      "clave": "20CL08003",
+      "nombre": "20CL08003",
+      "municipio": "MELCHOR OCAMPO",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "20CL08003-2-sorteo-3"
+    },
+    {
+      "clave": "20CL09291DTM",
+      "nombre": "20CL09291DTM",
+      "municipio": "SAN PEDRO CHOLULA",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "20CL09291DTM-1-sorteo-3"
+    },
+    {
+      "clave": "21CL13773",
+      "nombre": "21CL13773",
+      "municipio": "TEPOTZOTLÁN",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "21CL13773-11-sorteo-3"
+    },
+    {
+      "clave": "21CL14435VA5",
+      "nombre": "21CL14435VA5",
+      "municipio": "COACALCO DE BERRIOZÁBAL",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "21CL14435VA5-1-sorteo-3"
+    },
+    {
+      "clave": "22CL01398YJD",
+      "nombre": "22CL01398YJD",
+      "municipio": "CONTLA DE JUAN CUAMATZI",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "22CL01398YJD-1-sorteo-3"
+    },
+    {
+      "clave": "22CL04968",
+      "nombre": "22CL04968",
+      "municipio": "MORELIA",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "22CL04968-7-sorteo-3"
+    },
+    {
+      "clave": "22CL06719",
+      "nombre": "22CL06719",
+      "municipio": "LEÓN",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "22CL06719-3-sorteo-3"
+    },
+    {
+      "clave": "22CL09269SHB",
+      "nombre": "22CL09269SHB",
+      "municipio": "TLALNEPANTLA DE BAZ",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "22CL09269SHB-1-sorteo-3"
+    },
+    {
+      "clave": "24CL00623",
+      "nombre": "24CL00623",
+      "municipio": "APASEO EL GRANDE",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "24CL00623-6-sorteo-3"
+    },
+    {
+      "clave": "24CL0494669C",
+      "nombre": "24CL0494669C",
+      "municipio": "SAN MIGUEL XOXTLA",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "24CL0494669C-2-sorteo-3"
+    },
+    {
+      "clave": "25CL02582D35",
+      "nombre": "25CL02582D35",
+      "municipio": "GUSTAVO A. MADERO",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "25CL02582D35-2-sorteo-3"
+    },
+    {
+      "clave": "25CL032923B2",
+      "nombre": "25CL032923B2",
+      "municipio": "CHIMALHUACÁN",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "25CL032923B2-1-sorteo-3"
+    },
+    {
+      "clave": "25CL03348079",
+      "nombre": "25CL03348079",
+      "municipio": "TIZAYUCA",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "25CL03348079-7-sorteo-3"
+    },
+    {
+      "clave": "26CL010536BD",
+      "nombre": "26CL010536BD",
+      "municipio": "TUXPAN",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "26CL010536BD-6-sorteo-3"
+    },
+    {
+      "clave": "26CL00837034",
+      "nombre": "26CL00837034",
+      "municipio": "PUEBLA",
+      "liga": "Pro",
+      "kit": "KIT PRO",
+      "ticket": "26CL00837034-1-sorteo-3"
+    },
+    {
+      "clave": "19CL03134YPU",
+      "nombre": "19CL03134YPU",
+      "municipio": "ATIZAPÁN DE ZARAGOZA",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "19CL03134YPU-7-sorteo-3"
+    },
+    {
+      "clave": "19CL05117JNS",
+      "nombre": "19CL05117JNS",
+      "municipio": "LA MAGDALENA CONTRERAS",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "19CL05117JNS-18-sorteo-3"
+    },
+    {
+      "clave": "19CL05481",
+      "nombre": "19CL05481",
+      "municipio": "LA PAZ",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "19CL05481-4-sorteo-3"
+    },
+    {
+      "clave": "21CL10599",
+      "nombre": "21CL10599",
+      "municipio": "MORELIA",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "21CL10599-2-sorteo-3"
+    },
+    {
+      "clave": "21CL14789QGG",
+      "nombre": "21CL14789QGG",
+      "municipio": "NICOLÁS ROMERO",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "21CL14789QGG-6-sorteo-3"
+    },
+    {
+      "clave": "21CL15636",
+      "nombre": "21CL15636",
+      "municipio": "SALVADOR ESCALANTE",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "21CL15636-4-sorteo-3"
+    },
+    {
+      "clave": "21CL16901HA3",
+      "nombre": "21CL16901HA3",
+      "municipio": "ÁLVARO OBREGÓN",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "21CL16901HA3-2-sorteo-3"
+    },
+    {
+      "clave": "22CL00711",
+      "nombre": "22CL00711",
+      "municipio": "XOXOCOTLA",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "22CL00711-11-sorteo-3"
+    },
+    {
+      "clave": "22CL04264",
+      "nombre": "22CL04264",
+      "municipio": "AZCAPOTZALCO",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "22CL04264-2-sorteo-3"
+    },
+    {
+      "clave": "23CL00334",
+      "nombre": "23CL00334",
+      "municipio": "GUSTAVO A. MADERO",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "23CL00334-5-sorteo-3"
+    },
+    {
+      "clave": "23CL04027",
+      "nombre": "23CL04027",
+      "municipio": "CUAUTITLÁN IZCALLI",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "23CL04027-1-sorteo-3"
+    },
+    {
+      "clave": "24CL00806",
+      "nombre": "24CL00806",
+      "municipio": "CUERNAVACA",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "24CL00806-10-sorteo-3"
+    },
+    {
+      "clave": "25CL01976D0C",
+      "nombre": "25CL01976D0C",
+      "municipio": "TOLUCA",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "25CL01976D0C-2-sorteo-3"
+    },
+    {
+      "clave": "25CL07403B9A",
+      "nombre": "25CL07403B9A",
+      "municipio": "QUERÉTARO",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "25CL07403B9A-2-sorteo-3"
+    },
+    {
+      "clave": "25CL02736025",
+      "nombre": "25CL02736025",
+      "municipio": "NULL",
+      "liga": "Pro",
+      "kit": "KIT ELITE",
+      "ticket": "25CL02736025-3-sorteo-3"
+    },
+    {
+      "clave": "19CL001465S1",
+      "nombre": "19CL001465S1",
+      "municipio": "NAUCALPAN DE JUÁREZ",
+      "liga": "Elite",
+      "kit": "KIT BÁSICO",
+      "ticket": "19CL001465S1-5-sorteo-3"
+    },
+    {
+      "clave": "22CL08129DTH",
+      "nombre": "22CL08129DTH",
+      "municipio": "TIZAYUCA",
+      "liga": "Elite",
+      "kit": "KIT BÁSICO",
+      "ticket": "22CL08129DTH-16-sorteo-3"
+    },
+    {
+      "clave": "24CL0105877D",
+      "nombre": "24CL0105877D",
+      "municipio": "TLALPAN",
+      "liga": "Elite",
+      "kit": "KIT BÁSICO",
+      "ticket": "24CL0105877D-4-sorteo-3"
+    },
+    {
+      "clave": "19CL00246SD1",
+      "nombre": "19CL00246SD1",
+      "municipio": "TEOTIHUACÁN",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL00246SD1-22-sorteo-3"
+    },
+    {
+      "clave": "19CL00724",
+      "nombre": "19CL00724",
+      "municipio": "GUSTAVO A. MADERO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL00724-3-sorteo-3"
+    },
+    {
+      "clave": "19CL00986AIW",
+      "nombre": "19CL00986AIW",
+      "municipio": "TULANCINGO DE BRAVO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL00986AIW-3-sorteo-3"
+    },
+    {
+      "clave": "19CL01564",
+      "nombre": "19CL01564",
+      "municipio": "GUSTAVO A. MADERO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL01564-3-sorteo-3"
+    },
+    {
+      "clave": "19CL02723",
+      "nombre": "19CL02723",
+      "municipio": "TLALNEPANTLA DE BAZ",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL02723-5-sorteo-3"
+    },
+    {
+      "clave": "19CL04832SDV",
+      "nombre": "19CL04832SDV",
+      "municipio": "ZUMPANGO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "19CL04832SDV-3-sorteo-3"
+    },
+    {
+      "clave": "20CL08534517",
+      "nombre": "20CL08534517",
+      "municipio": "IXMIQUILPAN",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "20CL08534517-6-sorteo-3"
+    },
+    {
+      "clave": "21CL14896",
+      "nombre": "21CL14896",
+      "municipio": "COACALCO DE BERRIOZÁBAL",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "21CL14896-1-sorteo-3"
+    },
+    {
+      "clave": "21CL15577BC8",
+      "nombre": "21CL15577BC8",
+      "municipio": "LA MAGDALENA CONTRERAS",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "21CL15577BC8-4-sorteo-3"
+    },
+    {
+      "clave": "21CL15829POQ",
+      "nombre": "21CL15829POQ",
+      "municipio": "ECATEPEC DE MORELOS",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "21CL15829POQ-4-sorteo-3"
+    },
+    {
+      "clave": "21CL16240",
+      "nombre": "21CL16240",
+      "municipio": "ATIZAPÁN DE ZARAGOZA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "21CL16240-3-sorteo-3"
+    },
+    {
+      "clave": "21CL17190S9H",
+      "nombre": "21CL17190S9H",
+      "municipio": "NICOLÁS ROMERO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "21CL17190S9H-9-sorteo-3"
+    },
+    {
+      "clave": "22CL01211",
+      "nombre": "22CL01211",
+      "municipio": "NICOLÁS ROMERO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "22CL01211-6-sorteo-3"
+    },
+    {
+      "clave": "22CL04111D47",
+      "nombre": "22CL04111D47",
+      "municipio": "GUSTAVO A. MADERO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "22CL04111D47-21-sorteo-3"
+    },
+    {
+      "clave": "22CL06838HER",
+      "nombre": "22CL06838HER",
+      "municipio": "TLALNEPANTLA DE BAZ",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "22CL06838HER-10-sorteo-3"
+    },
+    {
+      "clave": "23CL01425",
+      "nombre": "23CL01425",
+      "municipio": "GUSTAVO A. MADERO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "23CL01425-3-sorteo-3"
+    },
+    {
+      "clave": "23CL06461",
+      "nombre": "23CL06461",
+      "municipio": "MELCHOR OCAMPO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "23CL06461-4-sorteo-3"
+    },
+    {
+      "clave": "23CL07247",
+      "nombre": "23CL07247",
+      "municipio": "BENITO JUÁREZ",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "23CL07247-9-sorteo-3"
+    },
+    {
+      "clave": "24CL01125SC3",
+      "nombre": "24CL01125SC3",
+      "municipio": "QUERÉTARO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "24CL01125SC3-8-sorteo-3"
+    },
+    {
+      "clave": "24CL05292D18",
+      "nombre": "24CL05292D18",
+      "municipio": "PUEBLA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "24CL05292D18-18-sorteo-3"
+    },
+    {
+      "clave": "24CL06334F72",
+      "nombre": "24CL06334F72",
+      "municipio": "ECATEPEC DE MORELOS",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "24CL06334F72-3-sorteo-3"
+    },
+    {
+      "clave": "24CL04489237",
+      "nombre": "24CL04489237",
+      "municipio": "PACHUCA DE SOTO",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "24CL04489237-3-sorteo-3"
+    },
+    {
+      "clave": "25CL01035D3D",
+      "nombre": "25CL01035D3D",
+      "municipio": "TLAXCALA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "25CL01035D3D-8-sorteo-3"
+    },
+    {
+      "clave": "25CL06322B34",
+      "nombre": "25CL06322B34",
+      "municipio": "HEROICA CIUDAD DE JUCHITÁN DE ZARAGOZA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "25CL06322B34-4-sorteo-3"
+    },
+    {
+      "clave": "25CL0102667F",
+      "nombre": "25CL0102667F",
+      "municipio": "TLAXCALA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "25CL0102667F-13-sorteo-3"
+    },
+    {
+      "clave": "25CL0124556B",
+      "nombre": "25CL0124556B",
+      "municipio": "IXMIQUILPAN",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "25CL0124556B-6-sorteo-3"
+    },
+    {
+      "clave": "25CL0653347F",
+      "nombre": "25CL0653347F",
+      "municipio": "ATOTONILCO DE TULA",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "25CL0653347F-7-sorteo-3"
+    },
+    {
+      "clave": "26CL01075302",
+      "nombre": "26CL01075302",
+      "municipio": "LA MAGDALENA CONTRERAS",
+      "liga": "Elite",
+      "kit": "KIT PRO",
+      "ticket": "26CL01075302-22-sorteo-3"
+    },
+    {
+      "clave": "19CL00358",
+      "nombre": "19CL00358",
+      "municipio": "TLALNEPANTLA DE BAZ",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL00358-1-sorteo-3"
+    },
+    {
+      "clave": "19CL00862SC1",
+      "nombre": "19CL00862SC1",
+      "municipio": "PACHUCA DE SOTO",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL00862SC1-1-sorteo-3"
+    },
+    {
+      "clave": "19CL02689",
+      "nombre": "19CL02689",
+      "municipio": "GUSTAVO A. MADERO",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL02689-4-sorteo-3"
+    },
+    {
+      "clave": "19CL02784",
+      "nombre": "19CL02784",
+      "municipio": "ECATEPEC DE MORELOS",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL02784-4-sorteo-3"
+    },
+    {
+      "clave": "19CL03144XTC",
+      "nombre": "19CL03144XTC",
+      "municipio": "NICOLÁS ROMERO",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL03144XTC-16-sorteo-3"
+    },
+    {
+      "clave": "19CL04113SET",
+      "nombre": "19CL04113SET",
+      "municipio": "TULA DE ALLENDE",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL04113SET-4-sorteo-3"
+    },
+    {
+      "clave": "19CL04253SG4",
+      "nombre": "19CL04253SG4",
+      "municipio": "ECATEPEC DE MORELOS",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL04253SG4-6-sorteo-3"
+    },
+    {
+      "clave": "19CL05020DZV",
+      "nombre": "19CL05020DZV",
+      "municipio": "MILPA ALTA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL05020DZV-1-sorteo-3"
+    },
+    {
+      "clave": "19CL05339",
+      "nombre": "19CL05339",
+      "municipio": "NAUCALPAN DE JUÁREZ",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL05339-3-sorteo-3"
+    },
+    {
+      "clave": "19CL05710",
+      "nombre": "19CL05710",
+      "municipio": "CHIMALHUACÁN",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "19CL05710-17-sorteo-3"
+    },
+    {
+      "clave": "20CL085096T1",
+      "nombre": "20CL085096T1",
+      "municipio": "XOCHIMILCO",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "20CL085096T1-4-sorteo-3"
+    },
+    {
+      "clave": "21CL12192",
+      "nombre": "21CL12192",
+      "municipio": "CÓRDOBA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "21CL12192-2-sorteo-3"
+    },
+    {
+      "clave": "21CL13205",
+      "nombre": "21CL13205",
+      "municipio": "LEÓN",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "21CL13205-11-sorteo-3"
+    },
+    {
+      "clave": "21CL16322",
+      "nombre": "21CL16322",
+      "municipio": "CUAUTITLÁN IZCALLI",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "21CL16322-15-sorteo-3"
+    },
+    {
+      "clave": "21CL17298",
+      "nombre": "21CL17298",
+      "municipio": "IZTAPALAPA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "21CL17298-5-sorteo-3"
+    },
+    {
+      "clave": "22CL02720F4R",
+      "nombre": "22CL02720F4R",
+      "municipio": "IXTAPALUCA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "22CL02720F4R-5-sorteo-3"
+    },
+    {
+      "clave": "23CL00467KTZ",
+      "nombre": "23CL00467KTZ",
+      "municipio": "VENUSTIANO CARRANZA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "23CL00467KTZ-10-sorteo-3"
+    },
+    {
+      "clave": "23CL06933",
+      "nombre": "23CL06933",
+      "municipio": "NEZAHUALCÓYOTL",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "23CL06933-3-sorteo-3"
+    },
+    {
+      "clave": "25CL05096453",
+      "nombre": "25CL05096453",
+      "municipio": "PUEBLA",
+      "liga": "Elite",
+      "kit": "KIT ELITE",
+      "ticket": "25CL05096453-4-sorteo-3"
+    },
+    {
+      "clave": "20CB07072FFR",
+      "nombre": "20CB07072FFR",
+      "municipio": "PUEBLA",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "20CB07072FFR-68-sorteo-3"
+    },
+    {
+      "clave": "23CB07521JN3",
+      "nombre": "23CB07521JN3",
+      "municipio": "ECATEPEC DE MORELOS",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "23CB07521JN3-3-sorteo-3"
+    },
+    {
+      "clave": "25CB06613AB2",
+      "nombre": "25CB06613AB2",
+      "municipio": "VERACRUZ",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CB06613AB2-1-sorteo-3"
+    },
+    {
+      "clave": "25CB041048D9",
+      "nombre": "25CB041048D9",
+      "municipio": "ECATEPEC DE MORELOS",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "25CB041048D9-2-sorteo-3"
+    },
+    {
+      "clave": "26CB00983DEA",
+      "nombre": "26CB00983DEA",
+      "municipio": "PUEBLA",
+      "liga": "Cambaceo",
+      "kit": "KIT BÁSICO",
+      "ticket": "26CB00983DEA-1-sorteo-3"
+    },
+    {
+      "clave": "19CB03191SCV",
+      "nombre": "19CB03191SCV",
+      "municipio": "ECATEPEC DE MORELOS",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "19CB03191SCV-3-sorteo-3"
+    },
+    {
+      "clave": "21CB17059L20",
+      "nombre": "21CB17059L20",
+      "municipio": "TULTITLÁN",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "21CB17059L20-5-sorteo-3"
+    },
+    {
+      "clave": "22CB06012",
+      "nombre": "22CB06012",
+      "municipio": "XOXOCOTLA",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "22CB06012-1-sorteo-3"
+    },
+    {
+      "clave": "22CB06923",
+      "nombre": "22CB06923",
+      "municipio": "HUITZILAC",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "22CB06923-4-sorteo-3"
+    },
+    {
+      "clave": "22CB08891",
+      "nombre": "22CB08891",
+      "municipio": "JOJUTLA",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "22CB08891-2-sorteo-3"
+    },
+    {
+      "clave": "23CB07034",
+      "nombre": "23CB07034",
+      "municipio": "CULIACÁN",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "23CB07034-2-sorteo-3"
+    },
+    {
+      "clave": "24CB00717",
+      "nombre": "24CB00717",
+      "municipio": "CUERNAVACA",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "24CB00717-1-sorteo-3"
+    },
+    {
+      "clave": "25CB00214E38",
+      "nombre": "25CB00214E38",
+      "municipio": "APIZACO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB00214E38-8-sorteo-3"
+    },
+    {
+      "clave": "25CB01697EBC",
+      "nombre": "25CB01697EBC",
+      "municipio": "MARTÍNEZ DE LA TORRE",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB01697EBC-1-sorteo-3"
+    },
+    {
+      "clave": "25CB01735CB0",
+      "nombre": "25CB01735CB0",
+      "municipio": "SANTA ANA ZEGACHE",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB01735CB0-2-sorteo-3"
+    },
+    {
+      "clave": "25CB04862CF9",
+      "nombre": "25CB04862CF9",
+      "municipio": "SAN PEDRO TLAQUEPAQUE",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB04862CF9-2-sorteo-3"
+    },
+    {
+      "clave": "25CB05874B5D",
+      "nombre": "25CB05874B5D",
+      "municipio": "COACALCO DE BERRIOZÁBAL",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB05874B5D-4-sorteo-3"
+    },
+    {
+      "clave": "25CB06163F11",
+      "nombre": "25CB06163F11",
+      "municipio": "CUAUTITLÁN",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB06163F11-2-sorteo-3"
+    },
+    {
+      "clave": "25CB0259920F",
+      "nombre": "25CB0259920F",
+      "municipio": "APIZACO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB0259920F-1-sorteo-3"
+    },
+    {
+      "clave": "25CB00536248",
+      "nombre": "25CB00536248",
+      "municipio": "APIZACO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB00536248-7-sorteo-3"
+    },
+    {
+      "clave": "25CB01141287",
+      "nombre": "25CB01141287",
+      "municipio": "CUERNAVACA",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB01141287-2-sorteo-3"
+    },
+    {
+      "clave": "25CB05861983",
+      "nombre": "25CB05861983",
+      "municipio": "POZA RICA DE HIDALGO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "25CB05861983-5-sorteo-3"
+    },
+    {
+      "clave": "26CB00299B82",
+      "nombre": "26CB00299B82",
+      "municipio": "PUEBLA",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "26CB00299B82-1-sorteo-3"
+    },
+    {
+      "clave": "26CB009643C9",
+      "nombre": "26CB009643C9",
+      "municipio": "IRAPUATO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "26CB009643C9-2-sorteo-3"
+    },
+    {
+      "clave": "26CB0212930F",
+      "nombre": "26CB0212930F",
+      "municipio": "POZA RICA DE HIDALGO",
+      "liga": "Cambaceo",
+      "kit": "KIT PRO",
+      "ticket": "26CB0212930F-3-sorteo-3"
+    },
+    {
+      "clave": "22CB04911",
+      "nombre": "22CB04911",
+      "municipio": "MORELIA",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "22CB04911-1-sorteo-3"
+    },
+    {
+      "clave": "23CB07523EXE",
+      "nombre": "23CB07523EXE",
+      "municipio": "TEHUACÁN",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "23CB07523EXE-2-sorteo-3"
+    },
+    {
+      "clave": "23CB08085",
+      "nombre": "23CB08085",
+      "municipio": "LEÓN",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "23CB08085-3-sorteo-3"
+    },
+    {
+      "clave": "24CB0680163C",
+      "nombre": "24CB0680163C",
+      "municipio": "PUEBLA",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "24CB0680163C-1-sorteo-3"
+    },
+    {
+      "clave": "24CL072359CB",
+      "nombre": "24CL072359CB",
+      "municipio": "NAUCALPAN DE JUÁREZ",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "24CL072359CB-1-sorteo-3"
+    },
+    {
+      "clave": "25CB07248420",
+      "nombre": "25CB07248420",
+      "municipio": "CENTRO",
+      "liga": "Cambaceo",
+      "kit": "KIT ELITE",
+      "ticket": "25CB07248420-11-sorteo-3"
+    }
+  ]
+}
