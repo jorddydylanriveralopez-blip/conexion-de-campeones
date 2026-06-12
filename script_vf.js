@@ -1610,7 +1610,6 @@ inputPass.addEventListener('keypress', function (event) {
 });
 function cerrarSorteador() {
     if (confirm('¿Es seguro de cerrar el evento en vivo? Se perderá el progreso no guardado.')) {
-        detenerComentariosLive();
         detenerMusicaSorteo();
         sorterModal.style.display = 'none';
         location.reload();
@@ -1939,7 +1938,6 @@ async function iniciarSorteador() {
     detenerMusicaSorteo();
     actualizarBienvenidaSorteador();
     showSorterScreen('welcome');
-    iniciarComentariosLive();
     if (!ganadoresPreviosCargados && SORTEO_NUMERO_ACTUAL > 1) {
         await cargarGanadoresSorteosPrevios();
     }
@@ -1950,155 +1948,6 @@ function actualizarBienvenidaSorteador() {
     const fechaEl = document.getElementById('sorter-welcome-fecha');
     if (sorteoEl) sorteoEl.textContent = etiquetaOrdinalSorteo(SORTEO_NUMERO_ACTUAL);
     if (fechaEl && sorteoVigente) fechaEl.textContent = sorteoVigente.label;
-}
-
-const SORTEO_LIVE_COMENTARIOS = [
-    { nombre: 'Carlos M.', texto: '¡Llegué al live de Facebook, vamos YAAVS! 🔥' },
-    { nombre: 'Ana R.', texto: 'Este live del sorteo va a estar épico 💪' },
-    { nombre: 'Luis G.', texto: 'Saludos desde el live, suerte campeones ⚽' },
-    { nombre: 'María P.', texto: '¡Por fin el 3.er sorteo en Facebook Live!' },
-    { nombre: 'Roberto S.', texto: 'Viendo desde Guadalajara en el live 🙌' },
-    { nombre: 'Diana L.', texto: 'Compartí el live con mi equipo, ¡ánimo!' },
-    { nombre: 'Jorge H.', texto: 'Ya estoy en el live con mi boleto listo 🎟️' },
-    { nombre: 'Patricia V.', texto: '¡Qué emoción este Facebook Live!' },
-    { nombre: 'Fernando T.', texto: 'El live de Conexión de Campeones es lo máximo 🔥' },
-    { nombre: 'Sofía N.', texto: 'Saludos a todos los del live de Liga Pro' },
-    { nombre: 'Miguel A.', texto: 'Hoy se gana, lo decía en el chat del live 💚' },
-    { nombre: 'Laura C.', texto: 'Viendo el live en familia 👨‍👩‍👧' },
-    { nombre: 'Ricardo B.', texto: '¡Dale, ya quiero ver ganadores en el live!' },
-    { nombre: 'Elena D.', texto: 'El live se ve súper fluido en Facebook 👏' },
-    { nombre: 'Héctor F.', texto: '¡Vamos Ascenso! Saludos desde el live 🚀' },
-    { nombre: 'Claudia J.', texto: 'Vi los sorteos pasados, hoy toca en este live' },
-    { nombre: 'Óscar W.', texto: '¡EN VIVO en Facebook y con todo! 🎉' },
-    { nombre: 'Verónica K.', texto: 'Suerte campeones, los sigo en el live' },
-];
-const SORTEO_LIVE_AVATAR_CACHE = new Map();
-let comentariosLiveTimer = null;
-let viewersLiveTimer = null;
-let ultimoComentarioLiveIdx = -1;
-let liveViewersCount = 0;
-
-function hashNombreLive(nombre) {
-    let hash = 0;
-    for (let i = 0; i < nombre.length; i++) {
-        hash = nombre.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return Math.abs(hash);
-}
-
-function avatarUrlParaNombre(nombre) {
-    if (SORTEO_LIVE_AVATAR_CACHE.has(nombre)) return SORTEO_LIVE_AVATAR_CACHE.get(nombre);
-    const id = (hashNombreLive(nombre) % 70) + 1;
-    const url = `https://i.pravatar.cc/64?img=${id}`;
-    SORTEO_LIVE_AVATAR_CACHE.set(nombre, url);
-    return url;
-}
-
-function formatearViewersLive(n) {
-    if (n >= 1000) return `${(n / 1000).toFixed(1).replace('.0', '')}K viendo`;
-    return `${n} viendo`;
-}
-
-function pintarViewersLive() {
-    const viewersEl = document.getElementById('sorter-live-viewers');
-    if (!viewersEl) return;
-    viewersEl.textContent = formatearViewersLive(liveViewersCount);
-    viewersEl.classList.remove('is-ticking');
-    void viewersEl.offsetWidth;
-    viewersEl.classList.add('is-ticking');
-}
-
-function fluctuarViewersLive() {
-    const delta = Math.floor(Math.random() * 19) - 6;
-    liveViewersCount = Math.max(892, Math.min(1680, liveViewersCount + delta));
-    pintarViewersLive();
-}
-
-function iniciarViewersLive() {
-    detenerViewersLive();
-    liveViewersCount = 940 + Math.floor(Math.random() * 280);
-    pintarViewersLive();
-    const programarFluctuacion = () => {
-        viewersLiveTimer = setTimeout(() => {
-            fluctuarViewersLive();
-            programarFluctuacion();
-        }, 1800 + Math.random() * 2800);
-    };
-    programarFluctuacion();
-}
-
-function detenerViewersLive() {
-    if (viewersLiveTimer) {
-        clearTimeout(viewersLiveTimer);
-        viewersLiveTimer = null;
-    }
-}
-
-function iniciarComentariosLive() {
-    detenerComentariosLive();
-    const overlay = document.getElementById('sorter-live-overlay');
-    const panel = document.getElementById('sorter-live-comments');
-    if (!overlay || !panel) return;
-
-    overlay.classList.add('visible');
-    overlay.setAttribute('aria-hidden', 'false');
-    panel.innerHTML = '';
-    ultimoComentarioLiveIdx = -1;
-    iniciarViewersLive();
-
-    for (let i = 0; i < 11; i++) agregarComentarioLive(panel);
-
-    const programarSiguiente = () => {
-        comentariosLiveTimer = setTimeout(() => {
-            agregarComentarioLive(panel);
-            programarSiguiente();
-        }, 1600 + Math.random() * 2000);
-    };
-    programarSiguiente();
-}
-
-function detenerComentariosLive() {
-    if (comentariosLiveTimer) {
-        clearTimeout(comentariosLiveTimer);
-        comentariosLiveTimer = null;
-    }
-    detenerViewersLive();
-    const overlay = document.getElementById('sorter-live-overlay');
-    if (overlay) {
-        overlay.classList.remove('visible');
-        overlay.setAttribute('aria-hidden', 'true');
-    }
-    const panel = document.getElementById('sorter-live-comments');
-    if (panel) panel.innerHTML = '';
-}
-
-function agregarComentarioLive(panel) {
-    let idx;
-    do {
-        idx = Math.floor(Math.random() * SORTEO_LIVE_COMENTARIOS.length);
-    } while (idx === ultimoComentarioLiveIdx && SORTEO_LIVE_COMENTARIOS.length > 1);
-    ultimoComentarioLiveIdx = idx;
-
-    const item = SORTEO_LIVE_COMENTARIOS[idx];
-    const avatarUrl = avatarUrlParaNombre(item.nombre);
-    const el = document.createElement('div');
-    el.className = 'sorter-live-comment';
-    el.innerHTML = `
-        <img class="sorter-live-comment__avatar" src="${avatarUrl}" alt="" width="32" height="32" loading="lazy" decoding="async">
-        <div class="sorter-live-comment__pill">
-            <span class="sorter-live-comment__name">${item.nombre}</span>
-            <span class="sorter-live-comment__text">${item.texto}</span>
-        </div>
-    `;
-    const img = el.querySelector('.sorter-live-comment__avatar');
-    if (img) {
-        img.addEventListener('error', () => {
-            const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(item.nombre)}&background=1877f2&color=fff&size=64`;
-            img.src = fallback;
-        }, { once: true });
-    }
-    panel.appendChild(el);
-    while (panel.children.length > 18) panel.removeChild(panel.firstChild);
 }
 
 window.addEventListener('keydown', (e) => {
