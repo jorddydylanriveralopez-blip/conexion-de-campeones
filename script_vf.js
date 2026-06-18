@@ -165,7 +165,7 @@ function crearSlideGanadorHTML(g, fotoSrc) {
             ? `<span class="cromo-sticker__num" aria-hidden="true">${numero}</span>`
             : '';
         return `
-            <div class="cromo-reveal" tabindex="0"
+            <div class="cromo-showcase" tabindex="0"
                 data-nombre="${nombreToast}"
                 data-msg="${msgToast}"
                 data-img="${escaparHtmlCarrusel(src)}"
@@ -173,23 +173,25 @@ function crearSlideGanadorHTML(g, fotoSrc) {
                 data-sello="${sello}"
                 data-numero="${numero}"
                 data-alt="${alt}">
-                <div class="cromo-pack">
-                    <div class="cromo-pack__shine" aria-hidden="true"></div>
-                    <div class="cromo-pack__flap cromo-pack__flap--top" aria-hidden="true"></div>
-                    <div class="cromo-pack__flap cromo-pack__flap--left" aria-hidden="true"></div>
-                    <div class="cromo-pack__flap cromo-pack__flap--right" aria-hidden="true"></div>
-                    <div class="cromo-pack__seal" aria-hidden="true"><i class="fa-solid fa-futbol"></i></div>
-                    <article class="carrusel-ganadores__card carrusel-ganadores__card--poster cromo-sticker cromo-sticker--${variante}">
-                        <span class="cromo-sticker__sello" aria-hidden="true">${sello}</span>
-                        ${numHtml}
-                        <div class="cromo-sticker__frame">
-                            <img src="${escaparHtmlCarrusel(src)}" alt="${alt}" class="carrusel-ganadores__img" loading="lazy" decoding="async">
+                <span class="cromo-showcase__spotlight" aria-hidden="true"></span>
+                <span class="cromo-showcase__beam" aria-hidden="true"></span>
+                <article class="carrusel-ganadores__card carrusel-ganadores__card--poster cromo-sticker cromo-sticker--${variante}">
+                    <span class="cromo-sticker__sello" aria-hidden="true">${sello}</span>
+                    ${numHtml}
+                    <div class="cromo-sticker__frame">
+                        <img src="${escaparHtmlCarrusel(src)}" alt="${alt}" class="carrusel-ganadores__img" loading="lazy" decoding="async">
+                    </div>
+                    <span class="cromo-sticker__holo" aria-hidden="true"></span>
+                    <span class="cromo-sticker__sparkles" aria-hidden="true"></span>
+                    <span class="cromo-sticker__perforacion" aria-hidden="true"></span>
+                    <div class="cromo-showcase__caption">
+                        <h3 class="cromo-showcase__nombre">${nombreToast}</h3>
+                        <div class="cromo-showcase__meta">
+                            <span>${escaparHtmlCarrusel(g.liga || 'Liga')}</span>
+                            <span>${escaparHtmlCarrusel(g.kit || 'Kit')}</span>
                         </div>
-                        <span class="cromo-sticker__holo" aria-hidden="true"></span>
-                        <span class="cromo-sticker__sparkles" aria-hidden="true"></span>
-                        <span class="cromo-sticker__perforacion" aria-hidden="true"></span>
-                    </article>
-                </div>
+                    </div>
+                </article>
             </div>
         `;
     }
@@ -226,6 +228,24 @@ function aplicarFiltroCarruselGanadores() {
     renderCarruselGanadores();
 }
 
+function carruselEsShowcase() {
+    return document.getElementById('carrusel-ganadores')?.classList.contains('carrusel-ganadores--showcase');
+}
+
+function aplicarClasesCoverflow(slideEls, activo, total) {
+    slideEls.forEach((el, i) => {
+        el.classList.remove('is-center', 'is-left', 'is-right', 'is-far');
+        let d = i - activo;
+        if (d > total / 2) d -= total;
+        if (d < -total / 2) d += total;
+        if (d === 0) el.classList.add('is-center');
+        else if (d === -1) el.classList.add('is-left');
+        else if (d === 1) el.classList.add('is-right');
+        else el.classList.add('is-far');
+        el.setAttribute('aria-hidden', Math.abs(d) > 2 ? 'true' : 'false');
+    });
+}
+
 function renderCarruselGanadores() {
     const track = document.getElementById('carrusel-ganadores-track');
     const dots = document.getElementById('carrusel-ganadores-dots');
@@ -234,7 +254,8 @@ function renderCarruselGanadores() {
     if (!track || !dots) return;
 
     const { filtrados } = carruselGanadoresState;
-    carruselGanadoresState.porVista = carruselGanadoresPorVista();
+    const showcase = carruselEsShowcase();
+    carruselGanadoresState.porVista = showcase ? 1 : carruselGanadoresPorVista();
 
     if (!filtrados.length) {
         if (loader) {
@@ -250,33 +271,47 @@ function renderCarruselGanadores() {
     if (loader) loader.style.display = 'none';
     if (stage) stage.style.display = '';
 
-    track.innerHTML = filtrados
-        .map(
-            (g, i) =>
-                `<div class="carrusel-ganadores__slide cromo-tilt-${(i % 5) + 1}">${crearSlideGanadorHTML(g, g.foto)}</div>`,
-        )
-        .join('');
-
-    const maxIndice = Math.max(0, filtrados.length - carruselGanadoresState.porVista);
-    if (carruselGanadoresState.indice > maxIndice) {
+    if (showcase && carruselGanadoresState.indice >= filtrados.length) {
         carruselGanadoresState.indice = 0;
     }
 
-    const pct = (100 / carruselGanadoresState.porVista) * carruselGanadoresState.indice;
-    track.style.transform = `translateX(-${pct}%)`;
+    track.innerHTML = filtrados
+        .map((g, i) => {
+            const tilt = showcase ? '' : ` cromo-tilt-${(i % 5) + 1}`;
+            return `<div class="carrusel-ganadores__slide${tilt}">${crearSlideGanadorHTML(g, g.foto)}</div>`;
+        })
+        .join('');
 
     const slideEls = track.querySelectorAll('.carrusel-ganadores__slide');
-    slideEls.forEach((el, i) => {
-        el.classList.toggle('is-center', i === carruselGanadoresState.indice + Math.floor(carruselGanadoresState.porVista / 2));
-    });
 
-    const totalDots = maxIndice + 1;
+    if (showcase) {
+        aplicarClasesCoverflow(slideEls, carruselGanadoresState.indice, filtrados.length);
+        const slide = slideEls[0];
+        const gap = slide ? parseFloat(getComputedStyle(track).gap) || 20 : 20;
+        const slideW = slide?.offsetWidth || 280;
+        track.style.transform = `translateX(calc(50% - ${carruselGanadoresState.indice * (slideW + gap) + slideW / 2}px))`;
+    } else {
+        const maxIndice = Math.max(0, filtrados.length - carruselGanadoresState.porVista);
+        if (carruselGanadoresState.indice > maxIndice) {
+            carruselGanadoresState.indice = 0;
+        }
+        const pct = (100 / carruselGanadoresState.porVista) * carruselGanadoresState.indice;
+        track.style.transform = `translateX(-${pct}%)`;
+        slideEls.forEach((el, i) => {
+            el.classList.toggle(
+                'is-center',
+                i === carruselGanadoresState.indice + Math.floor(carruselGanadoresState.porVista / 2),
+            );
+        });
+    }
+
+    const totalDots = showcase ? filtrados.length : Math.max(0, filtrados.length - carruselGanadoresState.porVista) + 1;
     dots.innerHTML = '';
     for (let i = 0; i < totalDots; i++) {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = `carrusel-ganadores__dot${i === carruselGanadoresState.indice ? ' active' : ''}`;
-        btn.setAttribute('aria-label', `Ir al grupo ${i + 1}`);
+        btn.setAttribute('aria-label', showcase ? `Ver cromo ${i + 1}` : `Ir al grupo ${i + 1}`);
         btn.addEventListener('click', () => {
             carruselGanadoresState.indice = i;
             renderCarruselGanadores();
@@ -285,7 +320,11 @@ function renderCarruselGanadores() {
         dots.appendChild(btn);
     }
 
-    enlazarRevealCromos(track);
+    if (showcase) {
+        enlazarCromosShowcase(track);
+    } else {
+        enlazarRevealCromos(track);
+    }
 }
 
 const CROMO_REVEAL_TIMERS = new WeakMap();
@@ -421,6 +460,28 @@ function initCromoModalGlobal() {
     });
 }
 
+function enlazarCromosShowcase(track) {
+    initCromoModalGlobal();
+    track.querySelectorAll('.cromo-showcase').forEach((el) => {
+        if (el.dataset.showcaseListo === '1') return;
+        el.dataset.showcaseListo = '1';
+
+        const abrir = () => {
+            pausarAutoCarruselGanadores();
+            marcarCromoAlbumVisto();
+            abrirCromoModalDesdeReveal(el);
+        };
+
+        el.addEventListener('click', abrir);
+        el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                abrir();
+            }
+        });
+    });
+}
+
 function enlazarRevealCromos(track) {
     initCromoModalGlobal();
     const hoverFine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -499,10 +560,17 @@ function enlazarRevealCromos(track) {
 }
 
 function moverCarruselGanadores(delta) {
-    const maxIndice = Math.max(0, carruselGanadoresState.filtrados.length - carruselGanadoresState.porVista);
-    carruselGanadoresState.indice += delta;
-    if (carruselGanadoresState.indice > maxIndice) carruselGanadoresState.indice = 0;
-    if (carruselGanadoresState.indice < 0) carruselGanadoresState.indice = maxIndice;
+    const { filtrados } = carruselGanadoresState;
+    if (!filtrados.length) return;
+
+    if (carruselEsShowcase()) {
+        carruselGanadoresState.indice = (carruselGanadoresState.indice + delta + filtrados.length) % filtrados.length;
+    } else {
+        const maxIndice = Math.max(0, filtrados.length - carruselGanadoresState.porVista);
+        carruselGanadoresState.indice += delta;
+        if (carruselGanadoresState.indice > maxIndice) carruselGanadoresState.indice = 0;
+        if (carruselGanadoresState.indice < 0) carruselGanadoresState.indice = maxIndice;
+    }
     renderCarruselGanadores();
 }
 

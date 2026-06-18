@@ -707,6 +707,256 @@ body.futbol-minigame-open { overflow: hidden; }
 .carrusel-ganadores__slide.cromo-tilt-5 { --cromo-rot: -1deg; }
 .carrusel-ganadores__slide.is-center { --cromo-rot: 0deg; }
 
+/* —— Carrusel showcase 3D (sin sobres) —— */
+.carrusel-ganadores--showcase {
+    position: relative;
+    width: 100vw;
+    max-width: 100vw;
+    margin: 56px calc(50% - 50vw) 20px;
+    padding: clamp(28px, 4vw, 48px) clamp(8px, 2vw, 32px) clamp(24px, 3vw, 40px);
+    box-sizing: border-box;
+    background:
+        radial-gradient(ellipse 90% 70% at 50% 0%, rgba(34, 255, 94, 0.22), transparent 62%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(212, 175, 55, 0.12), transparent 55%),
+        linear-gradient(180deg, rgba(2, 18, 10, 0.92) 0%, rgba(1, 8, 16, 0.96) 100%);
+    border-top: 1px solid rgba(212, 175, 55, 0.25);
+    border-bottom: 1px solid rgba(34, 255, 94, 0.2);
+    overflow: hidden;
+}
+.carrusel-ganadores--showcase::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 80px,
+            rgba(34, 255, 94, 0.03) 80px,
+            rgba(34, 255, 94, 0.03) 81px
+        );
+    pointer-events: none;
+    opacity: 0.6;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__header {
+    position: relative;
+    z-index: 2;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__eyebrow {
+    background: linear-gradient(135deg, #d4af37, #1a472a);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__titulo {
+    color: #fff;
+    text-shadow: 0 2px 0 #1a472a, 0 0 32px rgba(212, 175, 55, 0.5);
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__stage {
+    padding: 0 clamp(52px, 6vw, 72px);
+    max-width: min(1280px, 100%);
+    margin: 0 auto;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__viewport {
+    perspective: 1400px;
+    perspective-origin: 50% 42%;
+    overflow: visible;
+    min-height: clamp(420px, 52vh, 560px);
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__viewport::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    width: min(420px, 70vw);
+    height: 40px;
+    margin-left: calc(min(420px, 70vw) / -2);
+    background: radial-gradient(ellipse, rgba(34, 255, 94, 0.35), transparent 70%);
+    filter: blur(12px);
+    pointer-events: none;
+    z-index: 0;
+    animation: showcaseFloorPulse 3s ease-in-out infinite alternate;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__track {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 28px);
+    padding: clamp(20px, 3vw, 36px) 0;
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__slide {
+    flex: 0 0 min(280px, 72vw);
+    width: min(280px, 72vw);
+    padding: 0;
+    transform-style: preserve-3d;
+    transition:
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.55s ease,
+        filter 0.55s ease;
+    transform: scale(0.72) rotateY(14deg) translateZ(-80px);
+    opacity: 0.25;
+    filter: brightness(0.65) saturate(0.8);
+    z-index: 1;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__slide.is-left {
+    transform: scale(0.86) rotateY(22deg) translateZ(-20px) translateX(6%);
+    opacity: 0.62;
+    filter: brightness(0.85);
+    z-index: 2;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__slide.is-right {
+    transform: scale(0.86) rotateY(-22deg) translateZ(-20px) translateX(-6%);
+    opacity: 0.62;
+    filter: brightness(0.85);
+    z-index: 2;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__slide.is-center {
+    transform: scale(1.06) rotateY(0deg) translateZ(40px) translateY(-14px);
+    opacity: 1;
+    filter: none;
+    z-index: 4;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__slide.is-far {
+    transform: scale(0.6) rotateY(0deg) translateZ(-120px);
+    opacity: 0.12;
+    filter: blur(1px) brightness(0.5);
+    z-index: 0;
+}
+.carrusel-ganadores--showcase .cromo-showcase {
+    position: relative;
+    display: block;
+    height: 100%;
+    cursor: pointer;
+    outline: none;
+}
+.carrusel-ganadores--showcase .cromo-showcase__spotlight {
+    position: absolute;
+    inset: -20% -10%;
+    background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.14), transparent 55%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 0;
+}
+.carrusel-ganadores--showcase .cromo-showcase__beam {
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    width: 120px;
+    height: 160%;
+    margin-left: -60px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 70%);
+    transform: rotate(8deg);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 0;
+    transition: opacity 0.5s;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__slide.is-center .cromo-showcase__spotlight,
+.carrusel-ganadores--showcase .carrusel-ganadores__slide.is-center .cromo-showcase__beam {
+    opacity: 1;
+    animation: showcaseBeam 4s ease-in-out infinite alternate;
+}
+.carrusel-ganadores--showcase .cromo-showcase .cromo-sticker {
+    transform: none;
+    height: clamp(340px, 44vw, 460px);
+    transition: box-shadow 0.45s, transform 0.45s;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__slide.is-center .cromo-sticker {
+    box-shadow:
+        0 0 0 2px #ffffff,
+        0 0 0 4px #d4af37,
+        0 0 0 6px #1a472a,
+        0 0 48px rgba(34, 255, 94, 0.45),
+        0 24px 48px rgba(0, 0, 0, 0.55);
+}
+.carrusel-ganadores--showcase .cromo-showcase:hover .cromo-sticker,
+.carrusel-ganadores--showcase .cromo-showcase:focus-visible .cromo-sticker {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        0 0 0 2px #ffffff,
+        0 0 0 4px #ffd700,
+        0 0 0 6px #1a472a,
+        0 0 56px rgba(255, 215, 0, 0.4),
+        0 28px 52px rgba(0, 0, 0, 0.5);
+}
+.carrusel-ganadores--showcase .cromo-showcase__caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 6;
+    padding: 28px 12px 12px;
+    background: linear-gradient(180deg, transparent, rgba(2, 8, 16, 0.92) 55%);
+    text-align: center;
+    pointer-events: none;
+}
+.carrusel-ganadores--showcase .cromo-showcase__nombre {
+    margin: 0 0 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.72rem, 2.2vw, 0.88rem);
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    line-height: 1.25;
+}
+.carrusel-ganadores--showcase .cromo-showcase__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+.carrusel-ganadores--showcase .cromo-showcase__meta span {
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1a472a;
+    background: linear-gradient(180deg, #fff9e6, #f0d878);
+    border: 1px solid rgba(26, 71, 42, 0.35);
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__nav {
+    width: 52px;
+    height: 52px;
+    font-size: 1.2rem;
+    background: rgba(2, 12, 8, 0.85);
+    border: 2px solid rgba(212, 175, 55, 0.55);
+    color: #ffd700;
+    box-shadow: 0 0 24px rgba(34, 255, 94, 0.25);
+    z-index: 5;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__nav:hover {
+    background: rgba(26, 71, 42, 0.95);
+    border-color: var(--verde-yaavs);
+    color: #fff;
+    transform: scale(1.08);
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__dot.active {
+    background: linear-gradient(135deg, #ffd700, var(--verde-yaavs));
+    box-shadow: 0 0 14px rgba(34, 255, 94, 0.55);
+    transform: scale(1.25);
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__link {
+    background: linear-gradient(135deg, #d4af37, #1a472a);
+    border-color: rgba(255, 215, 0, 0.45);
+}
+@keyframes showcaseFloorPulse {
+    0% { opacity: 0.5; transform: scaleX(0.9); }
+    100% { opacity: 1; transform: scaleX(1.08); }
+}
+@keyframes showcaseBeam {
+    0% { opacity: 0.35; transform: rotate(6deg) translateX(-8px); }
+    100% { opacity: 0.7; transform: rotate(10deg) translateX(8px); }
+}
+
 .cromo-sticker {
     position: relative;
     height: 100%;
@@ -2310,6 +2560,27 @@ input[type='text']:focus, input[type='password']:focus { outline: none; border-c
     .section-separator { margin: 25px auto; }
     .centered-header { min-height: auto; padding-bottom: 20px; }
     .section-boletos-bg { padding: 20px 10px 25px; margin-top: 0; }
+    .carrusel-ganadores--showcase {
+        width: calc(100% + 20px);
+        max-width: calc(100% + 20px);
+        margin-left: -10px;
+        margin-right: -10px;
+        padding: 24px 4px 16px;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__stage {
+        padding: 0 40px;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__viewport {
+        min-height: clamp(400px, 72vw, 500px);
+    }
+    .carrusel-ganadores--showcase .cromo-showcase .cromo-sticker {
+        height: clamp(320px, 58vw, 420px);
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__slide.is-left,
+    .carrusel-ganadores--showcase .carrusel-ganadores__slide.is-right {
+        transform: scale(0.78) rotateY(0deg);
+        opacity: 0.35;
+    }
     .carrusel-ganadores--album {
         width: calc(100% + 20px);
         max-width: calc(100% + 20px);
