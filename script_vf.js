@@ -184,14 +184,14 @@ function crearSlideGanadorHTML(g, fotoSrc) {
                     <span class="cromo-sticker__holo" aria-hidden="true"></span>
                     <span class="cromo-sticker__sparkles" aria-hidden="true"></span>
                     <span class="cromo-sticker__perforacion" aria-hidden="true"></span>
-                    <div class="cromo-showcase__caption">
-                        <h3 class="cromo-showcase__nombre">${nombreToast}</h3>
-                        <div class="cromo-showcase__meta">
-                            <span>${escaparHtmlCarrusel(g.liga || 'Liga')}</span>
-                            <span>${escaparHtmlCarrusel(g.kit || 'Kit')}</span>
-                        </div>
-                    </div>
                 </article>
+                <div class="cromo-showcase__caption">
+                    <h3 class="cromo-showcase__nombre">${nombreToast}</h3>
+                    <div class="cromo-showcase__meta">
+                        <span>${escaparHtmlCarrusel(g.liga || 'Liga')}</span>
+                        <span>${escaparHtmlCarrusel(g.kit || 'Kit')}</span>
+                    </div>
+                </div>
             </div>
         `;
     }
@@ -246,6 +246,15 @@ function aplicarClasesCoverflow(slideEls, activo, total) {
     });
 }
 
+function centrarTrackShowcase(track, slideEls, indice) {
+    const viewport = track?.parentElement;
+    const slide = slideEls?.[indice];
+    if (!viewport || !slide) return;
+    const viewportCenter = viewport.clientWidth / 2;
+    const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+    track.style.transform = `translateX(${viewportCenter - slideCenter}px)`;
+}
+
 function renderCarruselGanadores() {
     const track = document.getElementById('carrusel-ganadores-track');
     const dots = document.getElementById('carrusel-ganadores-dots');
@@ -286,10 +295,9 @@ function renderCarruselGanadores() {
 
     if (showcase) {
         aplicarClasesCoverflow(slideEls, carruselGanadoresState.indice, filtrados.length);
-        const slide = slideEls[0];
-        const gap = slide ? parseFloat(getComputedStyle(track).gap) || 20 : 20;
-        const slideW = slide?.offsetWidth || 280;
-        track.style.transform = `translateX(calc(50% - ${carruselGanadoresState.indice * (slideW + gap) + slideW / 2}px))`;
+        requestAnimationFrame(() => {
+            centrarTrackShowcase(track, slideEls, carruselGanadoresState.indice);
+        });
     } else {
         const maxIndice = Math.max(0, filtrados.length - carruselGanadoresState.porVista);
         if (carruselGanadoresState.indice > maxIndice) {
