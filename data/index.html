@@ -561,9 +561,35 @@
         </div>
     </div>
 
-    <div id="sorter-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.98); z-index: 30000; justify-content: center; align-items: center; overflow-y: auto;">
+    <div id="sorter-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 30000; justify-content: center; align-items: center; overflow-y: auto;">
         <style>
-            #sorter-modal .wrapper { width: 100%; max-width: 600px; margin: auto; padding: 20px; text-align: center; z-index: 10; font-family: 'Montserrat', sans-serif; }
+            #sorter-modal {
+                background: #020812;
+                isolation: isolate;
+            }
+            #sorter-modal::before,
+            #sorter-modal::after {
+                content: '';
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+            }
+            #sorter-modal::before {
+                z-index: 0;
+                background:
+                    url('https://assets.zyrosite.com/cfVCqgCxQzd0Fnkg/porta1-A3bZetl2XIYClf7Y.png') center center / cover no-repeat;
+                animation: sorterBgPan 30s ease-in-out infinite alternate;
+            }
+            #sorter-modal::after {
+                z-index: 1;
+                background:
+                    radial-gradient(ellipse 90% 55% at 50% 105%, color-mix(in srgb, var(--cc) 32%, transparent) 0%, transparent 68%),
+                    radial-gradient(circle at 12% 18%, rgba(0, 229, 255, 0.16) 0%, transparent 38%),
+                    radial-gradient(circle at 88% 24%, color-mix(in srgb, var(--cc) 18%, transparent) 0%, transparent 34%),
+                    linear-gradient(180deg, rgba(2, 10, 24, 0.55) 0%, rgba(1, 8, 20, 0.82) 48%, rgba(0, 4, 14, 0.92) 100%);
+                animation: sorterOverlayPulse 9s ease-in-out infinite alternate;
+            }
+            #sorter-modal .wrapper { width: 100%; max-width: 600px; margin: auto; padding: 20px; text-align: center; z-index: 5; position: relative; font-family: 'Montserrat', sans-serif; }
             #sorter-modal .screen { display: none; flex-direction: column; align-items: center; }
             #sorter-modal .screen.active { display: flex; animation: stadiumIntro 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
             @keyframes stadiumIntro { 0% { opacity: 0; transform: scale(1.2) translateY(50px); filter: blur(15px); } 100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); } }
@@ -616,14 +642,62 @@
             @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.3); opacity: 0; } }
             #sorter-modal:has(#screen-stadium.active) .wrapper { max-width: min(720px, 94vw); }
             #sorter-modal #stadium {
-                background: rgba(0, 18, 45, 0.95);
+                position: relative;
+                z-index: 2;
+                overflow: hidden;
+                background: rgba(0, 10, 28, 0.78);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
                 border: 4px solid var(--cc);
                 border-radius: 40px;
                 padding: 26px 22px 22px;
-                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+                box-shadow:
+                    0 20px 50px rgba(0, 0, 0, 0.65),
+                    0 0 60px color-mix(in srgb, var(--cc) 28%, transparent),
+                    inset 0 0 80px color-mix(in srgb, var(--cc) 8%, transparent);
                 width: 100%;
                 box-sizing: border-box;
                 text-align: center;
+                animation: stadiumPanelGlow 4s ease-in-out infinite alternate;
+            }
+            #sorter-modal #stadium::before {
+                content: '';
+                position: absolute;
+                inset: -30%;
+                background: conic-gradient(
+                    from 0deg at 50% 50%,
+                    color-mix(in srgb, var(--cc) 35%, transparent),
+                    transparent 20%,
+                    rgba(0, 229, 255, 0.22) 35%,
+                    transparent 55%,
+                    color-mix(in srgb, var(--or) 25%, transparent) 70%,
+                    transparent 85%,
+                    color-mix(in srgb, var(--cc) 35%, transparent)
+                );
+                animation: stadiumAuroraSpin 14s linear infinite;
+                pointer-events: none;
+                z-index: 0;
+                opacity: 0.55;
+            }
+            #sorter-modal #stadium::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: inherit;
+                background:
+                    linear-gradient(125deg, transparent 30%, rgba(255, 255, 255, 0.05) 48%, transparent 62%),
+                    radial-gradient(circle at 50% -10%, color-mix(in srgb, var(--cc) 20%, transparent), transparent 55%),
+                    radial-gradient(circle at 50% 110%, rgba(0, 229, 255, 0.12), transparent 50%),
+                    repeating-linear-gradient(90deg, transparent, transparent 42px, rgba(255, 255, 255, 0.022) 42px, rgba(255, 255, 255, 0.022) 43px),
+                    linear-gradient(180deg, rgba(0, 14, 36, 0.55) 0%, rgba(0, 8, 22, 0.82) 100%);
+                background-size: 220% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+                animation: stadiumLightSweep 7s ease-in-out infinite;
+                pointer-events: none;
+                z-index: 0;
+            }
+            #sorter-modal #stadium > * {
+                position: relative;
+                z-index: 1;
             }
             #sorter-modal #stadium > img {
                 width: 150px;
@@ -652,10 +726,13 @@
             #sorter-modal #pName { color: var(--or); margin: 0; font-size: 1.2rem; }
             #sorter-modal #pDesc { font-size: 0.88rem; margin: 6px 0 0; opacity: 0.9; font-weight: bold; }
             #sorter-modal .display-area {
-                background: rgba(0, 0, 0, 0.8);
-                border: 2px dashed var(--cc);
+                position: relative;
+                isolation: isolate;
+                background:
+                    linear-gradient(165deg, rgba(0, 10, 28, 0.96) 0%, rgba(0, 6, 18, 0.98) 100%);
+                border: none;
                 border-radius: 25px;
-                min-height: 140px;
+                min-height: 168px;
                 max-height: min(50vh, 460px);
                 overflow-x: hidden;
                 overflow-y: auto;
@@ -666,7 +743,122 @@
                 margin: 0 0 16px;
                 align-content: start;
                 -webkit-overflow-scrolling: touch;
+                box-shadow:
+                    inset 0 0 50px color-mix(in srgb, var(--cc) 10%, transparent),
+                    0 0 28px color-mix(in srgb, var(--cc) 22%, transparent);
             }
+            #sorter-modal .display-area::before {
+                content: '';
+                position: absolute;
+                inset: -2px;
+                border-radius: 27px;
+                background: conic-gradient(
+                    from 0deg,
+                    var(--cc),
+                    transparent 22%,
+                    rgba(0, 229, 255, 0.75) 38%,
+                    transparent 58%,
+                    var(--or) 72%,
+                    transparent 88%,
+                    var(--cc)
+                );
+                animation: cajaBorderSpin 5s linear infinite;
+                pointer-events: none;
+                z-index: 0;
+                opacity: 0.9;
+            }
+            #sorter-modal .display-area::after {
+                content: '';
+                position: absolute;
+                inset: 2px;
+                border-radius: 23px;
+                background:
+                    linear-gradient(165deg, rgba(0, 10, 28, 0.97) 0%, rgba(0, 6, 18, 0.99) 100%);
+                pointer-events: none;
+                z-index: 0;
+            }
+            #sorter-modal .display-area:not(:empty)::after {
+                background:
+                    linear-gradient(165deg, rgba(0, 10, 28, 0.94) 0%, rgba(0, 6, 18, 0.97) 100%),
+                    linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.04) 50%, transparent 58%);
+                background-size: 100% 100%, 220% 100%;
+                animation: cajaShineSweep 6s ease-in-out infinite;
+            }
+            #sorter-modal .display-area:empty {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 190px;
+            }
+            #sorter-modal .display-area:empty::after {
+                inset: 2px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 10px;
+                background:
+                    radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--cc) 14%, transparent), transparent 55%),
+                    linear-gradient(165deg, rgba(0, 10, 28, 0.95) 0%, rgba(0, 6, 18, 0.98) 100%);
+                animation: cajaEmptyGlow 2.4s ease-in-out infinite;
+            }
+            #sorter-modal .display-area:empty::before {
+                animation: cajaBorderSpin 3s linear infinite;
+                opacity: 1;
+            }
+            #sorter-modal .display-area > * {
+                position: relative;
+                z-index: 1;
+            }
+            #sorter-modal .caja-empty-hint {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                grid-column: 1 / -1;
+                min-height: 150px;
+                pointer-events: none;
+                user-select: none;
+            }
+            #sorter-modal .caja-empty-hint__icon {
+                font-size: 2rem;
+                filter: drop-shadow(0 0 14px var(--cc));
+                animation: cajaIconBounce 2s ease-in-out infinite;
+            }
+            #sorter-modal .caja-empty-hint__title {
+                margin: 0;
+                font-size: 0.72rem;
+                font-weight: 900;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: color-mix(in srgb, var(--cc) 80%, #fff);
+                text-shadow: 0 0 16px var(--cc);
+            }
+            #sorter-modal .caja-empty-hint__sub {
+                margin: 0;
+                font-size: 0.62rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: rgba(255, 255, 255, 0.45);
+            }
+            #sorter-modal .caja-empty-hint__dots {
+                display: flex;
+                gap: 6px;
+            }
+            #sorter-modal .caja-empty-hint__dots span {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: var(--cc);
+                box-shadow: 0 0 10px var(--cc);
+                animation: cajaDotPulse 1.2s ease-in-out infinite;
+            }
+            #sorter-modal .caja-empty-hint__dots span:nth-child(2) { animation-delay: 0.2s; }
+            #sorter-modal .caja-empty-hint__dots span:nth-child(3) { animation-delay: 0.4s; }
             #sorter-modal .winner-tag {
                 display: flex;
                 flex-direction: column;
@@ -675,15 +867,21 @@
                 font-size: 0.7rem;
                 font-weight: 700;
                 color: var(--cc);
-                background: rgba(255, 255, 255, 0.05);
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
                 padding: 10px 8px;
                 border-radius: 12px;
-                border: 1px solid var(--cc);
+                border: 1px solid color-mix(in srgb, var(--cc) 70%, transparent);
+                box-shadow:
+                    0 0 16px color-mix(in srgb, var(--cc) 18%, transparent),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.08);
                 animation: pop 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.49);
                 line-height: 1.35;
                 word-break: break-all;
                 text-align: center;
                 text-shadow: 0 0 5px #000;
+            }
+            #sorter-modal .winner-tag:last-child {
+                animation: pop 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.49), cajaWinnerFlash 1.2s ease-out 1;
             }
             #sorter-modal .winner-tag__ticket {
                 display: block;
@@ -704,6 +902,44 @@
                 #sorter-modal .winner-tag { font-size: 0.78rem; }
             }
             @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+            @keyframes cajaBorderSpin { to { transform: rotate(360deg); } }
+            @keyframes cajaShineSweep {
+                0%, 100% { background-position: 0% 0%, 0% 0%; }
+                50% { background-position: 0% 0%, 100% 0%; }
+            }
+            @keyframes cajaEmptyGlow {
+                0%, 100% { box-shadow: inset 0 0 30px color-mix(in srgb, var(--cc) 8%, transparent); }
+                50% { box-shadow: inset 0 0 50px color-mix(in srgb, var(--cc) 18%, transparent); }
+            }
+            @keyframes cajaIconBounce {
+                0%, 100% { transform: translateY(0) scale(1); }
+                50% { transform: translateY(-6px) scale(1.08); }
+            }
+            @keyframes cajaDotPulse {
+                0%, 100% { opacity: 0.35; transform: scale(0.85); }
+                50% { opacity: 1; transform: scale(1.15); }
+            }
+            @keyframes cajaWinnerFlash {
+                0% { box-shadow: 0 0 24px var(--cc), inset 0 0 12px color-mix(in srgb, var(--cc) 30%, transparent); }
+                100% { box-shadow: 0 0 16px color-mix(in srgb, var(--cc) 18%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.08); }
+            }
+            @keyframes stadiumPanelGlow {
+                0% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 50px color-mix(in srgb, var(--cc) 20%, transparent), inset 0 0 60px color-mix(in srgb, var(--cc) 6%, transparent); }
+                100% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 75px color-mix(in srgb, var(--cc) 38%, transparent), inset 0 0 90px color-mix(in srgb, var(--cc) 14%, transparent); }
+            }
+            @keyframes stadiumAuroraSpin { to { transform: rotate(360deg); } }
+            @keyframes stadiumLightSweep {
+                0%, 100% { background-position: -20% 0, 0 0, 0 0, 0 0, 0 0; }
+                50% { background-position: 120% 0, 0 0, 0 0, 0 0, 0 0; }
+            }
+            @keyframes sorterBgPan {
+                0% { transform: scale(1.06) translate(0, 0); }
+                100% { transform: scale(1.14) translate(-1.5%, -1%); }
+            }
+            @keyframes sorterOverlayPulse {
+                0% { opacity: 0.88; }
+                100% { opacity: 1; }
+            }
             h1, h2, h3, p { text-shadow: 2px 2px 10px #000; }
             #modalH { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.97); z-index: 35000; overflow-y: auto; padding: 24px 16px 40px; }
             #modalH .modalH-inner { max-width: 1180px; margin: 0 auto; }
@@ -939,6 +1175,6 @@
         </div>
     </div>
 
-    <script src="script_vf.js?v=20260612_no_fblive"></script>
+    <script src="script_vf.js?v=20260618_caja_viva"></script>
 </body>
 </html>

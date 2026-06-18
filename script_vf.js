@@ -2143,7 +2143,27 @@ function pA(input) {
 
 function limpiarCajaGanadores() {
     const caja = document.getElementById('caja');
-    if (caja) caja.innerHTML = '';
+    if (!caja) return;
+    caja.innerHTML = '';
+    mostrarHintCajaVacia();
+}
+
+function crearHintCajaVacia() {
+    const hint = document.createElement('div');
+    hint.className = 'caja-empty-hint';
+    hint.setAttribute('aria-hidden', 'true');
+    hint.innerHTML =
+        '<span class="caja-empty-hint__icon">🏆</span>' +
+        '<p class="caja-empty-hint__title">Zona de ganadores</p>' +
+        '<p class="caja-empty-hint__sub">Presiona sortear para comenzar</p>' +
+        '<div class="caja-empty-hint__dots"><span></span><span></span><span></span></div>';
+    return hint;
+}
+
+function mostrarHintCajaVacia() {
+    const caja = document.getElementById('caja');
+    if (!caja || caja.children.length > 0) return;
+    caja.appendChild(crearHintCajaVacia());
 }
 
 function crearTagGanadorEnCaja(ticketGanador, municipioGanador) {
