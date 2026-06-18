@@ -232,27 +232,24 @@ function carruselEsShowcase() {
     return document.getElementById('carrusel-ganadores')?.classList.contains('carrusel-ganadores--showcase');
 }
 
-function aplicarClasesCoverflow(slideEls, activo, total) {
-    slideEls.forEach((el, i) => {
-        el.classList.remove('is-center', 'is-left', 'is-right', 'is-far');
-        let d = i - activo;
-        if (d > total / 2) d -= total;
-        if (d < -total / 2) d += total;
-        if (d === 0) el.classList.add('is-center');
-        else if (d === -1) el.classList.add('is-left');
-        else if (d === 1) el.classList.add('is-right');
-        else el.classList.add('is-far');
-        el.setAttribute('aria-hidden', Math.abs(d) > 2 ? 'true' : 'false');
-    });
+function showcasePorVista() {
+    if (window.innerWidth >= 1200) return 4;
+    if (window.innerWidth >= 720) return 2;
+    return 1;
 }
 
-function centrarTrackShowcase(track, slideEls, indice) {
-    const viewport = track?.parentElement;
-    const slide = slideEls?.[indice];
-    if (!viewport || !slide) return;
-    const viewportCenter = viewport.clientWidth / 2;
-    const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-    track.style.transform = `translateX(${viewportCenter - slideCenter}px)`;
+function aplicarClasesShowcase(slideEls, indice, porVista) {
+    const centro = indice + Math.floor(porVista / 2);
+    slideEls.forEach((el, i) => {
+        el.classList.remove('is-center', 'is-left', 'is-right', 'is-far', 'is-visible');
+        const enVista = i >= indice && i < indice + porVista;
+        if (enVista) el.classList.add('is-visible');
+        if (i === centro) el.classList.add('is-center');
+        else if (enVista && i < centro) el.classList.add('is-left');
+        else if (enVista && i > centro) el.classList.add('is-right');
+        else el.classList.add('is-far');
+        el.setAttribute('aria-hidden', enVista ? 'false' : 'true');
+    });
 }
 
 function renderCarruselGanadores() {
@@ -264,7 +261,7 @@ function renderCarruselGanadores() {
 
     const { filtrados } = carruselGanadoresState;
     const showcase = carruselEsShowcase();
-    carruselGanadoresState.porVista = showcase ? 1 : carruselGanadoresPorVista();
+    carruselGanadoresState.porVista = showcase ? showcasePorVista() : carruselGanadoresPorVista();
 
     if (!filtrados.length) {
         if (loader) {
@@ -280,7 +277,7 @@ function renderCarruselGanadores() {
     if (loader) loader.style.display = 'none';
     if (stage) stage.style.display = '';
 
-    if (showcase && carruselGanadoresState.indice >= filtrados.length) {
+    if (showcase && carruselGanadoresState.indice >= Math.max(1, filtrados.length - carruselGanadoresState.porVista + 1)) {
         carruselGanadoresState.indice = 0;
     }
 
@@ -292,14 +289,14 @@ function renderCarruselGanadores() {
         .join('');
 
     const slideEls = track.querySelectorAll('.carrusel-ganadores__slide');
+    const maxIndice = Math.max(0, filtrados.length - carruselGanadoresState.porVista);
 
     if (showcase) {
-        aplicarClasesCoverflow(slideEls, carruselGanadoresState.indice, filtrados.length);
-        requestAnimationFrame(() => {
-            centrarTrackShowcase(track, slideEls, carruselGanadoresState.indice);
-        });
+        if (carruselGanadoresState.indice > maxIndice) carruselGanadoresState.indice = 0;
+        const pct = (100 / carruselGanadoresState.porVista) * carruselGanadoresState.indice;
+        track.style.transform = `translateX(-${pct}%)`;
+        aplicarClasesShowcase(slideEls, carruselGanadoresState.indice, carruselGanadoresState.porVista);
     } else {
-        const maxIndice = Math.max(0, filtrados.length - carruselGanadoresState.porVista);
         if (carruselGanadoresState.indice > maxIndice) {
             carruselGanadoresState.indice = 0;
         }
@@ -313,13 +310,13 @@ function renderCarruselGanadores() {
         });
     }
 
-    const totalDots = showcase ? filtrados.length : Math.max(0, filtrados.length - carruselGanadoresState.porVista) + 1;
+    const totalDots = maxIndice + 1;
     dots.innerHTML = '';
     for (let i = 0; i < totalDots; i++) {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = `carrusel-ganadores__dot${i === carruselGanadoresState.indice ? ' active' : ''}`;
-        btn.setAttribute('aria-label', showcase ? `Ver cromo ${i + 1}` : `Ir al grupo ${i + 1}`);
+        btn.setAttribute('aria-label', showcase ? `Ver grupo ${i + 1}` : `Ir al grupo ${i + 1}`);
         btn.addEventListener('click', () => {
             carruselGanadoresState.indice = i;
             renderCarruselGanadores();
@@ -571,14 +568,11 @@ function moverCarruselGanadores(delta) {
     const { filtrados } = carruselGanadoresState;
     if (!filtrados.length) return;
 
-    if (carruselEsShowcase()) {
-        carruselGanadoresState.indice = (carruselGanadoresState.indice + delta + filtrados.length) % filtrados.length;
-    } else {
-        const maxIndice = Math.max(0, filtrados.length - carruselGanadoresState.porVista);
-        carruselGanadoresState.indice += delta;
-        if (carruselGanadoresState.indice > maxIndice) carruselGanadoresState.indice = 0;
-        if (carruselGanadoresState.indice < 0) carruselGanadoresState.indice = maxIndice;
-    }
+    const porVista = carruselEsShowcase() ? showcasePorVista() : carruselGanadoresState.porVista;
+    const maxIndice = Math.max(0, filtrados.length - porVista);
+    carruselGanadoresState.indice += delta;
+    if (carruselGanadoresState.indice > maxIndice) carruselGanadoresState.indice = 0;
+    if (carruselGanadoresState.indice < 0) carruselGanadoresState.indice = maxIndice;
     renderCarruselGanadores();
 }
 

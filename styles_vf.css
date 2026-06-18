@@ -790,41 +790,63 @@ body.futbol-minigame-open { overflow: hidden; }
     will-change: transform;
 }
 .carrusel-ganadores--showcase .carrusel-ganadores__slide {
-    flex: 0 0 clamp(280px, 32vw, 380px);
-    width: clamp(280px, 32vw, 380px);
-    padding: 0;
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
+    padding: 0 6px;
+    box-sizing: border-box;
     transform-style: preserve-3d;
     transition:
         transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
         opacity 0.55s ease,
         filter 0.55s ease;
-    transform: scale(0.78) rotateY(16deg) translateZ(-90px);
+    transform: scale(0.88);
     opacity: 0.35;
-    filter: brightness(0.7) saturate(0.85);
+    filter: brightness(0.65) saturate(0.8);
     z-index: 1;
 }
-.carrusel-ganadores--showcase .carrusel-ganadores__slide.is-left {
-    transform: scale(0.88) rotateY(24deg) translateZ(-30px) translateX(4%);
-    opacity: 0.72;
-    filter: brightness(0.88);
+@media (min-width: 720px) {
+    .carrusel-ganadores--showcase .carrusel-ganadores__slide {
+        flex: 0 0 50%;
+        width: 50%;
+        min-width: 50%;
+    }
+}
+@media (min-width: 1200px) {
+    .carrusel-ganadores--showcase .carrusel-ganadores__slide {
+        flex: 0 0 25%;
+        width: 25%;
+        min-width: 25%;
+    }
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__slide.is-visible {
+    opacity: 0.92;
+    filter: brightness(0.92);
+    transform: scale(0.96);
     z-index: 2;
+}
+.carrusel-ganadores--showcase .carrusel-ganadores__slide.is-left {
+    transform: scale(0.98) rotateY(8deg) translateZ(-10px);
+    opacity: 0.95;
+    filter: brightness(0.95);
+    z-index: 3;
 }
 .carrusel-ganadores--showcase .carrusel-ganadores__slide.is-right {
-    transform: scale(0.88) rotateY(-24deg) translateZ(-30px) translateX(-4%);
-    opacity: 0.72;
-    filter: brightness(0.88);
-    z-index: 2;
+    transform: scale(0.98) rotateY(-8deg) translateZ(-10px);
+    opacity: 0.95;
+    filter: brightness(0.95);
+    z-index: 3;
 }
 .carrusel-ganadores--showcase .carrusel-ganadores__slide.is-center {
-    transform: scale(1.08) rotateY(0deg) translateZ(50px) translateY(-10px);
+    transform: scale(1.04) rotateY(0deg) translateZ(20px) translateY(-6px);
     opacity: 1;
     filter: none;
     z-index: 4;
 }
 .carrusel-ganadores--showcase .carrusel-ganadores__slide.is-far {
-    transform: scale(0.65) rotateY(0deg) translateZ(-140px);
-    opacity: 0.18;
-    filter: blur(1px) brightness(0.55);
+    transform: scale(0.82);
+    opacity: 0.2;
+    filter: blur(1px) brightness(0.5);
     z-index: 0;
 }
 .carrusel-ganadores--showcase .cromo-showcase {
@@ -868,7 +890,7 @@ body.futbol-minigame-open { overflow: hidden; }
 .carrusel-ganadores--showcase .cromo-showcase .cromo-sticker {
     flex: 1 1 auto;
     transform: none;
-    height: clamp(360px, 38vw, 480px);
+    height: clamp(300px, 32vw, 420px);
     min-height: 0;
     transition: box-shadow 0.45s, transform 0.45s;
 }
@@ -2585,16 +2607,16 @@ input[type='text']:focus, input[type='password']:focus { outline: none; border-c
         min-height: clamp(440px, 78vw, 540px);
     }
     .carrusel-ganadores--showcase .carrusel-ganadores__slide {
-        flex: 0 0 min(300px, 82vw);
-        width: min(300px, 82vw);
+        flex: 0 0 100%;
+        width: 100%;
+        min-width: 100%;
     }
     .carrusel-ganadores--showcase .cromo-showcase .cromo-sticker {
-        height: clamp(340px, 62vw, 440px);
+        height: clamp(320px, 58vw, 420px);
     }
     .carrusel-ganadores--showcase .carrusel-ganadores__slide.is-left,
     .carrusel-ganadores--showcase .carrusel-ganadores__slide.is-right {
-        transform: scale(0.78) rotateY(0deg);
-        opacity: 0.35;
+        transform: scale(0.96);
     }
     .carrusel-ganadores--album {
         width: calc(100% + 20px);
