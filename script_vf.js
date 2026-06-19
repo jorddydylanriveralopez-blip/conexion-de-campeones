@@ -154,6 +154,7 @@ function crearSlideGanadorHTML(g, fotoSrc) {
     const alt = escaparHtmlCarrusel(g.alt || nombre);
 
     if (esPoster && src) {
+        const fullBleed = !!g.fullBleed;
         const variante = varianteCromoValida(g.variante);
         const numero = escaparHtmlCarrusel(g.numero || '');
         const sello = escaparHtmlCarrusel(g.varianteLabel || ETIQUETAS_CROMO[variante] || 'Cromo');
@@ -161,11 +162,32 @@ function crearSlideGanadorHTML(g, fotoSrc) {
         const msgToast = escaparHtmlCarrusel(
             g.agradecimiento || '¡Felicidades! Gracias por ser parte de Conexión de Campeones YAAVS.',
         );
-        const numHtml = numero
+        const sorteoLabel = escaparHtmlCarrusel(g.sorteoLabel || (g.sorteo === 2 ? '2.º sorteo' : g.sorteo === 3 ? '3.er sorteo' : '1.er sorteo'));
+        const stickerClass = fullBleed ? 'cromo-sticker--full-bleed' : `cromo-sticker--${variante}`;
+        const numHtml = !fullBleed && numero
             ? `<span class="cromo-sticker__num" aria-hidden="true">${numero}</span>`
             : '';
+        const selloHtml = fullBleed
+            ? ''
+            : `<span class="cromo-sticker__sello" aria-hidden="true">${sello}</span>`;
+        const fxHtml = fullBleed
+            ? ''
+            : `<span class="cromo-sticker__holo" aria-hidden="true"></span>
+                    <span class="cromo-sticker__sparkles" aria-hidden="true"></span>
+                    <span class="cromo-sticker__perforacion" aria-hidden="true"></span>`;
+        const captionHtml = fullBleed
+            ? `<div class="cromo-showcase__caption cromo-showcase__caption--full-bleed">
+                    <span class="cromo-showcase__sorteo-badge">${sorteoLabel}</span>
+                </div>`
+            : `<div class="cromo-showcase__caption">
+                    <h3 class="cromo-showcase__nombre">${nombreToast}</h3>
+                    <div class="cromo-showcase__meta">
+                        <span>${escaparHtmlCarrusel(g.liga || 'Liga')}</span>
+                        <span>${escaparHtmlCarrusel(g.kit || 'Kit')}</span>
+                    </div>
+                </div>`;
         return `
-            <div class="cromo-showcase" tabindex="0"
+            <div class="cromo-showcase${fullBleed ? ' cromo-showcase--full-bleed' : ''}" tabindex="0"
                 data-nombre="${nombreToast}"
                 data-msg="${msgToast}"
                 data-img="${escaparHtmlCarrusel(src)}"
@@ -175,23 +197,15 @@ function crearSlideGanadorHTML(g, fotoSrc) {
                 data-alt="${alt}">
                 <span class="cromo-showcase__spotlight" aria-hidden="true"></span>
                 <span class="cromo-showcase__beam" aria-hidden="true"></span>
-                <article class="carrusel-ganadores__card carrusel-ganadores__card--poster cromo-sticker cromo-sticker--${variante}">
-                    <span class="cromo-sticker__sello" aria-hidden="true">${sello}</span>
+                <article class="carrusel-ganadores__card carrusel-ganadores__card--poster cromo-sticker ${stickerClass}">
+                    ${selloHtml}
                     ${numHtml}
                     <div class="cromo-sticker__frame">
                         <img src="${escaparHtmlCarrusel(src)}" alt="${alt}" class="carrusel-ganadores__img" loading="lazy" decoding="async">
                     </div>
-                    <span class="cromo-sticker__holo" aria-hidden="true"></span>
-                    <span class="cromo-sticker__sparkles" aria-hidden="true"></span>
-                    <span class="cromo-sticker__perforacion" aria-hidden="true"></span>
+                    ${fxHtml}
                 </article>
-                <div class="cromo-showcase__caption">
-                    <h3 class="cromo-showcase__nombre">${nombreToast}</h3>
-                    <div class="cromo-showcase__meta">
-                        <span>${escaparHtmlCarrusel(g.liga || 'Liga')}</span>
-                        <span>${escaparHtmlCarrusel(g.kit || 'Kit')}</span>
-                    </div>
-                </div>
+                ${captionHtml}
             </div>
         `;
     }
@@ -619,7 +633,7 @@ async function initCarruselGanadores() {
 
     try {
         const [cfgRes, s1Res, s2Res] = await Promise.all([
-            fetch('ganadores/carrusel-ganadores.json?v=20260611_cromo_refine').catch(() => null),
+            fetch('ganadores/carrusel-ganadores.json?v=20260619_sorteo2').catch(() => null),
             fetch(urlGanadoresSorteo(1) + '?v=20260610'),
             fetch(urlGanadoresSorteo(2) + '?v=20260610'),
         ]);
@@ -654,12 +668,13 @@ async function initCarruselGanadores() {
                     numero: img.numero || String(i + 1).padStart(2, '0'),
                     variante,
                     varianteLabel: img.varianteLabel || ETIQUETAS_CROMO[variante],
-                    sorteoLabel: 'Ganador del sorteo',
+                    sorteoLabel: img.sorteoLabel || (sorteo === 2 ? '2.º sorteo' : sorteo === 3 ? '3.er sorteo' : '1.er sorteo'),
                     nombre: img.nombre || 'Campeón YAAVS',
                     liga: img.liga || 'Ganador',
                     kit: img.kit || 'Premio',
                     foto: img.src,
                     poster: img.poster !== false,
+                    fullBleed: img.fullBleed === true,
                     alt: img.alt || img.nombre || 'Ganador del sorteo',
                     agradecimiento: img.agradecimiento || '',
                 };
