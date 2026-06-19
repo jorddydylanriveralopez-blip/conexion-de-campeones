@@ -177,7 +177,7 @@ function crearSlideGanadorHTML(g, fotoSrc) {
                     <span class="cromo-sticker__perforacion" aria-hidden="true"></span>`;
         const captionHtml = fullBleed
             ? `<div class="cromo-showcase__caption cromo-showcase__caption--full-bleed">
-                    <span class="cromo-showcase__sorteo-badge">${sorteoLabel}</span>
+                    <span class="cromo-showcase__sorteo-badge cromo-showcase__sorteo-badge--${Number(g.sorteo) || 1}">${sorteoLabel}</span>
                 </div>`
             : `<div class="cromo-showcase__caption">
                     <h3 class="cromo-showcase__nombre">${nombreToast}</h3>
@@ -612,9 +612,14 @@ function enlazarControlesCarruselGanadores(root) {
     document.getElementById('carrusel-ganadores-filtros')?.addEventListener('click', (e) => {
         const btn = e.target.closest('.carrusel-ganadores__filtro');
         if (!btn) return;
-        document.querySelectorAll('.carrusel-ganadores__filtro').forEach((b) => b.classList.remove('active'));
+        document.querySelectorAll('.carrusel-ganadores__filtro').forEach((b) => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
         carruselGanadoresState.filtro = btn.dataset.filtro;
+        root.dataset.filtro = btn.dataset.filtro;
         aplicarFiltroCarruselGanadores();
         reiniciarAutoCarruselGanadores();
     });
@@ -633,7 +638,7 @@ async function initCarruselGanadores() {
 
     try {
         const [cfgRes, s1Res, s2Res] = await Promise.all([
-            fetch('ganadores/carrusel-ganadores.json?v=20260619_sorteo2').catch(() => null),
+            fetch('ganadores/carrusel-ganadores.json?v=20260619_album_dual').catch(() => null),
             fetch(urlGanadoresSorteo(1) + '?v=20260610'),
             fetch(urlGanadoresSorteo(2) + '?v=20260610'),
         ]);

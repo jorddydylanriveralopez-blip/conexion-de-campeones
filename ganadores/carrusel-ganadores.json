@@ -1,9 +1,21 @@
 {
-  "titulo": "Regalos del Segundo Sorteo",
-  "subtitulo": "Los campeones Yaavsers ya recibieron su premio — orgullo verde, esfuerzo y victoria en cada regalo",
-  "instruccionesDesktop": "Usa las flechas y haz clic en una tarjeta para verla en grande",
-  "instruccionesMobile": "Desliza con las flechas y toca una tarjeta para ampliarla",
+  "titulo": "Álbum de Campeones",
+  "subtitulo": "Ganadores del 1.º y 2.º sorteo — filtra, explora y celebra cada victoria Yaavser",
+  "instruccionesDesktop": "Elige un sorteo o explora todos, y haz clic en una tarjeta para verla en grande",
+  "instruccionesMobile": "Filtra por sorteo, desliza con las flechas y toca una tarjeta para ampliarla",
   "imagenes": [
+    {
+      "sorteo": 1,
+      "numero": "02",
+      "variante": "comun",
+      "nombre": "Campeón YAAVS",
+      "sorteoLabel": "1.er sorteo",
+      "agradecimiento": "¡Gracias por demostrar que con esfuerzo y constancia se llega lejos! Tu victoria enciende a toda la familia YAAVS.",
+      "src": "ganadores/fotos/sorteo-1/ganador-02.png",
+      "alt": "Ganador del 1.er sorteo — regalo Conexión de Campeones",
+      "poster": true,
+      "fullBleed": true
+    },
     {
       "sorteo": 2,
       "numero": "01",
@@ -13,6 +25,18 @@
       "agradecimiento": "¡Felicidades, campeón! Tu esfuerzo en la vinculación te trajo este regalo. YAAVS celebra contigo.",
       "src": "ganadores/fotos/sorteo-2/ganador-01.png",
       "alt": "Ganador del 2.º sorteo — regalo Conexión de Campeones",
+      "poster": true,
+      "fullBleed": true
+    },
+    {
+      "sorteo": 1,
+      "numero": "03",
+      "variante": "cromado",
+      "nombre": "Campeón YAAVS",
+      "sorteoLabel": "1.er sorteo",
+      "agradecimiento": "¡Brillaste en el sorteo como brillas en cada vinculación! Este cromo cromado celebra tu camino de campeón.",
+      "src": "ganadores/fotos/sorteo-1/ganador-03.png",
+      "alt": "Ganador del 1.er sorteo — regalo Conexión de Campeones",
       "poster": true,
       "fullBleed": true
     },
@@ -29,6 +53,18 @@
       "fullBleed": true
     },
     {
+      "sorteo": 1,
+      "numero": "04",
+      "variante": "edicion-especial",
+      "nombre": "Campeón YAAVS",
+      "sorteoLabel": "1.er sorteo",
+      "agradecimiento": "Edición especial para un YAAVSER especial: gracias por ser parte de Conexión de Campeones y llevar el orgullo en alto.",
+      "src": "ganadores/fotos/sorteo-1/ganador-04.png",
+      "alt": "Ganador del 1.er sorteo — regalo Conexión de Campeones",
+      "poster": true,
+      "fullBleed": true
+    },
+    {
       "sorteo": 2,
       "numero": "03",
       "variante": "edicion-especial",
@@ -37,6 +73,18 @@
       "agradecimiento": "Edición especial para un YAAVSER especial: gracias por creer en el juego y llevar el orgullo en alto.",
       "src": "ganadores/fotos/sorteo-2/ganador-03.png",
       "alt": "Ganador del 2.º sorteo — regalo Conexión de Campeones",
+      "poster": true,
+      "fullBleed": true
+    },
+    {
+      "sorteo": 1,
+      "numero": "05",
+      "variante": "brillante",
+      "nombre": "Campeón YAAVS",
+      "sorteoLabel": "1.er sorteo",
+      "agradecimiento": "¡Tu dedicación reluce! Este premio es para ti, campeón, por creer en el juego y en tu equipo hasta el final.",
+      "src": "ganadores/fotos/sorteo-1/ganador-05.png",
+      "alt": "Ganador del 1.er sorteo — regalo Conexión de Campeones",
       "poster": true,
       "fullBleed": true
     },
@@ -53,6 +101,18 @@
       "fullBleed": true
     },
     {
+      "sorteo": 1,
+      "numero": "06",
+      "variante": "cromado",
+      "nombre": "Campeón YAAVS",
+      "sorteoLabel": "1.er sorteo",
+      "agradecimiento": "¡Felicidades, crack! Ganaste con actitud de campeón. YAAVS celebra contigo este momento único.",
+      "src": "ganadores/fotos/sorteo-1/ganador-06.png",
+      "alt": "Ganador del 1.er sorteo — regalo Conexión de Campeones",
+      "poster": true,
+      "fullBleed": true
+    },
+    {
       "sorteo": 2,
       "numero": "05",
       "variante": "cromado",
@@ -61,6 +121,18 @@
       "agradecimiento": "¡Aquí se juega para ganar y tú lo demostraste! Disfruta tu premio con toda la familia YAAVS.",
       "src": "ganadores/fotos/sorteo-2/ganador-05.png",
       "alt": "Ganador del 2.º sorteo — regalo Conexión de Campeones",
+      "poster": true,
+      "fullBleed": true
+    },
+    {
+      "sorteo": 1,
+      "numero": "07",
+      "variante": "leyenda",
+      "nombre": "Campeón YAAVS",
+      "sorteoLabel": "1.er sorteo",
+      "agradecimiento": "Cromo leyenda para una leyenda: gracias por inspirar a todos los YAAVSERS. Tu nombre queda en el álbum para siempre.",
+      "src": "ganadores/fotos/sorteo-1/ganador-07.png",
+      "alt": "Ganador del 1.er sorteo — regalo Conexión de Campeones",
       "poster": true,
       "fullBleed": true
     },
@@ -77,6 +149,18 @@
       "fullBleed": true
     },
     {
+      "sorteo": 1,
+      "numero": "08",
+      "variante": "comun",
+      "nombre": "Campeón YAAVS",
+      "sorteoLabel": "1.er sorteo",
+      "agradecimiento": "¡Eres parte de la historia del sorteo! Gracias por confiar en YAAVS y celebrar este triunfo con nosotros.",
+      "src": "ganadores/fotos/sorteo-1/ganador-08.png",
+      "alt": "Ganador del 1.er sorteo — regalo Conexión de Campeones",
+      "poster": true,
+      "fullBleed": true
+    },
+    {
       "sorteo": 2,
       "numero": "07",
       "variante": "leyenda",
@@ -85,6 +169,30 @@
       "agradecimiento": "Cromo leyenda para una leyenda: gracias por inspirar a todos los Yaavsers. ¡A seguir ganando!",
       "src": "ganadores/fotos/sorteo-2/ganador-07.png",
       "alt": "Ganador del 2.º sorteo — regalo Conexión de Campeones",
+      "poster": true,
+      "fullBleed": true
+    },
+    {
+      "sorteo": 1,
+      "numero": "09",
+      "variante": "edicion-especial",
+      "nombre": "Campeón YAAVS",
+      "sorteoLabel": "1.er sorteo",
+      "agradecimiento": "Premio edición especial para quien lo dio todo en la cancha y en la conexión. ¡Felicidades, campeón YAAVS!",
+      "src": "ganadores/fotos/sorteo-1/ganador-09.png",
+      "alt": "Ganador del 1.er sorteo — regalo Conexión de Campeones",
+      "poster": true,
+      "fullBleed": true
+    },
+    {
+      "sorteo": 1,
+      "numero": "10",
+      "variante": "cromado",
+      "nombre": "Campeón YAAVS",
+      "sorteoLabel": "1.er sorteo",
+      "agradecimiento": "¡Gracias por representar el espíritu de campeón! Tu cromo brilla porque tú brillaste en el sorteo.",
+      "src": "ganadores/fotos/sorteo-1/ganador-10.png",
+      "alt": "Ganador del 1.er sorteo — regalo Conexión de Campeones",
       "poster": true,
       "fullBleed": true
     }

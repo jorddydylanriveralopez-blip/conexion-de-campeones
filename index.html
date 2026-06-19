@@ -33,7 +33,7 @@
     <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles_vf.css?v=20260619_sorteo2_showcase">
+    <link rel="stylesheet" href="styles_vf.css?v=20260619_album_dual_sorteos">
     
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -332,16 +332,28 @@
                 </div>
             </div>
 
-            <section id="carrusel-ganadores" class="carrusel-ganadores carrusel-ganadores--showcase carrusel-ganadores--sorteo2 animate-on-scroll" aria-label="Ganadores del segundo sorteo">
+            <section id="carrusel-ganadores" class="carrusel-ganadores carrusel-ganadores--showcase animate-on-scroll" aria-label="Álbum de campeones" data-filtro="todos">
                 <div class="carrusel-ganadores__header">
-                    <span class="carrusel-ganadores__eyebrow"><i class="fa-solid fa-gift"></i> ¡Nuevo! 2.º Sorteo</span>
-                    <h2 class="carrusel-ganadores__titulo" id="carrusel-ganadores-titulo">Regalos del Segundo Sorteo</h2>
-                    <p class="carrusel-ganadores__sub" id="carrusel-ganadores-sub">Los campeones Yaavsers ya recibieron su premio — orgullo verde, esfuerzo y victoria en cada regalo</p>
+                    <span class="carrusel-ganadores__eyebrow"><i class="fa-solid fa-trophy"></i> Conexión de Campeones YAAVS</span>
+                    <h2 class="carrusel-ganadores__titulo" id="carrusel-ganadores-titulo">Álbum de Campeones</h2>
+                    <p class="carrusel-ganadores__sub" id="carrusel-ganadores-sub">Ganadores del 1.º y 2.º sorteo — filtra, explora y celebra cada victoria Yaavser</p>
                     <p class="carrusel-ganadores__hint" id="carrusel-ganadores-hint" aria-live="polite">
                         <i class="fa-solid fa-wand-magic-sparkles carrusel-ganadores__hint-icon" aria-hidden="true"></i>
-                        <span class="carrusel-ganadores__hint-desktop">Usa las flechas y haz clic en una tarjeta para verla en grande</span>
-                        <span class="carrusel-ganadores__hint-mobile">Desliza con las flechas y toca una tarjeta para ampliarla</span>
+                        <span class="carrusel-ganadores__hint-desktop">Elige un sorteo o explora todos, y haz clic en una tarjeta para verla en grande</span>
+                        <span class="carrusel-ganadores__hint-mobile">Filtra por sorteo, desliza con las flechas y toca una tarjeta para ampliarla</span>
                     </p>
+                    <div class="carrusel-ganadores__filtros carrusel-ganadores__filtros--showcase" id="carrusel-ganadores-filtros" role="tablist" aria-label="Filtrar ganadores por sorteo">
+                        <button type="button" class="carrusel-ganadores__filtro active" data-filtro="todos" role="tab" aria-selected="true">
+                            <i class="fa-solid fa-layer-group" aria-hidden="true"></i> Todos
+                        </button>
+                        <button type="button" class="carrusel-ganadores__filtro" data-filtro="1" role="tab" aria-selected="false">
+                            <i class="fa-solid fa-medal" aria-hidden="true"></i> 1.er sorteo
+                        </button>
+                        <button type="button" class="carrusel-ganadores__filtro carrusel-ganadores__filtro--nuevo" data-filtro="2" role="tab" aria-selected="false">
+                            <i class="fa-solid fa-gift" aria-hidden="true"></i> 2.º sorteo
+                            <span class="carrusel-ganadores__filtro-badge">Nuevo</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="carrusel-ganadores__loader" id="carrusel-ganadores-loader">
                     <i class="fa-solid fa-circle-notch fa-spin"></i> Cargando ganadores...
@@ -358,9 +370,12 @@
                     </button>
                 </div>
                 <div class="carrusel-ganadores__dots" id="carrusel-ganadores-dots"></div>
-                <div class="carrusel-ganadores__footer">
-                    <a href="ganadores?sorteo=2" class="carrusel-ganadores__link snd-click snd-hover">
-                        <i class="fa-solid fa-list"></i> Ver todos los ganadores del 2.º sorteo
+                <div class="carrusel-ganadores__footer carrusel-ganadores__footer--dual">
+                    <a href="ganadores?sorteo=1" class="carrusel-ganadores__link carrusel-ganadores__link--sorteo1 snd-click snd-hover">
+                        <i class="fa-solid fa-medal"></i> Ver ganadores 1.er sorteo
+                    </a>
+                    <a href="ganadores?sorteo=2" class="carrusel-ganadores__link carrusel-ganadores__link--sorteo2 snd-click snd-hover">
+                        <i class="fa-solid fa-gift"></i> Ver ganadores 2.º sorteo
                     </a>
                 </div>
             </section>
@@ -1249,6 +1264,6 @@
     </div>
 
     <script src="minijuego-futbol-yaavs.js?v=20260611_futbol4"></script>
-    <script src="script_vf.js?v=20260619_sorteo2_showcase"></script>
+    <script src="script_vf.js?v=20260619_album_dual_sorteos"></script>
 </body>
 </html>
