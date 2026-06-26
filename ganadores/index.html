@@ -458,6 +458,7 @@
                 <button type="button" class="filtro-btn active" data-sorteo="1">1.er sorteo</button>
                 <button type="button" class="filtro-btn" data-sorteo="2">2.º sorteo</button>
                 <button type="button" class="filtro-btn" data-sorteo="3">3.er sorteo</button>
+                <button type="button" class="filtro-btn" data-sorteo="4">4.º sorteo</button>
             </div>
         </header>
 
@@ -517,6 +518,12 @@
                 badge: '3.er sorteo · 12 junio 2026',
                 sub: 'Lista oficial de ganadores del tercer sorteo quincenal',
                 docTitle: 'GANADORES 3.er SORTEO - CONEXIÓN DE CAMPEONES | YAAVS',
+            },
+            4: {
+                url: 'ganadores-sorteo-4.json',
+                badge: '4.º sorteo · 26 junio 2026',
+                sub: 'Lista oficial de ganadores del cuarto sorteo quincenal',
+                docTitle: 'GANADORES 4.º SORTEO - CONEXIÓN DE CAMPEONES | YAAVS',
             },
         };
 
@@ -654,7 +661,7 @@
         async function obtenerDatosSorteo(n) {
             if (cacheSorteos[n]) return cacheSorteos[n];
             const cfg = SORTEOS[n];
-            const res = await fetch(cfg.url + '?v=20260612');
+            const res = await fetch(cfg.url + '?v=20260619_sorteo4');
             if (!res.ok) throw new Error('HTTP ' + res.status);
             const data = await res.json();
             cacheSorteos[n] = data;
