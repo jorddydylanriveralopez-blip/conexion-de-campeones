@@ -963,16 +963,30 @@ body.futbol-minigame-open { overflow: hidden; }
     box-shadow: none;
     padding: 0;
 }
+.cromo-showcase--full-bleed .cromo-sticker.carrusel-ganadores__card--poster {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+}
+.carrusel-ganadores--showcase .cromo-showcase--full-bleed .cromo-sticker {
+    height: auto;
+    min-height: 0;
+}
 .cromo-showcase--full-bleed .cromo-sticker__frame {
     border: none;
     border-radius: 10px;
     background: transparent;
     overflow: visible;
+    height: auto;
 }
 .cromo-showcase--full-bleed .cromo-sticker__frame .carrusel-ganadores__img {
+    position: static;
+    display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: none;
     object-fit: contain;
+    object-position: center;
     filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55));
     transition: filter 0.45s, transform 0.45s;
 }
@@ -1064,6 +1078,7 @@ body.futbol-minigame-open { overflow: hidden; }
         margin-right: 0;
         padding-left: clamp(10px, 3.5vw, 16px);
         padding-right: clamp(10px, 3.5vw, 16px);
+        overflow: visible;
     }
     .carrusel-ganadores--showcase .carrusel-ganadores__header {
         text-align: center;
@@ -1087,12 +1102,15 @@ body.futbol-minigame-open { overflow: hidden; }
         padding: 0 38px;
         max-width: 100%;
         margin-inline: auto;
+        overflow: visible;
     }
     .carrusel-ganadores--showcase .carrusel-ganadores__viewport {
         perspective: none;
-        overflow: hidden;
-        min-height: 0;
-        padding: 10px 0 6px;
+        overflow-x: hidden;
+        overflow-y: visible;
+        min-height: auto;
+        height: auto;
+        padding: 14px 0 8px;
     }
     .carrusel-ganadores--showcase .carrusel-ganadores__track {
         gap: 14px;
@@ -1121,25 +1139,21 @@ body.futbol-minigame-open { overflow: hidden; }
         align-items: center;
         gap: 8px;
     }
-    .carrusel-ganadores--showcase .cromo-showcase .cromo-sticker {
+    .carrusel-ganadores--showcase .cromo-showcase .cromo-sticker,
+    .carrusel-ganadores--showcase .cromo-showcase .cromo-sticker.carrusel-ganadores__card--poster {
         width: 100%;
-        max-width: min(100%, 340px);
+        max-width: min(100%, 320px);
         height: auto;
         min-height: 0;
         margin-inline: auto;
+        overflow: visible;
     }
     .cromo-showcase--full-bleed .cromo-sticker__frame {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: block;
+        height: auto;
+        overflow: visible;
     }
     .cromo-showcase--full-bleed .cromo-sticker__frame .carrusel-ganadores__img {
-        position: relative;
-        inset: auto;
-        width: 100%;
-        height: auto;
-        max-height: min(62vh, 460px);
-        object-fit: contain;
         transform: none;
     }
     .carrusel-ganadores--showcase .cromo-showcase--full-bleed:hover .cromo-sticker__frame .carrusel-ganadores__img,
