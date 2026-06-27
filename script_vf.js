@@ -252,6 +252,16 @@ function showcasePorVista() {
     return 1;
 }
 
+function actualizarTransformShowcase(track, slideEls, indice) {
+    if (!slideEls.length) {
+        track.style.transform = '';
+        return;
+    }
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    const slideW = slideEls[0].getBoundingClientRect().width;
+    track.style.transform = `translateX(-${indice * (slideW + gap)}px)`;
+}
+
 function aplicarClasesShowcase(slideEls, indice, porVista) {
     const centro = indice + Math.floor(porVista / 2);
     slideEls.forEach((el, i) => {
@@ -307,9 +317,11 @@ function renderCarruselGanadores() {
 
     if (showcase) {
         if (carruselGanadoresState.indice > maxIndice) carruselGanadoresState.indice = 0;
-        const pct = (100 / carruselGanadoresState.porVista) * carruselGanadoresState.indice;
-        track.style.transform = `translateX(-${pct}%)`;
         aplicarClasesShowcase(slideEls, carruselGanadoresState.indice, carruselGanadoresState.porVista);
+        actualizarTransformShowcase(track, slideEls, carruselGanadoresState.indice);
+        requestAnimationFrame(() => {
+            actualizarTransformShowcase(track, slideEls, carruselGanadoresState.indice);
+        });
     } else {
         if (carruselGanadoresState.indice > maxIndice) {
             carruselGanadoresState.indice = 0;

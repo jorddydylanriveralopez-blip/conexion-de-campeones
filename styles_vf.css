@@ -1055,6 +1055,136 @@ body.futbol-minigame-open { overflow: hidden; }
     100% { opacity: 0.7; transform: rotate(10deg) translateX(8px); }
 }
 
+/* Showcase — móvil: centrado, sin recortes, sin inclinación 3D */
+@media (max-width: 719px) {
+    .carrusel-ganadores--showcase {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: clamp(10px, 3.5vw, 16px);
+        padding-right: clamp(10px, 3.5vw, 16px);
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__header {
+        text-align: center;
+        padding-inline: 4px;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__filtros--showcase {
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        border-radius: 18px;
+        padding: 8px;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__filtros--showcase .carrusel-ganadores__filtro {
+        flex: 1 1 auto;
+        justify-content: center;
+        min-width: 0;
+        padding: 9px 10px;
+        font-size: 0.62rem;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__stage {
+        padding: 0 38px;
+        max-width: 100%;
+        margin-inline: auto;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__viewport {
+        perspective: none;
+        overflow: hidden;
+        min-height: 0;
+        padding: 10px 0 6px;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__track {
+        gap: 14px;
+        padding: 6px 0 10px;
+        align-items: stretch;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__slide {
+        flex: 0 0 100%;
+        width: 100%;
+        min-width: 100%;
+        padding: 0 2px;
+        transform: none !important;
+        filter: none !important;
+        opacity: 1 !important;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__slide.is-far {
+        opacity: 0.25 !important;
+        filter: brightness(0.7) !important;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__slide.is-center {
+        transform: none !important;
+        filter: none !important;
+        opacity: 1 !important;
+    }
+    .carrusel-ganadores--showcase .cromo-showcase {
+        align-items: center;
+        gap: 8px;
+    }
+    .carrusel-ganadores--showcase .cromo-showcase .cromo-sticker {
+        width: 100%;
+        max-width: min(100%, 340px);
+        height: auto;
+        min-height: 0;
+        margin-inline: auto;
+    }
+    .cromo-showcase--full-bleed .cromo-sticker__frame {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .cromo-showcase--full-bleed .cromo-sticker__frame .carrusel-ganadores__img {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        max-height: min(62vh, 460px);
+        object-fit: contain;
+        transform: none;
+    }
+    .carrusel-ganadores--showcase .cromo-showcase--full-bleed:hover .cromo-sticker__frame .carrusel-ganadores__img,
+    .carrusel-ganadores--showcase .cromo-showcase--full-bleed:focus-visible .cromo-sticker__frame .carrusel-ganadores__img {
+        transform: none;
+    }
+    .cromo-showcase__caption--full-bleed {
+        text-align: center;
+        width: 100%;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__nav {
+        width: 38px;
+        height: 38px;
+        font-size: 0.95rem;
+        top: 42%;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__nav--prev {
+        left: 0;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__nav--next {
+        right: 0;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__dots {
+        max-width: 100%;
+        padding-inline: 8px;
+        gap: 6px;
+    }
+    .carrusel-ganadores--showcase .carrusel-ganadores__dot {
+        width: 7px;
+        height: 7px;
+    }
+    .carrusel-ganadores__footer--dual {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding-inline: 8px;
+    }
+    .carrusel-ganadores__footer--dual .carrusel-ganadores__link {
+        width: 100%;
+        max-width: 340px;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
 .cromo-sticker {
     position: relative;
     height: 100%;
