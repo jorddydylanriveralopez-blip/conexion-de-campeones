@@ -2670,31 +2670,301 @@ function ganadoresSinDuplicadosParaExport() {
     });
 }
 
+/** Estilos Excel (xlsx-js-style) — look Conexión de Campeones / YAAVS */
+const EXCEL_ESTILOS = {
+    titulo: {
+        font: { bold: true, sz: 18, color: { rgb: '0A0A0A' }, name: 'Calibri' },
+        fill: { patternType: 'solid', fgColor: { rgb: '39FF14' } },
+        alignment: { horizontal: 'center', vertical: 'center' },
+    },
+    subtitulo: {
+        font: { bold: true, sz: 12, color: { rgb: 'FFFFFF' }, name: 'Calibri' },
+        fill: { patternType: 'solid', fgColor: { rgb: '0A1628' } },
+        alignment: { horizontal: 'center', vertical: 'center' },
+    },
+    meta: {
+        font: { sz: 11, color: { rgb: 'E8FFF0' }, name: 'Calibri' },
+        fill: { patternType: 'solid', fgColor: { rgb: '12263A' } },
+        alignment: { horizontal: 'center', vertical: 'center' },
+    },
+    header: {
+        font: { bold: true, sz: 11, color: { rgb: '0A0A0A' }, name: 'Calibri' },
+        fill: { patternType: 'solid', fgColor: { rgb: '00AEEF' } },
+        alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
+        border: {
+            top: { style: 'thin', color: { rgb: '0A1628' } },
+            bottom: { style: 'thin', color: { rgb: '0A1628' } },
+            left: { style: 'thin', color: { rgb: '0A1628' } },
+            right: { style: 'thin', color: { rgb: '0A1628' } },
+        },
+    },
+    celda: {
+        font: { sz: 10, color: { rgb: '111111' }, name: 'Calibri' },
+        alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
+        border: {
+            top: { style: 'thin', color: { rgb: 'D0D7DE' } },
+            bottom: { style: 'thin', color: { rgb: 'D0D7DE' } },
+            left: { style: 'thin', color: { rgb: 'D0D7DE' } },
+            right: { style: 'thin', color: { rgb: 'D0D7DE' } },
+        },
+    },
+    filaPar: { patternType: 'solid', fgColor: { rgb: 'F3FBF5' } },
+    filaImpar: { patternType: 'solid', fgColor: { rgb: 'FFFFFF' } },
+    liga: {
+        Ascenso: { patternType: 'solid', fgColor: { rgb: 'D8FFD0' } },
+        Pro: { patternType: 'solid', fgColor: { rgb: 'D6F3FF' } },
+        Elite: { patternType: 'solid', fgColor: { rgb: 'FFF3C4' } },
+        Cambaceo: { patternType: 'solid', fgColor: { rgb: 'F5D6FF' } },
+    },
+    kit: {
+        B: { patternType: 'solid', fgColor: { rgb: 'E8F5E9' } },
+        P: { patternType: 'solid', fgColor: { rgb: 'E3F2FD' } },
+        E: { patternType: 'solid', fgColor: { rgb: 'FFF8E1' } },
+    },
+};
+
+function excelBordeFino() {
+    return {
+        top: { style: 'thin', color: { rgb: 'D0D7DE' } },
+        bottom: { style: 'thin', color: { rgb: 'D0D7DE' } },
+        left: { style: 'thin', color: { rgb: 'D0D7DE' } },
+        right: { style: 'thin', color: { rgb: 'D0D7DE' } },
+    };
+}
+
+function excelAplicarRango(ws, rango, estilo) {
+    const { s, e } = XLSX.utils.decode_range(rango);
+    for (let R = s.r; R <= e.r; R++) {
+        for (let C = s.c; C <= e.c; C++) {
+            const addr = XLSX.utils.encode_cell({ r: R, c: C });
+            if (!ws[addr]) ws[addr] = { t: 's', v: '' };
+            ws[addr].s = { ...(ws[addr].s || {}), ...estilo };
+        }
+    }
+}
+
+function excelCrearHojaGanadores(filas, tituloHoja) {
+    const info = infoSorteoActual();
+    const etiqueta = etiquetaSorteoActual();
+    const headers = ['#', 'MUNICIPIO', 'LIGA', 'KIT', 'TICKET / NOMBRE', 'CLAVE', 'FECHA', 'HORA'];
+    const cols = headers.length;
+
+    const aoa = [
+        ['CONEXIÓN DE CAMPEONES · YAAVS'],
+        [`GANADORES OFICIALES · ${etiqueta}`],
+        [`${info.fecha} · ${filas.length} ganadores · ${tituloHoja}`],
+        [],
+        headers,
+    ];
+
+    filas.forEach((r, i) => {
+        const clave = extraerClaveDeTicket(r.n) || '';
+        aoa.push([
+            i + 1,
+            r.mun || municipioDeClave(clave) || '',
+            `LIGA ${String(r.l || '').toUpperCase()}`,
+            (K[r.k] && K[r.k].n) || r.k || '',
+            r.n || '',
+            clave,
+            r.d || '',
+            r.h || '',
+        ]);
+    });
+
+    const ws = XLSX.utils.aoa_to_sheet(aoa);
+    const lastCol = XLSX.utils.encode_col(cols - 1);
+
+    ws['!merges'] = [
+        { s: { r: 0, c: 0 }, e: { r: 0, c: cols - 1 } },
+        { s: { r: 1, c: 0 }, e: { r: 1, c: cols - 1 } },
+        { s: { r: 2, c: 0 }, e: { r: 2, c: cols - 1 } },
+    ];
+    ws['!rows'] = [{ hpt: 28 }, { hpt: 22 }, { hpt: 18 }, { hpt: 8 }, { hpt: 24 }];
+    ws['!cols'] = [
+        { wch: 5 },
+        { wch: 28 },
+        { wch: 16 },
+        { wch: 14 },
+        { wch: 34 },
+        { wch: 18 },
+        { wch: 14 },
+        { wch: 10 },
+    ];
+    ws['!freeze'] = { xSplit: 0, ySplit: 5 };
+
+    excelAplicarRango(ws, `A1:${lastCol}1`, EXCEL_ESTILOS.titulo);
+    excelAplicarRango(ws, `A2:${lastCol}2`, EXCEL_ESTILOS.subtitulo);
+    excelAplicarRango(ws, `A3:${lastCol}3`, EXCEL_ESTILOS.meta);
+    excelAplicarRango(ws, `A5:${lastCol}5`, EXCEL_ESTILOS.header);
+
+    const dataStart = 5;
+    filas.forEach((r, i) => {
+        const row = dataStart + i;
+        const fillBase = i % 2 === 0 ? EXCEL_ESTILOS.filaPar : EXCEL_ESTILOS.filaImpar;
+        for (let c = 0; c < cols; c++) {
+            const addr = XLSX.utils.encode_cell({ r: row, c });
+            if (!ws[addr]) continue;
+            let fill = fillBase;
+            if (c === 2 && EXCEL_ESTILOS.liga[r.l]) fill = EXCEL_ESTILOS.liga[r.l];
+            if (c === 3 && EXCEL_ESTILOS.kit[r.k]) fill = EXCEL_ESTILOS.kit[r.k];
+            ws[addr].s = {
+                ...EXCEL_ESTILOS.celda,
+                fill,
+                border: excelBordeFino(),
+                font: {
+                    ...EXCEL_ESTILOS.celda.font,
+                    bold: c === 0 || c === 2 || c === 3,
+                },
+            };
+        }
+    });
+
+    return ws;
+}
+
+function excelCrearHojaResumen(filas) {
+    const info = infoSorteoActual();
+    const etiqueta = etiquetaSorteoActual();
+    const aoa = [
+        ['CONEXIÓN DE CAMPEONES · RESUMEN'],
+        [`${etiqueta} · ${info.fecha}`],
+        [],
+        ['LIGA', 'KIT BÁSICO', 'KIT PRO', 'KIT ELITE', 'TOTAL'],
+    ];
+
+    L.forEach((liga) => {
+        const deLiga = filas.filter((r) => r.l === liga.id);
+        const b = deLiga.filter((r) => r.k === 'B').length;
+        const p = deLiga.filter((r) => r.k === 'P').length;
+        const e = deLiga.filter((r) => r.k === 'E').length;
+        aoa.push([`LIGA ${liga.id.toUpperCase()}`, b, p, e, deLiga.length]);
+    });
+    aoa.push([
+        'TOTAL GENERAL',
+        filas.filter((r) => r.k === 'B').length,
+        filas.filter((r) => r.k === 'P').length,
+        filas.filter((r) => r.k === 'E').length,
+        filas.length,
+    ]);
+
+    const ws = XLSX.utils.aoa_to_sheet(aoa);
+    ws['!merges'] = [
+        { s: { r: 0, c: 0 }, e: { r: 0, c: 4 } },
+        { s: { r: 1, c: 0 }, e: { r: 1, c: 4 } },
+    ];
+    ws['!cols'] = [{ wch: 18 }, { wch: 14 }, { wch: 12 }, { wch: 12 }, { wch: 10 }];
+    ws['!rows'] = [{ hpt: 28 }, { hpt: 20 }, { hpt: 8 }, { hpt: 22 }];
+
+    excelAplicarRango(ws, 'A1:E1', EXCEL_ESTILOS.titulo);
+    excelAplicarRango(ws, 'A2:E2', EXCEL_ESTILOS.subtitulo);
+    excelAplicarRango(ws, 'A4:E4', EXCEL_ESTILOS.header);
+
+    for (let i = 0; i < L.length + 1; i++) {
+        const row = 4 + i;
+        const ligaId = i < L.length ? L[i].id : null;
+        for (let c = 0; c < 5; c++) {
+            const addr = XLSX.utils.encode_cell({ r: row, c });
+            if (!ws[addr]) continue;
+            const isTotal = i === L.length;
+            ws[addr].s = {
+                ...EXCEL_ESTILOS.celda,
+                fill: isTotal
+                    ? { patternType: 'solid', fgColor: { rgb: '39FF14' } }
+                    : EXCEL_ESTILOS.liga[ligaId] || EXCEL_ESTILOS.filaPar,
+                font: {
+                    ...EXCEL_ESTILOS.celda.font,
+                    bold: true,
+                    sz: isTotal ? 11 : 10,
+                },
+                border: excelBordeFino(),
+            };
+        }
+    }
+    return ws;
+}
+
+function excelCrearHojaClaves(filas) {
+    const info = infoSorteoActual();
+    const etiqueta = etiquetaSorteoActual();
+    const aoa = [
+        ['CONEXIÓN DE CAMPEONES · SOLO CLAVES'],
+        [`${etiqueta} · ${info.fecha} · ${filas.length} claves`],
+        [],
+        ['#', 'CLAVE', 'LIGA', 'KIT'],
+    ];
+    filas.forEach((r, i) => {
+        aoa.push([
+            i + 1,
+            extraerClaveDeTicket(r.n) || r.n,
+            `LIGA ${String(r.l || '').toUpperCase()}`,
+            (K[r.k] && K[r.k].n) || '',
+        ]);
+    });
+    const ws = XLSX.utils.aoa_to_sheet(aoa);
+    ws['!merges'] = [
+        { s: { r: 0, c: 0 }, e: { r: 0, c: 3 } },
+        { s: { r: 1, c: 0 }, e: { r: 1, c: 3 } },
+    ];
+    ws['!cols'] = [{ wch: 5 }, { wch: 22 }, { wch: 16 }, { wch: 14 }];
+    ws['!rows'] = [{ hpt: 28 }, { hpt: 20 }, { hpt: 8 }, { hpt: 22 }];
+    ws['!freeze'] = { xSplit: 0, ySplit: 4 };
+
+    excelAplicarRango(ws, 'A1:D1', EXCEL_ESTILOS.titulo);
+    excelAplicarRango(ws, 'A2:D2', EXCEL_ESTILOS.subtitulo);
+    excelAplicarRango(ws, 'A4:D4', EXCEL_ESTILOS.header);
+
+    filas.forEach((r, i) => {
+        const row = 4 + i;
+        const fillBase = i % 2 === 0 ? EXCEL_ESTILOS.filaPar : EXCEL_ESTILOS.filaImpar;
+        for (let c = 0; c < 4; c++) {
+            const addr = XLSX.utils.encode_cell({ r: row, c });
+            if (!ws[addr]) continue;
+            let fill = fillBase;
+            if (c === 2 && EXCEL_ESTILOS.liga[r.l]) fill = EXCEL_ESTILOS.liga[r.l];
+            if (c === 3 && EXCEL_ESTILOS.kit[r.k]) fill = EXCEL_ESTILOS.kit[r.k];
+            ws[addr].s = {
+                ...EXCEL_ESTILOS.celda,
+                fill,
+                border: excelBordeFino(),
+                font: { ...EXCEL_ESTILOS.celda.font, bold: c === 1 },
+            };
+        }
+    });
+    return ws;
+}
+
 function exportarExcel() {
     if (!reg || reg.length === 0) {
         return alert('No hay ganadores registrados aún.');
     }
+    if (typeof XLSX === 'undefined') {
+        return alert('No se pudo cargar la librería de Excel. Revisa tu conexión y recarga la página.');
+    }
+
     const sinDuplicados = ganadoresSinDuplicadosParaExport();
     const fecha = new Date().toISOString().slice(0, 10);
     const nombreBase = `Ganadores_Conexión_de_Campeones_${fecha}`;
 
-    const filasCompletas = sinDuplicados.map((r) => ({
-        MUNICIPIO: r.mun || municipioDeClave(extraerClaveDeTicket(r.n)),
-        LIGA: r.l,
-        KIT: K[r.k].n,
-        'TICKET / NOMBRE': r.n,
-        FECHA: r.d,
-        HORA: r.h,
-    }));
     const wbCompleto = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wbCompleto, XLSX.utils.json_to_sheet(filasCompletas), 'Ganadores');
+    XLSX.utils.book_append_sheet(wbCompleto, excelCrearHojaResumen(sinDuplicados), 'Resumen');
+    XLSX.utils.book_append_sheet(
+        wbCompleto,
+        excelCrearHojaGanadores(sinDuplicados, 'TODAS LAS LIGAS'),
+        'Ganadores',
+    );
+    L.forEach((liga) => {
+        const deLiga = sinDuplicados.filter((r) => r.l === liga.id);
+        if (!deLiga.length) return;
+        XLSX.utils.book_append_sheet(
+            wbCompleto,
+            excelCrearHojaGanadores(deLiga, `LIGA ${liga.id.toUpperCase()}`),
+            liga.id.slice(0, 31),
+        );
+    });
     XLSX.writeFile(wbCompleto, `${nombreBase}.xlsx`);
 
-    const filasSoloClaves = sinDuplicados.map((r) => ({
-        CLAVE: extraerClaveDeTicket(r.n) || r.n,
-    }));
     const wbClaves = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wbClaves, XLSX.utils.json_to_sheet(filasSoloClaves), 'Claves');
+    XLSX.utils.book_append_sheet(wbClaves, excelCrearHojaClaves(sinDuplicados), 'Claves');
     setTimeout(() => {
         XLSX.writeFile(wbClaves, `${nombreBase}_solo_claves.xlsx`);
     }, 400);
