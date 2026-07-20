@@ -1789,14 +1789,25 @@ const K = {
     E: { n: 'KIT ELITE', d: 'Balón + Playera + Cilindro', c: '#FFD700', speed: 800 },
 };
 const L = [
-    { id: 'Ascenso', c: '#39FF14', q: { B: 10, P: 11, E: 10 } },
-    { id: 'Pro', c: '#00AEEF', q: { B: 9, P: 17, E: 15 } },
-    { id: 'Elite', c: '#FFD700', q: { B: 3, P: 28, E: 19 } },
-    { id: 'Cambaceo', c: '#d500ff', q: { B: 5, P: 20, E: 6 } },
+    // q = sorteos 1–5 (153). qUltimo = 6.º sorteo: 30 Básico + 70 Pro + 54 Elite = 154
+    { id: 'Ascenso', c: '#39FF14', q: { B: 10, P: 11, E: 10 }, qUltimo: { B: 11, P: 10, E: 11 } },
+    { id: 'Pro', c: '#00AEEF', q: { B: 9, P: 17, E: 15 }, qUltimo: { B: 10, P: 16, E: 16 } },
+    { id: 'Elite', c: '#FFD700', q: { B: 3, P: 28, E: 19 }, qUltimo: { B: 3, P: 26, E: 21 } },
+    { id: 'Cambaceo', c: '#d500ff', q: { B: 5, P: 20, E: 6 }, qUltimo: { B: 6, P: 18, E: 6 } },
 ];
 const sorteoVigente = resolverSorteoVigente();
 const SORTEO_NUMERO_ACTUAL = sorteoVigente.num;
 const SORTEO_TICKET_SUFFIX = `sorteo-${sorteoVigente.num}`;
+
+function esUltimoSorteoDelCalendario() {
+    const ultimo = CALENDARIO_SORTEOS[CALENDARIO_SORTEOS.length - 1];
+    return !!ultimo && SORTEO_NUMERO_ACTUAL === ultimo.num;
+}
+
+function cantidadesKitsLiga(lData) {
+    if (esUltimoSorteoDelCalendario() && lData.qUltimo) return { ...lData.qUltimo };
+    return { ...lData.q };
+}
 
 function urlGanadoresSorteo(n) {
     return n === 1 ? 'ganadores/ganadores.json' : `ganadores/ganadores-sorteo-${n}.json`;
@@ -1988,11 +1999,6 @@ let ganadoresPreviosCargados = false;
  * Ascenso y Cambaceo siguen sin poder repetir.
  */
 const LIGAS_PERMITEN_REPETIR_PREVIOS_EN_ULTIMO = new Set(['Pro', 'Elite']);
-
-function esUltimoSorteoDelCalendario() {
-    const ultimo = CALENDARIO_SORTEOS[CALENDARIO_SORTEOS.length - 1];
-    return !!ultimo && SORTEO_NUMERO_ACTUAL === ultimo.num;
-}
 
 function ligaPermiteRepetirGanadoresPrevios(ligaId) {
     return esUltimoSorteoDelCalendario() && LIGAS_PERMITEN_REPETIR_PREVIOS_EN_ULTIMO.has(ligaId);
@@ -2323,7 +2329,7 @@ function preparar() {
     const lData = L[cIdx];
     document.documentElement.style.setProperty('--cc', lData.c);
     if (sel) sel.value = cIdx;
-    inv = { ...lData.q };
+    inv = cantidadesKitsLiga(lData);
     const btnS = document.getElementById('btnS');
     if (btnS) btnS.style.display = 'block';
     updUI();
