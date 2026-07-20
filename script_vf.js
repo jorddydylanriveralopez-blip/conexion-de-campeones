@@ -1893,7 +1893,7 @@ function boletosElegiblesParaBloque(ligaId) {
         if (x.l !== ligaId || usados.has(x.n)) continue;
         const clave = extraerClaveDeTicket(x.n);
         if (!clave) continue;
-        if (!claveElegibleParaSorteo(clave)) continue;
+        if (!claveElegibleParaSorteo(clave, ligaId)) continue;
         if (claveYaGanoEnEsteSorteo(clave)) continue;
         if (clavesEnBolillero.has(clave)) continue;
         clavesEnBolillero.add(clave);
@@ -1909,7 +1909,7 @@ function sacarGanadorDelBolillero(pool, ligaId, kitType) {
         const clave = extraerClaveDeTicket(item.n);
         if (
             !clave ||
-            !claveElegibleParaSorteo(clave) ||
+            !claveElegibleParaSorteo(clave, ligaId) ||
             claveYaGanoEnEsteSorteo(clave) ||
             claveYaGanoEnBloque(clave, ligaId, kitType)
         ) {
@@ -1983,6 +1983,21 @@ function municipioDeClave(clave) {
 const clavesExcluidasSorteosPrevios = new Set();
 let ganadoresPreviosCargados = false;
 
+/**
+ * En el último sorteo del calendario, Pro y Elite sí pueden repetir ganadores previos.
+ * Ascenso y Cambaceo siguen sin poder repetir.
+ */
+const LIGAS_PERMITEN_REPETIR_PREVIOS_EN_ULTIMO = new Set(['Pro', 'Elite']);
+
+function esUltimoSorteoDelCalendario() {
+    const ultimo = CALENDARIO_SORTEOS[CALENDARIO_SORTEOS.length - 1];
+    return !!ultimo && SORTEO_NUMERO_ACTUAL === ultimo.num;
+}
+
+function ligaPermiteRepetirGanadoresPrevios(ligaId) {
+    return esUltimoSorteoDelCalendario() && LIGAS_PERMITEN_REPETIR_PREVIOS_EN_ULTIMO.has(ligaId);
+}
+
 function normalizarClaveYaavser(clave) {
     return String(clave ?? '').trim().toUpperCase();
 }
@@ -2025,14 +2040,18 @@ async function cargarGanadoresSorteosPrevios() {
         }
     }
     ganadoresPreviosCargados = true;
+    const reglaUltimo = esUltimoSorteoDelCalendario()
+        ? ' · último sorteo: Pro/Elite sí pueden repetir; Ascenso/Cambaceo no'
+        : '';
     console.info(
-        `[Sorteador] ${clavesExcluidasSorteosPrevios.size} claves excluidas de sorteos previos (${resumenPorSorteo.join(', ') || 'sin listas'}).`,
+        `[Sorteador] ${clavesExcluidasSorteosPrevios.size} claves excluidas de sorteos previos (${resumenPorSorteo.join(', ') || 'sin listas'})${reglaUltimo}.`,
     );
 }
 
-function claveElegibleParaSorteo(clave) {
+function claveElegibleParaSorteo(clave, ligaId) {
     const c = normalizarClaveYaavser(clave);
     if (!c) return false;
+    if (ligaPermiteRepetirGanadoresPrevios(ligaId)) return true;
     return !clavesExcluidasSorteosPrevios.has(c);
 }
 let reg = [];
