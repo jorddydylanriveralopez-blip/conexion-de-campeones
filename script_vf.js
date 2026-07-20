@@ -2073,6 +2073,7 @@ async function iniciarSorteador() {
     est = 'W';
     detenerMusicaSorteo();
     actualizarBienvenidaSorteador();
+    iniciarAnimacionPuntosBienvenida();
     showSorterScreen('welcome');
     if (!ganadoresPreviosCargados && SORTEO_NUMERO_ACTUAL > 1) {
         await cargarGanadoresSorteosPrevios();
@@ -2084,6 +2085,27 @@ function actualizarBienvenidaSorteador() {
     const fechaEl = document.getElementById('sorter-welcome-fecha');
     if (sorteoEl) sorteoEl.textContent = etiquetaOrdinalSorteo(SORTEO_NUMERO_ACTUAL);
     if (fechaEl && sorteoVigente) fechaEl.textContent = sorteoVigente.label;
+}
+
+let intervaloPuntosBienvenida = null;
+
+function iniciarAnimacionPuntosBienvenida() {
+    const dotsEl = document.getElementById('btn-iniciar-sorteo-dots');
+    if (!dotsEl) return;
+    detenerAnimacionPuntosBienvenida();
+    let n = 1;
+    dotsEl.textContent = '.';
+    intervaloPuntosBienvenida = setInterval(() => {
+        n = n >= 3 ? 1 : n + 1;
+        dotsEl.textContent = '.'.repeat(n);
+    }, 500);
+}
+
+function detenerAnimacionPuntosBienvenida() {
+    if (intervaloPuntosBienvenida) {
+        clearInterval(intervaloPuntosBienvenida);
+        intervaloPuntosBienvenida = null;
+    }
 }
 
 window.addEventListener('keydown', (e) => {
@@ -2202,6 +2224,7 @@ const SEGUNDOS_TRANSICION_LIGA = 1;
 
 function iniciarConEspera() {
     est = 'R';
+    detenerAnimacionPuntosBienvenida();
     limpiarCajaGanadores();
     const radarText = document.getElementById('radar-text');
     const radarSub = document.getElementById('radar-sub');

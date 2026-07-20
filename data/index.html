@@ -604,6 +604,12 @@
                 transform: scale(1.06);
                 filter: brightness(1.15);
             }
+            #sorter-modal .btn-ui-dots {
+                display: inline-block;
+                min-width: 1.6em;
+                text-align: left;
+                letter-spacing: 0.05em;
+            }
             @keyframes sorterBtnPulse {
                 0%, 100% {
                     transform: scale(1);
@@ -1081,7 +1087,7 @@
                 <p id="sorter-welcome-sorteo" class="sorter-welcome-sorteo">3.er SORTEO</p>
                 <p id="sorter-welcome-fecha" class="sorter-welcome-fecha">12 DE JUNIO 2026</p>
                 <h1 style="font-size: 2.5rem; color: var(--nv); margin: 0 0 22px;">¡ESTAMOS EN VIVO!</h1>
-                <button type="button" id="btn-iniciar-sorteo-live" class="btn-ui btn-ui--pulse" onclick="iniciarConEspera()">EL SORTEO ESTÁ POR COMENZAR</button>
+                <button type="button" id="btn-iniciar-sorteo-live" class="btn-ui btn-ui--pulse" onclick="iniciarConEspera()">EL SORTEO ESTÁ POR COMENZAR<span id="btn-iniciar-sorteo-dots" class="btn-ui-dots" aria-hidden="true">.</span></button>
             </div>
             <div id="screen-radar" class="screen">
                 <div class="loader-container">
@@ -1175,6 +1181,6 @@
         </div>
     </div>
 
-    <script src="script_vf.js?v=20260720_kits_ultimo_154"></script>
+    <script src="script_vf.js?v=20260720_puntos_esperando"></script>
 </body>
 </html>
