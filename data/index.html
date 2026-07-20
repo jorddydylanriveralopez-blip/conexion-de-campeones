@@ -753,7 +753,7 @@
                 isolation: isolate;
                 background:
                     linear-gradient(165deg, rgba(0, 10, 28, 0.96) 0%, rgba(0, 6, 18, 0.98) 100%);
-                border: none;
+                border: 3px solid color-mix(in srgb, var(--cc) 85%, transparent);
                 border-radius: 25px;
                 min-height: 220px;
                 max-height: min(58vh, 560px);
@@ -770,64 +770,16 @@
                     inset 0 0 50px color-mix(in srgb, var(--cc) 10%, transparent),
                     0 0 28px color-mix(in srgb, var(--cc) 22%, transparent);
             }
-            #sorter-modal .display-area::before {
-                content: '';
-                position: absolute;
-                inset: -2px;
-                border-radius: 27px;
-                background: conic-gradient(
-                    from 0deg,
-                    var(--cc),
-                    transparent 22%,
-                    rgba(0, 229, 255, 0.75) 38%,
-                    transparent 58%,
-                    var(--or) 72%,
-                    transparent 88%,
-                    var(--cc)
-                );
-                animation: cajaBorderSpin 5s linear infinite;
-                pointer-events: none;
-                z-index: 0;
-                opacity: 0.9;
-            }
+            #sorter-modal .display-area::before,
             #sorter-modal .display-area::after {
-                content: '';
-                position: absolute;
-                inset: 2px;
-                border-radius: 23px;
-                background:
-                    linear-gradient(165deg, rgba(0, 10, 28, 0.97) 0%, rgba(0, 6, 18, 0.99) 100%);
-                pointer-events: none;
-                z-index: 0;
-            }
-            #sorter-modal .display-area:not(:empty)::after {
-                background:
-                    linear-gradient(165deg, rgba(0, 10, 28, 0.94) 0%, rgba(0, 6, 18, 0.97) 100%),
-                    linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.04) 50%, transparent 58%);
-                background-size: 100% 100%, 220% 100%;
-                animation: cajaShineSweep 6s ease-in-out infinite;
+                content: none;
+                display: none;
             }
             #sorter-modal .display-area:empty {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 min-height: 190px;
-            }
-            #sorter-modal .display-area:empty::after {
-                inset: 2px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                gap: 10px;
-                background:
-                    radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--cc) 14%, transparent), transparent 55%),
-                    linear-gradient(165deg, rgba(0, 10, 28, 0.95) 0%, rgba(0, 6, 18, 0.98) 100%);
-                animation: cajaEmptyGlow 2.4s ease-in-out infinite;
-            }
-            #sorter-modal .display-area:empty::before {
-                animation: cajaBorderSpin 3s linear infinite;
-                opacity: 1;
             }
             #sorter-modal .display-area > * {
                 position: relative;
