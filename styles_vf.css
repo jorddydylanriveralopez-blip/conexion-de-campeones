@@ -2520,6 +2520,41 @@ body.cromo-modal-open { overflow: hidden; }
 .aviso-sorteo-proximo--hoy .aviso-sorteo-proximo__badge {
     background: linear-gradient(135deg, #ffd700, var(--verde-yaavs));
 }
+.aviso-sorteo-proximo--ultimo-momento {
+    border-color: #ff6b00;
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.22), rgba(255, 215, 0, 0.14), rgba(34, 255, 94, 0.1));
+    animation: avisoSorteoUltimoMomento 1.35s ease-in-out infinite;
+}
+@keyframes avisoSorteoUltimoMomento {
+    0%, 100% { box-shadow: 0 0 30px rgba(255, 107, 0, 0.45), inset 0 0 12px rgba(255, 255, 255, 0.08); }
+    50% { box-shadow: 0 0 52px rgba(255, 107, 0, 0.7), 0 0 22px rgba(255, 215, 0, 0.4), inset 0 0 14px rgba(255, 255, 255, 0.1); }
+}
+.aviso-sorteo-proximo--ultimo-momento .aviso-sorteo-proximo__badge {
+    background: linear-gradient(135deg, #ff6b00, #ffd700);
+    color: #1a0a00;
+}
+.aviso-sorteo-proximo--ultimo-momento .aviso-sorteo-proximo__titulo {
+    text-shadow: 0 0 22px rgba(255, 107, 0, 0.55);
+}
+.aviso-sorteo-proximo--ultimo-momento .aviso-sorteo-proximo__fecha {
+    color: #ffd700;
+}
+.fecha-cambio-aviso {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 0.78em;
+    font-weight: 700;
+    color: #ff6b00;
+    text-transform: lowercase;
+}
+.calendario-table-unificada tr.sorteo-ultimo-momento td {
+    background: rgba(255, 107, 0, 0.12);
+    border-color: rgba(255, 107, 0, 0.5);
+}
+.sorteo-ultimo-momento-tag {
+    background: linear-gradient(135deg, #ff6b00, #ffd700);
+    color: #1a0a00;
+}
 .calendario-table-unificada tr.sorteo-hoy td {
     background: rgba(255, 215, 0, 0.14);
     border-color: rgba(255, 215, 0, 0.55);

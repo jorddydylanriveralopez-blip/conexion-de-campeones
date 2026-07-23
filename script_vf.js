@@ -17,7 +17,13 @@ const CALENDARIO_SORTEOS = [
     { num: 3, fecha: '2026-06-12', label: '12 DE JUNIO 2026' },
     { num: 4, fecha: '2026-06-26', label: '26 DE JUNIO 2026' },
     { num: 5, fecha: '2026-07-10', label: '10 DE JULIO 2026' },
-    { num: 6, fecha: '2026-07-31', label: '31 DE JULIO 2026' },
+    {
+        num: 6,
+        fecha: '2026-07-24',
+        label: '24 DE JULIO 2026',
+        fechaAnteriorLabel: '31 DE JULIO',
+        avisoUltimoMomento: true,
+    },
 ];
 const HORA_SORTEO_TEXTO = '3:00 pm (hora CDMX)';
 
@@ -32,6 +38,19 @@ function hoyEnCDMX() {
     const m = partes.find((p) => p.type === 'month').value;
     const d = partes.find((p) => p.type === 'day').value;
     return `${y}-${m}-${d}`;
+}
+
+function sumarDiasFecha(fechaStr, dias) {
+    const [y, m, d] = String(fechaStr).split('-').map(Number);
+    const dt = new Date(y, m - 1, d + dias);
+    const yy = dt.getFullYear();
+    const mm = String(dt.getMonth() + 1).padStart(2, '0');
+    const dd = String(dt.getDate()).padStart(2, '0');
+    return `${yy}-${mm}-${dd}`;
+}
+
+function esMananaEnCDMX(fechaSorteo, fechaHoy = hoyEnCDMX()) {
+    return fechaSorteo === sumarDiasFecha(fechaHoy, 1);
 }
 
 /** Próximo sorteo según calendario; al pasar su fecha avanza al siguiente */
@@ -58,18 +77,33 @@ function resolverEstadoAvisoSorteo(fechaHoy = hoyEnCDMX()) {
 
 function actualizarCalendarioSorteosUI(estado) {
     document.querySelectorAll('.calendario-table-unificada tbody tr[data-sorteo]').forEach((row) => {
-        row.classList.remove('sorteo-proximo', 'sorteo-hoy');
+        row.classList.remove('sorteo-proximo', 'sorteo-hoy', 'sorteo-ultimo-momento');
         const tagViejo = row.querySelector('.sorteo-estado-tag');
         if (tagViejo) tagViejo.remove();
-        if (!estado) return;
+        if (!estado || !estado.sorteo) return;
         const num = Number(row.dataset.sorteo);
         if (num !== estado.sorteo.num) return;
-        row.classList.add(estado.tipo === 'hoy' ? 'sorteo-hoy' : 'sorteo-proximo');
+        const esUltimoMomento = !!estado.sorteo.avisoUltimoMomento;
+        const esManana = esMananaEnCDMX(estado.sorteo.fecha);
+        row.classList.add(
+            estado.tipo === 'hoy' ? 'sorteo-hoy' : 'sorteo-proximo',
+            ...(esUltimoMomento ? ['sorteo-ultimo-momento'] : []),
+        );
         const td = row.querySelector('td');
         if (!td) return;
         const tag = document.createElement('span');
-        tag.className = `sorteo-estado-tag ${estado.tipo === 'hoy' ? 'sorteo-hoy-tag' : 'sorteo-proximo-tag'}`;
-        tag.textContent = estado.tipo === 'hoy' ? '¡Hoy!' : 'Próximo';
+        let tagTxt = 'Próximo';
+        if (estado.tipo === 'hoy') tagTxt = '¡Hoy!';
+        else if (esUltimoMomento && esManana) tagTxt = '¡Mañana!';
+        else if (esUltimoMomento) tagTxt = '¡Cambio!';
+        tag.className = `sorteo-estado-tag ${
+            estado.tipo === 'hoy'
+                ? 'sorteo-hoy-tag'
+                : esUltimoMomento
+                  ? 'sorteo-ultimo-momento-tag'
+                  : 'sorteo-proximo-tag'
+        }`;
+        tag.textContent = tagTxt;
         td.appendChild(tag);
     });
 }
@@ -778,11 +812,37 @@ function actualizarAvisoSorteoEnPagina() {
     const titulo = document.getElementById('aviso-sorteo-titulo');
     const fecha = document.getElementById('aviso-sorteo-fecha');
     const texto = document.getElementById('aviso-sorteo-texto');
+    const esUltimoMomento = !!sorteo.avisoUltimoMomento;
+    const esManana = esMananaEnCDMX(sorteo.fecha);
 
     banner.style.display = '';
-    banner.classList.toggle('aviso-sorteo-proximo--hoy', tipo === 'hoy');
+    banner.classList.toggle('aviso-sorteo-proximo--hoy', tipo === 'hoy' && !esUltimoMomento);
+    banner.classList.toggle('aviso-sorteo-proximo--ultimo-momento', esUltimoMomento);
 
-    if (tipo === 'hoy') {
+    if (esUltimoMomento) {
+        if (badge) badge.innerHTML = '<i class="fa-solid fa-bolt"></i> Último momento';
+        if (titulo) titulo.textContent = `El ${ordinal} se movió`;
+        if (tipo === 'hoy') {
+            if (fecha) fecha.textContent = `¡Es hoy! · ${sorteo.label} · ${HORA_SORTEO_TEXTO}`;
+            if (texto) {
+                texto.textContent = sorteo.fechaAnteriorLabel
+                    ? `Aviso de último momento: se adelantó del ${sorteo.fechaAnteriorLabel}. ¡Nos vemos en la transmisión en vivo!`
+                    : 'Aviso de último momento: el sorteo se adelantó. ¡Nos vemos en la transmisión en vivo!';
+            }
+        } else {
+            if (fecha) {
+                fecha.textContent = esManana
+                    ? `Mañana · ${sorteo.label} · ${HORA_SORTEO_TEXTO}`
+                    : `${sorteo.label} · ${HORA_SORTEO_TEXTO}`;
+            }
+            if (texto) {
+                const destino = esManana ? 'mañana' : `el ${sorteo.label}`;
+                texto.textContent = sorteo.fechaAnteriorLabel
+                    ? `Aviso de último momento: el sorteo se movió del ${sorteo.fechaAnteriorLabel} a ${destino}. ¡Prepárate y revisa tus boletos!`
+                    : `Aviso de último momento: el sorteo se movió a ${destino}. ¡Prepárate y revisa tus boletos!`;
+            }
+        }
+    } else if (tipo === 'hoy') {
         if (badge) badge.innerHTML = '<i class="fa-solid fa-trophy"></i> ¡Es hoy!';
         if (titulo) titulo.textContent = `¡Es el ${ordinal}!`;
         if (fecha) fecha.textContent = `Hoy · ${HORA_SORTEO_TEXTO}`;
