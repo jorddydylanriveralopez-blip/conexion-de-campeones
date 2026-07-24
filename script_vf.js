@@ -1479,12 +1479,14 @@ function parseCSV(text) {
 }
 
 function limpiar() {
-    document.getElementById('inputClave').value = '';
+    const input = document.getElementById('inputClave');
+    const resDiv = document.getElementById('resultados');
     if (typeof window.resetCodigoSecretoUI === 'function') window.resetCodigoSecretoUI();
-    document.getElementById('resultados').style.display = 'none';
+    if (input) input.value = '';
+    if (resDiv) resDiv.style.display = 'none';
     const ticketPanel = document.getElementById('boletos-vista');
     if (ticketPanel) ticketPanel.style.display = 'none';
-    document.getElementById('inputClave').focus();
+    if (input && input.type !== 'hidden') input.focus();
 }
 
 function mostrarBoletosReales(ticketsList) {
@@ -1610,8 +1612,14 @@ function abrirMinijuegoFutbolDesdeConsulta() {
 }
 
 async function consultar() {
+    if (typeof CAMPANA_FINALIZADA !== 'undefined' && CAMPANA_FINALIZADA) {
+        window.location.href = 'ganadores?sorteo=6';
+        return;
+    }
     initAudio();
-    const inputBusqueda = normalizarCodigoFutbol(document.getElementById('inputClave').value);
+    const inputEl = document.getElementById('inputClave');
+    if (!inputEl) return;
+    const inputBusqueda = normalizarCodigoFutbol(inputEl.value);
     const loader = document.getElementById('loading');
     const resDiv = document.getElementById('resultados');
 
@@ -1621,14 +1629,14 @@ async function consultar() {
     }
 
     if (inputBusqueda === 'YAAVS') {
-        document.getElementById('inputClave').value = '';
+        inputEl.value = '';
         if (typeof window.resetCodigoSecretoUI === 'function') window.resetCodigoSecretoUI();
         abrirMinijuegoFutbolDesdeConsulta();
         return;
     }
 
-    loader.style.display = 'block';
-    resDiv.style.display = 'none';
+    if (loader) loader.style.display = 'block';
+    if (resDiv) resDiv.style.display = 'none';
 
     document.getElementById('cTotal').innerText = '0';
     const uiElements = ['avPortaBait', 'avPortaMovi', 'avPortaUnefon', 'totPortaBait', 'totPortaMovi', 'totPortaUnefon',

@@ -2554,6 +2554,25 @@ body.cromo-modal-open { overflow: hidden; }
 .aviso-sorteo-proximo--finalizado .aviso-sorteo-proximo__fecha {
     color: var(--verde-yaavs);
 }
+.consulta-boletos-suspendida {
+    text-align: center;
+    padding: clamp(28px, 4vw, 40px) clamp(20px, 4vw, 36px);
+}
+.consulta-boletos-suspendida__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #1a0a00;
+    background: linear-gradient(135deg, #ff6b00, #ffd700);
+}
 .fecha-cambio-aviso {
     display: inline-block;
     margin-left: 4px;
