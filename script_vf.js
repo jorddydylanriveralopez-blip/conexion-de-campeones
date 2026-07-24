@@ -25,6 +25,8 @@ const CALENDARIO_SORTEOS = [
         avisoUltimoMomento: true,
     },
 ];
+/** Campaña cerrada: ya no hay más sorteos; solo consulta de ganadores */
+const CAMPANA_FINALIZADA = true;
 const HORA_SORTEO_TEXTO = '3:00 pm (hora CDMX)';
 
 function hoyEnCDMX() {
@@ -67,6 +69,12 @@ function etiquetaOrdinalSorteo(n) {
 }
 
 function resolverEstadoAvisoSorteo(fechaHoy = hoyEnCDMX()) {
+    if (CAMPANA_FINALIZADA) {
+        return {
+            tipo: 'finalizado',
+            sorteo: CALENDARIO_SORTEOS[CALENDARIO_SORTEOS.length - 1],
+        };
+    }
     for (const s of CALENDARIO_SORTEOS) {
         if (s.fecha >= fechaHoy) {
             return { tipo: s.fecha === fechaHoy ? 'hoy' : 'proximo', sorteo: s };
@@ -800,11 +808,45 @@ function actualizarAvisoSorteoEnPagina() {
     if (!banner) return;
 
     const estado = resolverEstadoAvisoSorteo();
+    const openSorterBtn = document.getElementById('open-sorter-btn');
+
     if (estado.tipo === 'fin') {
         banner.style.display = 'none';
         actualizarCalendarioSorteosUI(null);
+        if (openSorterBtn) openSorterBtn.style.display = '';
         return;
     }
+
+    if (estado.tipo === 'finalizado') {
+        const sorteo = estado.sorteo;
+        const badge = document.getElementById('aviso-sorteo-badge');
+        const titulo = document.getElementById('aviso-sorteo-titulo');
+        const fecha = document.getElementById('aviso-sorteo-fecha');
+        const texto = document.getElementById('aviso-sorteo-texto');
+
+        banner.style.display = '';
+        banner.classList.remove('aviso-sorteo-proximo--hoy', 'aviso-sorteo-proximo--ultimo-momento');
+        banner.classList.add('aviso-sorteo-proximo--finalizado');
+
+        if (badge) badge.innerHTML = '<i class="fa-solid fa-flag-checkered"></i> Campaña finalizada';
+        if (titulo) titulo.textContent = '¡Se acabó Conexión de Campeones!';
+        if (fecha) {
+            fecha.textContent = sorteo
+                ? `Último sorteo · ${sorteo.label}`
+                : 'Todos los sorteos han concluido';
+        }
+        if (texto) {
+            texto.innerHTML =
+                'Gracias por participar. Ya puedes consultar la lista oficial de ganadores de todos los sorteos.';
+        }
+
+        actualizarCalendarioSorteosUI(null);
+        if (openSorterBtn) openSorterBtn.style.display = 'none';
+        return;
+    }
+
+    banner.classList.remove('aviso-sorteo-proximo--finalizado');
+    if (openSorterBtn) openSorterBtn.style.display = '';
 
     const { tipo, sorteo } = estado;
     const ordinal = etiquetaOrdinalSorteo(sorteo.num);
@@ -1754,6 +1796,10 @@ const inputPass = document.getElementById('inputPassword');
 const errorPass = document.getElementById('error-password');
 
 document.getElementById('open-sorter-btn').addEventListener('click', () => {
+    if (typeof CAMPANA_FINALIZADA !== 'undefined' && CAMPANA_FINALIZADA) {
+        window.location.href = 'ganadores?sorteo=6';
+        return;
+    }
     passModal.style.display = 'flex';
     inputPass.value = '';
     errorPass.style.display = 'none';

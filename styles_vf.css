@@ -2539,6 +2539,21 @@ body.cromo-modal-open { overflow: hidden; }
 .aviso-sorteo-proximo--ultimo-momento .aviso-sorteo-proximo__fecha {
     color: #ffd700;
 }
+.aviso-sorteo-proximo--finalizado {
+    border-color: var(--azul-puntos);
+    background: linear-gradient(135deg, rgba(0, 174, 239, 0.18), rgba(34, 255, 94, 0.1));
+    animation: none;
+    box-shadow: 0 0 28px rgba(0, 174, 239, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.06);
+}
+.aviso-sorteo-proximo--finalizado .aviso-sorteo-proximo__badge {
+    background: linear-gradient(135deg, var(--azul-puntos), var(--verde-yaavs));
+}
+.aviso-sorteo-proximo--finalizado .aviso-sorteo-proximo__titulo {
+    text-shadow: 0 0 20px rgba(0, 174, 239, 0.4);
+}
+.aviso-sorteo-proximo--finalizado .aviso-sorteo-proximo__fecha {
+    color: var(--verde-yaavs);
+}
 .fecha-cambio-aviso {
     display: inline-block;
     margin-left: 4px;

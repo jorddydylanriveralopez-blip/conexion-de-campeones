@@ -460,6 +460,7 @@
                 <button type="button" class="filtro-btn" data-sorteo="3">3.er sorteo</button>
                 <button type="button" class="filtro-btn" data-sorteo="4">4.º sorteo</button>
                 <button type="button" class="filtro-btn" data-sorteo="5">5.º sorteo</button>
+                <button type="button" class="filtro-btn" data-sorteo="6">6.º sorteo</button>
             </div>
         </header>
 
@@ -532,6 +533,12 @@
                 sub: 'Lista oficial de ganadores del quinto sorteo quincenal',
                 docTitle: 'GANADORES 5.º SORTEO - CONEXIÓN DE CAMPEONES | YAAVS',
             },
+            6: {
+                url: 'ganadores-sorteo-6.json',
+                badge: '6.º sorteo · 24 julio 2026',
+                sub: 'Lista oficial de ganadores del sexto y último sorteo quincenal',
+                docTitle: 'GANADORES 6.º SORTEO - CONEXIÓN DE CAMPEONES | YAAVS',
+            },
         };
 
         const POR_PAGINA = 24;
@@ -577,7 +584,9 @@
             const p = new URLSearchParams(location.search);
             const s = p.get('sorteo') || p.get('s');
             const n = Number(s);
-            return SORTEOS[n] ? n : 1;
+            if (SORTEOS[n]) return n;
+            const nums = Object.keys(SORTEOS).map(Number);
+            return Math.max(...nums);
         }
 
         function actualizarHero(n) {
@@ -668,7 +677,7 @@
         async function obtenerDatosSorteo(n) {
             if (cacheSorteos[n]) return cacheSorteos[n];
             const cfg = SORTEOS[n];
-            const res = await fetch(cfg.url + '?v=20260710_sorteo5');
+            const res = await fetch(cfg.url + '?v=20260724_sorteo6');
             if (!res.ok) throw new Error('HTTP ' + res.status);
             const data = await res.json();
             cacheSorteos[n] = data;
