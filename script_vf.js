@@ -1489,6 +1489,159 @@ function limpiar() {
     if (input && input.type !== 'hidden') input.focus();
 }
 
+/** Claves de prueba locales (no consultan Google Sheets) */
+const CLAVES_PRUEBA_CONSULTA = {
+    DEMO: {
+        clave: 'DEMO',
+        liga: 'LIGA ASCENSO',
+        sims: { bait: 12, movi: 8, unefon: 5 },
+        porta: { bait: 4, movi: 3, unefon: 2 },
+        esim: { bait: 2, movi: 1, unefon: 1 },
+    },
+    PRUEBA01: {
+        clave: 'PRUEBA01',
+        liga: 'LIGA PRO',
+        sims: { bait: 20, movi: 15, unefon: 10 },
+        porta: { bait: 6, movi: 5, unefon: 4 },
+        esim: { bait: 3, movi: 2, unefon: 2 },
+    },
+    CAMPEON24: {
+        clave: 'CAMPEON24',
+        liga: 'LIGA ELITE',
+        sims: { bait: 35, movi: 28, unefon: 18 },
+        porta: { bait: 10, movi: 8, unefon: 6 },
+        esim: { bait: 5, movi: 4, unefon: 3 },
+    },
+    TESTCB: {
+        clave: 'TESTCB',
+        liga: 'LIGA CAMBACEO',
+        sims: { bait: 9, movi: 6, unefon: 3 },
+        porta: { bait: 135, movi: 67, unefon: 0 },
+        esim: { bait: 0, movi: 0, unefon: 0 },
+    },
+    YA12345: {
+        clave: 'YA12345',
+        liga: 'LIGA ASCENSO',
+        sims: { bait: 7, movi: 4, unefon: 2 },
+        porta: { bait: 2, movi: 1, unefon: 1 },
+        esim: { bait: 1, movi: 1, unefon: 0 },
+    },
+};
+
+function calcularTotalesConsulta(stats) {
+    const totChipsUnefon = (stats.sims.unefon || 0) * 2;
+    const totChipsBait = (stats.sims.bait || 0) * 1;
+    const totChipsMovi = (stats.sims.movi || 0) * 1;
+    const totPortaUnefon = (stats.porta.unefon || 0) * 3;
+    const totPortaBait = (stats.porta.bait || 0) * 2;
+    const totPortaMovi = (stats.porta.movi || 0) * 2;
+    const totEsimUnefon = (stats.esim.unefon || 0) * 3;
+    const totEsimBait = (stats.esim.bait || 0) * 2;
+    const totEsimMovi = (stats.esim.movi || 0) * 2;
+    const total =
+        totChipsUnefon + totChipsBait + totChipsMovi +
+        totPortaUnefon + totPortaBait + totPortaMovi +
+        totEsimUnefon + totEsimBait + totEsimMovi;
+    return {
+        avChipsUnefon: stats.sims.unefon || 0,
+        totChipsUnefon,
+        avChipsBait: stats.sims.bait || 0,
+        totChipsBait,
+        avChipsMovi: stats.sims.movi || 0,
+        totChipsMovi,
+        avPortaUnefon: stats.porta.unefon || 0,
+        totPortaUnefon,
+        avPortaBait: stats.porta.bait || 0,
+        totPortaBait,
+        avPortaMovi: stats.porta.movi || 0,
+        totPortaMovi,
+        avEsimUnefon: stats.esim.unefon || 0,
+        totEsimUnefon,
+        avEsimBait: stats.esim.bait || 0,
+        totEsimBait,
+        avEsimMovi: stats.esim.movi || 0,
+        totEsimMovi,
+        total,
+    };
+}
+
+function pintarResultadosConsulta(liga, valores) {
+    applyRligaDisplay(document.getElementById('rLiga'), liga);
+    const map = {
+        avChipsUnefon: valores.avChipsUnefon,
+        totChipsUnefon: valores.totChipsUnefon,
+        avChipsBait: valores.avChipsBait,
+        totChipsBait: valores.totChipsBait,
+        avChipsMovi: valores.avChipsMovi,
+        totChipsMovi: valores.totChipsMovi,
+        avPortaUnefon: valores.avPortaUnefon,
+        totPortaUnefon: valores.totPortaUnefon,
+        avPortaBait: valores.avPortaBait,
+        totPortaBait: valores.totPortaBait,
+        avPortaMovi: valores.avPortaMovi,
+        totPortaMovi: valores.totPortaMovi,
+        avEsimUnefon: valores.avEsimUnefon,
+        totEsimUnefon: valores.totEsimUnefon,
+        avEsimBait: valores.avEsimBait,
+        totEsimBait: valores.totEsimBait,
+        avEsimMovi: valores.avEsimMovi,
+        totEsimMovi: valores.totEsimMovi,
+        cTotal: valores.total,
+    };
+    Object.entries(map).forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = String(val);
+    });
+}
+
+function mostrarResultadoConsultaCompleto(clave, liga, valores) {
+    const loader = document.getElementById('loading');
+    const resDiv = document.getElementById('resultados');
+    pintarResultadosConsulta(liga, valores);
+    const ticketsList = [];
+    for (let b = 1; b <= valores.total; b++) {
+        ticketsList.push(`${clave}-${b}-${SORTEO_TICKET_SUFFIX}`);
+    }
+    mostrarBoletosReales(ticketsList);
+    if (loader) loader.style.display = 'none';
+    if (resDiv) {
+        resDiv.style.display = 'block';
+        resDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    playSuccess();
+}
+
+function consultarClavePrueba(clave) {
+    const demo = CLAVES_PRUEBA_CONSULTA[clave];
+    if (!demo) return false;
+    const valores = calcularTotalesConsulta(demo);
+    mostrarResultadoConsultaCompleto(demo.clave, demo.liga, valores);
+    return true;
+}
+
+function enlazarClavesPruebaConsulta() {
+    document.querySelectorAll('.demo-clave-consulta-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const input = document.getElementById('inputClave');
+            const clave = (btn.getAttribute('data-clave') || '').trim().toUpperCase();
+            if (!input || !clave) return;
+            input.value = clave;
+            consultar();
+        });
+    });
+    const input = document.getElementById('inputClave');
+    if (input && input.type !== 'hidden') {
+        input.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Enter') {
+                ev.preventDefault();
+                consultar();
+            }
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', enlazarClavesPruebaConsulta);
+
 function mostrarBoletosReales(ticketsList) {
     ticketsList = ticketsList.map(normalizarNomenclaturaBoleto);
     const panel = document.getElementById('boletos-vista');
@@ -1639,6 +1792,11 @@ async function consultar() {
                         'avChipsBait', 'avChipsMovi', 'avChipsUnefon', 'totChipsBait', 'totChipsMovi', 'totChipsUnefon',
                         'avEsimBait', 'avEsimMovi', 'avEsimUnefon', 'totEsimBait', 'totEsimMovi', 'totEsimUnefon'];
     uiElements.forEach(id => document.getElementById(id).innerText = '0');
+
+    if (CLAVES_PRUEBA_CONSULTA[inputBusqueda]) {
+        consultarClavePrueba(inputBusqueda);
+        return;
+    }
 
     try {
         const resStats = await fetch(URL_CSV_STATS);

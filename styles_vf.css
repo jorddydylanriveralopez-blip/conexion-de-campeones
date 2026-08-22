@@ -2573,6 +2573,57 @@ body.cromo-modal-open { overflow: hidden; }
     color: #1a0a00;
     background: linear-gradient(135deg, #ff6b00, #ffd700);
 }
+.demo-claves-consulta {
+    margin-top: 18px;
+    padding: 16px 14px;
+    border-radius: 14px;
+    text-align: center;
+    background: rgba(46, 248, 120, 0.08);
+    border: 1px solid rgba(46, 248, 120, 0.28);
+}
+.demo-claves-consulta__title {
+    margin: 0 0 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--verde-yaavs, #2ef878);
+}
+.demo-claves-consulta__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 10px;
+    padding: 0;
+}
+.demo-clave-consulta-btn {
+    appearance: none;
+    border: 1px solid rgba(46, 248, 120, 0.45);
+    background: rgba(2, 18, 12, 0.65);
+    color: #eafff3;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.demo-clave-consulta-btn:hover {
+    transform: translateY(-1px);
+    border-color: var(--verde-yaavs, #2ef878);
+    background: rgba(46, 248, 120, 0.16);
+}
+.demo-claves-consulta__note {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.65);
+}
 .fecha-cambio-aviso {
     display: inline-block;
     margin-left: 4px;

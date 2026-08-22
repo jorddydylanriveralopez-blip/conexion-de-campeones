@@ -33,7 +33,7 @@
     <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles_vf.css?v=20260822_consulta_boletos">
+    <link rel="stylesheet" href="styles_vf.css?v=20260822_claves_prueba">
     
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -220,6 +220,17 @@
                         <button class="btn-check snd-click snd-hover btn-verificar" onclick="consultar()">VERIFICAR BOLETOS</button>
                         <button class="btn-clear snd-click snd-hover outline-cyan-btn btn-limpiar" onclick="limpiar()">LIMPIAR</button>
                     </div>
+                </div>
+                <div id="demo-claves-consulta" class="demo-claves-consulta" aria-label="Claves de prueba">
+                    <p class="demo-claves-consulta__title"><i class="fa-solid fa-flask" aria-hidden="true"></i> Claves de prueba</p>
+                    <ul class="demo-claves-consulta__list">
+                        <li><button type="button" class="demo-clave-consulta-btn" data-clave="DEMO">DEMO</button></li>
+                        <li><button type="button" class="demo-clave-consulta-btn" data-clave="PRUEBA01">PRUEBA01</button></li>
+                        <li><button type="button" class="demo-clave-consulta-btn" data-clave="CAMPEON24">CAMPEON24</button></li>
+                        <li><button type="button" class="demo-clave-consulta-btn" data-clave="TESTCB">TESTCB</button></li>
+                        <li><button type="button" class="demo-clave-consulta-btn" data-clave="YA12345">YA12345</button></li>
+                    </ul>
+                    <p class="demo-claves-consulta__note">Haz clic en una clave o escríbela y pulsa Verificar boletos.</p>
                 </div>
             </div>
 
@@ -1155,6 +1166,6 @@
         </div>
     </div>
 
-    <script src="script_vf.js?v=20260822_consulta_boletos"></script>
+    <script src="script_vf.js?v=20260822_claves_prueba"></script>
 </body>
 </html>
