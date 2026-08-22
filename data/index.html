@@ -33,7 +33,7 @@
     <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles_vf.css?v=20260724_sin_consulta_boletos">
+    <link rel="stylesheet" href="styles_vf.css?v=20260822_consulta_boletos">
     
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -210,23 +210,89 @@
         <div class="section-separator animate-on-scroll"></div>
 
         <div class="container-centered section-boletos-bg animate-on-scroll">
-            <div class="search-area tech-panel consulta-boletos-suspendida" style="max-width: 640px; margin: 0 auto;">
+            <div class="search-area tech-panel" style="max-width: 600px; margin: 0 auto;">
                 <div class="panel-corners"></div>
-                <span class="consulta-boletos-suspendida__badge"><i class="fa-solid fa-ban"></i> Suspendida</span>
-                <h2 class="section-title">CONSULTA DE BOLETOS</h2>
-                <p class="section-desc" style="color: var(--azul-puntos); margin-bottom: 12px; font-weight: bold;">
-                    Los sorteos de Conexión de Campeones ya terminaron.
-                </p>
-                <p style="color: rgba(255,255,255,0.78); margin: 0 0 22px; line-height: 1.45;">
-                    La consulta de boletos acumulados quedó suspendida. Ahora solo puedes revisar la lista oficial de ganadores.
-                </p>
-                <a href="ganadores?sorteo=6" class="btn-check snd-click snd-hover" style="display:inline-flex; align-items:center; gap:10px; width:auto; padding: 14px 28px; text-decoration:none;">
-                    <i class="fa-solid fa-trophy"></i> CONSULTAR GANADORES
-                </a>
-                <input type="hidden" id="inputClave" value="" aria-hidden="true">
-                <div id="loading" style="display:none;"></div>
-                <div id="resultados" style="display:none;"></div>
-                <div id="boletos-vista" style="display:none;"></div>
+                <h2 class="section-title">CONSULTA TUS BOLETOS ACUMULADOS</h2>
+                <p class="section-desc" style="color: var(--azul-puntos); margin-bottom: 20px; font-weight: bold;">INGRESA TU CLAVE ÚNICA DE YAAVSER</p>
+                <div class="input-wrapper">
+                    <input type="text" id="inputClave" placeholder="CLAVE ÚNICA O ID" class="snd-hover">
+                    <div class="botones-consulta-wrap">
+                        <button class="btn-check snd-click snd-hover btn-verificar" onclick="consultar()">VERIFICAR BOLETOS</button>
+                        <button class="btn-clear snd-click snd-hover outline-cyan-btn btn-limpiar" onclick="limpiar()">LIMPIAR</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading" class="loader-balon" style="display: none; margin-top: 40px;">
+                <div class="balon-bounce">⚽</div>
+                <span>DESENCRIPTANDO DATOS...</span>
+            </div>
+
+            <div id="resultados" style="display:none; max-width: 800px; margin: 40px auto 0 auto;" class="crt-monitor tech-panel">
+                <div class="panel-corners"></div>
+                <div class="score-hero">
+                    <span class="score-label" style="font-size: 1.2rem;">YAAVSER ESTÁS PARTICIPANDO DENTRO DE LA</span>
+                    <h3 id="rLiga" class="liga-resultado liga-resultado--placeholder">[ LIGA ]</h3>
+                    <span class="score-label">TOTAL DE BOLETOS ACUMULADOS</span>
+                    <span id="cTotal" class="score-number blink-slow">0</span>
+                </div>
+
+                <div class="cat-card">
+                    <div class="cat-title">SIMS VINCULADAS</div>
+                    <div class="data-grid">
+                        <div><span class="val-now" id="avChipsBait">0</span><span class="lbl-desc lbl-op lbl-op-bait">Bait</span></div>
+                        <div><span class="val-now" id="avChipsMovi">0</span><span class="lbl-desc lbl-op lbl-op-movi">Movistar</span></div>
+                        <div><span class="val-now" id="avChipsUnefon">0</span><span class="lbl-desc lbl-op lbl-op-unefon">AT&amp;T / Unefon</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="data-grid">
+                        <div><span class="val-win" id="totChipsBait">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totChipsMovi">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totChipsUnefon">0</span><span class="lbl-desc">BOLETOS</span></div>
+                    </div>
+                </div>
+
+                <div class="cat-card">
+                    <div class="cat-title">PORTABILIDADES VINCULADAS</div>
+                    <div class="data-grid">
+                        <div><span class="val-now" id="avPortaBait">0</span><span class="lbl-desc lbl-op lbl-op-bait">Bait</span></div>
+                        <div><span class="val-now" id="avPortaMovi">0</span><span class="lbl-desc lbl-op lbl-op-movi">Movistar</span></div>
+                        <div><span class="val-now" id="avPortaUnefon">0</span><span class="lbl-desc lbl-op lbl-op-unefon">AT&amp;T / Unefon</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="data-grid">
+                        <div><span class="val-win" id="totPortaBait">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totPortaMovi">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totPortaUnefon">0</span><span class="lbl-desc">BOLETOS</span></div>
+                    </div>
+                </div>
+
+                <div class="cat-card">
+                    <div class="cat-title">eSIMs VINCULADAS</div>
+                    <div class="data-grid">
+                        <div><span class="val-now" id="avEsimBait">0</span><span class="lbl-desc lbl-op lbl-op-bait">Bait</span></div>
+                        <div><span class="val-now" id="avEsimMovi">0</span><span class="lbl-desc lbl-op lbl-op-movi">Movistar</span></div>
+                        <div><span class="val-now" id="avEsimUnefon">0</span><span class="lbl-desc lbl-op lbl-op-unefon">AT&amp;T / Unefon</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="data-grid">
+                        <div><span class="val-win" id="totEsimBait">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totEsimMovi">0</span><span class="lbl-desc">BOLETOS</span></div>
+                        <div><span class="val-win" id="totEsimUnefon">0</span><span class="lbl-desc">BOLETOS</span></div>
+                    </div>
+                </div>
+
+                <div id="boletos-vista" class="ticket-panel" style="display:none;">
+                    <div class="ticket-summary-card">
+                        <div>
+                            <span class="ticket-count-label">BOLETOS EN TU BOLSA</span>
+                            <h3 id="ticket-count" class="ticket-count">0</h3>
+                            <p class="ticket-note">Tus boletos aparecen aquí con estilo dinámico y listos para el sorteo.</p>
+                        </div>
+                        <span class="ticket-status-chip">REVISIÓN DE BOLETOS</span>
+                    </div>
+                    <div id="ticket-grid" class="ticket-grid"></div>
+                </div>
             </div>
 
             <section id="carrusel-ganadores" class="carrusel-ganadores carrusel-ganadores--showcase animate-on-scroll" aria-label="Ganadores del sorteo">
@@ -1089,6 +1155,6 @@
         </div>
     </div>
 
-    <script src="script_vf.js?v=20260724_sin_consulta_boletos"></script>
+    <script src="script_vf.js?v=20260822_consulta_boletos"></script>
 </body>
 </html>

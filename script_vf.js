@@ -1612,10 +1612,6 @@ function abrirMinijuegoFutbolDesdeConsulta() {
 }
 
 async function consultar() {
-    if (typeof CAMPANA_FINALIZADA !== 'undefined' && CAMPANA_FINALIZADA) {
-        window.location.href = 'ganadores?sorteo=6';
-        return;
-    }
     initAudio();
     const inputEl = document.getElementById('inputClave');
     if (!inputEl) return;
