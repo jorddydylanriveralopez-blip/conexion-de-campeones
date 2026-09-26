@@ -12,35 +12,32 @@
       gtag('config', 'G-7C8W87NTJC');
     </script>
 
-    <title>GANADORES - CONEXIÓN DE CAMPEONES | YAAVS</title>
-    <meta name="description" content="Lista oficial de ganadores de Conexión de Campeones YAAVS — sorteos quincenales 2026.">
+    <title>GANADORES · RECOMPENSA AL TRIPLE — AT&T × YAAVS</title>
+    <meta name="description" content="Lista oficial de ganadores del programa Recompensa al Triple de AT&T × YAAVS. Consulta los ganadores por sorteo.">
 
     <link rel="manifest" href="../manifest.json">
-    <meta name="theme-color" content="#02060a">
+    <meta name="theme-color" content="#009FDB">
     <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --verde: #22ff5e;
-            --cyan: #00e5ff;
+            --verde: #ffe500;
+            --cyan: #ffffff;
             --oro: #ffd700;
             --morado: #d500ff;
         }
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #02060a;
-            background-image:
-                linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(180deg, rgba(0,0,0,0.3), rgba(2,6,10,0.95)),
-                url('https://assets.zyrosite.com/cfVCqgCxQzd0Fnkg/fondo-3-hOk3PVjxhQZfZ0DJ.png');
-            background-size: 40px 40px, 40px 40px, auto, cover;
-            background-position: center;
+            background:
+                radial-gradient(circle at 18% 10%, rgba(62,198,245,0.5), transparent 42%),
+                radial-gradient(circle at 82% 6%, rgba(62,198,245,0.4), transparent 40%),
+                radial-gradient(circle at 50% 120%, rgba(6,47,102,0.9), transparent 60%),
+                linear-gradient(160deg, #009FDB 0%, #0a72c4 45%, #0a53a8 78%, #062f66 100%);
             background-attachment: fixed;
             color: #fff;
             min-height: 100vh;
@@ -64,14 +61,14 @@
             text-transform: uppercase;
             color: #fff;
             text-decoration: none;
-            background: rgba(34, 255, 94, 0.2);
+            background: rgba(255, 229, 0, 0.2);
             border: 2px solid var(--verde);
             border-radius: 999px;
-            box-shadow: 0 0 20px rgba(34, 255, 94, 0.35);
+            box-shadow: 0 0 20px rgba(255, 229, 0, 0.35);
             transition: transform 0.2s, background 0.2s;
         }
         .btn-regresar:hover {
-            background: rgba(34, 255, 94, 0.45);
+            background: rgba(255, 229, 0, 0.45);
             transform: translateY(-2px);
         }
         .header {
@@ -103,9 +100,40 @@
             width: 100%;
             max-width: min(520px, 92vw);
             height: auto;
-            filter: drop-shadow(0 12px 30px rgba(0,0,0,0.8)) drop-shadow(0 0 24px rgba(34, 255, 94, 0.35));
+            filter: drop-shadow(0 12px 30px rgba(0,0,0,0.8)) drop-shadow(0 0 24px rgba(255, 229, 0, 0.35));
             animation: floatLogo 4s ease-in-out infinite;
         }
+        .campaign-banner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        .campaign-banner__eyebrow {
+            font-weight: 900;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #fff;
+            background: rgba(6, 22, 46, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 5px 16px;
+            border-radius: 999px;
+        }
+        .campaign-banner__title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(1.6rem, 6vw, 2.8rem);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #062f66;
+            background: linear-gradient(90deg, #ffc400, #ffe500);
+            padding: 8px 26px;
+            border-radius: 8px;
+            transform: skewX(-8deg);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+        }
+        .campaign-banner__title span { display: inline-block; transform: skewX(8deg); }
         @keyframes floatLogo {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
@@ -122,7 +150,7 @@
             background: linear-gradient(135deg, rgba(34,255,94,0.25), rgba(0,229,255,0.2));
             border: 1px solid var(--verde);
             color: var(--verde);
-            box-shadow: 0 0 24px rgba(34, 255, 94, 0.25);
+            box-shadow: 0 0 24px rgba(255, 229, 0, 0.25);
         }
         .hero-title {
             margin-top: 16px;
@@ -200,7 +228,7 @@
         }
         #busqueda:focus {
             border-color: var(--verde);
-            box-shadow: 0 0 16px rgba(34, 255, 94, 0.25);
+            box-shadow: 0 0 16px rgba(255, 229, 0, 0.25);
         }
         .filtros {
             display: flex;
@@ -223,7 +251,7 @@
         }
         .filtro-btn.active, .filtro-btn:hover {
             border-color: var(--verde);
-            background: rgba(34, 255, 94, 0.2);
+            background: rgba(255, 229, 0, 0.2);
             color: var(--verde);
         }
         .muro-titulo {
@@ -261,7 +289,7 @@
         .tarjeta:hover {
             transform: translateY(-4px);
             border-color: var(--verde);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 20px rgba(34, 255, 94, 0.2);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 20px rgba(255, 229, 0, 0.2);
         }
         .icono-trofeo {
             width: 46px;
@@ -274,7 +302,7 @@
             font-size: 1.1rem;
             background: linear-gradient(135deg, var(--verde), var(--cyan));
             color: #02060a;
-            box-shadow: 0 0 16px rgba(34, 255, 94, 0.5);
+            box-shadow: 0 0 16px rgba(255, 229, 0, 0.5);
         }
         .info { text-align: left; min-width: 0; }
         .nombre {
@@ -331,7 +359,7 @@
             background: linear-gradient(135deg, var(--verde), var(--cyan));
             border: none;
             border-radius: 12px;
-            box-shadow: 0 6px 24px rgba(34, 255, 94, 0.4);
+            box-shadow: 0 6px 24px rgba(255, 229, 0, 0.4);
             transition: transform 0.2s;
         }
         .btn-ver-mas:hover { transform: translateY(-2px); }
@@ -423,7 +451,7 @@
         }
         #filtros-sorteo .filtro-btn.active {
             transform: scale(1.04);
-            box-shadow: 0 0 18px rgba(34, 255, 94, 0.35);
+            box-shadow: 0 0 18px rgba(255, 229, 0, 0.35);
         }
         .tarjeta.tarjeta--entrada {
             animation: tarjetaEntrada 0.45s ease forwards;
@@ -447,7 +475,10 @@
         <header class="header">
             <div class="header-logos">
                 <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/recurso-6-dRbQkWfZFlakSEfc.png" alt="YAAVS" class="logo-yaavs">
-                <img src="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" alt="Conexión de Campeones" class="logo-campana">
+                <div class="campaign-banner">
+                    <span class="campaign-banner__eyebrow">AT&amp;T &times; YAAVS</span>
+                    <span class="campaign-banner__title"><span>RECOMPENSA AL TRIPLE</span></span>
+                </div>
             </div>
             <div class="hero-meta" id="hero-meta">
                 <div class="hero-badge" id="hero-badge">1.er sorteo · 15 mayo 2026</div>
@@ -690,14 +721,14 @@
                     angle: 60,
                     spread: 55,
                     origin: { x: 0 },
-                    colors: ['#22ff5e', '#00e5ff', '#ffd700', '#ffffff'],
+                    colors: ['#ffe500', '#ffffff', '#009FDB', '#3ec6f5'],
                 });
                 confetti({
                     particleCount: 4,
                     angle: 120,
                     spread: 55,
                     origin: { x: 1 },
-                    colors: ['#22ff5e', '#00e5ff', '#ffd700', '#ffffff'],
+                    colors: ['#ffe500', '#ffffff', '#009FDB', '#3ec6f5'],
                 });
                 if (Date.now() < end) requestAnimationFrame(burst);
             })();
