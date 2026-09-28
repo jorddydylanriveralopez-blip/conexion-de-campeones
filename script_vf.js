@@ -12,12 +12,12 @@ const BOLETOS_POR_PAGINA = 100;
    CALENDARIO DE SORTEOS (compartido: aviso web + sorteador)
    ========================================================= */
 const CALENDARIO_SORTEOS = [
-    { num: 1, fecha: '2026-05-15', label: '15 DE MAYO 2026' },
-    { num: 2, fecha: '2026-05-29', label: '29 DE MAYO 2026' },
-    { num: 3, fecha: '2026-06-12', label: '12 DE JUNIO 2026' },
-    { num: 4, fecha: '2026-06-26', label: '26 DE JUNIO 2026' },
-    { num: 5, fecha: '2026-07-10', label: '10 DE JULIO 2026' },
-    { num: 6, fecha: '2026-07-31', label: '31 DE JULIO 2026' },
+    { num: 1, fecha: '2026-10-09', label: '9 DE OCTUBRE 2026' },
+    { num: 2, fecha: '2026-10-23', label: '23 DE OCTUBRE 2026' },
+    { num: 3, fecha: '2026-11-06', label: '6 DE NOVIEMBRE 2026' },
+    { num: 4, fecha: '2026-11-20', label: '20 DE NOVIEMBRE 2026' },
+    { num: 5, fecha: '2026-12-04', label: '4 DE DICIEMBRE 2026' },
+    { num: 6, fecha: '2026-12-18', label: '18 DE DICIEMBRE 2026' },
 ];
 const HORA_SORTEO_TEXTO = '3:00 pm (hora CDMX)';
 
