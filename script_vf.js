@@ -12,12 +12,12 @@ const BOLETOS_POR_PAGINA = 100;
    CALENDARIO DE SORTEOS (compartido: aviso web + sorteador)
    ========================================================= */
 const CALENDARIO_SORTEOS = [
-    { num: 1, fecha: '2026-05-15', label: '15 DE MAYO 2026' },
-    { num: 2, fecha: '2026-05-29', label: '29 DE MAYO 2026' },
-    { num: 3, fecha: '2026-06-12', label: '12 DE JUNIO 2026' },
-    { num: 4, fecha: '2026-06-26', label: '26 DE JUNIO 2026' },
-    { num: 5, fecha: '2026-07-10', label: '10 DE JULIO 2026' },
-    { num: 6, fecha: '2026-07-31', label: '31 DE JULIO 2026' },
+    { num: 1, fecha: '2026-10-09', label: '9 DE OCTUBRE 2026' },
+    { num: 2, fecha: '2026-10-23', label: '23 DE OCTUBRE 2026' },
+    { num: 3, fecha: '2026-11-06', label: '6 DE NOVIEMBRE 2026' },
+    { num: 4, fecha: '2026-11-20', label: '20 DE NOVIEMBRE 2026' },
+    { num: 5, fecha: '2026-12-04', label: '4 DE DICIEMBRE 2026' },
+    { num: 6, fecha: '2026-12-18', label: '18 DE DICIEMBRE 2026' },
 ];
 const HORA_SORTEO_TEXTO = '3:00 pm (hora CDMX)';
 
@@ -1673,12 +1673,12 @@ function handleYaavsSecretKey(key) {
 }
 
 const K = {
-    B: { n: 'KIT BÁSICO', d: 'Gorra + Cilindro Oficial', c: '#39FF14', speed: 250 },
-    P: { n: 'KIT PRO', d: 'Playera + Gorra + Cilindro', c: '#00AEEF', speed: 350 },
-    E: { n: 'KIT ELITE', d: 'Balón + Playera + Cilindro', c: '#FFD700', speed: 800 },
+    B: { n: '3.ER LUGAR', d: 'Yaavsta $$$ · $2,000 en tiempo aire', c: '#ffe500', speed: 250 },
+    P: { n: '2.º LUGAR', d: 'Kit de accesorios para reventa · $3,000', c: '#00AEEF', speed: 350 },
+    E: { n: '1.ER LUGAR', d: 'Motocicleta nueva', c: '#FFD700', speed: 800 },
 };
 const L = [
-    { id: 'Ascenso', c: '#39FF14', q: { B: 10, P: 11, E: 10 } },
+    { id: 'Ascenso', c: '#ffe500', q: { B: 10, P: 11, E: 10 } },
     { id: 'Pro', c: '#00AEEF', q: { B: 9, P: 17, E: 15 } },
     { id: 'Elite', c: '#FFD700', q: { B: 3, P: 28, E: 19 } },
     { id: 'Cambaceo', c: '#d500ff', q: { B: 5, P: 20, E: 6 } },
@@ -2204,13 +2204,13 @@ function updUI() {
     }
 }
 
-/** Tras terminar una tanda: mantener nombre del kit que acaba de sortearse */
+/** Tras terminar una tanda: mantener el premio que acaba de sortearse */
 function mostrarEstadoKitCompletado(kitType) {
     const b = document.getElementById('btnS');
     document.getElementById('pName').innerText = K[kitType].n;
     document.getElementById('pDesc').innerText = K[kitType].d;
     const finLiga = inv.B <= 0 && inv.P <= 0 && inv.E <= 0;
-    b.innerText = finLiga ? 'SIGUIENTE LIGA (ENTER)' : 'SIGUIENTE KIT (ENTER)';
+    b.innerText = finLiga ? 'SIGUIENTE LIGA (ENTER)' : 'SIGUIENTE PREMIO (ENTER)';
     b.style.display = 'block';
     est = 'FIN_KIT';
 }
@@ -2397,15 +2397,15 @@ function abrirH() {
                 </div>
                 <div class="h-grid">
                     <div class="h-col h-col--basico">
-                        <div class="h-col-title" style="color:var(--verde-yaavs)">Básicos</div>
+                        <div class="h-col-title" style="color:var(--verde-yaavs)">3.ER LUGAR</div>
                         <div class="h-col-list" id="h-${l.id}-B"></div>
                     </div>
                     <div class="h-col h-col--pro">
-                        <div class="h-col-title" style="color:var(--sk)">Pros</div>
+                        <div class="h-col-title" style="color:var(--sk)">2.º LUGAR</div>
                         <div class="h-col-list" id="h-${l.id}-P"></div>
                     </div>
                     <div class="h-col h-col--elite">
-                        <div class="h-col-title" style="color:var(--oro)">Elites</div>
+                        <div class="h-col-title" style="color:var(--oro)">1.ER LUGAR</div>
                         <div class="h-col-list" id="h-${l.id}-E"></div>
                     </div>
                 </div>

@@ -1,11 +1,9 @@
-const CACHE_NAME = 'yaavs-pwa-v15';
+const CACHE_NAME = 'yaavs-pwa-v17';
 
 const urlsToCache = [
   './',
   './index.html',
-  './styles_vf.css?v=20260611_futbol4',
-  './script_vf.js?v=20260611_futbol4',
-  './minijuego-futbol-yaavs.js?v=20260611_futbol4'
+  './manifest.json?v=5'
 ];
 
 self.addEventListener('install', event => {

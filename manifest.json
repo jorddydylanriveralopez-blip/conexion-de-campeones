@@ -1,11 +1,11 @@
 {
-  "name": "Gana Yaavs",
-  "short_name": "Gana Yaavs",
-  "description": "¡Vincula y gana como campeón con YAAVS!",
+  "name": "Recompensa al Triple — AT&T × YAAVS",
+  "short_name": "Recompensa Triple",
+  "description": "¡Gana, gana, gana! Activa chips y portabilidades de AT&T y Unefon y participa por +690 premios.",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#02060a",
-  "theme_color": "#22ff5e",
+  "background_color": "#062f66",
+  "theme_color": "#009FDB",
   "icons": [
     {
       "src": "https://assets.zyrosite.com/EnigzBPrgZr5GxnU/688561636_1585574196908728_9130570143925923664_n-fgFZq17pPJCrGCog.jpg",
