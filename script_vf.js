@@ -1673,12 +1673,12 @@ function handleYaavsSecretKey(key) {
 }
 
 const K = {
-    B: { n: 'KIT BÁSICO', d: 'Gorra + Cilindro Oficial', c: '#39FF14', speed: 250 },
-    P: { n: 'KIT PRO', d: 'Playera + Gorra + Cilindro', c: '#00AEEF', speed: 350 },
-    E: { n: 'KIT ELITE', d: 'Balón + Playera + Cilindro', c: '#FFD700', speed: 800 },
+    B: { n: '3.ER LUGAR', d: 'Yaavsta $$$ · $2,000 en tiempo aire', c: '#ffe500', speed: 250 },
+    P: { n: '2.º LUGAR', d: 'Kit de accesorios para reventa · $3,000', c: '#00AEEF', speed: 350 },
+    E: { n: '1.ER LUGAR', d: 'Motocicleta nueva', c: '#FFD700', speed: 800 },
 };
 const L = [
-    { id: 'Ascenso', c: '#39FF14', q: { B: 10, P: 11, E: 10 } },
+    { id: 'Ascenso', c: '#ffe500', q: { B: 10, P: 11, E: 10 } },
     { id: 'Pro', c: '#00AEEF', q: { B: 9, P: 17, E: 15 } },
     { id: 'Elite', c: '#FFD700', q: { B: 3, P: 28, E: 19 } },
     { id: 'Cambaceo', c: '#d500ff', q: { B: 5, P: 20, E: 6 } },
@@ -2204,13 +2204,13 @@ function updUI() {
     }
 }
 
-/** Tras terminar una tanda: mantener nombre del kit que acaba de sortearse */
+/** Tras terminar una tanda: mantener el premio que acaba de sortearse */
 function mostrarEstadoKitCompletado(kitType) {
     const b = document.getElementById('btnS');
     document.getElementById('pName').innerText = K[kitType].n;
     document.getElementById('pDesc').innerText = K[kitType].d;
     const finLiga = inv.B <= 0 && inv.P <= 0 && inv.E <= 0;
-    b.innerText = finLiga ? 'SIGUIENTE LIGA (ENTER)' : 'SIGUIENTE KIT (ENTER)';
+    b.innerText = finLiga ? 'SIGUIENTE LIGA (ENTER)' : 'SIGUIENTE PREMIO (ENTER)';
     b.style.display = 'block';
     est = 'FIN_KIT';
 }
@@ -2397,15 +2397,15 @@ function abrirH() {
                 </div>
                 <div class="h-grid">
                     <div class="h-col h-col--basico">
-                        <div class="h-col-title" style="color:var(--verde-yaavs)">Básicos</div>
+                        <div class="h-col-title" style="color:var(--verde-yaavs)">3.ER LUGAR</div>
                         <div class="h-col-list" id="h-${l.id}-B"></div>
                     </div>
                     <div class="h-col h-col--pro">
-                        <div class="h-col-title" style="color:var(--sk)">Pros</div>
+                        <div class="h-col-title" style="color:var(--sk)">2.º LUGAR</div>
                         <div class="h-col-list" id="h-${l.id}-P"></div>
                     </div>
                     <div class="h-col h-col--elite">
-                        <div class="h-col-title" style="color:var(--oro)">Elites</div>
+                        <div class="h-col-title" style="color:var(--oro)">1.ER LUGAR</div>
                         <div class="h-col-list" id="h-${l.id}-E"></div>
                     </div>
                 </div>

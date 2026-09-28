@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yaavs-pwa-v16';
+const CACHE_NAME = 'yaavs-pwa-v17';
 
 const urlsToCache = [
   './',
