@@ -221,6 +221,13 @@
             padding: 16px 42px; border-radius: 999px; border: 3px solid var(--yellow); box-shadow: 0 12px 30px rgba(0,0,0,0.35); transition: transform 0.25s ease, box-shadow 0.25s ease; animation: ctaPulse 2.6s ease-in-out infinite; }
         .btn-ganadores i { color: var(--yellow-deep); }
         .btn-ganadores:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 18px 42px rgba(0,0,0,0.5); }
+        .cta-row { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center; }
+        .btn-sorteo { display: inline-flex; align-items: center; gap: 12px; background: transparent; color: var(--white);
+            font-family: 'Anton', sans-serif; font-size: clamp(0.95rem, 3vw, 1.35rem); letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+            padding: 15px 36px; border-radius: 999px; border: 3px solid var(--white); transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease; }
+        .btn-sorteo i { color: var(--yellow); }
+        .btn-sorteo:hover { background: var(--white); color: var(--att-blue-deep); transform: translateY(-4px) scale(1.03); }
+        .btn-sorteo:hover i { color: var(--att-blue-deep); }
         @keyframes ctaPulse { 0%,100% { box-shadow: 0 12px 30px rgba(0,0,0,0.35), 0 0 0 0 rgba(255,229,0,0.55);} 50% { box-shadow: 0 12px 30px rgba(0,0,0,0.35), 0 0 0 16px rgba(255,229,0,0);} }
 
         /* ---------- Footer ---------- */
@@ -393,7 +400,10 @@
 
         <!-- CTA -->
         <section class="cta-ganadores reveal">
-            <a href="ganadores" class="btn-ganadores"><i class="fa-solid fa-trophy"></i><span>Ver ganadores</span></a>
+            <div class="cta-row">
+                <a href="ganadores" class="btn-ganadores"><i class="fa-solid fa-trophy"></i><span>Ver ganadores</span></a>
+                <a href="sorteador.html" class="btn-sorteo"><i class="fa-solid fa-satellite-dish"></i><span>Sorteo en vivo</span></a>
+            </div>
         </section>
     </div>
 
