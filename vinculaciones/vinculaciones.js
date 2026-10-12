@@ -755,6 +755,24 @@ function formularioDisponibleHoy() {
   return hoy >= inicio;
 }
 
+function initFormularioPlegable() {
+  const toggle = document.getElementById('formulario-toggle');
+  const panel = document.getElementById('formulario-panel');
+  const seccion = document.getElementById('formulario-section');
+  if (!toggle || !panel) return;
+
+  toggle.addEventListener('click', () => {
+    const abierto = toggle.getAttribute('aria-expanded') === 'true';
+    const siguiente = !abierto;
+    toggle.setAttribute('aria-expanded', siguiente ? 'true' : 'false');
+    panel.hidden = !siguiente;
+    seccion?.classList.toggle('formulario-plegable--abierto', siguiente);
+    if (siguiente) {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+}
+
 function initFormularioPorFecha() {
   const aviso = document.getElementById('formulario-aviso');
   const contenido = document.getElementById('formulario-contenido');
@@ -885,6 +903,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageEnter();
   initScrollReveal();
   initFormularioPorFecha();
+  initFormularioPlegable();
   const pintarFlores = () => {
     if (document.fonts?.ready) {
       document.fonts.ready.then(floresDelTitulo);

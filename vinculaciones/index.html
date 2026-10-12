@@ -23,7 +23,7 @@
   <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Montserrat:wght@400;600;700;800;900&family=Titan+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="vinculaciones.css?v=122">
+  <link rel="stylesheet" href="vinculaciones.css?v=123">
 </head>
 <body class="vinculaciones-landing comisiones-landing comisiones-viva">
   <div class="cm-scene" aria-hidden="true">
@@ -257,9 +257,13 @@
 
       <section class="section-card" id="formulario-section">
         <h2 class="consulta-titulo">
-          <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
-          Registra tu CLABE
+          <button type="button" class="formulario-toggle" id="formulario-toggle" aria-expanded="false" aria-controls="formulario-panel">
+            <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+            <span>Registra tu CLABE</span>
+            <i class="fa-solid fa-chevron-down formulario-toggle__chev" aria-hidden="true"></i>
+          </button>
         </h2>
+        <div id="formulario-panel" class="formulario-panel" hidden>
         <p class="form-intro">Para recibir tu pago en efectivo, deja la CLABE del titular.</p>
         <form id="form-vinculaciones" class="form-grid" novalidate>
           <input type="hidden" id="form-motivo" value="Datos bancarios para pago" />
@@ -298,12 +302,13 @@
           </div>
         </form>
         <div id="form-status" class="status-msg" role="status" aria-live="polite"></div>
+        </div>
       </section>
 
     </main>
   </div>
 
-  <script src="vinculaciones.js?v=89"></script>
+  <script src="vinculaciones.js?v=90"></script>
   <script src="minijuego-jorddy.js?v=1"></script>
 </body>
 </html>

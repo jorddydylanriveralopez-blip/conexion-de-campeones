@@ -3614,7 +3614,41 @@ body.comisiones-viva #formulario-section.section-card {
 }
 
 body.comisiones-viva #formulario-section .consulta-titulo {
+  margin: 0;
   text-shadow: none;
+}
+
+body.comisiones-viva #formulario-section .formulario-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 2px 8px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 900;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+body.comisiones-viva #formulario-section .formulario-toggle__chev {
+  font-size: 0.85rem;
+  color: #ffe14a;
+  filter: none;
+  transition: transform 0.2s ease;
+}
+
+body.comisiones-viva #formulario-section.formulario-plegable--abierto .formulario-toggle {
+  margin-bottom: 8px;
+}
+
+body.comisiones-viva #formulario-section.formulario-plegable--abierto .formulario-toggle__chev {
+  transform: rotate(180deg);
 }
 
 body.comisiones-viva #formulario-section .consulta-titulo i {
