@@ -3503,3 +3503,48 @@ body.comisiones-landing.comisiones-poster .page-wrap {
   width: 100%;
   height: auto;
 }
+
+body.comisiones-landing.comisiones-viva {
+  background: #0b3ad4;
+  background-image:
+    radial-gradient(circle at 8% 18%, rgba(255, 140, 0, 0.16), transparent 18%),
+    radial-gradient(circle at 92% 12%, rgba(255, 80, 140, 0.14), transparent 16%),
+    linear-gradient(180deg, #1660f0 0%, #0b35c8 46%, #08248f 100%);
+}
+
+body.comisiones-landing.comisiones-viva .page-wrap {
+  width: min(860px, 94vw);
+  margin: 0 auto;
+  padding: 108px 0 48px;
+  opacity: 1;
+  animation: none;
+}
+
+body.comisiones-viva .cm-panel--exec {
+  position: relative;
+  padding-bottom: 8px;
+}
+
+body.comisiones-viva .cm-exec-deco {
+  position: relative;
+  height: 86px;
+  margin: 6px 12px 4px;
+}
+
+body.comisiones-viva .cm-exec-deco .cm-flower,
+body.comisiones-viva .cm-exec-deco .cm-candle,
+body.comisiones-viva .cm-exec-deco .cm-skull {
+  position: absolute;
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: auto;
+  opacity: 1;
+}
+
+body.comisiones-viva .cm-exec-deco .cm-candle--left { left: 0; }
+body.comisiones-viva .cm-exec-deco .cm-flower--2 { left: 28px; bottom: 8px; width: 42px; height: 42px; }
+body.comisiones-viva .cm-exec-deco .cm-flower--1 { left: 58px; bottom: 0; width: 64px; height: 64px; }
+body.comisiones-viva .cm-exec-deco .cm-skull { right: 78px; bottom: 0; width: 58px; height: 68px; }
+body.comisiones-viva .cm-exec-deco .cm-flower--4 { right: 28px; bottom: 6px; width: 52px; height: 52px; }
+body.comisiones-viva .cm-exec-deco .cm-candle--right { right: 0; }
