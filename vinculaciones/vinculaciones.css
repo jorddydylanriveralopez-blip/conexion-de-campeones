@@ -3548,3 +3548,62 @@ body.comisiones-viva .cm-exec-deco .cm-flower--1 { left: 58px; bottom: 0; width:
 body.comisiones-viva .cm-exec-deco .cm-skull { right: 78px; bottom: 0; width: 58px; height: 68px; }
 body.comisiones-viva .cm-exec-deco .cm-flower--4 { right: 28px; bottom: 6px; width: 52px; height: 52px; }
 body.comisiones-viva .cm-exec-deco .cm-candle--right { right: 0; }
+
+body.comisiones-viva .cm-panel,
+body.comisiones-viva .cm-offer,
+body.comisiones-viva .cm-price,
+body.comisiones-viva .cm-banner {
+  background: none;
+  background-color: transparent;
+}
+
+body.comisiones-viva .cm-panel--yaavsers {
+  background: radial-gradient(circle at 50% 0%, rgba(90, 190, 255, 0.16), transparent 55%);
+  border: 2px solid rgba(170, 230, 255, 0.95);
+  box-shadow:
+    0 0 0 6px rgba(40, 140, 255, 0.18),
+    0 0 34px rgba(70, 170, 255, 0.7),
+    inset 0 0 28px rgba(80, 180, 255, 0.12);
+}
+
+body.comisiones-viva .cm-panel--exec {
+  background: radial-gradient(circle at 50% 0%, rgba(190, 120, 255, 0.16), transparent 55%);
+  border: 2px solid rgba(230, 190, 255, 0.95);
+  box-shadow:
+    0 0 0 6px rgba(150, 70, 255, 0.16),
+    0 0 34px rgba(160, 80, 255, 0.65),
+    inset 0 0 28px rgba(180, 100, 255, 0.12);
+}
+
+body.comisiones-viva .cm-banner {
+  background: none;
+  border: 2px solid rgba(210, 240, 255, 0.95);
+  box-shadow: 0 0 16px rgba(90, 180, 255, 0.7);
+}
+
+body.comisiones-viva .cm-banner--gold {
+  background: none;
+  border-color: rgba(236, 210, 255, 0.95);
+  box-shadow: 0 0 16px rgba(170, 90, 255, 0.7);
+}
+
+body.comisiones-viva .cm-offer {
+  background: none;
+  border: 1.5px solid rgba(150, 220, 255, 0.85);
+  box-shadow: 0 0 18px rgba(60, 160, 255, 0.35), inset 0 0 0 1px rgba(180, 230, 255, 0.25);
+}
+
+body.comisiones-viva .cm-price {
+  background: radial-gradient(circle at 50% 40%, rgba(70, 160, 255, 0.22), transparent 70%);
+  border: 2px solid rgba(190, 235, 255, 0.95);
+  box-shadow:
+    0 0 24px rgba(50, 160, 255, 0.75),
+    inset 0 0 20px rgba(90, 180, 255, 0.2);
+}
+
+body.comisiones-viva .cm-sim,
+body.comisiones-viva .cm-phone {
+  box-shadow:
+    0 10px 16px rgba(0, 0, 0, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
