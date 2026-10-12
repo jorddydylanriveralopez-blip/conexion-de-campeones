@@ -51,6 +51,26 @@ function indicesColumnaClave(array $headers): array
     return $indices;
 }
 
+function claveExisteEnDinamica(string $claveInput): ?bool
+{
+    $clave = normalizarClave($claveInput);
+    if ($clave === '') {
+        return false;
+    }
+
+    $raw = @file_get_contents(__DIR__ . '/dinamica-octubre.json');
+    if ($raw === false || trim($raw) === '') {
+        return null;
+    }
+
+    $mapa = json_decode($raw, true);
+    if (!is_array($mapa)) {
+        return null;
+    }
+
+    return array_key_exists($clave, $mapa);
+}
+
 function claveExisteEnCsv(string $claveInput): ?bool
 {
     $clave = normalizarClave($claveInput);
@@ -172,7 +192,7 @@ if ($claveFormulario === '') {
     exit;
 }
 
-$claveValida = claveExisteEnCsv($claveFormulario);
+$claveValida = claveExisteEnDinamica($claveFormulario);
 if ($claveValida === null) {
     http_response_code(503);
     echo json_encode(
