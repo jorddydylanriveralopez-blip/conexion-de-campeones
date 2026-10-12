@@ -213,6 +213,13 @@ if ($claveValida === false) {
     exit;
 }
 
+$data['clabe'] = preg_replace('/\D/', '', (string) ($data['clabe'] ?? '')) ?? '';
+if (($data['motivo'] ?? '') === 'Datos bancarios para pago' && !preg_match('/^\d{18}$/', $data['clabe'])) {
+    http_response_code(400);
+    echo json_encode(['ok' => false, 'error' => 'La CLABE debe tener 18 dígitos.'], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 if (FORMULARIO_SHEETS_TOKEN !== '') {
     $data['token'] = FORMULARIO_SHEETS_TOKEN;
 }

@@ -298,6 +298,7 @@ function formatoActivaciones(val) {
 function mostrarStatus(el, tipo, mensaje) {
   el.className = `status-msg visible status-msg--${tipo}`;
   el.textContent = mensaje;
+  el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
 function ocultarStatus(el) {
@@ -527,6 +528,9 @@ function pintarResultados(row) {
   set('oct-lineas', formatoNumero(row.lineas));
   set('oct-total', formatoMoneda(row.total));
 
+  const formClave = document.getElementById('form-clave');
+  if (formClave && row.clave) formClave.value = row.clave;
+
   document.getElementById('oct-resumen')?.classList.toggle('oct-resumen--hit', supero);
   const caja = document.getElementById('oct-alcance-box');
   caja?.classList.toggle('oct-alcance--hit', supero);
@@ -649,7 +653,7 @@ async function enviarFormulario(e) {
     motivo: document.getElementById('form-motivo')?.value,
     titular: document.getElementById('form-titular')?.value?.trim(),
     banco: document.getElementById('form-banco')?.value?.trim(),
-    clabe: document.getElementById('form-clabe')?.value?.trim(),
+    clabe: document.getElementById('form-clabe')?.value?.replace(/\D/g, '') || '',
     mensaje: document.getElementById('form-mensaje')?.value?.trim(),
     origen: 'ganayaavs.com/vinculaciones',
   };
@@ -664,11 +668,10 @@ async function enviarFormulario(e) {
       mostrarStatus(status, 'error', 'Para datos bancarios, completa titular, banco y CLABE.');
       return;
     }
-    if (!/^\d{18}$/.test(data.clabe.replace(/\s/g, ''))) {
+    if (!/^\d{18}$/.test(data.clabe)) {
       mostrarStatus(status, 'error', 'La CLABE debe tener 18 dígitos.');
       return;
     }
-    data.clabe = data.clabe.replace(/\s/g, '');
   }
 
   if (btn) btn.disabled = true;
@@ -893,19 +896,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('form-vinculaciones')?.addEventListener('submit', enviarFormulario);
 
-  document.getElementById('form-clave')?.addEventListener('blur', async () => {
-    const input = document.getElementById('form-clave');
-    const status = document.getElementById('form-status');
-    const clave = input?.value?.trim();
-    if (!clave) return;
-
-    const validacion = await validarClaveEnBase(clave);
-    if (!validacion.ok) {
-      mostrarStatus(status, 'error', validacion.error);
-      input?.focus();
-      return;
-    }
-    ocultarStatus(status);
+  document.getElementById('form-clabe')?.addEventListener('input', (ev) => {
+    const input = ev.currentTarget;
+    const digitos = String(input.value || '').replace(/\D/g, '').slice(0, 18);
+    if (input.value !== digitos) input.value = digitos;
   });
 
   const adminNote = document.getElementById('admin-csv-note');
