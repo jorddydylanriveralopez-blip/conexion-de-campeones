@@ -3593,12 +3593,16 @@ body.comisiones-viva .cm-banner {
 }
 
 body.comisiones-viva .cm-panel--yaavsers {
-  background: radial-gradient(circle at 50% 0%, rgba(90, 190, 255, 0.16), transparent 55%);
-  border: 2px solid rgba(170, 230, 255, 0.95);
+  background:
+    radial-gradient(circle at 78% 18%, rgba(40, 120, 255, 0.28), transparent 32%),
+    linear-gradient(180deg, #0c46d4 0%, #0834b4 48%, #06278f 100%);
+  border: 3px solid rgba(150, 225, 255, 0.95);
+  border-radius: 26px;
+  padding: 18px 16px 16px;
   box-shadow:
-    0 0 0 6px rgba(40, 140, 255, 0.18),
-    0 0 34px rgba(70, 170, 255, 0.7),
-    inset 0 0 28px rgba(80, 180, 255, 0.12);
+    0 0 0 5px rgba(18, 70, 190, 0.35),
+    0 0 28px rgba(50, 170, 255, 0.85),
+    inset 0 0 36px rgba(90, 170, 255, 0.18);
 }
 
 body.comisiones-viva .cm-panel--exec {
@@ -3641,4 +3645,320 @@ body.comisiones-viva .cm-phone {
   box-shadow:
     0 10px 16px rgba(0, 0, 0, 0.22),
     inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+body.comisiones-viva .cm-banner--name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  min-width: 0;
+  width: 100%;
+  margin: 0 0 14px;
+  padding: 2px 0 6px;
+  color: #fff;
+  font-size: clamp(2.4rem, 6vw, 3.35rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-shadow: 0 4px 0 #071433;
+}
+
+body.comisiones-viva .cm-banner--name .cm-petal {
+  position: static;
+  top: auto;
+  left: auto;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  opacity: 1;
+  animation: none;
+  border-radius: 80% 0 80% 0;
+  flex: none;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+}
+
+body.comisiones-viva .cm-petal--a { background: #ff8a00; transform: rotate(-30deg); }
+body.comisiones-viva .cm-petal--b { background: #7c3aed; transform: rotate(20deg); width: 12px; height: 12px; }
+body.comisiones-viva .cm-petal--c { background: #ff4d8d; transform: rotate(24deg); }
+body.comisiones-viva .cm-petal--d { background: #00c2a8; transform: rotate(-18deg); width: 12px; height: 12px; }
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer {
+  grid-template-columns: 1fr 1.05fr;
+  gap: 14px;
+  align-items: center;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 8px 6px 12px;
+  margin-bottom: 6px;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__step {
+  align-items: center;
+  gap: 10px;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__step span {
+  width: auto;
+  height: auto;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__step .cm-num {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 58px;
+  height: 64px;
+  border-radius: 12px;
+  background: #fff;
+  color: #1236b0;
+  font-size: 2.15rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 5px 0 rgba(8, 24, 80, 0.22);
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__step .cm-hl {
+  display: inline-block;
+  width: max-content;
+  max-width: calc(100% - 70px);
+  height: auto;
+  background: linear-gradient(180deg, #fff4b0 0%, #ffd000 58%, #ffc400 100%);
+  color: #10215f;
+  font-weight: 900;
+  font-size: clamp(1.05rem, 2.3vw, 1.35rem);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  padding: 6px 12px 7px;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(180, 120, 0, 0.25);
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__ops {
+  margin: 6px 0 8px 64px;
+  color: #fff;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-chips,
+body.comisiones-viva .cm-panel--yaavsers .cm-ports {
+  justify-content: flex-start;
+  padding-left: 36px;
+  gap: 0;
+  min-height: 120px;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-sim {
+  position: relative;
+  width: 86px;
+  height: 118px;
+  border-radius: 14px;
+  padding-top: 22px;
+  font-size: 1.05rem;
+  line-height: 0.95;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-sim::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 26px;
+  height: 18px;
+  border-radius: 4px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7));
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-sim--att { transform: rotate(-14deg); z-index: 1; }
+body.comisiones-viva .cm-panel--yaavsers .cm-sim--unefon {
+  margin-left: -8px;
+  transform: rotate(12deg);
+  color: #102040;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-phone {
+  position: relative;
+  width: 78px;
+  height: 138px;
+  border-radius: 18px;
+  border: 5px solid #141414;
+  box-shadow:
+    0 12px 16px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 2px #2a2a2a;
+  padding-top: 18px;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-phone::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 28px;
+  height: 7px;
+  border-radius: 0 0 7px 7px;
+  transform: translateX(-50%);
+  background: #141414;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-phone--att { transform: rotate(-8deg); }
+body.comisiones-viva .cm-panel--yaavsers .cm-phone--unefon {
+  transform: rotate(8deg);
+  color: #102040;
+  margin-left: 4px;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-sim b,
+body.comisiones-viva .cm-panel--yaavsers .cm-phone b {
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-sim i,
+body.comisiones-viva .cm-panel--yaavsers .cm-phone i {
+  position: relative;
+  display: block;
+  width: 36px;
+  height: 36px;
+  margin: 0 auto 2px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background:
+    linear-gradient(#fff, #fff) center / 100% 2px no-repeat,
+    linear-gradient(#fff, #fff) center / 2px 100% no-repeat;
+  overflow: hidden;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-sim i::before,
+body.comisiones-viva .cm-panel--yaavsers .cm-phone i::before,
+body.comisiones-viva .cm-panel--yaavsers .cm-sim i::after,
+body.comisiones-viva .cm-panel--yaavsers .cm-phone i::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-sim i::before,
+body.comisiones-viva .cm-panel--yaavsers .cm-phone i::before {
+  width: 62%;
+  height: 100%;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-sim i::after,
+body.comisiones-viva .cm-panel--yaavsers .cm-phone i::after {
+  width: 100%;
+  height: 46%;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-swap {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 2px;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__note {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__note span {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin: 0 8px 1px 0;
+  vertical-align: middle;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__note strong {
+  color: #ffe14a;
+  font-weight: 900;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-price {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "kick kick"
+    "amt label";
+  align-items: center;
+  column-gap: 8px;
+  text-align: left;
+  padding: 12px 14px 14px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(90, 170, 255, 0.45), transparent 58%),
+    linear-gradient(180deg, #1a62f0 0%, #0c45d8 55%, #0836c0 100%);
+  border: 2px solid rgba(190, 235, 255, 0.98);
+  box-shadow:
+    0 0 22px rgba(40, 160, 255, 0.85),
+    inset 0 0 18px rgba(140, 210, 255, 0.28);
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-price__kicker {
+  grid-area: kick;
+  color: #fff;
+  font-size: 1.55rem;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-price__amount {
+  grid-area: amt;
+  font-family: 'Titan One', 'Lilita One', sans-serif;
+  font-size: clamp(3.6rem, 8vw, 5.1rem);
+  line-height: 0.82;
+  color: #ffd000;
+  -webkit-text-stroke: 5px #0a2470;
+  paint-order: stroke fill;
+  text-shadow: 0 5px 0 #071a4a;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-price__label {
+  grid-area: label;
+  align-self: end;
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-align: left;
+}
+
+@media (max-width: 720px) {
+  body.comisiones-viva .cm-panel--yaavsers .cm-offer {
+    grid-template-columns: 1fr;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-offer__ops,
+  body.comisiones-viva .cm-panel--yaavsers .cm-chips,
+  body.comisiones-viva .cm-panel--yaavsers .cm-ports {
+    margin-left: 0;
+    padding-left: 0;
+    justify-content: center;
+  }
 }
