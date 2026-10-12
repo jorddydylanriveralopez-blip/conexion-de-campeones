@@ -4056,162 +4056,203 @@ body.comisiones-viva #consulta .desglose-orden--abierto {
   overflow: visible;
 }
 
+body.comisiones-viva #consulta .oct-kicker {
+  margin: 0 0 4px;
+  color: #9ee7ff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
 body.comisiones-viva #consulta .oct-nombre {
   margin: 0;
   color: #ffe14a;
   font-family: 'Titan One', 'Arial Black', sans-serif;
-  font-size: clamp(1.35rem, 3.4vw, 1.9rem);
+  font-size: clamp(1.45rem, 3.6vw, 2.05rem);
   font-weight: 400;
   letter-spacing: 0.02em;
-  line-height: 1.1;
-  text-shadow: 0 2px 0 #10215f;
+  line-height: 1.05;
+  text-shadow: 0 3px 0 #10215f, 0 0 18px rgba(255, 210, 40, 0.35);
 }
 
 body.comisiones-viva #consulta .oct-clave {
-  margin: 6px 0 0;
-  color: #b7ecff;
-  font-size: 0.82rem;
+  display: inline-block;
+  margin: 8px 0 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(4, 28, 120, 0.55);
+  border: 1px solid rgba(150, 225, 255, 0.55);
+  color: #d7f6ff;
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.08em;
 }
 
 body.comisiones-viva #consulta .oct-resumen {
-  margin: 12px 0 0;
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(4, 28, 120, 0.4);
+  width: fit-content;
+  max-width: 100%;
+  margin: 14px auto 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(4, 28, 120, 0.45);
+  border: 1px solid rgba(150, 225, 255, 0.4);
   color: #fff;
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1.35;
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: center;
 }
 
-body.comisiones-viva #consulta .oct-grid {
+body.comisiones-viva #consulta .oct-resumen--hit {
+  color: #10215f;
+  background: linear-gradient(180deg, #fff4b0, #ffd000);
+  border-color: #ffe14a;
+  box-shadow: 0 0 16px rgba(255, 196, 0, 0.4);
+}
+
+body.comisiones-viva #consulta .oct-stats {
   display: grid;
-  grid-template-columns: 0.72fr 1.28fr;
-  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
   margin-top: 14px;
 }
 
-body.comisiones-viva #consulta .oct-card,
-body.comisiones-viva #consulta .oct-alcance,
-body.comisiones-viva #consulta .oct-pago {
-  border: 2px solid rgba(150, 225, 255, 0.7);
+body.comisiones-viva #consulta .oct-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 92px;
+  padding: 12px 12px 10px;
+  border: 2px solid rgba(150, 225, 255, 0.75);
   border-radius: 18px;
-  background: rgba(4, 28, 120, 0.38);
+  background:
+    radial-gradient(circle at 80% 0%, rgba(80, 170, 255, 0.28), transparent 46%),
+    rgba(4, 28, 120, 0.42);
+  box-shadow: inset 0 0 18px rgba(80, 160, 255, 0.12);
 }
 
-body.comisiones-viva #consulta .oct-card {
-  padding: 12px 14px 6px;
+body.comisiones-viva #consulta .oct-stat span,
+body.comisiones-viva #consulta .oct-stat small {
+  color: #b7ecff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-body.comisiones-viva #consulta .oct-card h3 {
-  margin: 0 0 6px;
+body.comisiones-viva #consulta .oct-stat strong {
+  margin: 4px 0 2px;
+  color: #fff;
+  font-family: 'Titan One', 'Arial Black', sans-serif;
+  font-size: clamp(1.55rem, 3.4vw, 2rem);
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 0 2px 0 #071433;
+}
+
+body.comisiones-viva #consulta .oct-stat--real {
+  background:
+    radial-gradient(circle at 80% 0%, rgba(255, 210, 40, 0.28), transparent 50%),
+    rgba(4, 28, 120, 0.42);
+  border-color: rgba(255, 225, 74, 0.85);
+}
+
+body.comisiones-viva #consulta .oct-stat--real strong {
   color: #ffe14a;
+}
+
+body.comisiones-viva #consulta .oct-alcance {
+  margin-top: 12px;
+  padding: 12px 14px 14px;
+  border: 2px solid rgba(150, 225, 255, 0.75);
+  border-radius: 18px;
+  background: rgba(4, 28, 120, 0.42);
+}
+
+body.comisiones-viva #consulta .oct-alcance__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+body.comisiones-viva #consulta .oct-alcance__top span {
+  color: #d7f4ff;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body.comisiones-viva #consulta .oct-alcance__top strong {
+  color: #ffe14a;
+  font-family: 'Titan One', 'Arial Black', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 0 0 14px rgba(255, 210, 40, 0.35);
+}
+
+body.comisiones-viva #consulta .oct-meter {
+  height: 14px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(4, 18, 80, 0.65);
+  box-shadow: inset 0 0 0 1px rgba(150, 225, 255, 0.35);
+}
+
+body.comisiones-viva #consulta .oct-meter i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #3ec8ff, #ffe14a);
+  box-shadow: 0 0 12px rgba(80, 190, 255, 0.8);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.comisiones-viva #consulta .oct-alcance--hit .oct-meter i {
+  background: linear-gradient(90deg, #ffe14a, #ffb000);
+  box-shadow: 0 0 14px rgba(255, 196, 0, 0.85);
+}
+
+body.comisiones-viva #consulta .oct-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin: 12px 0 0;
+  padding: 16px 14px 14px;
+  border-radius: 22px;
+  color: #10215f;
+  text-align: center;
+  background: linear-gradient(180deg, #fff6c4, #ffd000 52%, #ffb000);
+  box-shadow: 0 0 0 3px rgba(255, 225, 74, 0.35), 0 0 28px rgba(255, 196, 0, 0.55);
+}
+
+body.comisiones-viva #consulta .oct-total span {
+  color: #10215f;
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-body.comisiones-viva #consulta .oct-card p,
-body.comisiones-viva #consulta .oct-pago p {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 0;
-  padding: 9px 0;
-  border-top: 1px solid rgba(180, 230, 255, 0.22);
-  color: #eaf7ff;
-  font-size: 0.92rem;
-  font-weight: 700;
-}
-
-body.comisiones-viva #consulta .oct-card p:first-of-type {
-  border-top: 0;
-}
-
-body.comisiones-viva #consulta .oct-card strong,
-body.comisiones-viva #consulta .oct-pago strong {
-  color: #fff;
-  font-size: 1.15rem;
-  font-variant-numeric: tabular-nums;
-}
-
-body.comisiones-viva #consulta .oct-alcance {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2px 12px;
-  align-items: center;
-  margin-top: 12px;
-  padding: 12px 14px;
-}
-
-body.comisiones-viva #consulta .oct-alcance span,
-body.comisiones-viva #consulta .oct-pago span {
-  color: #d7f4ff;
-  font-weight: 800;
-}
-
-body.comisiones-viva #consulta .oct-alcance strong {
-  color: #ffe14a;
-  font-family: 'Titan One', 'Arial Black', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 400;
-  line-height: 1;
-}
-
-body.comisiones-viva #consulta .oct-alcance small {
-  grid-column: 1 / -1;
-  color: rgba(230, 246, 255, 0.78);
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-body.comisiones-viva #consulta .oct-pago {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 10px;
-  margin-top: 12px;
-  padding: 10px;
-  background: transparent;
-  border: 0;
-}
-
-body.comisiones-viva #consulta .oct-pago p {
-  margin: 0;
-  padding: 14px;
-  border: 2px solid rgba(150, 225, 255, 0.7);
-  border-radius: 18px;
-  background: rgba(4, 28, 120, 0.38);
-}
-
-body.comisiones-viva #consulta .oct-total {
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  color: #10215f !important;
-  background: linear-gradient(180deg, #fff4b0, #ffd000 55%, #ffb000) !important;
-  border-color: #ffe14a !important;
-  box-shadow: 0 0 18px rgba(255, 196, 0, 0.45);
-}
-
-body.comisiones-viva #consulta .oct-total span,
 body.comisiones-viva #consulta .oct-total strong {
   color: #10215f;
-}
-
-body.comisiones-viva #consulta .oct-total strong {
   font-family: 'Titan One', 'Arial Black', sans-serif;
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-size: clamp(2rem, 6vw, 2.8rem);
   font-weight: 400;
   line-height: 1;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.35);
 }
 
 @media (max-width: 720px) {
-  body.comisiones-viva #consulta .oct-grid,
-  body.comisiones-viva #consulta .oct-pago {
-    grid-template-columns: 1fr;
+  body.comisiones-viva #consulta .oct-stats {
+    grid-template-columns: 1fr 1fr;
   }
 }

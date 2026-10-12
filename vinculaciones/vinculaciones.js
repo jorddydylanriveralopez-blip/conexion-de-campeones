@@ -496,19 +496,9 @@ function pickGanTotal(row) {
 function textoAlcance(row) {
   const meta = Number(row.meta) || 0;
   const reales = Number(row.reales) || 0;
-  const veces = Number.isFinite(Number(row.alcance))
-    ? Number(row.alcance)
-    : meta > 0
-      ? reales / meta
-      : 0;
-  const vecesTxt = veces.toLocaleString('es-MX', { maximumFractionDigits: 2 });
-  if (meta <= 0) {
-    return `En octubre llevas ${formatoNumero(reales)} activaciones reales.`;
-  }
-  if (reales >= meta) {
-    return `Superaste tu meta de ${formatoNumero(meta)}: llevas ${formatoNumero(reales)} activaciones reales, ${vecesTxt} veces la meta.`;
-  }
-  return `Tu meta de octubre es ${formatoNumero(meta)}. Llevas ${formatoNumero(reales)} activaciones reales, ${vecesTxt} veces la meta.`;
+  if (meta > 0 && reales >= meta) return '¡Meta de octubre superada!';
+  if (meta > 0) return 'Todavía no llegas a tu meta de octubre.';
+  return 'Así va tu octubre.';
 }
 
 function pintarResultados(row) {
@@ -521,7 +511,10 @@ function pintarResultados(row) {
     el.classList.add('is-updated');
   };
 
+  const meta = Number(row.meta) || 0;
+  const reales = Number(row.reales) || 0;
   const veces = Number.isFinite(Number(row.alcance)) ? Number(row.alcance) : 0;
+  const supero = meta > 0 && reales >= meta;
   set('oct-nombre', row.nombre || 'Yaavser');
   set('oct-clave', row.clave || '—');
   set('oct-resumen', textoAlcance(row));
@@ -533,6 +526,15 @@ function pintarResultados(row) {
   set('oct-alcance', `${veces.toLocaleString('es-MX', { maximumFractionDigits: 2 })}×`);
   set('oct-lineas', formatoNumero(row.lineas));
   set('oct-total', formatoMoneda(row.total));
+
+  document.getElementById('oct-resumen')?.classList.toggle('oct-resumen--hit', supero);
+  const caja = document.getElementById('oct-alcance-box');
+  caja?.classList.toggle('oct-alcance--hit', supero);
+  const meter = document.getElementById('oct-meter');
+  if (meter) {
+    const pct = meta > 0 ? Math.max(0, Math.min(100, (reales / meta) * 100)) : 0;
+    meter.style.width = `${pct}%`;
+  }
   abrirDesglosePanel();
 }
 
@@ -624,7 +626,7 @@ async function consultarVinculacion() {
     }
 
     pintarResultados(row);
-    mostrarStatus(status, 'ok', 'Listo. Este es tu avance de octubre.');
+    ocultarStatus(status);
   } catch (err) {
     mostrarStatus(
       status,
