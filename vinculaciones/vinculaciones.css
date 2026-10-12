@@ -3484,3 +3484,22 @@ body.comisiones-landing .cm-bases .section-title {
     animation: none;
   }
 }
+
+body.comisiones-landing.comisiones-poster {
+  background: #071a86;
+  background-image: linear-gradient(180deg, #0d46d8 0%, #082888 100%);
+}
+
+body.comisiones-landing.comisiones-poster .page-wrap {
+  width: min(560px, 100%);
+  margin: 0 auto;
+  padding: 0;
+  opacity: 1;
+  animation: none;
+}
+
+.cm-poster {
+  display: block;
+  width: 100%;
+  height: auto;
+}
