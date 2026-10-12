@@ -3198,115 +3198,9 @@ body.comisiones-landing .page-wrap {
 }
 
 .cm-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: min(100%, 920px);
-  margin: 2px auto 4px;
-  overflow: visible;
-}
-
-.cm-line {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  line-height: 0.8;
-}
-
-.cm-line--white {
-  margin-top: -0.02em;
-}
-
-.cm-letter {
-  display: inline-block;
-  transform: translateY(calc(var(--lift) * 1.65)) rotate(calc(var(--rot) * 1.2));
-  animation: cm-bob 2.8s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 80ms);
-}
-
-.cm-letter__pop {
-  position: relative;
-  isolation: isolate;
-  display: inline-block;
-  font-family: 'Titan One', 'Lilita One', sans-serif;
-  font-size: clamp(2.35rem, 7.4vw, 5.15rem);
-  line-height: 0.82;
-  margin: 0 -0.02em;
-  color: transparent;
-  animation: cm-pop 0.7s cubic-bezier(0.18, 1.4, 0.36, 1) both;
-  animation-delay: calc(var(--i) * 55ms);
-}
-
-.cm-letter__pop::before,
-.cm-letter__pop::after {
-  content: attr(data-ch);
-  position: absolute;
-  left: 0;
-  top: 0;
-  font: inherit;
-}
-
-.cm-letter__pop::before {
-  top: 0.11em;
-  left: 0.03em;
-  z-index: 0;
-  color: #071433;
-  -webkit-text-stroke: 8px #071433;
-  paint-order: stroke fill;
-}
-
-.cm-letter__pop::after {
-  z-index: 1;
-  color: transparent;
-  -webkit-text-stroke: 9px #10204f;
-}
-
-.cm-letter__face {
-  position: relative;
-  z-index: 2;
-  display: inline-block;
-}
-
-.cm-line--orange .cm-letter__face {
-  background-image: linear-gradient(180deg, #fff7b8 0%, #ffe14a 28%, #ffb000 62%, #ff7a00 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: cm-shine 2.8s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 40ms);
-  background-size: 180% 100%;
-  background-image: linear-gradient(100deg, #ff8a00 0%, #ffd000 22%, #fff8c2 40%, #ffc400 55%, #ff7a00 100%);
-}
-
-.cm-line--white .cm-letter__pop {
-  font-size: clamp(2.15rem, 6.7vw, 4.7rem);
-}
-
-.cm-line--white .cm-letter__face {
-  color: #fff;
-}
-
-@keyframes cm-pop {
-  0% { transform: translateY(18px) scale(0.35) rotate(-6deg); opacity: 0; }
-  65% { transform: translateY(-7px) scale(1.08) rotate(2deg); opacity: 1; }
-  100% { transform: none; opacity: 1; }
-}
-
-@keyframes cm-bob {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -7px; }
-}
-
-@keyframes cm-shine {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cm-letter,
-  .cm-letter__pop {
-    animation: none;
-  }
+  display: block;
+  width: min(100%, 780px);
+  margin: 0 auto 6px;
 }
 
 .cm-title__sr {
@@ -3326,27 +3220,41 @@ body.comisiones-landing .page-wrap {
   width: 100%;
   height: auto;
   overflow: visible;
+  animation: cm-title-float 3.6s ease-in-out infinite;
 }
 
 .cm-title-svg text {
   font-family: 'Titan One', 'Lilita One', sans-serif;
-  font-size: 92px;
-  letter-spacing: 1px;
+  font-size: 84px;
+  letter-spacing: 0.5px;
 }
 
-.cm-title-svg__back {
-  fill: #07122e;
-  stroke: #07122e;
-  stroke-width: 18;
+.cm-title-svg__shadow {
+  transform: translate(0, 8px);
+}
+
+.cm-title-svg__shadow text {
+  fill: #071433;
+  stroke: #071433;
+  stroke-width: 12;
   stroke-linejoin: round;
   paint-order: stroke fill;
 }
 
 .cm-title-svg__front {
   stroke: #10204f;
-  stroke-width: 16;
+  stroke-width: 9;
   stroke-linejoin: round;
   paint-order: stroke fill;
+}
+
+@keyframes cm-title-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-title-svg { animation: none; }
 }
 
 .cm-title-svg__front--orange {
