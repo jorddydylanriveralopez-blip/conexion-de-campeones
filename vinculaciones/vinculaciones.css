@@ -3173,7 +3173,7 @@ body.comisiones-landing .page-wrap {
 }
 
 .cm-logo--att {
-  height: 58px;
+  height: 72px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -3185,6 +3185,19 @@ body.comisiones-landing .page-wrap {
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+}
+
+@media (max-width: 720px) {
+  .cm-logos {
+    gap: 12px;
+  }
+
+  .cm-logo--att,
+  .cm-logo-yaavs {
+    height: auto;
+    max-height: 52px;
+    max-width: calc(50% - 8px);
+  }
 }
 
 .cm-title {
