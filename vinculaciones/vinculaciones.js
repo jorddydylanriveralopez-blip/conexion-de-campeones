@@ -306,15 +306,17 @@ function ocultarStatus(el) {
 }
 
 const DESGLOSE_IDS = [
-  'piso-att',
-  'piso-movi',
-  'avance-att',
-  'vinculado-att',
-  'avance-movi',
-  'vinculado-movi',
-  'gan-att',
-  'gan-movi',
-  'gan-total',
+  'oct-nombre',
+  'oct-clave',
+  'oct-resumen',
+  'oct-act-sept',
+  'oct-meta',
+  'oct-act-oct',
+  'oct-exp',
+  'oct-reales',
+  'oct-alcance',
+  'oct-lineas',
+  'oct-total',
 ];
 
 function cerrarDesglosePanel() {
@@ -491,36 +493,46 @@ function pickGanTotal(row) {
   return pick(row, 'acumulado_total', 'acumulado total', 'ganancia_total', 'ganancia total', 'total');
 }
 
+function textoAlcance(row) {
+  const meta = Number(row.meta) || 0;
+  const reales = Number(row.reales) || 0;
+  const veces = Number.isFinite(Number(row.alcance))
+    ? Number(row.alcance)
+    : meta > 0
+      ? reales / meta
+      : 0;
+  const vecesTxt = veces.toLocaleString('es-MX', { maximumFractionDigits: 2 });
+  if (meta <= 0) {
+    return `En octubre llevas ${formatoNumero(reales)} activaciones reales.`;
+  }
+  if (reales >= meta) {
+    return `Superaste tu meta de ${formatoNumero(meta)}: llevas ${formatoNumero(reales)} activaciones reales, ${vecesTxt} veces la meta.`;
+  }
+  return `Tu meta de octubre es ${formatoNumero(meta)}. Llevas ${formatoNumero(reales)} activaciones reales, ${vecesTxt} veces la meta.`;
+}
+
 function pintarResultados(row) {
-  const set = (id, val, money = false) => {
+  const set = (id, text) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.textContent = money ? formatoMoneda(val) : formatoNumero(val);
+    el.textContent = text;
     el.classList.remove('is-updated');
     void el.offsetWidth;
     el.classList.add('is-updated');
   };
 
-  const setAvance = (id, val) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.textContent = formatoActivaciones(val);
-    el.classList.remove('is-updated');
-    void el.offsetWidth;
-    el.classList.add('is-updated');
-  };
-
-  set('piso-att', pickPisoAtt(row));
-  set('piso-movi', pickPisoMovi(row));
-  setAvance('avance-att', pickAvanceAtt(row));
-  setAvance('vinculado-att', pickVinculadoAtt(row));
-  setAvance('avance-movi', pickAvanceMovi(row));
-  setAvance('vinculado-movi', pickVinculadoMovi(row));
-  set('gan-att', pickGanAtt(row), true);
-  set('gan-movi', pickGanMovi(row), true);
-  set('gan-total', pickGanTotal(row), true);
-
-  actualizarEstadoPiso(row);
+  const veces = Number.isFinite(Number(row.alcance)) ? Number(row.alcance) : 0;
+  set('oct-nombre', row.nombre || 'Yaavser');
+  set('oct-clave', row.clave || '—');
+  set('oct-resumen', textoAlcance(row));
+  set('oct-act-sept', formatoNumero(row.actSept));
+  set('oct-meta', formatoNumero(row.meta));
+  set('oct-act-oct', formatoNumero(row.actOct));
+  set('oct-exp', formatoNumero(row.expOct));
+  set('oct-reales', formatoNumero(row.reales));
+  set('oct-alcance', `${veces.toLocaleString('es-MX', { maximumFractionDigits: 2 })}×`);
+  set('oct-lineas', formatoNumero(row.lineas));
+  set('oct-total', formatoMoneda(row.total));
   abrirDesglosePanel();
 }
 
@@ -529,20 +541,21 @@ let cacheDatos = null;
 async function cargarDatos() {
   if (cacheDatos) return cacheDatos;
 
-  if (!URL_CSV_VINCULACIONES) {
-    return DEMO_DATOS.map((row) => {
-      const obj = {};
-      Object.keys(row).forEach((k) => {
-        obj[normalizarHeader(k)] = row[k];
-      });
-      return obj;
-    });
-  }
-
-  const res = await fetch(URL_CSV_VINCULACIONES, { cache: 'no-store' });
-  if (!res.ok) throw new Error('No se pudo descargar la base de datos.');
-  const text = await res.text();
-  cacheDatos = filasADatos(parseCsv(text));
+  const res = await fetch('dinamica-octubre.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error('No se pudo cargar la dinámica de octubre.');
+  const mapa = await res.json();
+  cacheDatos = Object.entries(mapa).map(([clave, v]) => ({
+    clave,
+    nombre: v[0],
+    actSept: v[1],
+    meta: v[2],
+    actOct: v[3],
+    expOct: v[4],
+    reales: v[5],
+    alcance: v[6],
+    lineas: v[7],
+    total: v[8],
+  }));
   return cacheDatos;
 }
 
@@ -595,36 +608,23 @@ async function consultarVinculacion() {
   });
 
   btn.disabled = true;
-  mostrarStatus(status, 'info', 'Consultando tu meta…');
+  mostrarStatus(status, 'info', 'Buscando tu avance de octubre…');
 
   try {
-    if (!URL_CSV_VINCULACIONES) {
-      cacheDatos = null;
-    }
     const datos = await cargarDatos();
     const row = buscarPorClave(datos, clave);
 
     if (!row) {
-      const demo = !URL_CSV_VINCULACIONES;
       mostrarStatus(
         status,
         'error',
-        demo
-          ? `No encontramos «${clave}». Prueba con: ${CLAVES_DEMO_LISTA}`
-          : `No encontramos la clave «${clave}». Revisa que esté bien escrita o contacta a tu ejecutivo.`,
+        `No encontramos la clave «${clave}». Revisa que esté bien escrita o contacta a tu ejecutivo.`,
       );
       return;
     }
 
     pintarResultados(row);
-    const demo = !URL_CSV_VINCULACIONES;
-    mostrarStatus(
-      status,
-      'ok',
-      demo
-        ? `Datos de prueba cargados (${clave}). Cuando tengas la tabla, conecta Google Sheets en vinculaciones.js.`
-        : `Datos cargados para la clave ${clave}.`,
-    );
+    mostrarStatus(status, 'ok', 'Listo. Este es tu avance de octubre.');
   } catch (err) {
     mostrarStatus(
       status,
