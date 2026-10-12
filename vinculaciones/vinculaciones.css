@@ -3173,21 +3173,11 @@ body.comisiones-landing .page-wrap {
 }
 
 .cm-logo--att {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #fff;
-}
-
-.cm-logo--att svg {
-  width: 42px;
-  height: 42px;
-}
-
-.cm-logo--att strong {
-  font-size: 1.7rem;
-  letter-spacing: -0.04em;
-  font-weight: 800;
+  height: 58px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.28));
 }
 
 .cm-logo-yaavs {
