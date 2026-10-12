@@ -23,7 +23,7 @@
   <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Montserrat:wght@400;600;700;800;900&family=Titan+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="vinculaciones.css?v=103">
+  <link rel="stylesheet" href="vinculaciones.css?v=104">
 </head>
 <body class="vinculaciones-landing comisiones-landing comisiones-viva">
   <div class="cm-scene" aria-hidden="true">
@@ -150,6 +150,104 @@
           <span class="cm-flower cm-flower--4"></span>
           <span class="cm-candle cm-candle--right"><i></i></span>
         </div>
+      </section>
+
+      <section class="section-card" id="consulta">
+        <h2 class="consulta-titulo">
+          <i class="fa-solid fa-key" aria-hidden="true"></i>
+          Ingresa tu clave única de Yaavser
+        </h2>
+        <div class="consulta-form">
+          <div class="consulta-form__field">
+            <input
+              type="text"
+              id="clave-cliente"
+              name="clave"
+              placeholder="Clave de Yaavser"
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Clave de Yaavser"
+            />
+          </div>
+          <button type="button" class="btn-consultar" id="btn-consultar">
+            <i class="fa-solid fa-bolt"></i> Consultar avance
+          </button>
+        </div>
+
+        <div id="desglose-panel" class="desglose-orden desglose-orden--cerrado" aria-live="polite" aria-hidden="true">
+          <div class="desglose-orden__inner">
+            <h3 class="desglose-orden__titulo">Desglose</h3>
+            <p class="desglose-orden__ayuda">
+              <strong>¿Cómo gano?</strong> En <strong>abril</strong> está tu <strong>piso</strong> (meta por operador).
+              En <strong>mayo</strong> ves tu <strong>avance</strong> y las <strong>vinculaciones que hiciste en el mes</strong>.
+              Si en mayo tus activaciones vinculadas <em>superan</em> tu piso de abril, ganas extra ($5 AT&amp;T · Unefon / $10 Movistar).
+            </p>
+            <div id="desglose-estado-piso" class="desglose-orden__estado" role="status" aria-live="polite"></div>
+            <ul class="desglose-orden__lista">
+              <li class="desglose-orden__bloque desglose-orden__bloque--abril">
+                <p class="desglose-orden__bloque-head">
+                  <span class="desglose-orden__mes-tag desglose-orden__mes-tag--abril" id="mes-tag-abril">Abril</span>
+                  <span class="desglose-orden__bloque-titulo">Tu meta (piso)</span>
+                </p>
+                <ul class="desglose-orden__sublista">
+                  <li class="desglose-orden__item">
+                    <span class="desglose-orden__label">Piso AT&amp;T <span class="desglose-orden__sublabel">Meta de abril</span></span>
+                    <span class="desglose-orden__valor" id="piso-att">—</span>
+                  </li>
+                  <li class="desglose-orden__item">
+                    <span class="desglose-orden__label">Piso Movistar <span class="desglose-orden__sublabel">Meta de abril</span></span>
+                    <span class="desglose-orden__valor" id="piso-movi">—</span>
+                  </li>
+                </ul>
+              </li>
+              <li class="desglose-orden__bloque desglose-orden__bloque--mayo">
+                <p class="desglose-orden__bloque-head">
+                  <span class="desglose-orden__mes-tag desglose-orden__mes-tag--mayo" id="mes-tag-mayo">Mayo</span>
+                  <span class="desglose-orden__bloque-titulo">Avance y vinculadas en mayo</span>
+                </p>
+                <ul class="desglose-orden__sublista">
+                  <li class="desglose-orden__item">
+                    <span class="desglose-orden__label">Avance AT&amp;T <span class="desglose-orden__sublabel">Progreso en mayo</span></span>
+                    <span class="desglose-orden__valor desglose-orden__valor--avance" id="avance-att">—</span>
+                  </li>
+                  <li class="desglose-orden__item desglose-orden__item--destacado">
+                    <span class="desglose-orden__label">Vinculadas AT&amp;T <span class="desglose-orden__sublabel">Las que vinculaste en mayo</span></span>
+                    <span class="desglose-orden__valor desglose-orden__valor--avance" id="vinculado-att">—</span>
+                  </li>
+                  <li class="desglose-orden__item">
+                    <span class="desglose-orden__label">Avance Movistar <span class="desglose-orden__sublabel">Progreso en mayo</span></span>
+                    <span class="desglose-orden__valor desglose-orden__valor--avance" id="avance-movi">—</span>
+                  </li>
+                  <li class="desglose-orden__item desglose-orden__item--destacado">
+                    <span class="desglose-orden__label">Vinculadas Movistar <span class="desglose-orden__sublabel">Las que vinculaste en mayo</span></span>
+                    <span class="desglose-orden__valor desglose-orden__valor--avance" id="vinculado-movi">—</span>
+                  </li>
+                </ul>
+              </li>
+              <li class="desglose-orden__bloque desglose-orden__bloque--ganancia">
+                <p class="desglose-orden__bloque-head">
+                  <span class="desglose-orden__mes-tag desglose-orden__mes-tag--ganancia">$</span>
+                  <span class="desglose-orden__bloque-titulo">Tu ganancia extra</span>
+                </p>
+                <ul class="desglose-orden__sublista">
+                  <li class="desglose-orden__item">
+                    <span class="desglose-orden__label">Ganancia AT&amp;T</span>
+                    <span class="desglose-orden__valor desglose-orden__valor--money" id="gan-att">—</span>
+                  </li>
+                  <li class="desglose-orden__item">
+                    <span class="desglose-orden__label">Ganancia Movistar</span>
+                    <span class="desglose-orden__valor desglose-orden__valor--money" id="gan-movi">—</span>
+                  </li>
+                  <li class="desglose-orden__item desglose-orden__item--total">
+                    <span class="desglose-orden__label">Ganancia total</span>
+                    <span class="desglose-orden__valor desglose-orden__valor--total" id="gan-total">—</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="consulta-status" class="status-msg" role="status" aria-live="polite"></div>
       </section>
     </main>
   </div>
