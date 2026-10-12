@@ -4221,8 +4221,9 @@ body.comisiones-viva #consulta .oct-clave {
 }
 
 body.comisiones-viva #consulta .oct-resumen {
-  width: fit-content;
+  width: 100%;
   max-width: 100%;
+  box-sizing: border-box;
   margin: 14px auto 0;
   padding: 8px 16px;
   border-radius: 999px;
@@ -4254,7 +4255,7 @@ body.comisiones-viva #consulta .oct-stat {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  min-height: 92px;
+  min-height: 118px;
   padding: 12px 12px 10px;
   border: 2px solid rgba(150, 225, 255, 0.75);
   border-radius: 18px;
@@ -4264,13 +4265,21 @@ body.comisiones-viva #consulta .oct-stat {
   box-shadow: inset 0 0 18px rgba(80, 160, 255, 0.12);
 }
 
-body.comisiones-viva #consulta .oct-stat span,
-body.comisiones-viva #consulta .oct-stat small {
+body.comisiones-viva #consulta .oct-stat span {
   color: #b7ecff;
   font-size: 0.68rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+body.comisiones-viva #consulta .oct-stat small {
+  color: rgba(215, 244, 255, 0.9);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.25;
+  text-transform: none;
 }
 
 body.comisiones-viva #consulta .oct-stat strong {
@@ -4320,10 +4329,19 @@ body.comisiones-viva #consulta .oct-alcance__top span {
 body.comisiones-viva #consulta .oct-alcance__top strong {
   color: #ffe14a;
   font-family: 'Titan One', 'Arial Black', sans-serif;
-  font-size: 1.7rem;
+  font-size: clamp(1.35rem, 3vw, 1.7rem);
   font-weight: 400;
   line-height: 1;
+  text-align: right;
   text-shadow: 0 0 14px rgba(255, 210, 40, 0.35);
+}
+
+body.comisiones-viva #consulta .oct-alcance__nota {
+  margin: 8px 0 0;
+  color: rgba(230, 246, 255, 0.82);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 body.comisiones-viva #consulta .oct-meter {
@@ -4380,6 +4398,14 @@ body.comisiones-viva #consulta .oct-total strong {
   font-weight: 400;
   line-height: 1;
   text-shadow: 0 2px 0 rgba(255, 255, 255, 0.35);
+}
+
+body.comisiones-viva #consulta .oct-total small {
+  color: #10215f;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 @media (max-width: 720px) {

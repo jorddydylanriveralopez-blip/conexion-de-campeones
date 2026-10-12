@@ -316,6 +316,7 @@ const DESGLOSE_IDS = [
   'oct-exp',
   'oct-reales',
   'oct-alcance',
+  'oct-alcance-nota',
   'oct-lineas',
   'oct-total',
 ];
@@ -497,9 +498,12 @@ function pickGanTotal(row) {
 function textoAlcance(row) {
   const meta = Number(row.meta) || 0;
   const reales = Number(row.reales) || 0;
-  if (meta > 0 && reales >= meta) return '¡Meta de octubre superada!';
-  if (meta > 0) return 'Todavía no llegas a tu meta de octubre.';
-  return 'Así va tu octubre.';
+  const faltan = Math.max(meta - reales, 0);
+  if (meta <= 0) return 'Así van tus activaciones reales de octubre.';
+  if (reales >= meta) {
+    return `¡Ya llegaste! Te pedían ${formatoNumero(meta)} y llevas ${formatoNumero(reales)} activaciones reales.`;
+  }
+  return `Tu meta es ${formatoNumero(meta)} activaciones reales. Llevas ${formatoNumero(reales)}. Te faltan ${formatoNumero(faltan)}.`;
 }
 
 function pintarResultados(row) {
@@ -514,7 +518,6 @@ function pintarResultados(row) {
 
   const meta = Number(row.meta) || 0;
   const reales = Number(row.reales) || 0;
-  const veces = Number.isFinite(Number(row.alcance)) ? Number(row.alcance) : 0;
   const supero = meta > 0 && reales >= meta;
   set('oct-nombre', row.nombre || 'Yaavser');
   set('oct-clave', row.clave || '—');
@@ -524,7 +527,12 @@ function pintarResultados(row) {
   set('oct-act-oct', formatoNumero(row.actOct));
   set('oct-exp', formatoNumero(row.expOct));
   set('oct-reales', formatoNumero(row.reales));
-  set('oct-alcance', `${veces.toLocaleString('es-MX', { maximumFractionDigits: 2 })}×`);
+  const avance = meta > 0 ? `${formatoNumero(reales)} de ${formatoNumero(meta)}` : '—';
+  const nota = meta > 0
+    ? 'Las activaciones reales entre lo que te pidieron.'
+    : '';
+  set('oct-alcance', avance);
+  set('oct-alcance-nota', nota);
   set('oct-lineas', formatoNumero(row.lineas));
   set('oct-total', formatoMoneda(row.total));
 
