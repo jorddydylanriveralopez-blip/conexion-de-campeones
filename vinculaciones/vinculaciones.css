@@ -3566,12 +3566,49 @@ body.comisiones-landing.comisiones-viva {
 }
 
 body.comisiones-viva #consulta.section-card {
-  background: linear-gradient(180deg, rgba(8, 36, 140, 0.82), rgba(4, 18, 80, 0.88));
-  border: 2px solid rgba(160, 220, 255, 0.85);
-  box-shadow: 0 0 22px rgba(40, 140, 255, 0.35);
+  background:
+    radial-gradient(circle at 78% 18%, rgba(40, 120, 255, 0.28), transparent 32%),
+    linear-gradient(180deg, #0c46d4 0%, #0834b4 48%, #06278f 100%);
+  border: 3px solid rgba(150, 225, 255, 0.95);
+  border-radius: 26px;
+  box-shadow:
+    0 0 0 5px rgba(18, 70, 190, 0.35),
+    0 0 28px rgba(50, 170, 255, 0.85),
+    inset 0 0 36px rgba(90, 170, 255, 0.18);
   color: #fff;
   margin-top: -36px;
   margin-bottom: 16px;
+}
+
+body.comisiones-viva #consulta .consulta-titulo {
+  text-shadow: none;
+}
+
+body.comisiones-viva #consulta .consulta-titulo i {
+  color: #ffe14a;
+  filter: drop-shadow(0 0 10px rgba(255, 196, 0, 0.75));
+}
+
+body.comisiones-viva #consulta .consulta-form input {
+  background: rgba(4, 28, 120, 0.45);
+  border: 2px solid rgba(180, 230, 255, 0.75);
+  color: #fff;
+  box-shadow: inset 0 0 12px rgba(40, 140, 255, 0.25);
+}
+
+body.comisiones-viva #consulta .consulta-form input::placeholder {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+body.comisiones-viva #consulta .consulta-form input:focus {
+  border-color: #ffe14a;
+  box-shadow: 0 0 0 3px rgba(255, 210, 0, 0.28);
+}
+
+body.comisiones-viva #consulta .btn-consultar {
+  color: #10215f;
+  background: linear-gradient(180deg, #fff4b0, #ffd000 55%, #ffb000);
+  box-shadow: 0 0 18px rgba(255, 196, 0, 0.55);
 }
 
 body.comisiones-landing.comisiones-viva .page-wrap {
