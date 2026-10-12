@@ -826,6 +826,43 @@ function etiquetaMes(s) {
   return t ? t.charAt(0).toUpperCase() + t.slice(1) : '';
 }
 
+function floresDelTitulo() {
+  const svg = document.querySelector('.cm-title-svg');
+  const layer = svg?.querySelector('.cm-title-blooms');
+  if (!svg || !layer) return;
+  const ns = 'http://www.w3.org/2000/svg';
+  layer.replaceChildren();
+  svg.querySelectorAll('.cm-title-svg__front').forEach((text) => {
+    const value = (text.querySelector('textPath')?.textContent || '').trim();
+    for (let i = 0; i < value.length; i += 1) {
+      const ch = value[i];
+      if (!'O¡!'.includes(ch)) continue;
+      let box;
+      let rot = 0;
+      try {
+        box = text.getExtentOfChar(i);
+        rot = text.getRotationOfChar(i) || 0;
+      } catch (err) {
+        continue;
+      }
+      const esLetra = ch === 'O';
+      const size = esLetra ? box.height * 1.05 : box.height * 0.38;
+      const cx = box.x + box.width / 2;
+      const cy = esLetra ? box.y + box.height * 0.52 : box.y + size * 0.35;
+      const g = document.createElementNS(ns, 'g');
+      g.setAttribute('transform', `translate(${cx} ${cy}) rotate(${rot})`);
+      const use = document.createElementNS(ns, 'use');
+      use.setAttribute('href', '#cmBloom');
+      use.setAttribute('x', -size / 2);
+      use.setAttribute('y', -size / 2);
+      use.setAttribute('width', size);
+      use.setAttribute('height', size);
+      g.appendChild(use);
+      layer.appendChild(g);
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const mesAbril = document.getElementById('mes-tag-abril');
   const mesMayo = document.getElementById('mes-tag-mayo');
@@ -835,6 +872,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageEnter();
   initScrollReveal();
   initFormularioPorFecha();
+  const pintarFlores = () => {
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(floresDelTitulo);
+    } else {
+      floresDelTitulo();
+    }
+  };
+  pintarFlores();
+  window.addEventListener('resize', floresDelTitulo);
 
   document.getElementById('btn-consultar')?.addEventListener('click', consultarVinculacion);
   document.getElementById('clave-cliente')?.addEventListener('keydown', (ev) => {
