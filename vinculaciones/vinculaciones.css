@@ -3198,46 +3198,57 @@ body.comisiones-landing .page-wrap {
 }
 
 .cm-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  margin: 8px 0 4px;
-  font-family: 'Titan One', 'Lilita One', sans-serif;
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: 0.01em;
-  font-size: clamp(2.8rem, 8.4vw, 5.1rem);
-}
-
-.cm-title__word {
-  position: relative;
   display: block;
+  width: min(100%, 860px);
+  margin: 6px auto 0;
 }
 
-.cm-title__edge,
-.cm-title__face {
-  display: block;
-}
-
-.cm-title__edge {
+.cm-title__sr {
   position: absolute;
-  inset: 0;
-  color: #071433;
-  -webkit-text-stroke: 8px #071433;
-  transform: translateY(5px);
-  z-index: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.cm-title__face {
-  position: relative;
-  z-index: 1;
-  background: linear-gradient(180deg, #fff7c2 0%, #ffe14a 34%, #ffb000 68%, #ff7a00 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-stroke: 0;
-  filter: drop-shadow(0 2px 0 rgba(255, 255, 255, 0.25));
+.cm-title-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.cm-title-svg text {
+  font-family: 'Titan One', 'Lilita One', sans-serif;
+  font-size: 92px;
+  letter-spacing: 1px;
+}
+
+.cm-title-svg__back {
+  fill: #07122e;
+  stroke: #07122e;
+  stroke-width: 18;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+}
+
+.cm-title-svg__front {
+  stroke: #10204f;
+  stroke-width: 16;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+}
+
+.cm-title-svg__front--orange {
+  fill: url(#cmTitleOrange);
+}
+
+.cm-title-svg__front--white {
+  fill: #ffffff;
 }
 
 .cm-main {

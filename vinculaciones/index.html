@@ -23,7 +23,7 @@
   <link rel="icon" href="https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Montserrat:wght@400;600;700;800;900&family=Titan+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="vinculaciones.css?v=92">
+  <link rel="stylesheet" href="vinculaciones.css?v=93">
 </head>
 <body class="vinculaciones-landing comisiones-landing comisiones-viva">
   <div class="cm-scene" aria-hidden="true">
@@ -57,14 +57,32 @@
       </div>
 
       <h1 class="cm-title">
-        <span class="cm-title__word">
-          <span class="cm-title__edge" aria-hidden="true">¡COMISIONES</span>
-          <span class="cm-title__face">¡COMISIONES</span>
-        </span>
-        <span class="cm-title__word">
-          <span class="cm-title__edge" aria-hidden="true">MONSTRUOSAS!</span>
-          <span class="cm-title__face">MONSTRUOSAS!</span>
-        </span>
+        <span class="cm-title__sr">¡COMISIONES MONSTRUOSAS!</span>
+        <svg class="cm-title-svg" viewBox="0 0 980 340" role="img" aria-hidden="true">
+          <defs>
+            <linearGradient id="cmTitleOrange" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fff3a0"/>
+              <stop offset="42%" stop-color="#ffc400"/>
+              <stop offset="100%" stop-color="#ff7a00"/>
+            </linearGradient>
+            <path id="cmArcTop" d="M70,150 Q490,28 910,150"/>
+            <path id="cmArcBottom" d="M24,292 Q490,168 956,292"/>
+          </defs>
+          <g transform="translate(0,10)">
+            <text class="cm-title-svg__back">
+              <textPath href="#cmArcTop" startOffset="50%" text-anchor="middle">¡COMISIONES</textPath>
+            </text>
+            <text class="cm-title-svg__back">
+              <textPath href="#cmArcBottom" startOffset="50%" text-anchor="middle">MONSTRUOSAS!</textPath>
+            </text>
+          </g>
+          <text class="cm-title-svg__front cm-title-svg__front--orange">
+            <textPath href="#cmArcTop" startOffset="50%" text-anchor="middle">¡COMISIONES</textPath>
+          </text>
+          <text class="cm-title-svg__front cm-title-svg__front--white">
+            <textPath href="#cmArcBottom" startOffset="50%" text-anchor="middle">MONSTRUOSAS!</textPath>
+          </text>
+        </svg>
       </h1>
     </header>
 
