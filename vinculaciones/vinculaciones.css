@@ -3201,23 +3201,43 @@ body.comisiones-landing .page-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
-  font-family: 'Lilita One', 'Montserrat', sans-serif;
+  gap: 2px;
+  margin: 8px 0 4px;
+  font-family: 'Titan One', 'Lilita One', sans-serif;
   font-weight: 400;
-  line-height: 0.9;
+  line-height: 0.92;
   letter-spacing: 0.01em;
-  font-size: clamp(2.6rem, 8vw, 4.6rem);
+  font-size: clamp(2.8rem, 8.4vw, 5.1rem);
 }
 
-.cm-title span {
+.cm-title__word {
+  position: relative;
   display: block;
-  background: linear-gradient(180deg, #fff4a8 0%, #ffd000 42%, #ff8a00 100%);
+}
+
+.cm-title__edge,
+.cm-title__face {
+  display: block;
+}
+
+.cm-title__edge {
+  position: absolute;
+  inset: 0;
+  color: #071433;
+  -webkit-text-stroke: 8px #071433;
+  transform: translateY(5px);
+  z-index: 0;
+}
+
+.cm-title__face {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, #fff7c2 0%, #ffe14a 34%, #ffb000 68%, #ff7a00 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  -webkit-text-stroke: 7px #10215f;
-  paint-order: stroke fill;
-  filter: drop-shadow(0 6px 0 #1a3d9a);
+  -webkit-text-stroke: 0;
+  filter: drop-shadow(0 2px 0 rgba(255, 255, 255, 0.25));
 }
 
 .cm-main {
@@ -3457,8 +3477,9 @@ body.comisiones-landing .cm-bases .section-title {
     margin-left: 0;
   }
 
-  .cm-title span {
-    -webkit-text-stroke-width: 4px;
+  .cm-title__edge {
+    -webkit-text-stroke-width: 8px;
+    transform: translateY(4px);
   }
 
   .cm-logo--att strong {
