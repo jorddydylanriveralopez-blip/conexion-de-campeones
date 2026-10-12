@@ -2983,12 +2983,21 @@ body.comisiones-landing {
   --cm-card: #0a3ec4;
   --cm-gold: #ffe14a;
   --cm-orange: #ff8a00;
-  background-color: #07124a;
+  background-color: #14062e;
   background-image:
-    radial-gradient(circle at 12% 8%, rgba(255, 140, 0, 0.18), transparent 28%),
-    radial-gradient(circle at 88% 0%, rgba(0, 174, 239, 0.22), transparent 32%),
-    linear-gradient(180deg, #1236c4 0%, #0a1d78 42%, #07124a 100%);
+    radial-gradient(circle at 78% 12%, rgba(255, 236, 170, 0.55) 0 42px, rgba(255, 214, 120, 0.18) 43px, transparent 120px),
+    radial-gradient(circle at 18% 88%, rgba(255, 110, 0, 0.28), transparent 22%),
+    radial-gradient(circle at 86% 92%, rgba(255, 70, 140, 0.22), transparent 24%),
+    radial-gradient(1.5px 1.5px at 12% 22%, rgba(255, 255, 255, 0.85) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 28% 14%, rgba(255, 255, 255, 0.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 46% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 63% 28%, rgba(255, 255, 255, 0.75) 50%, transparent 51%),
+    radial-gradient(1px 1px at 88% 36%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 8% 48%, rgba(255, 255, 255, 0.6) 50%, transparent 51%),
+    radial-gradient(1px 1px at 92% 58%, rgba(255, 255, 255, 0.8) 50%, transparent 51%),
+    linear-gradient(180deg, #2a0b62 0%, #12083f 38%, #1a0a55 68%, #3a1230 100%);
   background-attachment: fixed;
+  background-size: auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto;
 }
 
 .cm-scene {
@@ -2997,6 +3006,127 @@ body.comisiones-landing {
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
+}
+
+.cm-scene::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 220px;
+  background:
+    radial-gradient(ellipse at 12% 100%, rgba(255, 120, 0, 0.45), transparent 55%),
+    radial-gradient(ellipse at 88% 100%, rgba(255, 60, 120, 0.35), transparent 50%),
+    linear-gradient(180deg, transparent, rgba(80, 10, 40, 0.35));
+}
+
+.cm-picado {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 12px;
+}
+
+.cm-picado span {
+  width: 72px;
+  height: 96px;
+  flex: none;
+  background: currentColor;
+  color: #ff4d8d;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 84% 84%, 68% 70%, 50% 100%, 32% 70%, 16% 84%, 0 70%);
+  filter: drop-shadow(0 10px 0 rgba(0, 0, 0, 0.22));
+  animation: cm-sway 3.4s ease-in-out infinite;
+}
+
+.cm-picado span:nth-child(2),
+.cm-picado span:nth-child(7) { color: #ffb000; animation-delay: -0.4s; }
+.cm-picado span:nth-child(3),
+.cm-picado span:nth-child(8) { color: #7c3aed; animation-delay: -0.8s; }
+.cm-picado span:nth-child(4),
+.cm-picado span:nth-child(9) { color: #ff6a00; animation-delay: -1.2s; }
+.cm-picado span:nth-child(5),
+.cm-picado span:nth-child(10) { color: #00c2a8; animation-delay: -1.6s; }
+.cm-picado span:nth-child(6),
+.cm-picado span:nth-child(11) { color: #ff4d8d; animation-delay: -2s; }
+
+@keyframes cm-sway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+
+.cm-flower {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #ffe56a 0 16%, transparent 17%),
+    radial-gradient(circle at 50% 8%, #ff7a00 0 28%, transparent 29%),
+    radial-gradient(circle at 92% 50%, #ff9a00 0 28%, transparent 29%),
+    radial-gradient(circle at 50% 92%, #ff4d00 0 28%, transparent 29%),
+    radial-gradient(circle at 8% 50%, #ffb000 0 28%, transparent 29%),
+    #ff6a00;
+  box-shadow: 0 0 22px rgba(255, 140, 0, 0.55);
+}
+
+.cm-flower--1 { left: max(8px, calc(50% - 530px)); bottom: 7%; width: 92px; height: 92px; }
+.cm-flower--2 { left: max(28px, calc(50% - 470px)); bottom: 18%; width: 58px; height: 58px; }
+.cm-flower--3 { left: max(10px, calc(50% - 500px)); top: 180px; width: 52px; height: 52px; }
+.cm-flower--4 { right: max(8px, calc(50% - 530px)); bottom: 8%; width: 96px; height: 96px; }
+.cm-flower--5 { right: max(36px, calc(50% - 460px)); bottom: 20%; width: 54px; height: 54px; }
+.cm-flower--6 { right: max(12px, calc(50% - 500px)); top: 200px; width: 48px; height: 48px; }
+
+.cm-skull {
+  position: absolute;
+  width: 72px;
+  height: 84px;
+  opacity: 0.55;
+  background:
+    radial-gradient(circle at 35% 38%, #1a0a30 0 7px, transparent 8px),
+    radial-gradient(circle at 65% 38%, #1a0a30 0 7px, transparent 8px),
+    radial-gradient(ellipse at 50% 62%, #1a0a30 0 6px, transparent 7px),
+    radial-gradient(circle at 50% 42%, #fff6ea 0 34%, #ffe0c2 35% 70%, transparent 71%);
+  border-radius: 46% 46% 40% 40%;
+  filter: drop-shadow(0 0 12px rgba(255, 180, 80, 0.35));
+}
+
+.cm-skull--left { left: max(12px, calc(50% - 490px)); top: 250px; transform: rotate(-12deg); }
+.cm-skull--right { right: max(12px, calc(50% - 490px)); top: 270px; transform: rotate(10deg); }
+
+.cm-candle {
+  position: absolute;
+  bottom: 18px;
+  width: 18px;
+  height: 48px;
+  border-radius: 4px 4px 6px 6px;
+  background: linear-gradient(90deg, #fff4d2, #f3d48a 45%, #c9923a);
+  box-shadow: 0 0 18px rgba(255, 180, 60, 0.35);
+}
+
+.cm-candle i {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 12px;
+  height: 22px;
+  margin-left: -6px;
+  border-radius: 50% 50% 45% 45%;
+  background: radial-gradient(circle at 50% 70%, #fff6c8, #ffb000 40%, #ff4d00 72%, transparent 73%);
+  animation: cm-flame 0.7s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.cm-candle--left { left: max(24px, calc(50% - 430px)); }
+.cm-candle--right { right: max(24px, calc(50% - 430px)); }
+
+@keyframes cm-flame {
+  0%, 100% { transform: scaleY(1) scaleX(1); }
+  50% { transform: scaleY(1.12) scaleX(0.9); }
 }
 
 .cm-petal {
@@ -3010,11 +3140,13 @@ body.comisiones-landing {
 }
 
 .cm-petal--1 { left: 8%; animation-delay: 0s; }
-.cm-petal--2 { left: 22%; animation-delay: -3s; width: 14px; }
+.cm-petal--2 { left: 22%; animation-delay: -3s; width: 14px; background: linear-gradient(180deg, #ff4d8d, #ff7a00); }
 .cm-petal--3 { left: 48%; animation-delay: -6s; }
 .cm-petal--4 { left: 67%; animation-delay: -2s; }
 .cm-petal--5 { left: 82%; animation-delay: -8s; width: 16px; }
-.cm-petal--6 { left: 93%; animation-delay: -4s; }
+.cm-petal--6 { left: 93%; animation-delay: -4s; background: linear-gradient(180deg, #ffe14a, #ff4d00); }
+.cm-petal--7 { left: 34%; animation-delay: -7s; width: 12px; height: 20px; }
+.cm-petal--8 { left: 74%; animation-delay: -5s; background: linear-gradient(180deg, #ffb000, #ff2f7a); }
 
 @keyframes cm-fall {
   0% { top: -8%; transform: rotate(0deg); }
@@ -3024,7 +3156,7 @@ body.comisiones-landing {
 body.comisiones-landing .page-wrap {
   width: min(760px, 94vw);
   margin: 0 auto;
-  padding: 28px 0 56px;
+  padding: 118px 0 90px;
 }
 
 .cm-hero {
@@ -3332,10 +3464,23 @@ body.comisiones-landing .cm-bases .section-title {
   .cm-logo--att strong {
     font-size: 1.25rem;
   }
+
+  .cm-skull,
+  .cm-flower--3,
+  .cm-flower--6 {
+    display: none;
+  }
+
+  .cm-picado span {
+    width: 36px;
+    height: 52px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cm-petal {
+  .cm-petal,
+  .cm-picado span,
+  .cm-candle i {
     animation: none;
   }
 }
