@@ -3189,8 +3189,11 @@ body.comisiones-landing .page-wrap {
 
 .cm-title {
   display: block;
-  width: min(100%, 780px);
-  margin: 0 auto 6px;
+  width: min(94vw, 920px);
+  margin: 4px auto 10px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .cm-title__sr {
