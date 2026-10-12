@@ -3570,12 +3570,28 @@ body.comisiones-viva #consulta.section-card {
   border: 2px solid rgba(160, 220, 255, 0.85);
   box-shadow: 0 0 22px rgba(40, 140, 255, 0.35);
   color: #fff;
+  margin-top: -36px;
+  margin-bottom: 16px;
 }
+
+body.comisiones-landing.comisiones-viva .page-wrap {
   width: min(860px, 94vw);
   margin: 0 auto;
-  padding: 36px 0 48px;
+  padding: 28px 0 48px;
   opacity: 1;
   animation: none;
+}
+
+body.comisiones-viva .cm-hero {
+  padding-bottom: 0;
+}
+
+body.comisiones-viva .cm-title {
+  margin-bottom: 0;
+}
+
+body.comisiones-viva .cm-main {
+  padding-top: 0;
 }
 
 body.comisiones-viva .cm-panel--exec {
