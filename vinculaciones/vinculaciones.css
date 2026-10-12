@@ -3196,6 +3196,80 @@ body.comisiones-landing .page-wrap {
   transform: translateX(-50%);
 }
 
+.cm-title__lockup {
+  position: relative;
+  display: block;
+  animation: cm-title-float 3.6s ease-in-out infinite;
+}
+
+.cm-garland {
+  pointer-events: none;
+}
+
+.cm-marigold {
+  position: absolute;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 24% 46% at 50% 6%, #ff7a00 58%, transparent 60%),
+    radial-gradient(ellipse 24% 46% at 81% 19%, #ff9a00 58%, transparent 60%),
+    radial-gradient(ellipse 24% 46% at 94% 50%, #ff5a00 58%, transparent 60%),
+    radial-gradient(ellipse 24% 46% at 81% 81%, #ffb000 58%, transparent 60%),
+    radial-gradient(ellipse 24% 46% at 50% 94%, #ff6a00 58%, transparent 60%),
+    radial-gradient(ellipse 24% 46% at 19% 81%, #ff8a00 58%, transparent 60%),
+    radial-gradient(ellipse 24% 46% at 6% 50%, #ffb000 58%, transparent 60%),
+    radial-gradient(ellipse 24% 46% at 19% 19%, #ff5500 58%, transparent 60%),
+    #e35a00;
+  box-shadow: 0 8px 14px rgba(160, 50, 0, 0.28);
+}
+
+.cm-marigold::before,
+.cm-marigold::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cm-marigold::before {
+  inset: 18%;
+  background:
+    radial-gradient(ellipse 26% 48% at 50% 8%, #ffe14a 58%, transparent 60%),
+    radial-gradient(ellipse 26% 48% at 84% 28%, #ff9a00 58%, transparent 60%),
+    radial-gradient(ellipse 26% 48% at 92% 68%, #ffc400 58%, transparent 60%),
+    radial-gradient(ellipse 26% 48% at 58% 92%, #ff7a00 58%, transparent 60%),
+    radial-gradient(ellipse 26% 48% at 16% 78%, #ffe56a 58%, transparent 60%),
+    radial-gradient(ellipse 26% 48% at 8% 36%, #ffb000 58%, transparent 60%),
+    #ff8a00;
+}
+
+.cm-marigold::after {
+  left: 50%;
+  top: 50%;
+  width: 28%;
+  height: 28%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 38% 36%, #fff8c8, #ffd000 58%, #e88900);
+  box-shadow: 0 0 0 3px rgba(255, 90, 0, 0.45);
+}
+
+.cm-marigold--a { left: -36px; top: 22%; width: 92px; height: 92px; transform: rotate(-12deg); }
+.cm-marigold--b { left: 7%; top: -22px; width: 46px; height: 46px; transform: rotate(18deg); }
+.cm-marigold--c { right: -30px; top: 4%; width: 78px; height: 78px; transform: rotate(14deg); }
+.cm-marigold--d { right: 6%; bottom: -18px; width: 52px; height: 52px; transform: rotate(-20deg); }
+.cm-marigold--e { left: 12%; bottom: -14px; width: 40px; height: 40px; transform: rotate(8deg); }
+.cm-marigold--f { right: 16%; top: -12px; width: 34px; height: 34px; transform: rotate(-8deg); }
+
+@media (max-width: 720px) {
+  .cm-marigold--a { left: -8px; width: 58px; height: 58px; }
+  .cm-marigold--b { left: 2%; top: -8px; width: 32px; height: 32px; }
+  .cm-marigold--c { right: -6px; width: 52px; height: 52px; }
+  .cm-marigold--d { right: 2%; bottom: -8px; width: 34px; height: 34px; }
+  .cm-marigold--e,
+  .cm-marigold--f { display: none; }
+}
+
 .cm-title__sr {
   position: absolute;
   width: 1px;
@@ -3209,11 +3283,12 @@ body.comisiones-landing .page-wrap {
 }
 
 .cm-title-svg {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
-  animation: cm-title-float 3.6s ease-in-out infinite;
 }
 
 .cm-title-svg text {
@@ -3247,7 +3322,7 @@ body.comisiones-landing .page-wrap {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cm-title-svg { animation: none; }
+  .cm-title__lockup { animation: none; }
 }
 
 .cm-title-svg__front--orange {
