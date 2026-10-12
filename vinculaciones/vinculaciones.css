@@ -3233,6 +3233,10 @@ body.comisiones-landing .page-wrap {
   letter-spacing: 0.5px;
 }
 
+.cm-title-svg text.cm-title-svg__line--bottom {
+  font-size: 58px;
+}
+
 .cm-title-svg__shadow {
   transform: translate(0, 8px);
 }
@@ -3578,6 +3582,12 @@ body.comisiones-viva #consulta.section-card {
   color: #fff;
   margin-top: -36px;
   margin-bottom: 16px;
+}
+
+@media (max-width: 720px) {
+  body.comisiones-viva #consulta.section-card {
+    margin-top: -2px;
+  }
 }
 
 body.comisiones-viva #consulta .consulta-titulo {
