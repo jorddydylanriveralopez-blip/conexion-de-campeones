@@ -7,7 +7,8 @@ declare(strict_types=1);
  * Configura la URL después de implementar google-apps-script-formulario.gs
  * (debe terminar en /exec).
  */
-const FORMULARIO_SHEETS_WEBAPP = 'https://script.google.com/macros/s/AKfycby0WX9APv7sA98HHTRDaolGhl2TxvPSRogzoz7MgfhLEXdwSgjE8wn3EovrAqXx1RkmSg/exec';
+const FORMULARIO_SHEETS_WEBAPP = 'https://script.google.com/macros/s/AKfycbzL1Te35LzXBhPpZYUz1vP0x7bhFUti63pUOM5BG7FNIEFl2E9k5VpTXNl4y1lBWnzp5A/exec';
+const FORMULARIO_DESTINO = 'clabe-octubre';
 
 /** Misma URL CSV que vinculaciones.js (base de claves válidas) */
 const VINCULACIONES_CSV_URL =
@@ -226,6 +227,7 @@ if (FORMULARIO_SHEETS_TOKEN !== '') {
 
 $query = [
     'action' => 'submit',
+    'destino' => FORMULARIO_DESTINO,
     'nombre' => (string) ($data['nombre'] ?? ''),
     'telefono' => (string) ($data['telefono'] ?? ''),
     'clave' => (string) ($data['clave'] ?? ''),
