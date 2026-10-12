@@ -3894,6 +3894,31 @@ body.comisiones-viva .cm-panel--yaavsers .cm-phone--unefon {
   margin-left: 4px;
 }
 
+body.comisiones-viva .cm-panel--yaavsers .cm-was {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: line-through;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__extra {
+  margin: 10px 0 0;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-conditions {
+  margin: 10px 8px 2px;
+  color: rgba(230, 246, 255, 0.9);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
 body.comisiones-viva .cm-panel--yaavsers .cm-sim b,
 body.comisiones-viva .cm-panel--yaavsers .cm-phone b {
   font-weight: 900;
