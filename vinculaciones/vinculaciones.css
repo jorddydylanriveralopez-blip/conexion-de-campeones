@@ -3228,11 +3228,9 @@ body.comisiones-landing .page-wrap {
 
 .cm-title {
   display: block;
-  width: min(94vw, 920px);
+  width: min(72vw, 560px);
   margin: 4px auto 10px;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .cm-title__lockup {
@@ -3785,35 +3783,53 @@ body.comisiones-viva .cm-hero {
   padding-bottom: 0;
 }
 
-body.comisiones-viva .cm-title {
-  margin-bottom: 0;
+body.comisiones-viva .cm-hero-stage {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
 }
 
-body.comisiones-viva .cm-mascots {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 8px;
-  width: min(100%, 520px);
-  margin: -42px auto -6px;
-  position: relative;
-  z-index: 3;
-  pointer-events: none;
+body.comisiones-viva .cm-title {
+  width: min(100%, 500px);
+  max-width: 500px;
+  margin: 0;
+  flex: 0 1 auto;
 }
 
 body.comisiones-viva .cm-mascot {
   display: block;
-  width: 46%;
   height: auto;
+  pointer-events: none;
   filter: drop-shadow(0 16px 18px rgba(2, 18, 70, 0.42));
   transform-origin: center bottom;
+}
+
+body.comisiones-viva .cm-mascot--dinero {
+  width: 150px;
+  flex: 0 0 auto;
+  margin: 0 0 -8px;
   animation: cm-mascot-bob-left 3.4s ease-in-out infinite;
 }
 
+body.comisiones-viva .cm-fiesta-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+  margin-top: 8px;
+}
+
+body.comisiones-viva .cm-fiesta-row .cm-conditions {
+  flex: 1;
+  margin: 0 0 10px;
+}
+
 body.comisiones-viva .cm-mascot--fiesta {
-  width: 50%;
-  animation-name: cm-mascot-bob-right;
-  animation-delay: -1.5s;
+  width: 168px;
+  margin: 0;
+  flex: 0 0 auto;
+  animation: cm-mascot-bob-right 3.6s ease-in-out infinite;
+  animation-delay: -1.4s;
 }
 
 @keyframes cm-mascot-bob-left {
@@ -4553,13 +4569,16 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-title {
-    width: 100%;
+    width: min(100%, 500px);
+    max-width: 500px;
   }
 
-  body.comisiones-viva .cm-mascots {
-    width: min(100%, 680px);
-    margin-top: -64px;
-    gap: 18px;
+  body.comisiones-viva .cm-mascot--dinero {
+    width: 168px;
+  }
+
+  body.comisiones-viva .cm-mascot--fiesta {
+    width: 190px;
   }
 
   body.comisiones-viva .cm-logo-badge {
@@ -4632,15 +4651,32 @@ body.comisiones-viva #consulta .oct-total small {
     height: 20px;
   }
 
-  body.comisiones-viva .cm-title {
-    width: 94%;
-    margin: 0 auto;
+  body.comisiones-viva .cm-hero-stage {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
   }
 
-  body.comisiones-viva .cm-mascots {
-    width: min(78%, 250px);
-    margin: -8px auto -4px;
-    gap: 2px;
+  body.comisiones-viva .cm-title {
+    width: 78%;
+    flex: none;
+    order: 1;
+  }
+
+  body.comisiones-viva .cm-mascot--dinero {
+    width: 96px;
+    order: 2;
+    align-self: flex-start;
+    margin: -6px 0 -4px 10px;
+  }
+
+  body.comisiones-viva .cm-fiesta-row {
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  body.comisiones-viva .cm-mascot--fiesta {
+    width: 92px;
   }
 
   body.comisiones-viva #consulta.section-card {
