@@ -3169,34 +3169,60 @@ body.comisiones-landing .page-wrap {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
+}
+
+.cm-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 84px;
+  padding: 12px 18px;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(90, 170, 255, 0.28), transparent 58%),
+    linear-gradient(180deg, rgba(10, 40, 150, 0.92), rgba(5, 22, 96, 0.96));
+  border: 2px solid rgba(186, 232, 255, 0.95);
+  box-shadow:
+    0 0 0 4px rgba(16, 64, 180, 0.35),
+    0 0 26px rgba(70, 180, 255, 0.7),
+    inset 0 0 18px rgba(120, 190, 255, 0.18);
 }
 
 .cm-logo--att {
-  height: 72px;
+  height: 58px;
   width: auto;
   display: block;
   object-fit: contain;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.28));
 }
 
 .cm-logo-yaavs {
-  height: 46px;
+  height: 40px;
   width: auto;
+  display: block;
   object-fit: contain;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
 }
 
 @media (max-width: 720px) {
   .cm-logos {
-    gap: 12px;
+    gap: 10px;
   }
 
-  .cm-logo--att,
+  .cm-logo-badge {
+    min-height: 62px;
+    padding: 8px 10px;
+    border-radius: 16px;
+    box-shadow:
+      0 0 0 3px rgba(16, 64, 180, 0.35),
+      0 0 16px rgba(70, 180, 255, 0.65);
+  }
+
+  .cm-logo--att {
+    height: 40px;
+  }
+
   .cm-logo-yaavs {
-    height: auto;
-    max-height: 52px;
-    max-width: calc(50% - 8px);
+    height: 28px;
   }
 }
 
