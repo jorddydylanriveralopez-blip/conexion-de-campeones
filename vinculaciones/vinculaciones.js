@@ -756,20 +756,21 @@ function formularioDisponibleHoy() {
 }
 
 function initFormularioPlegable() {
-  const toggle = document.getElementById('formulario-toggle');
-  const panel = document.getElementById('formulario-panel');
-  const seccion = document.getElementById('formulario-section');
-  if (!toggle || !panel) return;
+  document.querySelectorAll('.formulario-toggle').forEach((toggle) => {
+    const panel = document.getElementById(toggle.getAttribute('aria-controls') || '');
+    const seccion = toggle.closest('section');
+    if (!panel) return;
 
-  toggle.addEventListener('click', () => {
-    const abierto = toggle.getAttribute('aria-expanded') === 'true';
-    const siguiente = !abierto;
-    toggle.setAttribute('aria-expanded', siguiente ? 'true' : 'false');
-    panel.hidden = !siguiente;
-    seccion?.classList.toggle('formulario-plegable--abierto', siguiente);
-    if (siguiente) {
-      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
+    toggle.addEventListener('click', () => {
+      const abierto = toggle.getAttribute('aria-expanded') === 'true';
+      const siguiente = !abierto;
+      toggle.setAttribute('aria-expanded', siguiente ? 'true' : 'false');
+      panel.hidden = !siguiente;
+      seccion?.classList.toggle('formulario-plegable--abierto', siguiente);
+      if (siguiente) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
   });
 }
 
