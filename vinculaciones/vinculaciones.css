@@ -3236,14 +3236,14 @@ body.comisiones-landing .page-wrap {
 .cm-title__lockup {
   position: relative;
   display: block;
-  animation: cm-title-float 3.6s ease-in-out infinite;
+  transform-origin: 50% 60%;
+  animation: cm-title-sway 4.4s ease-in-out infinite;
 }
 
 .cm-title-art {
   display: block;
   width: 100%;
   height: auto;
-  animation: cm-title-glow 2.6s ease-in-out infinite;
 }
 
 .cm-title-blooms {
@@ -3300,19 +3300,13 @@ body.comisiones-landing .page-wrap {
   paint-order: stroke fill;
 }
 
-@keyframes cm-title-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
-}
-
-@keyframes cm-title-glow {
-  0%, 100% { filter: drop-shadow(0 0 8px rgba(70, 180, 255, 0.28)); }
-  50% { filter: drop-shadow(0 0 22px rgba(130, 220, 255, 0.95)); }
+@keyframes cm-title-sway {
+  0%, 100% { transform: rotate(-1.6deg); }
+  50% { transform: rotate(1.6deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cm-title__lockup,
-  .cm-title-art,
   body.comisiones-viva .cm-mascot { animation: none; }
 }
 
