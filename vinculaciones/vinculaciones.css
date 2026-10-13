@@ -3681,7 +3681,7 @@ body.comisiones-viva #terminos-section .formulario-toggle {
   gap: 8px;
   width: 100%;
   margin: 0;
-  padding: 2px 8px;
+  padding: 2px 12px;
   border: 0;
   background: transparent;
   color: inherit;
@@ -4664,6 +4664,14 @@ body.comisiones-viva #consulta .oct-total small {
     gap: 4px;
     margin-bottom: 8px;
     font-size: 0.92rem;
+  }
+
+  body.comisiones-viva #formulario-section .formulario-toggle {
+    gap: 4px;
+    padding: 0 6px;
+    font-size: 0.88rem;
+    letter-spacing: 0.03em;
+    line-height: 1.25;
   }
 
   body.comisiones-viva #consulta .consulta-titulo i {
