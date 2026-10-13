@@ -3314,7 +3314,8 @@ body.comisiones-landing .page-wrap {
 
 @media (prefers-reduced-motion: reduce) {
   .cm-title__lockup,
-  .cm-title-art { animation: none; }
+  .cm-title-art,
+  body.comisiones-viva .cm-mascot { animation: none; }
 }
 
 .cm-title-svg__front--orange {
@@ -3786,6 +3787,43 @@ body.comisiones-viva .cm-hero {
 
 body.comisiones-viva .cm-title {
   margin-bottom: 0;
+}
+
+body.comisiones-viva .cm-mascots {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8px;
+  width: min(100%, 520px);
+  margin: -42px auto -6px;
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+}
+
+body.comisiones-viva .cm-mascot {
+  display: block;
+  width: 46%;
+  height: auto;
+  filter: drop-shadow(0 16px 18px rgba(2, 18, 70, 0.42));
+  transform-origin: center bottom;
+  animation: cm-mascot-bob-left 3.4s ease-in-out infinite;
+}
+
+body.comisiones-viva .cm-mascot--fiesta {
+  width: 50%;
+  animation-name: cm-mascot-bob-right;
+  animation-delay: -1.5s;
+}
+
+@keyframes cm-mascot-bob-left {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(-1deg); }
+}
+
+@keyframes cm-mascot-bob-right {
+  0%, 100% { transform: translateY(0) rotate(2deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
 }
 
 body.comisiones-viva .cm-main {
@@ -4518,6 +4556,12 @@ body.comisiones-viva #consulta .oct-total small {
     width: 100%;
   }
 
+  body.comisiones-viva .cm-mascots {
+    width: min(100%, 680px);
+    margin-top: -64px;
+    gap: 18px;
+  }
+
   body.comisiones-viva .cm-logo-badge {
     min-height: 100px;
     padding: 16px 24px;
@@ -4591,6 +4635,12 @@ body.comisiones-viva #consulta .oct-total small {
   body.comisiones-viva .cm-title {
     width: 94%;
     margin: 0 auto;
+  }
+
+  body.comisiones-viva .cm-mascots {
+    width: min(78%, 250px);
+    margin: -8px auto -4px;
+    gap: 2px;
   }
 
   body.comisiones-viva #consulta.section-card {
