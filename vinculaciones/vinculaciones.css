@@ -4537,30 +4537,75 @@ body.comisiones-viva #consulta .oct-total small {
   }
 }
 
-/* Celular: sin fondo fijo, márgenes seguros y texto que no haga zoom. */
+/* Celular: todo más corto para que quepa en la pantalla. */
 @media (max-width: 720px) {
   body.comisiones-landing.comisiones-viva {
     background-attachment: scroll;
   }
 
   body.comisiones-landing.comisiones-viva .page-wrap {
-    width: min(640px, calc(100% - 16px));
-    padding: 14px 0 calc(28px + env(safe-area-inset-bottom));
+    width: min(640px, calc(100% - 12px));
+    padding: 8px 0 calc(20px + env(safe-area-inset-bottom));
+  }
+
+  body.comisiones-viva .cm-logos {
+    margin-bottom: 0;
+  }
+
+  body.comisiones-viva .cm-logo-badge {
+    min-height: 46px;
+    padding: 5px 8px;
+    border-radius: 14px;
+    border-width: 1.5px;
+  }
+
+  body.comisiones-viva .cm-logo--att {
+    height: 28px;
+  }
+
+  body.comisiones-viva .cm-logo-yaavs {
+    height: 20px;
   }
 
   body.comisiones-viva .cm-title {
-    width: 100%;
+    width: 94%;
+    margin: 0 auto;
+  }
+
+  body.comisiones-viva #consulta.section-card {
+    margin-top: 0;
+    margin-bottom: 10px;
   }
 
   body.comisiones-viva #consulta.section-card,
   body.comisiones-viva .cm-panel--yaavsers,
   body.comisiones-viva #formulario-section.section-card {
-    border-radius: 20px;
+    border-radius: 18px;
     border-width: 2px;
-    padding: 16px 12px 14px;
+    padding: 12px 10px 10px;
     box-shadow:
-      0 0 0 3px rgba(18, 70, 190, 0.28),
-      0 0 16px rgba(50, 170, 255, 0.5);
+      0 0 0 2px rgba(18, 70, 190, 0.22),
+      0 0 12px rgba(50, 170, 255, 0.35);
+  }
+
+  body.comisiones-viva #consulta .consulta-titulo {
+    gap: 4px;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+  }
+
+  body.comisiones-viva #consulta .consulta-titulo i {
+    font-size: 0.95rem;
+  }
+
+  body.comisiones-viva #consulta .consulta-form {
+    gap: 8px;
+  }
+
+  body.comisiones-viva #consulta .consulta-form input,
+  body.comisiones-viva #consulta .btn-consultar {
+    min-height: 42px;
+    padding: 8px 12px;
   }
 
   body.comisiones-viva #consulta .consulta-form input,
@@ -4569,13 +4614,101 @@ body.comisiones-viva #consulta .oct-total small {
     font-size: 16px;
   }
 
+  body.comisiones-viva .cm-banner--name {
+    margin-bottom: 4px;
+    font-size: 1.45rem;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-offer {
+    padding: 8px 0;
+    gap: 8px;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-offer__step .cm-num {
+    width: 34px;
+    height: 38px;
+    font-size: 1.25rem;
+    border-radius: 8px;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-offer__step .cm-hl {
+    max-width: calc(100% - 44px);
+    padding: 4px 8px;
+    font-size: 0.78rem;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-offer__ops,
+  body.comisiones-viva .cm-panel--yaavsers .cm-offer__lead {
+    margin-left: 0;
+    margin-bottom: 4px;
+    font-size: 0.72rem;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-chips,
+  body.comisiones-viva .cm-panel--yaavsers .cm-ports {
+    min-height: 0;
+    margin: 4px 0 2px;
+    padding-left: 0;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-sim {
+    width: 58px;
+    height: 78px;
+    padding-top: 16px;
+    font-size: 0.72rem;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-phone {
+    width: 52px;
+    height: 92px;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-price {
+    padding: 8px 10px;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-price__kicker {
+    font-size: 0.95rem;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-price__amount {
+    font-size: 2.15rem;
+    -webkit-text-stroke-width: 3px;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-price__label {
+    margin-bottom: 4px;
+    font-size: 0.72rem;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-offer__extra,
+  body.comisiones-viva .cm-panel--yaavsers .cm-was {
+    font-size: 0.72rem;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-offer__extra {
+    margin-top: 6px;
+    padding: 5px 8px;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-conditions {
+    margin-top: 4px;
+    padding: 8px 10px;
+    font-size: 0.7rem;
+    line-height: 1.35;
+  }
+
   body.comisiones-viva #consulta .oct-stat {
-    min-height: 108px;
-    padding: 10px 10px 8px;
+    min-height: 92px;
+    padding: 8px 8px 6px;
   }
 
   body.comisiones-viva #consulta .oct-stat small {
-    font-size: 0.68rem;
+    font-size: 0.64rem;
+  }
+
+  body.comisiones-viva #consulta .oct-total strong {
+    font-size: 2rem;
   }
 }
 
