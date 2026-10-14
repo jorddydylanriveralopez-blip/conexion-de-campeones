@@ -4098,6 +4098,11 @@ body.comisiones-viva .cm-panel--yaavsers .cm-ports {
   min-height: 0;
 }
 
+body.comisiones-viva .cm-panel--yaavsers .cm-offer:first-of-type .cm-chips {
+  justify-content: center;
+  padding-left: 0;
+}
+
 body.comisiones-viva .cm-panel--yaavsers .cm-ill {
   display: block;
   width: auto;
