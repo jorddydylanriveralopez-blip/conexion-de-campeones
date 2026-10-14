@@ -3809,8 +3809,8 @@ body.comisiones-viva .cm-mascot--dinero {
 body.comisiones-viva .cm-fiesta-row {
   display: block;
   position: relative;
-  width: min(100%, 860px);
-  margin: 8px auto 0;
+  width: min(100%, 640px);
+  margin: 6px auto 0;
 }
 
 body.comisiones-viva .cm-fiesta-row .cm-conditions {
@@ -3820,9 +3820,10 @@ body.comisiones-viva .cm-fiesta-row .cm-conditions {
 
 body.comisiones-viva .cm-mascot--fiesta {
   position: absolute;
-  right: 12px;
-  bottom: 8px;
-  width: 92px;
+  left: calc(50% + 328px);
+  right: auto;
+  bottom: 0;
+  width: 108px;
   margin: 0;
   z-index: 2;
   animation: cm-mascot-bob-right 3.6s ease-in-out infinite;
@@ -3971,17 +3972,17 @@ body.comisiones-viva .cm-petal--c { background: #ff4d8d; transform: rotate(24deg
 body.comisiones-viva .cm-petal--d { background: #00c2a8; transform: rotate(-18deg); width: 12px; height: 12px; }
 
 body.comisiones-viva .cm-panel--yaavsers .cm-offer {
-  width: min(100%, 860px);
+  width: min(100%, 640px);
   margin: 0 auto;
-  grid-template-columns: max-content minmax(260px, 400px);
+  grid-template-columns: 268px max-content;
   justify-content: center;
-  gap: 8px 36px;
+  gap: 4px 18px;
   align-items: center;
   background: none;
   border: 0;
   box-shadow: none;
   border-radius: 0;
-  padding: 12px 0 10px;
+  padding: 8px 0 6px;
   border-bottom: 1px solid rgba(160, 220, 255, 0.22);
 }
 
@@ -3995,7 +3996,8 @@ body.comisiones-viva .cm-panel--yaavsers .cm-offer__pay {
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  width: 100%;
+  width: max-content;
+  max-width: 250px;
 }
 
 body.comisiones-viva .cm-panel--yaavsers .cm-offer__step {
@@ -4156,7 +4158,7 @@ body.comisiones-viva .cm-panel--yaavsers .cm-offer__extra {
 
 body.comisiones-viva .cm-panel--yaavsers .cm-conditions {
   margin: 8px 0 0;
-  padding: 0 128px 0 4px;
+  padding: 0 8px 0 4px;
   background: none;
   border: 0;
   border-radius: 0;
@@ -4245,14 +4247,16 @@ body.comisiones-viva .cm-panel--yaavsers .cm-offer__note strong {
 
 body.comisiones-viva .cm-panel--yaavsers .cm-price {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  width: max-content;
+  max-width: 100%;
+  grid-template-columns: auto auto;
   grid-template-areas:
     "kick kick"
     "amt label";
   align-items: center;
   column-gap: 8px;
   text-align: left;
-  padding: 8px 12px 8px;
+  padding: 6px 14px 8px;
   border-radius: 16px;
   background:
     radial-gradient(circle at 30% 40%, rgba(90, 170, 255, 0.45), transparent 58%),
@@ -4573,13 +4577,14 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-mascot--fiesta {
-    width: 96px;
-    right: 18px;
-    bottom: 12px;
+    width: 112px;
+    left: calc(50% + 336px);
+    right: auto;
+    bottom: 0;
   }
 
   body.comisiones-viva .cm-fiesta-row .cm-conditions {
-    padding-right: 128px;
+    padding-right: 8px;
   }
 
   body.comisiones-viva .cm-logo-badge {
@@ -4620,8 +4625,8 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-panel--yaavsers .cm-offer {
-    padding: 12px 0 10px;
-    gap: 8px 40px;
+    padding: 8px 0 6px;
+    gap: 4px 18px;
   }
 }
 
@@ -4684,8 +4689,19 @@ body.comisiones-viva #consulta .oct-total small {
 
   body.comisiones-viva .cm-mascot--fiesta {
     width: 70px;
+    left: auto;
     right: 6px;
     bottom: 6px;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-offer__pay {
+    width: 100%;
+    max-width: none;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-price {
+    width: 100%;
+    grid-template-columns: auto minmax(0, 1fr);
   }
 
   body.comisiones-viva #consulta.section-card {
