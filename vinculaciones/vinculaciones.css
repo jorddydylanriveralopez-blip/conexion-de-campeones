@@ -4060,9 +4060,29 @@ body.comisiones-viva .cm-panel--yaavsers .cm-offer__ops {
 body.comisiones-viva .cm-panel--yaavsers .cm-chips,
 body.comisiones-viva .cm-panel--yaavsers .cm-ports {
   justify-content: flex-start;
-  padding-left: 28px;
+  padding-left: 18px;
   gap: 0;
-  min-height: 86px;
+  min-height: 0;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-ill {
+  display: block;
+  width: auto;
+  height: auto;
+  margin: 2px 0 0;
+  filter: drop-shadow(0 12px 16px rgba(2, 12, 50, 0.4));
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-ill--chip {
+  width: 112px;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-ill--chips {
+  width: 210px;
+}
+
+body.comisiones-viva .cm-panel--yaavsers .cm-ill--ports {
+  width: 248px;
 }
 
 body.comisiones-viva .cm-panel--yaavsers .cm-sim {
@@ -4803,6 +4823,19 @@ body.comisiones-viva #consulta .oct-total small {
     min-height: 0;
     margin: 4px 0 2px;
     padding-left: 0;
+    justify-content: center;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-ill--chip {
+    width: 88px;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-ill--chips {
+    width: 168px;
+  }
+
+  body.comisiones-viva .cm-panel--yaavsers .cm-ill--ports {
+    width: 220px;
   }
 
   body.comisiones-viva .cm-panel--yaavsers .cm-sim {
