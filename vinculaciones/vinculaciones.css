@@ -3615,15 +3615,19 @@ body.comisiones-landing.comisiones-viva {
 }
 
 body.comisiones-viva #consulta.section-card {
+  width: min(100%, 620px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 16px 22px 14px;
   background:
     radial-gradient(circle at 78% 18%, rgba(40, 120, 255, 0.28), transparent 32%),
     linear-gradient(180deg, #0c46d4 0%, #0834b4 48%, #06278f 100%);
   border: 3px solid rgba(150, 225, 255, 0.95);
-  border-radius: 26px;
+  border-radius: 22px;
   box-shadow:
-    0 0 0 5px rgba(18, 70, 190, 0.35),
-    0 0 28px rgba(50, 170, 255, 0.85),
-    inset 0 0 36px rgba(90, 170, 255, 0.18);
+    0 0 0 4px rgba(18, 70, 190, 0.35),
+    0 0 22px rgba(50, 170, 255, 0.75),
+    inset 0 0 28px rgba(90, 170, 255, 0.18);
   color: #fff;
   margin-top: 32px;
   margin-bottom: 64px;
@@ -3636,6 +3640,9 @@ body.comisiones-viva #consulta.section-card {
 }
 
 body.comisiones-viva #consulta .consulta-titulo {
+  margin-bottom: 12px;
+  gap: 6px;
+  font-size: 1.02rem;
   text-shadow: none;
 }
 
@@ -3741,6 +3748,20 @@ body.comisiones-viva #formulario-section .btn-enviar {
   body.comisiones-viva #formulario-section .form-grid {
     grid-template-columns: 1fr;
   }
+}
+
+body.comisiones-viva #consulta .consulta-form {
+  max-width: none;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+body.comisiones-viva #consulta .consulta-form input,
+body.comisiones-viva #consulta .btn-consultar {
+  min-height: 46px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  border-radius: 14px;
 }
 
 body.comisiones-viva #consulta .consulta-form input {
@@ -4654,11 +4675,14 @@ body.comisiones-viva #consulta .oct-total small {
     height: 36px;
   }
 
-  body.comisiones-viva #consulta.section-card,
   body.comisiones-viva #formulario-section.section-card,
   body.comisiones-viva #terminos-section.section-card {
     border-radius: 32px;
     padding: 28px 32px 24px;
+  }
+
+  body.comisiones-viva #consulta.section-card {
+    padding: 18px 24px 16px;
   }
 
   body.comisiones-viva .cm-panel--yaavsers {
@@ -4666,15 +4690,7 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva #consulta .consulta-form {
-    max-width: 720px;
-    gap: 18px;
-  }
-
-  body.comisiones-viva #consulta .consulta-form input,
-  body.comisiones-viva #consulta .btn-consultar {
-    min-height: 58px;
-    font-size: 1.08rem;
-    border-radius: 18px;
+    gap: 12px;
   }
 
   body.comisiones-viva .cm-panel--yaavsers .cm-offer {
