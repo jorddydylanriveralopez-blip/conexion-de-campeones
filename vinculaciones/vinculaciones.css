@@ -3992,19 +3992,6 @@ body.comisiones-viva .cm-panel--yaavsers .cm-offer {
   border-bottom: 0;
 }
 
-body.comisiones-viva .cm-panel--yaavsers .cm-offer.cm-offer--banner {
-  display: block;
-  width: min(100%, 840px);
-  padding: 6px 0 16px;
-}
-
-body.comisiones-viva .cm-panel--yaavsers .cm-offer--banner img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 26px;
-}
-
 body.comisiones-viva .cm-panel--yaavsers .cm-offer:last-of-type {
   border-bottom: 0;
   padding-bottom: 6px;
@@ -4194,6 +4181,28 @@ body.comisiones-viva .cm-panel--yaavsers .cm-offer__extra {
   line-height: 1.25;
   text-align: center;
 }
+
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__lead--gold {
+  color: #ffe14a;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+body.comisiones-viva .cm-apps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 5px 0 3px;
+  font-size: 1rem;
+}
+
+body.comisiones-viva .cm-apps .fa-facebook-f { color: #1877f2; }
+body.comisiones-viva .cm-apps .fa-facebook-messenger { color: #b44bff; }
+body.comisiones-viva .cm-apps .fa-whatsapp { color: #25d366; }
+body.comisiones-viva .cm-apps .fa-instagram { color: #ff4d8d; }
+body.comisiones-viva .cm-apps .fa-x-twitter { color: #fff; }
+body.comisiones-viva .cm-apps .fa-location-dot { color: #34a853; }
 
 body.comisiones-viva .cm-panel--yaavsers .cm-conditions {
   margin: 8px 0 0;
@@ -4666,10 +4675,6 @@ body.comisiones-viva #consulta .oct-total small {
   body.comisiones-viva .cm-panel--yaavsers .cm-offer {
     padding: 32px 0 28px;
     gap: 14px 40px;
-  }
-
-  body.comisiones-viva .cm-panel--yaavsers .cm-offer--banner {
-    padding: 8px 0 12px;
   }
 }
 
