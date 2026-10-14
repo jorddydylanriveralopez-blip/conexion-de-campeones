@@ -3808,7 +3808,9 @@ body.comisiones-viva .cm-mascot--dinero {
 
 body.comisiones-viva .cm-fiesta-row {
   display: block;
-  margin-top: 6px;
+  position: relative;
+  width: min(100%, 860px);
+  margin: 8px auto 0;
 }
 
 body.comisiones-viva .cm-fiesta-row .cm-conditions {
@@ -3969,15 +3971,17 @@ body.comisiones-viva .cm-petal--c { background: #ff4d8d; transform: rotate(24deg
 body.comisiones-viva .cm-petal--d { background: #00c2a8; transform: rotate(-18deg); width: 12px; height: 12px; }
 
 body.comisiones-viva .cm-panel--yaavsers .cm-offer {
-  grid-template-columns: minmax(0, 1fr) minmax(190px, 0.82fr);
-  gap: 10px 16px;
+  width: min(100%, 860px);
+  margin: 0 auto;
+  grid-template-columns: max-content minmax(260px, 400px);
+  justify-content: center;
+  gap: 8px 36px;
   align-items: center;
   background: none;
   border: 0;
   box-shadow: none;
   border-radius: 0;
-  padding: 10px 2px 8px;
-  margin: 0;
+  padding: 12px 0 10px;
   border-bottom: 1px solid rgba(160, 220, 255, 0.22);
 }
 
@@ -4616,8 +4620,8 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-panel--yaavsers .cm-offer {
-    padding: 8px 4px;
-    gap: 8px 18px;
+    padding: 12px 0 10px;
+    gap: 8px 40px;
   }
 }
 
@@ -4675,7 +4679,7 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-fiesta-row .cm-conditions {
-    padding-right: 78px;
+    padding-right: 108px;
   }
 
   body.comisiones-viva .cm-mascot--fiesta {
@@ -4821,7 +4825,7 @@ body.comisiones-viva #consulta .oct-total small {
 
   body.comisiones-viva .cm-panel--yaavsers .cm-conditions {
     margin-top: 6px;
-    padding: 0 78px 0 2px;
+    padding: 0 108px 0 2px;
     font-size: 0.7rem;
     line-height: 1.35;
   }
