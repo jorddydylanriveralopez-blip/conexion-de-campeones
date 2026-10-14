@@ -3176,9 +3176,9 @@ body.comisiones-landing .page-wrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 84px;
-  padding: 12px 18px;
-  border-radius: 20px;
+  min-height: 68px;
+  padding: 10px 14px;
+  border-radius: 18px;
   background:
     radial-gradient(circle at 50% 0%, rgba(90, 170, 255, 0.28), transparent 58%),
     linear-gradient(180deg, rgba(10, 40, 150, 0.92), rgba(5, 22, 96, 0.96));
@@ -3190,14 +3190,14 @@ body.comisiones-landing .page-wrap {
 }
 
 .cm-logo--att {
-  height: 58px;
+  height: 46px;
   width: auto;
   display: block;
   object-fit: contain;
 }
 
 .cm-logo-yaavs {
-  height: 40px;
+  height: 32px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -4589,17 +4589,17 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-logo-badge {
-    min-height: 100px;
-    padding: 16px 24px;
-    border-radius: 24px;
+    min-height: 78px;
+    padding: 10px 16px;
+    border-radius: 18px;
   }
 
   body.comisiones-viva .cm-logo--att {
-    height: 70px;
+    height: 52px;
   }
 
   body.comisiones-viva .cm-logo-yaavs {
-    height: 48px;
+    height: 36px;
   }
 
   body.comisiones-viva #consulta.section-card,
