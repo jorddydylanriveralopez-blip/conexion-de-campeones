@@ -4156,11 +4156,11 @@ body.comisiones-viva .cm-panel--yaavsers .cm-offer__extra {
 }
 
 body.comisiones-viva .cm-panel--yaavsers .cm-conditions {
-  margin: 6px 0 0;
-  padding: 10px 128px 10px 14px;
-  border-radius: 16px;
-  background: rgba(4, 20, 90, 0.42);
-  border: 1px solid rgba(150, 225, 255, 0.3);
+  margin: 8px 0 0;
+  padding: 0 128px 0 4px;
+  background: none;
+  border: 0;
+  border-radius: 0;
   color: rgba(230, 246, 255, 0.92);
   font-size: 0.8rem;
   font-weight: 700;
@@ -4815,8 +4815,8 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-panel--yaavsers .cm-conditions {
-    margin-top: 4px;
-    padding: 8px 82px 8px 10px;
+    margin-top: 6px;
+    padding: 0 78px 0 2px;
     font-size: 0.7rem;
     line-height: 1.35;
   }
