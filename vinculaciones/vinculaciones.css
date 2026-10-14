@@ -4057,6 +4057,12 @@ body.comisiones-viva .cm-panel--yaavsers .cm-offer__ops {
   letter-spacing: 0.06em;
 }
 
+body.comisiones-viva .cm-panel--yaavsers .cm-offer__pay .cm-offer__ops {
+  margin: 0 0 10px;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
 body.comisiones-viva .cm-panel--yaavsers .cm-chips,
 body.comisiones-viva .cm-panel--yaavsers .cm-ports {
   justify-content: flex-start;
