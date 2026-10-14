@@ -3807,21 +3807,22 @@ body.comisiones-viva .cm-mascot--dinero {
 }
 
 body.comisiones-viva .cm-fiesta-row {
-  display: flex;
-  align-items: flex-end;
-  gap: 18px;
-  margin-top: 8px;
+  display: block;
+  margin-top: 6px;
 }
 
 body.comisiones-viva .cm-fiesta-row .cm-conditions {
-  flex: 1;
-  margin: 0 0 10px;
+  margin: 0;
+  padding-right: 118px;
 }
 
 body.comisiones-viva .cm-mascot--fiesta {
-  width: 168px;
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  width: 92px;
   margin: 0;
-  flex: 0 0 auto;
+  z-index: 2;
   animation: cm-mascot-bob-right 3.6s ease-in-out infinite;
   animation-delay: -1.4s;
 }
@@ -3878,6 +3879,7 @@ body.comisiones-viva .cm-banner {
 }
 
 body.comisiones-viva .cm-panel--yaavsers {
+  position: relative;
   background:
     radial-gradient(circle at 78% 18%, rgba(40, 120, 255, 0.28), transparent 32%),
     linear-gradient(180deg, #0c46d4 0%, #0834b4 48%, #06278f 100%);
@@ -4155,7 +4157,7 @@ body.comisiones-viva .cm-panel--yaavsers .cm-offer__extra {
 
 body.comisiones-viva .cm-panel--yaavsers .cm-conditions {
   margin: 6px 0 0;
-  padding: 12px 14px;
+  padding: 10px 128px 10px 14px;
   border-radius: 16px;
   background: rgba(4, 20, 90, 0.42);
   border: 1px solid rgba(150, 225, 255, 0.3);
@@ -4572,7 +4574,13 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-mascot--fiesta {
-    width: 190px;
+    width: 96px;
+    right: 18px;
+    bottom: 12px;
+  }
+
+  body.comisiones-viva .cm-fiesta-row .cm-conditions {
+    padding-right: 128px;
   }
 
   body.comisiones-viva .cm-logo-badge {
@@ -4665,12 +4673,17 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-fiesta-row {
-    gap: 8px;
-    margin-top: 6px;
+    margin-top: 4px;
+  }
+
+  body.comisiones-viva .cm-fiesta-row .cm-conditions {
+    padding-right: 78px;
   }
 
   body.comisiones-viva .cm-mascot--fiesta {
-    width: 92px;
+    width: 70px;
+    right: 6px;
+    bottom: 6px;
   }
 
   body.comisiones-viva #consulta.section-card {
@@ -4803,7 +4816,7 @@ body.comisiones-viva #consulta .oct-total small {
 
   body.comisiones-viva .cm-panel--yaavsers .cm-conditions {
     margin-top: 4px;
-    padding: 8px 10px;
+    padding: 8px 82px 8px 10px;
     font-size: 0.7rem;
     line-height: 1.35;
   }
