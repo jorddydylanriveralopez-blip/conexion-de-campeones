@@ -3810,7 +3810,8 @@ body.comisiones-viva .cm-fiesta-row {
   display: block;
   position: relative;
   width: min(100%, 640px);
-  margin: 6px auto 0;
+  height: 8px;
+  margin: 2px auto 0;
 }
 
 body.comisiones-viva .cm-fiesta-row .cm-conditions {
@@ -4690,8 +4691,8 @@ body.comisiones-viva #consulta .oct-total small {
   body.comisiones-viva .cm-mascot--fiesta {
     width: 70px;
     left: auto;
-    right: 6px;
-    bottom: 6px;
+    right: 4px;
+    bottom: 96px;
   }
 
   body.comisiones-viva .cm-panel--yaavsers .cm-offer__pay {
