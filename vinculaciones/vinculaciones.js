@@ -532,7 +532,7 @@ function pintarResultados(row) {
   set('oct-reales', formatoNumero(row.reales));
   const avance = meta > 0 ? `${formatoNumero(reales)} de ${formatoNumero(meta)}` : '—';
   const nota = meta > 0
-    ? 'Las activaciones reales entre lo que te pidieron.'
+    ? 'Las activaciones reales vs tu meta de septiembre.'
     : '';
   set('oct-alcance', avance);
   set('oct-alcance-nota', nota);
