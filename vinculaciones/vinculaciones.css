@@ -4543,6 +4543,11 @@ body.comisiones-viva #consulta .oct-stat span {
   text-transform: uppercase;
 }
 
+body.comisiones-viva #consulta .oct-stat__long {
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+
 body.comisiones-viva #consulta .oct-stat small {
   color: rgba(215, 244, 255, 0.9);
   font-size: 0.74rem;
