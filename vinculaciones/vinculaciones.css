@@ -5137,3 +5137,110 @@ body.comisiones-viva .terminos-cierre {
     font-size: 0.78rem;
   }
 }
+
+body.comisiones-viva .cm-footer {
+  width: min(860px, calc(100% - 24px));
+  margin: 8px auto 0;
+  padding: 28px 22px calc(22px + env(safe-area-inset-bottom));
+  border-radius: 28px 28px 0 0;
+  border: 3px solid rgba(150, 225, 255, 0.7);
+  border-bottom: 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(80, 170, 255, 0.28), transparent 42%),
+    linear-gradient(180deg, #0c46d4 0%, #06278f 100%);
+  box-shadow: 0 -10px 30px rgba(4, 16, 60, 0.28);
+  text-align: center;
+}
+
+body.comisiones-viva .cm-footer__title {
+  margin: 0;
+  color: #ffe14a;
+  font-family: 'Titan One', 'Lilita One', sans-serif;
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-shadow: 0 3px 0 #071a4a;
+}
+
+body.comisiones-viva .cm-footer__lead {
+  margin: 8px auto 0;
+  max-width: 420px;
+  color: #eaf7ff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+body.comisiones-viva .cm-footer__btn {
+  margin-top: 16px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffe14a, #ffd000);
+  color: #10215f;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(255, 196, 0, 0.4);
+}
+
+body.comisiones-viva .cm-footer__socials {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+body.comisiones-viva .cm-footer__socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  color: #fff;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+
+body.comisiones-viva .cm-footer__logo {
+  display: block;
+  width: auto;
+  height: 34px;
+  margin: 20px auto 0;
+}
+
+body.comisiones-viva .cm-footer__legal {
+  margin: 12px 0 0;
+  color: rgba(215, 244, 255, 0.86);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 721px) {
+  body.comisiones-landing.comisiones-viva .page-wrap {
+    padding-bottom: 28px;
+  }
+}
+
+@media (max-width: 720px) {
+  body.comisiones-viva .cm-footer {
+    width: min(640px, calc(100% - 12px));
+    padding: 22px 14px calc(16px + env(safe-area-inset-bottom));
+    border-radius: 22px 22px 0 0;
+  }
+
+  body.comisiones-viva .cm-footer__title {
+    font-size: 1.35rem;
+  }
+
+  body.comisiones-viva .cm-footer__lead {
+    font-size: 0.86rem;
+  }
+}

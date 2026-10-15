@@ -898,6 +898,17 @@ function floresDelTitulo() {
   });
 }
 
+function initFooterTerminos() {
+  const btn = document.getElementById('footer-terminos');
+  const toggle = document.getElementById('terminos-toggle');
+  if (!btn || !toggle) return;
+  btn.addEventListener('click', () => {
+    const seccion = document.getElementById('terminos-section');
+    if (toggle.getAttribute('aria-expanded') !== 'true') toggle.click();
+    else seccion?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const mesAbril = document.getElementById('mes-tag-abril');
   const mesMayo = document.getElementById('mes-tag-mayo');
@@ -908,6 +919,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initFormularioPorFecha();
   initFormularioPlegable();
+  initFooterTerminos();
   const pintarFlores = () => {
     if (document.fonts?.ready) {
       document.fonts.ready.then(floresDelTitulo);
