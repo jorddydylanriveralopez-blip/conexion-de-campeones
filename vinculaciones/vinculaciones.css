@@ -4771,8 +4771,12 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-landing.comisiones-viva .page-wrap {
-    width: min(640px, calc(100% - 12px));
+    width: calc(100% - 56px);
     padding: 8px 0 calc(20px + env(safe-area-inset-bottom));
+  }
+
+  body.comisiones-viva .container {
+    width: 100%;
   }
 
   body.comisiones-viva .cm-logos {
