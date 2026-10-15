@@ -5139,16 +5139,13 @@ body.comisiones-viva .terminos-cierre {
 }
 
 body.comisiones-viva .cm-footer {
-  width: min(860px, calc(100% - 24px));
-  margin: 8px auto 0;
-  padding: 28px 22px calc(22px + env(safe-area-inset-bottom));
-  border-radius: 28px 28px 0 0;
-  border: 3px solid rgba(150, 225, 255, 0.7);
-  border-bottom: 0;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(80, 170, 255, 0.28), transparent 42%),
-    linear-gradient(180deg, #0c46d4 0%, #06278f 100%);
-  box-shadow: 0 -10px 30px rgba(4, 16, 60, 0.28);
+  width: 100%;
+  margin: 0;
+  padding: 42px 20px calc(32px + env(safe-area-inset-bottom));
+  border: 0;
+  border-top: 3px solid #ffe14a;
+  border-radius: 0;
+  background: #041433;
   text-align: center;
 }
 
@@ -5231,9 +5228,7 @@ body.comisiones-viva .cm-footer__legal {
 
 @media (max-width: 720px) {
   body.comisiones-viva .cm-footer {
-    width: min(640px, calc(100% - 12px));
-    padding: 22px 14px calc(16px + env(safe-area-inset-bottom));
-    border-radius: 22px 22px 0 0;
+    padding: 32px 16px calc(22px + env(safe-area-inset-bottom));
   }
 
   body.comisiones-viva .cm-footer__title {
