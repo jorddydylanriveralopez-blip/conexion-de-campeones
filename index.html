@@ -227,6 +227,10 @@
         <p class="form-intro">Para recibir tu pago en efectivo, deja la cuenta del titular.</p>
         <form id="form-vinculaciones" class="form-grid" novalidate>
           <input type="hidden" id="form-motivo" value="Datos bancarios para pago" />
+          <label class="full">
+            Clave de Yaavser
+            <input type="text" id="form-clave" required placeholder="La misma de tu consulta" autocomplete="off" spellcheck="false" />
+          </label>
           <p class="form-clabe-leyenda full">Si escribes 10 dígitos, es BBVA. Si escribes 18 dígitos, es otro banco.</p>
           <label class="full">
             CLABE o número de cuenta
@@ -248,10 +252,6 @@
           <label>
             Teléfono / WhatsApp
             <input type="tel" id="form-telefono" required placeholder="10 dígitos" autocomplete="tel" />
-          </label>
-          <label>
-            Clave de Yaavser
-            <input type="text" id="form-clave" required placeholder="La misma de tu consulta" autocomplete="off" spellcheck="false" />
           </label>
           <label class="full">
             Nombre del titular
