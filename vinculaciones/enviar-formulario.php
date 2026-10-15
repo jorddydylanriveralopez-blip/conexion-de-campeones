@@ -214,10 +214,55 @@ if ($claveValida === false) {
     exit;
 }
 
+function bancoDesdeCuenta(string $digitos): string
+{
+    if (preg_match('/^\d{10}$/', $digitos)) {
+        return 'BBVA';
+    }
+    if (!preg_match('/^\d{18}$/', $digitos)) {
+        return '';
+    }
+    $bancos = [
+        '002' => 'Citibanamex',
+        '012' => 'BBVA',
+        '014' => 'Santander',
+        '021' => 'HSBC',
+        '030' => 'BanBajío',
+        '036' => 'Inbursa',
+        '042' => 'Mifel',
+        '044' => 'Scotiabank',
+        '058' => 'Banregio',
+        '059' => 'Invex',
+        '062' => 'Afirme',
+        '072' => 'Banorte',
+        '127' => 'Banco Azteca',
+        '132' => 'Multiva',
+        '133' => 'Actinver',
+        '136' => 'Intercam',
+        '137' => 'Bancoppel',
+        '143' => 'CIBanco',
+        '145' => 'BBASE',
+        '147' => 'Bankaool',
+        '152' => 'Bancrea',
+        '156' => 'Sabadell',
+        '166' => 'Banco del Bienestar',
+        '638' => 'Nu',
+        '646' => 'STP',
+        '706' => 'Arcus',
+        '710' => 'NVIO',
+    ];
+    $codigo = substr($digitos, 0, 3);
+    return $bancos[$codigo] ?? 'Otro banco';
+}
+
 $data['clabe'] = preg_replace('/\D/', '', (string) ($data['clabe'] ?? '')) ?? '';
-if (($data['motivo'] ?? '') === 'Datos bancarios para pago' && !preg_match('/^\d{18}$/', $data['clabe'])) {
+$data['banco'] = bancoDesdeCuenta($data['clabe']);
+if (($data['motivo'] ?? '') === 'Datos bancarios para pago' && $data['banco'] === '') {
     http_response_code(400);
-    echo json_encode(['ok' => false, 'error' => 'La CLABE debe tener 18 dígitos.'], JSON_UNESCAPED_UNICODE);
+    echo json_encode(
+        ['ok' => false, 'error' => 'Escribe 10 dígitos si es BBVA, o 18 si es otro banco.'],
+        JSON_UNESCAPED_UNICODE,
+    );
     exit;
 }
 

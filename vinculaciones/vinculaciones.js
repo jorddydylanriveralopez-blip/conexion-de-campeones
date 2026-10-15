@@ -653,6 +653,54 @@ async function consultarVinculacion() {
   }
 }
 
+const BANCOS_CLABE = {
+  '002': 'Citibanamex',
+  '012': 'BBVA',
+  '014': 'Santander',
+  '021': 'HSBC',
+  '030': 'BanBajío',
+  '036': 'Inbursa',
+  '042': 'Mifel',
+  '044': 'Scotiabank',
+  '058': 'Banregio',
+  '059': 'Invex',
+  '062': 'Afirme',
+  '072': 'Banorte',
+  '127': 'Banco Azteca',
+  '132': 'Multiva',
+  '133': 'Actinver',
+  '136': 'Intercam',
+  '137': 'Bancoppel',
+  '143': 'CIBanco',
+  '145': 'BBASE',
+  '147': 'Bankaool',
+  '152': 'Bancrea',
+  '156': 'Sabadell',
+  '166': 'Banco del Bienestar',
+  '638': 'Nu',
+  '646': 'STP',
+  '706': 'Arcus',
+  '710': 'NVIO',
+};
+
+function bancoDesdeCuenta(digitos) {
+  if (digitos.length === 10) return 'BBVA';
+  if (digitos.length !== 18) return '';
+  return BANCOS_CLABE[digitos.slice(0, 3)] || 'Otro banco';
+}
+
+function initCuentaBancaria() {
+  const clabe = document.getElementById('form-clabe');
+  const banco = document.getElementById('form-banco');
+  if (!clabe || !banco) return;
+  const aplicar = () => {
+    const digitos = clabe.value.replace(/\D/g, '').slice(0, 18);
+    if (clabe.value !== digitos) clabe.value = digitos;
+    banco.value = bancoDesdeCuenta(digitos);
+  };
+  clabe.addEventListener('input', aplicar);
+}
+
 async function enviarFormulario(e) {
   e.preventDefault();
   const status = document.getElementById('form-status');
@@ -668,6 +716,7 @@ async function enviarFormulario(e) {
     mensaje: document.getElementById('form-mensaje')?.value?.trim(),
     origen: 'ganayaavs.com/vinculaciones',
   };
+  data.banco = bancoDesdeCuenta(data.clabe);
 
   if (!data.nombre || !data.telefono || !data.clave) {
     mostrarStatus(status, 'error', 'Completa nombre, teléfono y clave de cliente.');
@@ -675,12 +724,12 @@ async function enviarFormulario(e) {
   }
 
   if (data.motivo === 'Datos bancarios para pago') {
-    if (!data.titular || !data.banco || !data.clabe) {
-      mostrarStatus(status, 'error', 'Para datos bancarios, completa titular, banco y CLABE.');
+    if (!data.titular || !data.clabe) {
+      mostrarStatus(status, 'error', 'Para datos bancarios, completa el titular y la cuenta.');
       return;
     }
-    if (!/^\d{18}$/.test(data.clabe)) {
-      mostrarStatus(status, 'error', 'La CLABE debe tener 18 dígitos.');
+    if (!data.banco) {
+      mostrarStatus(status, 'error', 'Escribe 10 dígitos si es BBVA, o 18 si es otro banco.');
       return;
     }
   }
@@ -920,6 +969,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFormularioPorFecha();
   initFormularioPlegable();
   initFooterTerminos();
+  initCuentaBancaria();
   const pintarFlores = () => {
     if (document.fonts?.ready) {
       document.fonts.ready.then(floresDelTitulo);

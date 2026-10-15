@@ -3722,6 +3722,20 @@ body.comisiones-viva #formulario-section .form-intro {
   text-align: center;
 }
 
+body.comisiones-viva #formulario-section .form-clabe-leyenda {
+  margin: 0;
+  color: #ffe14a;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+}
+
+body.comisiones-viva #formulario-section #form-banco[readonly] {
+  color: #ffe14a;
+  cursor: default;
+}
+
 body.comisiones-viva #formulario-section .form-grid label {
   color: #d7f4ff;
 }
