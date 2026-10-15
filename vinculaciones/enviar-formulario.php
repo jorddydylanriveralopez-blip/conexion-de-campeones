@@ -224,8 +224,11 @@ function bancoDesdeCuenta(string $digitos): string
     }
     $bancos = [
         '002' => 'Citibanamex',
+        '006' => 'Bancomext',
+        '009' => 'Banobras',
         '012' => 'BBVA',
         '014' => 'Santander',
+        '019' => 'Banjercito',
         '021' => 'HSBC',
         '030' => 'BanBajío',
         '036' => 'Inbursa',
@@ -233,26 +236,42 @@ function bancoDesdeCuenta(string $digitos): string
         '044' => 'Scotiabank',
         '058' => 'Banregio',
         '059' => 'Invex',
+        '060' => 'Bansi',
         '062' => 'Afirme',
         '072' => 'Banorte',
+        '103' => 'American Express',
+        '113' => 'Banco Ve por Más',
         '127' => 'Banco Azteca',
-        '132' => 'Multiva',
+        '128' => 'Autofin',
+        '130' => 'Compartamos',
+        '132' => 'Banco Multiva',
         '133' => 'Actinver',
+        '135' => 'Nafin',
         '136' => 'Intercam',
         '137' => 'Bancoppel',
+        '140' => 'Consubanco',
+        '141' => 'Volkswagen Bank',
         '143' => 'CIBanco',
         '145' => 'BBASE',
         '147' => 'Bankaool',
+        '148' => 'PagaTodo',
         '152' => 'Bancrea',
-        '156' => 'Sabadell',
+        '154' => 'Banco Covalto',
+        '156' => 'Banco Sabadell',
         '166' => 'Banco del Bienestar',
+        '167' => 'Hey Banco',
+        '600' => 'GBM',
+        '601' => 'Monex',
         '638' => 'Nu',
         '646' => 'STP',
+        '699' => 'Fondeadora',
         '706' => 'Arcus',
         '710' => 'NVIO',
+        '722' => 'Mercado Pago',
+        '728' => 'Spin by OXXO',
     ];
     $codigo = substr($digitos, 0, 3);
-    return $bancos[$codigo] ?? 'Otro banco';
+    return $bancos[$codigo] ?? '';
 }
 
 $data['clabe'] = preg_replace('/\D/', '', (string) ($data['clabe'] ?? '')) ?? '';
@@ -260,7 +279,7 @@ $data['banco'] = bancoDesdeCuenta($data['clabe']);
 if (($data['motivo'] ?? '') === 'Datos bancarios para pago' && $data['banco'] === '') {
     http_response_code(400);
     echo json_encode(
-        ['ok' => false, 'error' => 'Escribe 10 dígitos si es BBVA, o 18 si es otro banco.'],
+        ['ok' => false, 'error' => 'Escribe 10 dígitos de BBVA o 18 de una CLABE que reconozcamos.'],
         JSON_UNESCAPED_UNICODE,
     );
     exit;

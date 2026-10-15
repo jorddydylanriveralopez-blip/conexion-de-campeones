@@ -654,51 +654,108 @@ async function consultarVinculacion() {
 }
 
 const BANCOS_CLABE = {
-  '002': 'Citibanamex',
-  '012': 'BBVA',
-  '014': 'Santander',
-  '021': 'HSBC',
-  '030': 'BanBajío',
-  '036': 'Inbursa',
-  '042': 'Mifel',
-  '044': 'Scotiabank',
-  '058': 'Banregio',
-  '059': 'Invex',
-  '062': 'Afirme',
-  '072': 'Banorte',
-  '127': 'Banco Azteca',
-  '132': 'Multiva',
-  '133': 'Actinver',
-  '136': 'Intercam',
-  '137': 'Bancoppel',
-  '143': 'CIBanco',
-  '145': 'BBASE',
-  '147': 'Bankaool',
-  '152': 'Bancrea',
-  '156': 'Sabadell',
-  '166': 'Banco del Bienestar',
-  '638': 'Nu',
-  '646': 'STP',
-  '706': 'Arcus',
-  '710': 'NVIO',
+  '002': { nombre: 'Citibanamex', marca: 'BNMX', color: '#003DA5' },
+  '006': { nombre: 'Bancomext', marca: 'EXT', color: '#0B3D2E' },
+  '009': { nombre: 'Banobras', marca: 'OBRAS', color: '#1B4F72' },
+  '012': { nombre: 'BBVA', marca: 'BBVA', color: '#004481' },
+  '014': { nombre: 'Santander', marca: 'SAN', color: '#EC0000' },
+  '019': { nombre: 'Banjercito', marca: 'JER', color: '#0A5C36' },
+  '021': { nombre: 'HSBC', marca: 'HSBC', color: '#DB0011' },
+  '030': { nombre: 'BanBajío', marca: 'BAJÍO', color: '#0033A0' },
+  '036': { nombre: 'Inbursa', marca: 'INBUR', color: '#0A2F5C' },
+  '042': { nombre: 'Mifel', marca: 'MIFEL', color: '#003366' },
+  '044': { nombre: 'Scotiabank', marca: 'SCOTIA', color: '#EC111A' },
+  '058': { nombre: 'Banregio', marca: 'BREG', color: '#E87722' },
+  '059': { nombre: 'Invex', marca: 'INVEX', color: '#6B2D5B' },
+  '060': { nombre: 'Bansi', marca: 'BANSI', color: '#0057A8' },
+  '062': { nombre: 'Afirme', marca: 'AFIR', color: '#00A3E0' },
+  '072': { nombre: 'Banorte', marca: 'BNT', color: '#E30613' },
+  '103': { nombre: 'American Express', marca: 'AMEX', color: '#016FD0' },
+  '113': { nombre: 'Banco Ve por Más', marca: 'BX+', color: '#E4002B' },
+  '127': { nombre: 'Banco Azteca', marca: 'AZTECA', color: '#78BE20', tinta: '#10215f' },
+  '128': { nombre: 'Autofin', marca: 'AUTO', color: '#1F4E79' },
+  '130': { nombre: 'Compartamos', marca: 'COMP', color: '#E4002B' },
+  '132': { nombre: 'Banco Multiva', marca: 'MULT', color: '#F36F21' },
+  '133': { nombre: 'Actinver', marca: 'ACTIN', color: '#0B3D91' },
+  '135': { nombre: 'Nafin', marca: 'NAFIN', color: '#006747' },
+  '136': { nombre: 'Intercam', marca: 'ICAM', color: '#005EB8' },
+  '137': { nombre: 'Bancoppel', marca: 'COPPEL', color: '#FFD100', tinta: '#10215f' },
+  '140': { nombre: 'Consubanco', marca: 'CONS', color: '#003865' },
+  '141': { nombre: 'Volkswagen Bank', marca: 'VW', color: '#001E50' },
+  '143': { nombre: 'CIBanco', marca: 'CIB', color: '#1B4F9C' },
+  '145': { nombre: 'BBASE', marca: 'BBASE', color: '#111111' },
+  '147': { nombre: 'Bankaool', marca: 'KOOL', color: '#00A99D' },
+  '148': { nombre: 'PagaTodo', marca: 'PAGO', color: '#6C2BD9' },
+  '152': { nombre: 'Bancrea', marca: 'CREA', color: '#C8102E' },
+  '154': { nombre: 'Banco Covalto', marca: 'COV', color: '#5B2C6F' },
+  '156': { nombre: 'Banco Sabadell', marca: 'SAB', color: '#0099D8' },
+  '166': { nombre: 'Banco del Bienestar', marca: 'BIEN', color: '#611232' },
+  '167': { nombre: 'Hey Banco', marca: 'HEY', color: '#00C389' },
+  '600': { nombre: 'GBM', marca: 'GBM', color: '#111111' },
+  '601': { nombre: 'Monex', marca: 'MONEX', color: '#E10600' },
+  '638': { nombre: 'Nu', marca: 'NU', color: '#820AD1' },
+  '646': { nombre: 'STP', marca: 'STP', color: '#1A1A1A' },
+  '699': { nombre: 'Fondeadora', marca: 'FOND', color: '#111111' },
+  '706': { nombre: 'Arcus', marca: 'ARC', color: '#0E6B4F' },
+  '710': { nombre: 'NVIO', marca: 'NVIO', color: '#111111' },
+  '722': { nombre: 'Mercado Pago', marca: 'MP', color: '#009EE3' },
+  '728': { nombre: 'Spin by OXXO', marca: 'SPIN', color: '#E30613' },
 };
 
+const BBVA = BANCOS_CLABE['012'];
+
 function bancoDesdeCuenta(digitos) {
-  if (digitos.length === 10) return 'BBVA';
+  if (digitos.length === 10) return BBVA.nombre;
   if (digitos.length !== 18) return '';
-  return BANCOS_CLABE[digitos.slice(0, 3)] || 'Otro banco';
+  return BANCOS_CLABE[digitos.slice(0, 3)]?.nombre || '';
+}
+
+function fichaBanco(digitos) {
+  if (digitos.length === 10) return BBVA;
+  if (digitos.length === 18) return BANCOS_CLABE[digitos.slice(0, 3)] || null;
+  return null;
 }
 
 function initCuentaBancaria() {
   const clabe = document.getElementById('form-clabe');
   const banco = document.getElementById('form-banco');
-  if (!clabe || !banco) return;
+  const chip = document.getElementById('banco-chip');
+  const icono = document.getElementById('banco-icon');
+  const nombre = document.getElementById('banco-nombre');
+  if (!clabe || !banco || !chip || !icono || !nombre) return;
+
+  const pintar = (ficha, error) => {
+    if (!ficha && !error) {
+      chip.hidden = true;
+      chip.classList.remove('banco-chip--error');
+      banco.value = '';
+      return;
+    }
+    chip.hidden = false;
+    chip.classList.toggle('banco-chip--error', Boolean(error));
+    icono.textContent = ficha ? ficha.marca : '···';
+    icono.style.background = ficha ? ficha.color : '#5c6b86';
+    icono.classList.toggle('is-dark', ficha?.tinta === '#10215f');
+    icono.style.color = ficha?.tinta || '#fff';
+    nombre.textContent = ficha ? ficha.nombre : 'No reconocemos este banco. Revisa los dígitos.';
+    banco.value = ficha ? ficha.nombre : '';
+  };
+
   const aplicar = () => {
     const digitos = clabe.value.replace(/\D/g, '').slice(0, 18);
     if (clabe.value !== digitos) clabe.value = digitos;
-    banco.value = bancoDesdeCuenta(digitos);
+    if (digitos.length !== 10 && digitos.length !== 18) {
+      pintar(null, false);
+      return;
+    }
+    const ficha = fichaBanco(digitos);
+    pintar(ficha, !ficha);
   };
+
   clabe.addEventListener('input', aplicar);
+  clabe.form?.addEventListener('reset', () => {
+    window.setTimeout(aplicar, 0);
+  });
 }
 
 async function enviarFormulario(e) {
@@ -729,7 +786,7 @@ async function enviarFormulario(e) {
       return;
     }
     if (!data.banco) {
-      mostrarStatus(status, 'error', 'Escribe 10 dígitos si es BBVA, o 18 si es otro banco.');
+      mostrarStatus(status, 'error', 'Escribe 10 dígitos de BBVA o 18 de una CLABE que reconozcamos.');
       return;
     }
   }

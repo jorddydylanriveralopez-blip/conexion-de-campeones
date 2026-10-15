@@ -25,7 +25,7 @@
   <link rel="apple-touch-icon" href="favicon.png?v=1">
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Montserrat:wght@400;600;700;800;900&family=Titan+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="vinculaciones.css?v=176">
+  <link rel="stylesheet" href="vinculaciones.css?v=177">
 </head>
 <body class="vinculaciones-landing comisiones-landing comisiones-viva">
   <div class="cm-scene" aria-hidden="true">
@@ -232,10 +232,15 @@
             CLABE o número de cuenta
             <input type="text" id="form-clabe" inputmode="numeric" maxlength="18" required placeholder="10 o 18 dígitos" autocomplete="off" />
           </label>
-          <label class="full">
-            Banco
-            <input type="text" id="form-banco" readonly required placeholder="Se detecta solo" />
-          </label>
+          <div class="banco-chip full" id="banco-chip" hidden>
+            <span class="banco-chip__icon" id="banco-icon" aria-hidden="true"></span>
+            <span class="banco-chip__text">
+              <span class="banco-chip__kicker">Banco detectado</span>
+              <strong id="banco-nombre"></strong>
+            </span>
+          </div>
+          <input type="hidden" id="form-banco" value="" />
+          <p class="form-aviso-privacidad full"><i class="fa-solid fa-lock" aria-hidden="true"></i> Tu información es confidencial. Solo la usamos para depositarte tus comisiones. No la compartimos ni la usamos para nada más.</p>
           <label>
             Nombre completo
             <input type="text" id="form-nombre" required placeholder="Tu nombre" autocomplete="name" />
@@ -354,7 +359,7 @@
     <p class="cm-footer__legal">YAAVS | ¡CON YAAVS, SIEMPRE GANAS MÁS!</p>
   </footer>
 
-  <script src="vinculaciones.js?v=96"></script>
+  <script src="vinculaciones.js?v=97"></script>
   <script src="minijuego-jorddy.js?v=1"></script>
 </body>
 </html>

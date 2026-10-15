@@ -3731,9 +3731,86 @@ body.comisiones-viva #formulario-section .form-clabe-leyenda {
   text-align: center;
 }
 
-body.comisiones-viva #formulario-section #form-banco[readonly] {
+body.comisiones-viva #formulario-section .banco-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+body.comisiones-viva #formulario-section .banco-chip[hidden] {
+  display: none;
+}
+
+body.comisiones-viva #formulario-section .banco-chip__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  text-align: center;
+}
+
+body.comisiones-viva #formulario-section .banco-chip__icon.is-dark {
+  color: #10215f;
+}
+
+body.comisiones-viva #formulario-section .banco-chip__kicker {
+  display: block;
+  color: rgba(215, 244, 255, 0.8);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body.comisiones-viva #formulario-section .banco-chip__text strong {
+  display: block;
+  margin-top: 2px;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+body.comisiones-viva #formulario-section .banco-chip--error {
+  border-color: rgba(255, 180, 180, 0.7);
+}
+
+body.comisiones-viva #formulario-section .banco-chip--error .banco-chip__text strong {
+  color: #ffe1e1;
+  font-size: 0.92rem;
+}
+
+body.comisiones-viva #formulario-section .form-aviso-privacidad {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(4, 28, 120, 0.35);
+  color: #eaf7ff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: left;
+}
+
+body.comisiones-viva #formulario-section .form-aviso-privacidad i {
+  margin-top: 2px;
   color: #ffe14a;
-  cursor: default;
 }
 
 body.comisiones-viva #formulario-section .form-grid label {
