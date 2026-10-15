@@ -1,23 +1,29 @@
 {
-  "name": "Gana Yaavs",
-  "short_name": "Gana Yaavs",
-  "description": "¡Vincula y gana como campeón con YAAVS!",
-  "start_url": "/index.html",
+  "name": "Con Yaavs, siempre ganas más",
+  "short_name": "YAAVS",
+  "description": "Yaavser, supera tu meta de septiembre. Consulta tus comisiones de chips y portabilidades AT&T.",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#02060a",
-  "theme_color": "#22ff5e",
+  "background_color": "#06278f",
+  "theme_color": "#0b2fbe",
   "icons": [
     {
-      "src": "https://assets.zyrosite.com/EnigzBPrgZr5GxnU/688561636_1585574196908728_9130570143925923664_n-fgFZq17pPJCrGCog.jpg",
+      "src": "/vinculaciones/favicon.png?v=2",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "https://assets.zyrosite.com/EnigzBPrgZr5GxnU/logo-conexion-de-campeones-EtXJAuhtXsAHmlBL.pngz",
+      "src": "/vinculaciones/icon-512.png?v=1",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/vinculaciones/icon-512.png?v=1",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

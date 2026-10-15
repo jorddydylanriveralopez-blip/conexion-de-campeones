@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yaavs-pwa-v15';
+const CACHE_NAME = 'yaavs-pwa-v16';
 
 const urlsToCache = [
   './',
@@ -50,7 +50,7 @@ self.addEventListener('push', event => {
       }
     }
   }
-  const iconUrl = 'https://assets.zyrosite.com/EnigzBPrgZr5GxnU/mesa-de-trabajo-23-8-9UuOY2sWU5il4Fc7.png';
+  const iconUrl = 'https://ganayaavs.com/vinculaciones/favicon.png?v=2';
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
