@@ -499,11 +499,14 @@ function textoAlcance(row) {
   const meta = Number(row.meta) || 0;
   const reales = Number(row.reales) || 0;
   const faltan = Math.max(meta - reales, 0);
-  if (meta <= 0) return 'Así van tus activaciones reales de octubre.';
+  if (meta <= 0) return 'Así van tus activaciones de chips y portabilidades AT&T.';
+  const deMeta = meta === 1 ? '1 activación' : `${formatoNumero(meta)} activaciones`;
+  const base = `Tu meta es de ${deMeta} de chips y portabilidades AT&T`;
   if (reales >= meta) {
-    return `¡Ya llegaste! Te pedían ${formatoNumero(meta)} y llevas ${formatoNumero(reales)} activaciones reales.`;
+    return `${base}. Ya las alcanzaste para generar comisiones extra.`;
   }
-  return `Tu meta es ${formatoNumero(meta)} activaciones reales. Llevas ${formatoNumero(reales)}. Te faltan ${formatoNumero(faltan)}.`;
+  const deFaltan = faltan === 1 ? 'te falta 1' : `te faltan ${formatoNumero(faltan)}`;
+  return `${base}, ${deFaltan} para generar comisiones extra.`;
 }
 
 function pintarResultados(row) {
