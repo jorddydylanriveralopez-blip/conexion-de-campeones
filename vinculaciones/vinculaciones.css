@@ -4208,11 +4208,13 @@ body.comisiones-viva .cm-panel--yaavsers .cm-was {
 
 body.comisiones-viva .cm-panel--yaavsers .cm-was--price {
   font-family: 'Titan One', 'Lilita One', sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.55rem;
   font-weight: 400;
   letter-spacing: 0.02em;
   line-height: 1;
-  padding: 3px 14px 5px;
+  padding: 4px 16px 6px;
+  text-decoration-thickness: 3px;
+  text-decoration-color: #fff;
 }
 
 body.comisiones-viva .cm-panel--yaavsers .cm-offer__lead {
