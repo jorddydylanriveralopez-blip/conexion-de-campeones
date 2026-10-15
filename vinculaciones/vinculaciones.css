@@ -3829,6 +3829,13 @@ body.comisiones-viva .cm-lookup {
   display: flow-root;
 }
 
+body.comisiones-viva .cm-activa {
+  display: block;
+  width: min(100%, 620px);
+  height: auto;
+  margin: 4px auto 28px;
+}
+
 body.comisiones-viva .cm-mascot--dinero {
   position: relative;
   display: block;
@@ -4698,7 +4705,7 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva #consulta.section-card {
-    margin-bottom: 108px;
+    margin-bottom: 28px;
   }
 
   body.comisiones-viva .cm-mascot--fiesta {
