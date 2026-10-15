@@ -4811,8 +4811,8 @@ body.comisiones-viva #consulta .oct-total small {
     left: auto;
     bottom: auto;
     order: 0;
-    align-self: flex-start;
-    margin: 4px 0 0 10px;
+    align-self: center;
+    margin: 4px auto 0;
   }
 
   body.comisiones-viva .cm-fiesta-row {
