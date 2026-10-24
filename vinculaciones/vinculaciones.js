@@ -558,7 +558,7 @@ let cacheDatos = null;
 async function cargarDatos() {
   if (cacheDatos) return cacheDatos;
 
-  const res = await fetch('dinamica-octubre.json?v=3', { cache: 'no-store' });
+  const res = await fetch('dinamica-octubre.json?v=4', { cache: 'no-store' });
   if (!res.ok) throw new Error('No se pudo cargar la dinámica de octubre.');
   const mapa = await res.json();
   cacheDatos = Object.entries(mapa).map(([clave, v]) => ({
