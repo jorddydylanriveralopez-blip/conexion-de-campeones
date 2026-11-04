@@ -4167,6 +4167,16 @@ body.comisiones-viva .cm-logos {
   margin-bottom: 28px;
 }
 
+body.comisiones-viva .cm-logo-badge {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.55));
+}
+
 body.comisiones-viva .cm-hero-stage {
   position: relative;
   display: block;
@@ -5092,9 +5102,12 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-logo-badge {
-    min-height: 78px;
-    padding: 10px 16px;
-    border-radius: 18px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
   }
 
   body.comisiones-viva .cm-logo--att {
@@ -5149,10 +5162,12 @@ body.comisiones-viva #consulta .oct-total small {
   }
 
   body.comisiones-viva .cm-logo-badge {
-    min-height: 46px;
-    padding: 5px 8px;
-    border-radius: 14px;
-    border-width: 1.5px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
   }
 
   body.comisiones-viva .cm-logo--att {
@@ -5401,8 +5416,11 @@ body.comisiones-viva #consulta .oct-total small {
 
 @media (max-width: 380px) {
   body.comisiones-viva .cm-logo-badge {
-    min-height: 52px;
-    padding: 6px 8px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
   }
 
   body.comisiones-viva .cm-logo--att {
