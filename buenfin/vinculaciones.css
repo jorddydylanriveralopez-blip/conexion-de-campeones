@@ -3798,11 +3798,11 @@ body.comisiones-landing.comisiones-poster .page-wrap {
 body.comisiones-landing.comisiones-viva {
   background-color: #050505;
   background-image:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.28) 40%, rgba(20, 0, 6, 0.55) 100%),
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(180, 0, 35, 0.28), transparent 60%),
-    url('fondo-buen-fin.jpg');
+    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 38%, rgba(20, 0, 6, 0.62) 100%),
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(180, 0, 35, 0.22), transparent 60%),
+    url('fondo-att-noche.jpg');
   background-size: cover, cover, cover;
-  background-position: center, center, center;
+  background-position: center, center, center top;
   background-attachment: fixed, fixed, fixed;
   background-repeat: no-repeat;
 }
