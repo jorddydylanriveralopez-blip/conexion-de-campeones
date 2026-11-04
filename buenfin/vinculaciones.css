@@ -3820,14 +3820,15 @@ body.comisiones-viva #consulta.section-card {
   margin-right: auto;
   padding: 16px 22px 14px;
   background:
-    radial-gradient(circle at 78% 18%, rgba(40, 120, 255, 0.28), transparent 32%),
-    linear-gradient(180deg, #0c46d4 0%, #0834b4 48%, #06278f 100%);
-  border: 3px solid rgba(150, 225, 255, 0.95);
+    radial-gradient(circle at 82% 12%, rgba(220, 20, 60, 0.38), transparent 34%),
+    radial-gradient(circle at 12% 88%, rgba(255, 225, 74, 0.12), transparent 36%),
+    linear-gradient(180deg, #1a0508 0%, #0c0c0c 48%, #140206 100%);
+  border: 3px solid rgba(255, 60, 80, 0.92);
   border-radius: 22px;
   box-shadow:
-    0 0 0 4px rgba(18, 70, 190, 0.35),
-    0 0 22px rgba(50, 170, 255, 0.75),
-    inset 0 0 28px rgba(90, 170, 255, 0.18);
+    0 0 0 4px rgba(120, 0, 20, 0.45),
+    0 0 26px rgba(220, 20, 60, 0.55),
+    inset 0 0 28px rgba(255, 40, 60, 0.12);
   color: #fff;
   margin-top: 32px;
   margin-bottom: 64px;
@@ -3855,14 +3856,15 @@ body.comisiones-viva #formulario-section.section-card,
 body.comisiones-viva #terminos-section.section-card {
   margin-top: 40px;
   background:
-    radial-gradient(circle at 78% 18%, rgba(40, 120, 255, 0.28), transparent 32%),
-    linear-gradient(180deg, #0c46d4 0%, #0834b4 48%, #06278f 100%);
-  border: 3px solid rgba(150, 225, 255, 0.95);
+    radial-gradient(circle at 82% 12%, rgba(220, 20, 60, 0.38), transparent 34%),
+    radial-gradient(circle at 12% 88%, rgba(255, 225, 74, 0.12), transparent 36%),
+    linear-gradient(180deg, #1a0508 0%, #0c0c0c 48%, #140206 100%);
+  border: 3px solid rgba(255, 60, 80, 0.92);
   border-radius: 26px;
   box-shadow:
-    0 0 0 5px rgba(18, 70, 190, 0.35),
-    0 0 28px rgba(50, 170, 255, 0.85),
-    inset 0 0 36px rgba(90, 170, 255, 0.18);
+    0 0 0 5px rgba(120, 0, 20, 0.45),
+    0 0 28px rgba(220, 20, 60, 0.55),
+    inset 0 0 36px rgba(255, 40, 60, 0.12);
   color: #fff;
 }
 
@@ -4014,19 +4016,19 @@ body.comisiones-viva #formulario-section .form-aviso-privacidad i {
 }
 
 body.comisiones-viva #formulario-section .form-grid label {
-  color: #d7f4ff;
+  color: #ffe8ec;
 }
 
 body.comisiones-viva #formulario-section .form-grid input,
 body.comisiones-viva #formulario-section .form-grid textarea {
-  background: rgba(4, 28, 120, 0.45);
-  border: 2px solid rgba(180, 230, 255, 0.75);
+  background: rgba(20, 0, 6, 0.72);
+  border: 2px solid rgba(255, 80, 100, 0.7);
   color: #fff;
 }
 
 body.comisiones-viva #formulario-section .form-grid input::placeholder,
 body.comisiones-viva #formulario-section .form-grid textarea::placeholder {
-  color: rgba(230, 246, 255, 0.55);
+  color: rgba(255, 220, 225, 0.55);
 }
 
 body.comisiones-viva #formulario-section .btn-enviar {
@@ -4056,14 +4058,14 @@ body.comisiones-viva #consulta .btn-consultar {
 }
 
 body.comisiones-viva #consulta .consulta-form input {
-  background: rgba(4, 28, 120, 0.45);
-  border: 2px solid rgba(180, 230, 255, 0.75);
+  background: rgba(20, 0, 6, 0.72);
+  border: 2px solid rgba(255, 80, 100, 0.75);
   color: #fff;
-  box-shadow: inset 0 0 12px rgba(40, 140, 255, 0.25);
+  box-shadow: inset 0 0 12px rgba(220, 20, 60, 0.22);
 }
 
 body.comisiones-viva #consulta .consulta-form input::placeholder {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 220, 225, 0.72);
 }
 
 body.comisiones-viva #consulta .consulta-form input:focus {
@@ -4304,28 +4306,28 @@ body.comisiones-viva .cm-panel--exec {
 
 body.comisiones-viva .cm-banner {
   background: none;
-  border: 2px solid rgba(210, 240, 255, 0.95);
-  box-shadow: 0 0 16px rgba(90, 180, 255, 0.7);
+  border: 2px solid rgba(255, 80, 100, 0.9);
+  box-shadow: 0 0 16px rgba(220, 20, 60, 0.55);
 }
 
 body.comisiones-viva .cm-banner--gold {
   background: none;
-  border-color: rgba(236, 210, 255, 0.95);
-  box-shadow: 0 0 16px rgba(170, 90, 255, 0.7);
+  border-color: rgba(255, 225, 74, 0.95);
+  box-shadow: 0 0 16px rgba(255, 196, 0, 0.55);
 }
 
 body.comisiones-viva .cm-offer {
   background: none;
-  border: 1.5px solid rgba(150, 220, 255, 0.85);
-  box-shadow: 0 0 18px rgba(60, 160, 255, 0.35), inset 0 0 0 1px rgba(180, 230, 255, 0.25);
+  border: 1.5px solid rgba(255, 70, 90, 0.75);
+  box-shadow: 0 0 18px rgba(220, 20, 60, 0.28), inset 0 0 0 1px rgba(255, 225, 74, 0.12);
 }
 
 body.comisiones-viva .cm-price {
-  background: radial-gradient(circle at 50% 40%, rgba(70, 160, 255, 0.22), transparent 70%);
-  border: 2px solid rgba(190, 235, 255, 0.95);
+  background: radial-gradient(circle at 50% 40%, rgba(220, 20, 60, 0.28), transparent 70%);
+  border: 2px solid rgba(255, 80, 100, 0.9);
   box-shadow:
-    0 0 24px rgba(50, 160, 255, 0.75),
-    inset 0 0 20px rgba(90, 180, 255, 0.2);
+    0 0 24px rgba(220, 20, 60, 0.55),
+    inset 0 0 20px rgba(255, 40, 60, 0.16);
 }
 
 body.comisiones-viva .cm-sim,
@@ -4890,16 +4892,16 @@ body.comisiones-viva #consulta .oct-stat {
   justify-content: center;
   min-height: 118px;
   padding: 12px 12px 10px;
-  border: 2px solid rgba(150, 225, 255, 0.75);
+  border: 2px solid rgba(255, 80, 100, 0.7);
   border-radius: 18px;
   background:
-    radial-gradient(circle at 80% 0%, rgba(80, 170, 255, 0.28), transparent 46%),
-    rgba(4, 28, 120, 0.42);
-  box-shadow: inset 0 0 18px rgba(80, 160, 255, 0.12);
+    radial-gradient(circle at 80% 0%, rgba(220, 20, 60, 0.32), transparent 46%),
+    rgba(20, 0, 6, 0.55);
+  box-shadow: inset 0 0 18px rgba(220, 20, 60, 0.12);
 }
 
 body.comisiones-viva #consulta .oct-stat span {
-  color: #b7ecff;
+  color: #ffc4cc;
   font-size: 0.68rem;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -4912,7 +4914,7 @@ body.comisiones-viva #consulta .oct-stat__long {
 }
 
 body.comisiones-viva #consulta .oct-stat small {
-  color: rgba(215, 244, 255, 0.9);
+  color: rgba(255, 230, 234, 0.9);
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0;
@@ -4927,13 +4929,13 @@ body.comisiones-viva #consulta .oct-stat strong {
   font-size: clamp(1.55rem, 3.4vw, 2rem);
   font-weight: 400;
   line-height: 1;
-  text-shadow: 0 2px 0 #071433;
+  text-shadow: 0 2px 0 #1a0004;
 }
 
 body.comisiones-viva #consulta .oct-stat--real {
   background:
     radial-gradient(circle at 80% 0%, rgba(255, 210, 40, 0.28), transparent 50%),
-    rgba(4, 28, 120, 0.42);
+    rgba(20, 0, 6, 0.55);
   border-color: rgba(255, 225, 74, 0.85);
 }
 
@@ -4944,9 +4946,9 @@ body.comisiones-viva #consulta .oct-stat--real strong {
 body.comisiones-viva #consulta .oct-alcance {
   margin-top: 12px;
   padding: 12px 14px 14px;
-  border: 2px solid rgba(150, 225, 255, 0.75);
+  border: 2px solid rgba(255, 80, 100, 0.7);
   border-radius: 18px;
-  background: rgba(4, 28, 120, 0.42);
+  background: rgba(20, 0, 6, 0.55);
 }
 
 body.comisiones-viva #consulta .oct-alcance__top {
