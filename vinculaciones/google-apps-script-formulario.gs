@@ -4,12 +4,16 @@
  * destino=vinculaciones-anterior ? Formulario vinculaciones anterior
  */
 
-var NOTIFY_EMAIL_DEFAULT = 'jorddydylan2001@gmail.com';
+var NOTIFY_EMAIL_DEFAULT = '';
 var HOJA = 'Respuestas';
 var DESTINOS = {
   'clabe-octubre': {
+    id: '1RtB0Z2MwKgYNGLFTT1nXZEGGrw_hPNenQnAuVd2D59E',
+    nombre: 'CLABE landing â€” nuevo registro desde 30 oct 2026'
+  },
+  'clabe-octubre-archivo': {
     id: '1Z_MWJmrLMbqdn3XZ5RsClRDatZlOKCYwBI9p3Lj6X2Y',
-    nombre: 'CLABE comisiones octubre'
+    nombre: 'CLABE comisiones octubre (archivo)'
   },
   'vinculaciones-anterior': {
     id: '1KCmSqfhHHYYPidFwKC9DzfhqzL_McsZN1Vg0i_qINXw',
@@ -20,7 +24,7 @@ var DESTINOS = {
 var ENCABEZADOS = [
   'Fecha (CDMX)',
   'Nombre',
-  'Teléfono',
+  'TelÃ©fono',
   'Clave cliente',
   'Motivo',
   'Titular',
@@ -97,17 +101,102 @@ function guardarFormulario(data) {
   return jsonOut({ ok: true, saved: true, destino: destinoKey, hoja: destino.nombre });
 }
 
+function quitarCorreoDeAviso() {
+  try {
+    PropertiesService.getScriptProperties().deleteProperty('FORM_NOTIFY_EMAIL');
+  } catch (err) {
+    Logger.log('quitarCorreoDeAviso: ' + err);
+  }
+}
+
+
+function limpiarArchivoAnterior() {
+  var destino = DESTINOS['clabe-octubre-archivo'];
+  if (!destino) {
+    return { ok: false, error: 'Sin archivo anterior' };
+  }
+  var sheet = prepararHoja(destino.id);
+  var last = sheet.getLastRow();
+  var lastCol = Math.max(sheet.getLastColumn(), ENCABEZADOS.length);
+  var borradas = 0;
+  if (last > 1) {
+    borradas = last - 1;
+    sheet.getRange(2, 1, last, lastCol).clearContent();
+  }
+  return { ok: true, borradas: borradas, hoja: destino.nombre };
+}
+
+function prepararNuevoRegistro() {
+  var destino = DESTINOS['clabe-octubre'];
+  var sheet = prepararHoja(destino.id);
+  return {
+    ok: true,
+    hoja: destino.nombre,
+    id: destino.id,
+    url: 'https://docs.google.com/spreadsheets/d/' + destino.id + '/edit',
+    filas: sheet.getLastRow()
+  };
+}
+
+
+function restaurarDatosAnteriores(sourceId) {
+  var srcSs = SpreadsheetApp.openById(sourceId);
+  var src = srcSs.getSheetByName('Respuestas') || srcSs.getSheets()[0];
+  var dest = prepararHoja(DESTINOS['clabe-octubre-archivo'].id);
+  var values = src.getDataRange().getValues();
+  if (!values || values.length === 0) {
+    return { ok: false, error: 'Fuente vacia' };
+  }
+  dest.clear();
+  dest.getRange(1, 1, values.length, values[0].length).setValues(values);
+  var header = dest.getRange(1, 1, 1, Math.min(values[0].length, ENCABEZADOS.length));
+  header.setBackground('#1e3a5f').setFontColor('#ffffff').setFontWeight('bold').setFontFamily('Arial');
+  dest.setFrozenRows(1);
+  return {
+    ok: true,
+    filas: values.length,
+    datos: Math.max(0, values.length - 1),
+    hoja: DESTINOS['clabe-octubre-archivo'].nombre,
+    id: DESTINOS['clabe-octubre-archivo'].id,
+    url: 'https://docs.google.com/spreadsheets/d/' + DESTINOS['clabe-octubre-archivo'].id + '/edit'
+  };
+}
+
 function doGet(e) {
   try {
+    quitarCorreoDeAviso();
     var params = (e && e.parameter) || {};
     if (params.action === 'submit') {
       return guardarFormulario(params);
     }
+    if (params.action === 'preparar-nuevo') {
+      return jsonOut(prepararNuevoRegistro());
+    }
+    if (params.action === 'limpiar-archivo') {
+      return jsonOut(limpiarArchivoAnterior());
+    }
+    if (params.action === 'restaurar-anteriores') {
+      var sourceId = params.sourceId || '1jbga4T5jlczr6oJxtdp_ND0Uqnm4sA0eIPKZWMSEXDo';
+      return jsonOut(restaurarDatosAnteriores(sourceId));
+    }
+    if (params.action === 'limpiar-activo') {
+      var destino = DESTINOS['clabe-octubre'];
+      var sheet = prepararHoja(destino.id);
+      var last = sheet.getLastRow();
+      var lastCol = Math.max(sheet.getLastColumn(), ENCABEZADOS.length);
+      var borradas = 0;
+      if (last > 1) {
+        borradas = last - 1;
+        sheet.getRange(2, 1, last, lastCol).clearContent();
+      }
+      return jsonOut({ ok: true, borradas: borradas, hoja: destino.nombre });
+    }
     return jsonOut({
       ok: true,
       message: 'Web App formularios Yaavs activa',
-      version: 3,
-      destinos: Object.keys(DESTINOS)
+      version: 6,
+      destinos: Object.keys(DESTINOS),
+      hojaActiva: DESTINOS['clabe-octubre'].nombre
     });
   } catch (err) {
     return jsonOut({ ok: false, error: String(err) });
@@ -135,43 +224,5 @@ function escapeHtml(text) {
 }
 
 function notificarNuevoFormulario(data, fecha, hoja) {
-  try {
-    var props = PropertiesService.getScriptProperties();
-    var emailsRaw = props.getProperty('FORM_NOTIFY_EMAIL') || NOTIFY_EMAIL_DEFAULT;
-    var destinatarios = emailsRaw.split(',').map(function (s) {
-      return s.trim();
-    }).filter(function (s) {
-      return s.indexOf('@') > 0;
-    });
-    if (destinatarios.length === 0) {
-      return;
-    }
-    var nombre = String(data.nombre || '—');
-    var motivo = String(data.motivo || '—');
-    var asunto = 'Vinculaciones: ' + nombre + ' — ' + motivo;
-    var filas = [
-      ['Hoja', hoja],
-      ['Fecha', fecha],
-      ['Nombre', nombre],
-      ['Teléfono', String(data.telefono || '—')],
-      ['Clave cliente', String(data.clave || '—')],
-      ['Motivo', motivo],
-      ['Titular', String(data.titular || '—')],
-      ['Banco', String(data.banco || '—')],
-      ['CLABE', String(data.clabe || '—')],
-      ['Mensaje', String(data.mensaje || '—')],
-      ['Origen', String(data.origen || '—')]
-    ];
-    var texto = 'Nueva solicitud — ' + hoja + '\n\n' + filas.map(function (par) {
-      return par[0] + ': ' + par[1];
-    }).join('\n');
-    MailApp.sendEmail({
-      to: destinatarios.join(','),
-      subject: asunto,
-      body: texto,
-      name: 'YAAVS Vinculaciones'
-    });
-  } catch (err) {
-    Logger.log('notificarNuevoFormulario: ' + err);
-  }
+  quitarCorreoDeAviso();
 }
