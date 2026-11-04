@@ -4079,9 +4079,57 @@ body.comisiones-viva #consulta .btn-consultar {
   box-shadow: 0 0 18px rgba(255, 196, 0, 0.55);
 }
 
-.bf-marquee {
+.bf-header {
   position: sticky;
   top: 0;
+  z-index: 50;
+  width: 100%;
+  border-bottom: 2px solid rgba(255, 60, 80, 0.85);
+  background:
+    linear-gradient(180deg, rgba(18, 0, 4, 0.92), rgba(5, 5, 5, 0.88));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 225, 74, 0.18);
+}
+
+.bf-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 4vw, 28px);
+  width: min(920px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 12px 0;
+}
+
+.bf-header__logo {
+  display: block;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.55));
+}
+
+.bf-header__logo--att {
+  height: clamp(28px, 5vw, 40px);
+}
+
+.bf-header__logo--yaavs {
+  height: clamp(22px, 4vw, 30px);
+}
+
+.bf-header__divider {
+  width: 2px;
+  height: clamp(22px, 4vw, 28px);
+  border-radius: 999px;
+  background: linear-gradient(180deg, transparent, #ffe14a 20%, #ff2a3a 50%, #ffe14a 80%, transparent);
+  box-shadow: 0 0 10px rgba(255, 42, 58, 0.55);
+}
+
+.bf-marquee {
+  position: sticky;
+  top: 64px;
   z-index: 40;
   width: 100%;
   overflow: hidden;
@@ -4093,6 +4141,17 @@ body.comisiones-viva #consulta .btn-consultar {
     0 0 0 1px rgba(220, 20, 60, 0.55),
     0 10px 28px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 rgba(255, 225, 74, 0.25);
+}
+
+@media (max-width: 720px) {
+  .bf-marquee {
+    top: 52px;
+  }
+
+  .bf-header__inner {
+    padding: 10px 0;
+    gap: 14px;
+  }
 }
 
 .bf-marquee__track {
