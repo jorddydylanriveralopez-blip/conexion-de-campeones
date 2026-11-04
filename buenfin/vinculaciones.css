@@ -3218,6 +3218,133 @@ body.comisiones-landing {
   100% { top: 108%; transform: rotate(220deg); }
 }
 
+.bf-deco {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  font-size: clamp(1.1rem, 2.4vw, 1.7rem);
+  color: #ffe14a;
+  filter: drop-shadow(0 0 12px rgba(255, 42, 58, 0.55));
+  animation: bf-float 7s ease-in-out infinite;
+  opacity: 0.88;
+  pointer-events: none;
+}
+
+.bf-deco--bolt { color: #ffd000; }
+.bf-deco--tag { color: #ff4d6a; }
+.bf-deco--pct {
+  font-family: 'Titan One', 'Lilita One', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  color: #fff;
+  text-shadow: 0 0 14px rgba(255, 42, 58, 0.8);
+}
+.bf-deco--fire { color: #ff2a3a; }
+.bf-deco--bag { color: #ffe14a; }
+.bf-deco--gift { color: #ff6b7a; }
+.bf-deco--boom { color: #ffb000; }
+
+.bf-deco--a { top: 14%; left: 6%; animation-delay: 0s; }
+.bf-deco--b { top: 22%; right: 8%; animation-delay: -1.2s; transform: rotate(12deg); }
+.bf-deco--c { top: 38%; left: 4%; animation-delay: -2.4s; }
+.bf-deco--d { top: 46%; right: 5%; animation-delay: -0.8s; }
+.bf-deco--e { top: 58%; left: 7%; animation-delay: -3.1s; }
+.bf-deco--f { top: 66%; right: 7%; animation-delay: -1.7s; }
+.bf-deco--g { top: 78%; left: 5%; animation-delay: -4s; }
+.bf-deco--h { top: 18%; left: 18%; font-size: 0.95rem; opacity: 0.7; animation-delay: -2s; }
+.bf-deco--i { top: 72%; right: 16%; animation-delay: -3.6s; }
+.bf-deco--j { top: 32%; left: 14%; animation-delay: -5s; }
+.bf-deco--k { top: 84%; right: 10%; animation-delay: -2.8s; }
+.bf-deco--l { top: 50%; left: 16%; animation-delay: -4.4s; font-size: 1.15rem; }
+
+.bf-chip {
+  position: absolute;
+  z-index: 2;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 225, 74, 0.85);
+  background: linear-gradient(180deg, #ff2a3a, #8b0000);
+  color: #fff;
+  font-family: 'Titan One', 'Lilita One', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 16px rgba(220, 20, 60, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  animation: bf-wiggle 5.5s ease-in-out infinite;
+}
+
+.bf-chip--1 { top: 26%; right: 14%; transform: rotate(14deg); animation-delay: -0.5s; }
+.bf-chip--2 { top: 54%; left: 10%; transform: rotate(-12deg); background: linear-gradient(180deg, #ffe14a, #ffb000); color: #1a0000; border-color: #fff; animation-delay: -1.8s; }
+.bf-chip--3 { top: 70%; right: 12%; transform: rotate(8deg); animation-delay: -3s; }
+.bf-chip--4 { top: 40%; left: 20%; transform: rotate(-18deg); background: linear-gradient(180deg, #111, #333); border-color: #ff2a3a; color: #ffe14a; animation-delay: -2.2s; }
+
+.bf-spark {
+  position: absolute;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffe14a;
+  box-shadow:
+    0 0 10px #ffe14a,
+    0 0 22px rgba(255, 42, 58, 0.65);
+  animation: bf-twinkle 3.2s ease-in-out infinite;
+}
+
+.bf-spark--1 { top: 12%; left: 28%; animation-delay: 0s; }
+.bf-spark--2 { top: 30%; right: 22%; width: 6px; height: 6px; animation-delay: -0.7s; background: #ff4d6a; }
+.bf-spark--3 { top: 48%; left: 24%; animation-delay: -1.4s; }
+.bf-spark--4 { top: 62%; right: 26%; width: 5px; height: 5px; animation-delay: -2.1s; background: #fff; }
+.bf-spark--5 { top: 80%; left: 22%; animation-delay: -0.9s; }
+.bf-spark--6 { top: 88%; right: 30%; width: 7px; height: 7px; animation-delay: -1.8s; background: #ff2a3a; }
+
+@keyframes bf-float {
+  0%, 100% { transform: translateY(0) rotate(var(--bf-rot, -6deg)); }
+  50% { transform: translateY(-14px) rotate(calc(var(--bf-rot, -6deg) + 8deg)); }
+}
+
+@keyframes bf-wiggle {
+  0%, 100% { translate: 0 0; }
+  33% { translate: 0 -10px; }
+  66% { translate: 4px 4px; }
+}
+
+@keyframes bf-twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+@media (max-width: 720px) {
+  .bf-deco--h,
+  .bf-deco--j,
+  .bf-deco--l,
+  .bf-chip--4,
+  .bf-spark--3,
+  .bf-spark--5 {
+    display: none;
+  }
+
+  .bf-deco {
+    font-size: 1.05rem;
+    opacity: 0.75;
+  }
+
+  .bf-chip {
+    font-size: 0.68rem;
+    padding: 5px 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-deco,
+  .bf-chip,
+  .bf-spark {
+    animation: none;
+  }
+}
+
 body.comisiones-landing .page-wrap {
   width: min(760px, 94vw);
   margin: 0 auto;
