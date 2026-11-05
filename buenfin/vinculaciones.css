@@ -6821,3 +6821,282 @@ body.bf-clean #terminos-section.bf-terms .terminos-cierre {
   color: rgba(255, 225, 74, 0.85);
   text-transform: none;
 }
+
+/* ——— Premium polish pass ——— */
+body.bf-clean .bf-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+  opacity: 0.55;
+  animation: bf-orb-drift 12s ease-in-out infinite alternate;
+}
+
+body.bf-clean .bf-orb--1 {
+  width: min(48vw, 340px);
+  height: min(48vw, 340px);
+  top: 12%;
+  left: -8%;
+  background: radial-gradient(circle, rgba(255, 42, 58, 0.55), transparent 70%);
+}
+
+body.bf-clean .bf-orb--2 {
+  width: min(42vw, 280px);
+  height: min(42vw, 280px);
+  top: 28%;
+  right: -6%;
+  background: radial-gradient(circle, rgba(255, 225, 74, 0.28), transparent 70%);
+  animation-delay: -4s;
+}
+
+body.bf-clean .bf-orb--3 {
+  width: min(50vw, 360px);
+  height: min(50vw, 360px);
+  bottom: 8%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(180, 0, 40, 0.35), transparent 70%);
+  animation-delay: -7s;
+}
+
+@keyframes bf-orb-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(18px, -22px, 0) scale(1.08); }
+}
+
+body.bf-clean .bf-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 0, 4, 0.72);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+body.bf-clean .bf-marquee {
+  top: 60px;
+  border-bottom: 1px solid rgba(255, 225, 74, 0.35);
+  background: linear-gradient(180deg, rgba(20, 0, 6, 0.92), rgba(8, 0, 4, 0.95));
+  box-shadow: none;
+}
+
+body.bf-clean .bf-marquee__group {
+  font-size: clamp(0.78rem, 2.2vw, 0.92rem);
+  letter-spacing: 0.14em;
+  opacity: 0.92;
+}
+
+body.bf-clean .bf-stage {
+  position: relative;
+  width: min(780px, 94vw);
+  margin: 28px auto 40px;
+  padding: 8px 0 0;
+}
+
+body.bf-clean .bf-stage__spotlight {
+  position: absolute;
+  inset: -8% 8% auto;
+  height: 42%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 60, 80, 0.28), transparent 70%);
+  filter: blur(8px);
+}
+
+body.bf-clean .bf-hero-title,
+body.bf-clean .bf-kicker,
+body.bf-clean .bf-offer,
+body.bf-clean .bf-perks {
+  position: relative;
+  z-index: 1;
+}
+
+body.bf-clean .bf-hero-title {
+  animation: bf-rise 0.7s ease both;
+}
+
+body.bf-clean .bf-hero-title__eyebrow {
+  display: inline-block;
+  margin-bottom: 4px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 225, 74, 0.28);
+  background: rgba(255, 225, 74, 0.08);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffe14a;
+}
+
+body.bf-clean .bf-hero-title__line {
+  font-size: clamp(1.85rem, 6.4vw, 2.9rem);
+}
+
+body.bf-clean .bf-hero-title__pill {
+  background: linear-gradient(180deg, #ff4d5f, #b00018);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 12px 28px rgba(176, 0, 24, 0.45),
+    0 0 34px rgba(255, 60, 80, 0.28);
+}
+
+body.bf-clean .bf-kicker {
+  margin-bottom: 28px;
+  font-size: clamp(1.05rem, 3.1vw, 1.28rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.86);
+  animation: bf-rise 0.75s ease 0.08s both;
+}
+
+body.bf-clean .bf-offer {
+  margin-bottom: 26px;
+  padding: 18px 16px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+    rgba(0, 0, 0, 0.28);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: bf-rise 0.8s ease 0.12s both;
+}
+
+body.bf-clean .bf-offer__mascot {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+body.bf-clean .bf-offer__halo {
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 225, 74, 0.28), transparent 68%);
+  filter: blur(8px);
+  animation: bf-halo-pulse 3.4s ease-in-out infinite;
+}
+
+body.bf-clean .bf-offer__yaavsti {
+  position: relative;
+  z-index: 1;
+  width: min(210px, 50vw);
+  filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.45));
+}
+
+body.bf-clean .bf-deal__amount {
+  position: relative;
+}
+
+body.bf-clean .bf-deal__amount span {
+  display: inline-block;
+  background: linear-gradient(180deg, #fff4b0 0%, #ffe14a 42%, #ffb000 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 3px 0 #8b0000) drop-shadow(0 0 18px rgba(255, 225, 74, 0.4));
+  animation: bf-amount-pulse 2.6s ease-in-out infinite;
+}
+
+body.bf-clean .bf-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 225, 74, 0.45);
+  background: linear-gradient(180deg, #ffe14a, #ffb000);
+  color: #1a0508;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(255, 176, 0, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.bf-clean .bf-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(255, 176, 0, 0.38);
+}
+
+body.bf-clean .bf-perks {
+  animation: bf-rise 0.85s ease 0.18s both;
+}
+
+body.bf-clean .bf-perk {
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+body.bf-clean .bf-perk:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 225, 74, 0.4);
+}
+
+body.bf-clean #consulta.section-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 40%),
+    rgba(8, 0, 4, 0.72);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+body.bf-clean #consulta .consulta-titulo {
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-size: 1.15rem;
+}
+
+body.bf-clean #consulta .btn-consultar {
+  border-radius: 999px;
+}
+
+body.bf-clean #formulario-section.section-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 40%),
+    rgba(8, 0, 4, 0.72);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+@keyframes bf-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bf-halo-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.96); }
+  50% { opacity: 0.95; transform: scale(1.05); }
+}
+
+@keyframes bf-amount-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+@media (max-width: 720px) {
+  body.bf-clean .bf-marquee {
+    top: 52px;
+  }
+
+  body.bf-clean .bf-offer {
+    padding: 16px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.bf-clean .bf-orb,
+  body.bf-clean .bf-offer__halo,
+  body.bf-clean .bf-deal__amount span,
+  body.bf-clean .bf-hero-title,
+  body.bf-clean .bf-kicker,
+  body.bf-clean .bf-offer,
+  body.bf-clean .bf-perks {
+    animation: none;
+  }
+}
