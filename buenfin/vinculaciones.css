@@ -6309,13 +6309,12 @@ body.bf-clean .cm-scene::after {
 }
 
 body.bf-clean.comisiones-landing.comisiones-viva {
-  background-color: #1a0508;
-  background-image:
-    linear-gradient(180deg, rgba(90, 0, 14, 0.55) 0%, rgba(20, 0, 6, 0.82) 55%, rgba(8, 0, 4, 0.94) 100%),
-    url('fondo-prepago-noche.jpg');
-  background-size: cover, cover;
-  background-position: center, center top;
-  background-attachment: fixed, fixed;
+  background-color: #c40018;
+  background-image: url('fondo-buen-fin-rojo.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 body.bf-clean .bf-stage {
@@ -7103,15 +7102,21 @@ body.bf-clean #formulario-section.section-card {
 
 /* ——— Visual refine v28 ——— */
 body.bf-clean.comisiones-landing.comisiones-viva {
-  background-color: #0a0204;
-  background-image:
-    linear-gradient(180deg, rgba(12, 0, 4, 0.72) 0%, rgba(8, 0, 4, 0.86) 48%, rgba(4, 0, 2, 0.94) 100%),
-    url('fondo-prepago-noche.jpg');
+  background-color: #d4001c;
+  background-image: url('fondo-buen-fin-rojo.jpg?v=1');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 body.bf-clean .bf-orb {
-  opacity: 0.28;
+  opacity: 0.12;
   filter: blur(52px);
+}
+
+body.bf-clean .cm-scene {
+  opacity: 0.35;
 }
 
 body.bf-clean .bf-marquee {
