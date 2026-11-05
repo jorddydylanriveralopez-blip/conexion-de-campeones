@@ -7896,7 +7896,7 @@ body.bf-clean .bf-block {
 
 body.bf-clean .bf-block__banner {
   display: block;
-  width: min(560px, 92vw);
+  width: min(480px, 88vw);
   height: auto;
   margin: 4px auto 10px;
   filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.45));
