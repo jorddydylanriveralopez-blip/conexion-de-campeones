@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""Convierte LayOut Acelerador Noviembre.xlsx ? acelerador-noviembre.json"""
+# -*- coding: utf-8 -*-
+"""Convert LayOut Acelerador Noviembre.xlsx to acelerador-noviembre.json"""
 
 from __future__ import annotations
 
 import json
+import unicodedata
 from pathlib import Path
 
 try:
     import openpyxl
 except ImportError as exc:  # pragma: no cover
-    raise SystemExit("Necesitas openpyxl: pip install openpyxl") from exc
+    raise SystemExit("Need openpyxl: pip install openpyxl") from exc
 
 ROOT = Path(__file__).resolve().parent
 XLSX = ROOT / "layout-acelerador-noviembre.xlsx"
@@ -28,9 +30,9 @@ HEADERS = {
 
 
 def norm(h: object) -> str:
-    s = str(h or "").strip().lower()
-    for a, b in (("á", "a"), ("é", "e"), ("í", "i"), ("ó", "o"), ("ú", "u"), ("ñ", "n")):
-        s = s.replace(a, b)
+    s = unicodedata.normalize("NFKD", str(h or ""))
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    s = s.strip().lower()
     out = []
     for ch in s:
         out.append(ch if ch.isalnum() else "_")
@@ -51,19 +53,19 @@ def num(v: object):
 
 def main() -> None:
     if not XLSX.exists():
-        raise SystemExit(f"No está el Excel: {XLSX}")
+        raise SystemExit(f"Missing Excel: {XLSX}")
 
     wb = openpyxl.load_workbook(XLSX, data_only=True)
     ws = wb.active
     rows = list(ws.iter_rows(values_only=True))
     if not rows:
-        raise SystemExit("La hoja está vacía.")
+        raise SystemExit("Sheet is empty.")
 
     headers = [norm(h) for h in rows[0]]
     idx = {HEADERS[h]: i for i, h in enumerate(headers) if h in HEADERS}
     missing = [k for k in HEADERS.values() if k not in idx]
     if missing:
-        raise SystemExit(f"Faltan columnas en el Excel: {missing}. Headers={headers}")
+        raise SystemExit(f"Missing Excel columns: {missing}. Headers={headers}")
 
     data: dict[str, list] = {}
     for row in rows[1:]:
@@ -80,7 +82,7 @@ def main() -> None:
         bracket = "" if bracket is None else str(bracket).strip()
         unitario = num(row[idx["unitario"]])
         total = num(row[idx["total"]])
-        # Compacto: [nombre, actOct, meta, actNov, adicionales, bracket, unitario, total]
+        # [nombre, actOct, meta, actNov, adicionales, bracket, unitario, total]
         data[clave] = [
             nombre,
             act_oct,
@@ -93,7 +95,7 @@ def main() -> None:
         ]
 
     OUT.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"OK ? {OUT.name} ({len(data)} claves)")
+    print(f"OK -> {OUT.name} ({len(data)} keys)")
 
 
 if __name__ == "__main__":
