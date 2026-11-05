@@ -7621,3 +7621,76 @@ body.bf-clean .bf-offer__yaavsti--flight {
     transform: none;
   }
 }
+
+/* ——— Official $20 EXTRA art ——— */
+body.bf-clean .bf-offer {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.25fr);
+  align-items: center;
+}
+
+body.bf-clean .bf-offer__copy {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+body.bf-clean .bf-offer__deal-art {
+  display: block;
+  width: min(420px, 100%);
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.42));
+  transform-origin: center center;
+  animation:
+    bf-deal-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both,
+    bf-deal-pulse 2.8s ease-in-out 1s infinite;
+}
+
+body.bf-clean .bf-offer__ops,
+body.bf-clean .bf-deal {
+  display: none;
+}
+
+body.bf-clean .bf-offer__meta {
+  margin: 2px 0 0;
+  max-width: 34ch;
+}
+
+@keyframes bf-deal-in {
+  from {
+    opacity: 0;
+    transform: translateX(18px) scale(0.92) rotate(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes bf-deal-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.42));
+  }
+  50% {
+    transform: scale(1.035);
+    filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.48)) drop-shadow(0 0 18px rgba(255, 60, 70, 0.35));
+  }
+}
+
+@media (max-width: 720px) {
+  body.bf-clean .bf-offer {
+    grid-template-columns: 1fr;
+  }
+
+  body.bf-clean .bf-offer__deal-art {
+    width: min(360px, 94vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.bf-clean .bf-offer__deal-art {
+    animation: none;
+  }
+}
