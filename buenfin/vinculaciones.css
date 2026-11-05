@@ -6310,10 +6310,19 @@ body.bf-clean .cm-scene::after {
 
 body.bf-clean.comisiones-landing.comisiones-viva {
   background-color: #d4001c;
-  background-image: url('fondo-buen-fin-rojo.jpg?v=3');
+  background-image: none;
+}
+
+body.bf-clean.comisiones-landing.comisiones-viva::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #d4001c;
+  background-image: url('fondo-buen-fin-rojo.jpg?v=4');
   background-size: cover;
   background-position: center center;
-  background-attachment: scroll;
   background-repeat: no-repeat;
 }
 
@@ -7103,16 +7112,24 @@ body.bf-clean #formulario-section.section-card {
 /* ——— Visual refine v28 ——— */
 body.bf-clean.comisiones-landing.comisiones-viva {
   background-color: #d4001c;
-  background-image: url('fondo-buen-fin-rojo.jpg?v=3');
+  background-image: none;
+}
+
+body.bf-clean.comisiones-landing.comisiones-viva::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #d4001c;
+  background-image: url('fondo-buen-fin-rojo.jpg?v=4');
   background-size: cover;
   background-position: center center;
-  background-attachment: scroll;
   background-repeat: no-repeat;
 }
 
 @media (max-width: 720px) {
-  body.bf-clean.comisiones-landing.comisiones-viva {
-    background-size: cover;
+  body.bf-clean.comisiones-landing.comisiones-viva::before {
     background-position: center top;
   }
 }
