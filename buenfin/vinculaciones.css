@@ -7320,3 +7320,132 @@ body.bf-clean #formulario-section.section-card {
     justify-items: center;
   }
 }
+
+/* ——— Soft side atmosphere ——— */
+body.bf-clean .bf-side {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(22vw, 260px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.bf-clean .bf-side--left {
+  left: 0;
+  background:
+    linear-gradient(90deg, rgba(160, 0, 28, 0.38), transparent 78%),
+    radial-gradient(ellipse 90% 40% at 0% 35%, rgba(255, 60, 80, 0.28), transparent 70%);
+}
+
+body.bf-clean .bf-side--right {
+  right: 0;
+  background:
+    linear-gradient(270deg, rgba(120, 0, 22, 0.34), transparent 78%),
+    radial-gradient(ellipse 90% 42% at 100% 55%, rgba(255, 225, 74, 0.16), transparent 72%);
+}
+
+body.bf-clean .bf-side-beam {
+  position: absolute;
+  width: 2px;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 225, 74, 0.55) 25%,
+    rgba(255, 60, 80, 0.55) 55%,
+    transparent
+  );
+  box-shadow: 0 0 14px rgba(255, 80, 100, 0.35);
+  animation: bf-side-beam 5.5s ease-in-out infinite;
+}
+
+body.bf-clean .bf-side-beam--1 {
+  left: 4.5%;
+  top: 18%;
+  height: 22vh;
+  animation-delay: 0s;
+}
+
+body.bf-clean .bf-side-beam--2 {
+  left: 8%;
+  top: 48%;
+  height: 16vh;
+  opacity: 0.7;
+  animation-delay: -1.8s;
+}
+
+body.bf-clean .bf-side-beam--3 {
+  right: 5%;
+  top: 24%;
+  height: 20vh;
+  animation-delay: -0.9s;
+}
+
+body.bf-clean .bf-side-beam--4 {
+  right: 8.5%;
+  top: 52%;
+  height: 18vh;
+  opacity: 0.65;
+  animation-delay: -2.6s;
+}
+
+body.bf-clean .bf-side-dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: #ffe14a;
+  box-shadow: 0 0 12px rgba(255, 225, 74, 0.75);
+  animation: bf-side-dot 4.8s ease-in-out infinite;
+}
+
+body.bf-clean .bf-side-dot--1 { left: 5.5%; top: 28%; animation-delay: 0s; }
+body.bf-clean .bf-side-dot--2 { left: 7%; top: 62%; width: 5px; height: 5px; animation-delay: -1.2s; background: #ff4d6a; }
+body.bf-clean .bf-side-dot--3 { left: 3.5%; top: 74%; animation-delay: -2.1s; }
+body.bf-clean .bf-side-dot--4 { right: 6%; top: 32%; animation-delay: -0.7s; }
+body.bf-clean .bf-side-dot--5 { right: 8%; top: 58%; width: 5px; height: 5px; animation-delay: -1.8s; background: #ff4d6a; }
+body.bf-clean .bf-side-dot--6 { right: 4%; top: 78%; animation-delay: -2.9s; }
+
+@keyframes bf-side-beam {
+  0%, 100% { opacity: 0.35; transform: translateY(0) scaleY(1); }
+  50% { opacity: 0.9; transform: translateY(-12px) scaleY(1.08); }
+}
+
+@keyframes bf-side-dot {
+  0%, 100% { opacity: 0.35; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-10px); }
+}
+
+@media (max-width: 900px) {
+  body.bf-clean .bf-side {
+    width: min(18vw, 140px);
+    opacity: 0.7;
+  }
+
+  body.bf-clean .bf-side-beam,
+  body.bf-clean .bf-side-dot {
+    opacity: 0.55;
+  }
+}
+
+@media (max-width: 640px) {
+  body.bf-clean .bf-side-beam,
+  body.bf-clean .bf-side-dot {
+    display: none;
+  }
+
+  body.bf-clean .bf-side {
+    width: 72px;
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.bf-clean .bf-side-beam,
+  body.bf-clean .bf-side-dot {
+    animation: none;
+  }
+}
