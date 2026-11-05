@@ -7694,3 +7694,66 @@ body.bf-clean .bf-offer__meta {
     animation: none;
   }
 }
+
+/* ——— Official chips $135 / 8.1GB art ——— */
+body.bf-clean .bf-perks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 4px auto 10px;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+
+body.bf-clean .bf-perk {
+  display: none;
+}
+
+body.bf-clean .bf-perks__art {
+  display: block;
+  width: min(640px, 96vw);
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.42));
+  transform-origin: center center;
+  animation:
+    bf-perks-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both,
+    bf-perks-float 3.8s ease-in-out 1.1s infinite;
+}
+
+@keyframes bf-perks-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bf-perks-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.42));
+  }
+  50% {
+    transform: translateY(-8px) scale(1.015);
+    filter: drop-shadow(0 20px 28px rgba(0, 0, 0, 0.48));
+  }
+}
+
+@media (max-width: 720px) {
+  body.bf-clean .bf-perks__art {
+    width: min(100%, 96vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.bf-clean .bf-perks__art {
+    animation: none;
+  }
+}
