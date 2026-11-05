@@ -8504,3 +8504,251 @@ body.bf-clean .bf-feat__deal--85 {
     animation: none;
   }
 }
+
+/* ——— Mobile compact / easy to scan ——— */
+@media (max-width: 720px) {
+  body.bf-clean.comisiones-landing.comisiones-viva .page-wrap {
+    width: calc(100% - 24px);
+    padding: 6px 0 calc(16px + env(safe-area-inset-bottom));
+  }
+
+  body.bf-clean .bf-header__inner {
+    padding: 8px 0;
+    gap: 10px;
+  }
+
+  body.bf-clean .bf-header__logo--yaavs {
+    height: 18px;
+  }
+
+  body.bf-clean .bf-header__logo--att {
+    height: 24px;
+  }
+
+  body.bf-clean .bf-marquee {
+    top: 46px;
+  }
+
+  body.bf-clean .bf-marquee__group {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    gap: 10px;
+    padding: 6px 0;
+  }
+
+  body.bf-clean .bf-stage {
+    width: 100%;
+    margin: 10px auto 18px;
+    padding: 0;
+  }
+
+  body.bf-clean .bf-hero-title {
+    margin: 2px auto 6px;
+  }
+
+  body.bf-clean .bf-hero-title__art {
+    width: min(100%, 86vw);
+  }
+
+  body.bf-clean .cm-lookup {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    margin: 4px auto 12px;
+    padding: 0;
+    row-gap: 0;
+  }
+
+  body.bf-clean .cm-lookup .cm-mascot--dinero {
+    display: none;
+  }
+
+  body.bf-clean .cm-lookup #consulta.section-card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 12px 12px 12px;
+    border-radius: 18px;
+  }
+
+  body.bf-clean .cm-lookup #consulta .consulta-titulo {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    gap: 6px;
+  }
+
+  body.bf-clean .cm-lookup #consulta .consulta-form {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    max-width: none;
+  }
+
+  body.bf-clean .cm-lookup #consulta .consulta-form input,
+  body.bf-clean .cm-lookup #consulta .btn-consultar {
+    min-height: 44px;
+    font-size: 0.9rem;
+  }
+
+  body.bf-clean .cm-lookup #consulta .btn-consultar {
+    width: 100%;
+    letter-spacing: 0.04em;
+  }
+
+  body.bf-clean .bf-block {
+    margin: 6px auto 12px;
+  }
+
+  body.bf-clean .bf-block__banner {
+    width: min(300px, 78vw);
+    margin: 2px auto 8px;
+  }
+
+  body.bf-clean .bf-feat {
+    width: 100%;
+    margin: 0 auto 12px;
+    padding: 14px 12px 14px;
+    gap: 10px;
+    border-radius: 20px;
+  }
+
+  body.bf-clean .bf-feat__leaf,
+  body.bf-clean .bf-feat__glow {
+    opacity: 0.35;
+  }
+
+  body.bf-clean .bf-feat__head {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  body.bf-clean .bf-feat__num {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    font-size: 1.35rem;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.22);
+  }
+
+  body.bf-clean .bf-feat__banner {
+    padding: 9px 11px;
+    font-size: 0.72rem;
+    border-radius: 10px;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.22);
+  }
+
+  body.bf-clean .bf-feat__sub {
+    margin-top: 6px;
+    font-size: 0.78rem;
+  }
+
+  body.bf-clean .bf-feat__chip {
+    width: min(120px, 38vw);
+    margin-top: 2px;
+  }
+
+  body.bf-clean .bf-feat__include {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+
+  body.bf-clean .bf-feat__old {
+    margin-bottom: 8px;
+  }
+
+  body.bf-clean .bf-feat__old span {
+    padding: 3px 14px;
+    font-size: 0.92rem;
+  }
+
+  body.bf-clean .bf-feat__now {
+    width: 100%;
+    gap: 6px 10px;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+  }
+
+  body.bf-clean .bf-feat__now-price {
+    font-size: 2.35rem;
+  }
+
+  body.bf-clean .bf-feat__now-label {
+    font-size: 0.72rem;
+  }
+
+  body.bf-clean .bf-feat__pack {
+    width: 100%;
+    padding: 12px 12px 10px;
+  }
+
+  body.bf-clean .bf-feat__gb {
+    margin-bottom: 6px;
+    font-size: 1.55rem;
+  }
+
+  body.bf-clean .bf-feat__apps {
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 1rem;
+  }
+
+  body.bf-clean .bf-feat__days {
+    font-size: 0.68rem;
+  }
+
+  body.bf-clean .bf-feat__mascot {
+    width: min(160px, 48vw);
+    margin-top: 2px;
+  }
+
+  body.bf-clean .bf-feat__deal {
+    width: min(100%, 320px);
+  }
+
+  body.bf-clean .bf-feat__deal--85 {
+    width: min(100%, 300px);
+  }
+
+  body.bf-clean .bf-feat__porta {
+    width: min(220px, 62vw);
+    margin-top: 2px;
+  }
+
+  body.bf-clean .bf-feat__note {
+    margin-top: 10px;
+    max-width: 100%;
+    padding: 10px 12px;
+    font-size: 0.86rem;
+  }
+
+  body.bf-clean .cm-main {
+    width: 100%;
+    padding: 0;
+  }
+
+  body.bf-clean #formulario-section.section-card,
+  body.bf-clean #terminos-section.section-card {
+    margin-top: 14px;
+    margin-bottom: 10px;
+    padding: 12px 12px 10px;
+    border-radius: 18px;
+  }
+
+  body.bf-clean #formulario-section .consulta-titulo,
+  body.bf-clean #terminos-section .consulta-titulo {
+    font-size: 0.92rem;
+  }
+
+  body.bf-clean .bf-terms__title {
+    font-size: 0.95rem;
+  }
+
+  body.bf-clean .bf-terms__hint {
+    font-size: 0.72rem;
+  }
+
+  body.bf-clean .cm-footer {
+    margin-top: 16px;
+    padding: 16px 12px 18px;
+  }
+}
