@@ -6642,3 +6642,182 @@ body.bf-clean #terminos-section .formulario-toggle {
     flex-direction: column;
   }
 }
+
+/* ——— Cool terms accordion ——— */
+body.bf-clean #terminos-section.section-card.bf-terms {
+  width: min(100%, 640px);
+  margin: 18px auto 10px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(135deg, rgba(255, 225, 74, 0.06), transparent 42%),
+    linear-gradient(180deg, rgba(28, 6, 10, 0.92), rgba(10, 2, 4, 0.96));
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+body.bf-clean #terminos-section.bf-terms .consulta-titulo {
+  margin: 0;
+  padding: 0;
+}
+
+body.bf-clean #terminos-section.bf-terms .formulario-toggle {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+body.bf-clean .bf-terms__head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  transition: background 0.2s ease;
+}
+
+body.bf-clean #terminos-section.bf-terms .formulario-toggle:hover .bf-terms__head {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+body.bf-clean .bf-terms__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #1a0508;
+  background: linear-gradient(180deg, #ffe14a, #ffb000);
+  box-shadow: 0 6px 14px rgba(255, 176, 0, 0.28);
+  font-size: 1rem;
+}
+
+body.bf-clean .bf-terms__copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+body.bf-clean .bf-terms__title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.98rem;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+body.bf-clean .bf-terms__hint {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  color: rgba(255, 225, 74, 0.78);
+  letter-spacing: 0.02em;
+}
+
+body.bf-clean #terminos-section.bf-terms .formulario-toggle__chev {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  filter: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+body.bf-clean #terminos-section.bf-terms.formulario-plegable--abierto .formulario-toggle__chev {
+  transform: rotate(180deg);
+  color: #ffe14a;
+}
+
+body.bf-clean #terminos-section.bf-terms .terminos-panel {
+  padding: 0 14px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.bf-clean #terminos-section.bf-terms .terminos-lista {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: bf-term;
+  display: grid;
+  gap: 10px;
+}
+
+body.bf-clean #terminos-section.bf-terms .terminos-lista > li {
+  position: relative;
+  margin: 0;
+  padding: 12px 12px 12px 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  counter-increment: bf-term;
+}
+
+body.bf-clean #terminos-section.bf-terms .terminos-lista > li::before {
+  content: counter(bf-term);
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.72rem;
+  color: #1a0508;
+  background: #ffe14a;
+  box-shadow: none;
+}
+
+body.bf-clean #terminos-section.bf-terms .terminos-lista strong {
+  display: block;
+  margin: 0 0 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+body.bf-clean #terminos-section.bf-terms .terminos-lista p,
+body.bf-clean #terminos-section.bf-terms .terminos-lista li li {
+  margin: 0 0 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+body.bf-clean #terminos-section.bf-terms .terminos-lista ul {
+  margin: 6px 0 0;
+  padding-left: 1.1rem;
+}
+
+body.bf-clean #terminos-section.bf-terms .terminos-lista a {
+  color: #ffe14a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+body.bf-clean #terminos-section.bf-terms .terminos-cierre {
+  margin: 14px 2px 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: rgba(255, 225, 74, 0.85);
+  text-transform: none;
+}
