@@ -6036,52 +6036,134 @@ body.comisiones-viva .cm-footer__legal {
 .bf-offer__copy { text-align: center; }
 
 .bf-offer__ops {
-  margin: 0 0 10px;
+  margin: 0 0 14px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   font-size: clamp(0.78rem, 2.4vw, 0.95rem);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #ffe14a;
-  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.55);
+  text-shadow:
+    0 0 18px rgba(255, 225, 74, 0.45),
+    0 2px 0 rgba(0, 0, 0, 0.55);
 }
 
-.bf-offer__burst {
-  margin: 0 auto 12px;
-  width: fit-content;
-  max-width: 100%;
-  padding: 20px 22px 18px;
-  font-family: 'Titan One', 'Lilita One', sans-serif;
-  font-size: clamp(1.45rem, 5.6vw, 2.2rem);
-  line-height: 1.05;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: #fff;
+.bf-seal {
+  --seal-size: clamp(168px, 42vw, 220px);
+  position: relative;
+  width: var(--seal-size);
+  height: var(--seal-size);
+  margin: 0 auto 16px;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.bf-seal__glow {
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
   background:
-    radial-gradient(circle at 30% 20%, #ff7a88, transparent 42%),
-    linear-gradient(180deg, #ff2f42, #8b0000);
+    radial-gradient(circle, rgba(255, 225, 74, 0.55) 0%, rgba(255, 42, 58, 0.35) 38%, transparent 70%);
+  filter: blur(10px);
+  animation: bf-seal-glow 2.8s ease-in-out infinite;
+  z-index: 0;
+}
+
+.bf-seal__rays {
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  z-index: 1;
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(255, 225, 74, 0.42) 0deg 6deg,
+      transparent 6deg 18deg
+    );
+  mask-image: radial-gradient(circle, transparent 42%, #000 48%, #000 62%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle, transparent 42%, #000 48%, #000 62%, transparent 72%);
+  animation: bf-seal-spin 14s linear infinite;
+}
+
+.bf-seal__face {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0;
+  padding: 12% 10% 14%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 24%, #ff6b7a 0%, transparent 42%),
+    radial-gradient(circle at 70% 78%, #5a000a 0%, transparent 48%),
+    linear-gradient(160deg, #ff3b4e 0%, #c40018 48%, #7a0010 100%);
   border: 3px solid #ffe14a;
   box-shadow:
-    0 0 0 5px rgba(255, 42, 58, 0.28),
-    0 14px 0 rgba(0, 0, 0, 0.28),
-    0 0 36px rgba(255, 60, 80, 0.55);
-  clip-path: polygon(
-    50% 0%, 61% 9%, 74% 3%, 79% 16%, 92% 14%, 90% 28%, 100% 38%, 92% 48%, 100% 60%,
-    90% 70%, 94% 84%, 80% 82%, 74% 96%, 60% 90%, 50% 100%, 40% 90%, 26% 96%, 20% 82%,
-    6% 84%, 10% 70%, 0% 60%, 8% 48%, 0% 38%, 10% 28%, 8% 14%, 21% 16%, 26% 3%, 39% 9%
-  );
-  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.45);
-  animation: bf-burst-pop 2.8s ease-in-out infinite;
+    0 0 0 5px rgba(196, 0, 24, 0.55),
+    0 0 0 8px rgba(255, 225, 74, 0.35),
+    inset 0 2px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -10px 24px rgba(0, 0, 0, 0.35),
+    0 18px 36px rgba(0, 0, 0, 0.45),
+    0 0 42px rgba(255, 60, 80, 0.55);
+  animation: bf-seal-float 3.4s ease-in-out infinite;
 }
 
-.bf-offer__burst span {
+.bf-seal__top,
+.bf-seal__bot {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.45);
+}
+
+.bf-seal__top {
+  font-size: clamp(0.78rem, 2.4vw, 0.95rem);
+  line-height: 1;
+}
+
+.bf-seal__bot {
+  font-size: clamp(0.95rem, 3vw, 1.15rem);
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.bf-seal__amount {
+  font-family: 'Titan One', 'Lilita One', sans-serif;
+  font-size: clamp(2.8rem, 11vw, 4rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
   color: #ffe14a;
-  font-size: 1.18em;
+  text-shadow:
+    0 3px 0 #8b0000,
+    0 6px 0 rgba(0, 0, 0, 0.28),
+    0 0 28px rgba(255, 225, 74, 0.65);
+  animation: bf-seal-amount 2.2s ease-in-out infinite;
 }
 
-@keyframes bf-burst-pop {
-  0%, 100% { transform: scale(1) rotate(-2deg); }
-  50% { transform: scale(1.045) rotate(1deg); }
+@keyframes bf-seal-glow {
+  0%, 100% { opacity: 0.75; transform: scale(0.96); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes bf-seal-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bf-seal-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.02); }
+}
+
+@keyframes bf-seal-amount {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
 }
 
 .bf-offer__meta {
@@ -6212,7 +6294,10 @@ body.comisiones-viva .cm-footer__legal {
   .bf-offer__yaavsti,
   .bf-offer__chips,
   .bf-offer__chips img,
-  .bf-offer__burst {
+  .bf-seal__glow,
+  .bf-seal__rays,
+  .bf-seal__face,
+  .bf-seal__amount {
     animation: none;
   }
 }
