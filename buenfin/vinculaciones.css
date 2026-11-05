@@ -3796,10 +3796,10 @@ body.comisiones-landing.comisiones-poster .page-wrap {
 }
 
 body.comisiones-landing.comisiones-viva {
-  background-color: #9a0018;
+  background-color: #8b0014;
   background-image:
-    radial-gradient(ellipse 90% 50% at 50% 0%, rgba(255, 80, 100, 0.28), transparent 60%),
-    linear-gradient(180deg, rgba(120, 0, 18, 0.55) 0%, rgba(40, 0, 8, 0.78) 55%, rgba(10, 0, 4, 0.92) 100%),
+    radial-gradient(ellipse 90% 50% at 50% 0%, rgba(255, 70, 90, 0.32), transparent 60%),
+    linear-gradient(180deg, rgba(140, 0, 20, 0.5) 0%, rgba(50, 0, 10, 0.75) 52%, rgba(12, 0, 4, 0.92) 100%),
     url('fondo-prepago-noche.jpg');
   background-size: cover, cover, cover;
   background-position: center, center, center top;
@@ -4276,8 +4276,7 @@ body.comisiones-viva .cm-mascot--dinero {
   width: 132px;
   margin: 0 0 2px 12px;
   z-index: 3;
-  transform-origin: center bottom;
-  animation: bf-yaavsti-walk 5.2s ease-in-out infinite;
+  animation: cm-mascot-bob-left 3.4s ease-in-out infinite;
 }
 
 body.comisiones-viva .cm-fiesta-row {
@@ -5842,223 +5841,182 @@ body.comisiones-viva .cm-footer__legal {
   }
 }
 
-/* ——— Buen Fin flyer art (exact campaign piece) ——— */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.bf-flyer-art {
+/* ——— Buen Fin stage = flyer visual design (not the PNG) ——— */
+.bf-stage {
   position: relative;
-  width: min(560px, 94vw);
-  margin: 12px auto 28px;
+  width: min(860px, 96vw);
+  margin: 10px auto 30px;
+  padding: 22px 18px 0;
+  border-radius: 28px;
+  overflow: hidden;
   isolation: isolate;
-}
-
-.bf-flyer-art__img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 18px;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(255, 255, 255, 0.16), transparent 28%),
+    radial-gradient(circle at 88% 16%, rgba(255, 225, 74, 0.14), transparent 26%),
+    linear-gradient(165deg, #d3142c 0%, #b00018 38%, #7a0010 100%);
   box-shadow:
-    0 0 0 3px rgba(255, 255, 255, 0.18),
-    0 22px 48px rgba(0, 0, 0, 0.55),
-    0 0 60px rgba(255, 42, 58, 0.28);
-  animation: bf-flyer-glow 4.5s ease-in-out infinite;
+    0 0 0 3px rgba(255, 255, 255, 0.16),
+    0 24px 50px rgba(0, 0, 0, 0.45);
 }
 
-@keyframes bf-flyer-glow {
-  0%, 100% {
-    transform: translateY(0);
-    filter: drop-shadow(0 0 0 rgba(255, 225, 74, 0));
-  }
-  50% {
-    transform: translateY(-6px);
-    filter: drop-shadow(0 0 18px rgba(255, 225, 74, 0.35));
-  }
+.bf-stage__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.38;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
 }
 
-@media (max-width: 720px) {
-  .bf-flyer-art {
-    width: min(100%, 96vw);
-    margin-top: 8px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .bf-flyer-art__img {
-    animation: none;
-  }
-}
-
-/* ——— Buen Fin flyer blocks ——— */
 .bf-hero-title {
-  margin: 18px auto 10px;
+  position: relative;
+  z-index: 2;
+  margin: 4px auto 8px;
   text-align: center;
   display: grid;
-  gap: 6px;
+  gap: 4px;
   justify-items: center;
 }
 
 .bf-hero-title__line {
   font-family: 'Titan One', 'Lilita One', sans-serif;
-  font-size: clamp(1.55rem, 6.2vw, 2.55rem);
-  line-height: 1.05;
+  font-size: clamp(1.6rem, 6.4vw, 2.7rem);
+  line-height: 1.02;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #fff;
   text-shadow:
-    0 3px 0 #8b0000,
-    0 6px 0 rgba(0, 0, 0, 0.35),
-    0 0 22px rgba(255, 42, 58, 0.55);
+    0 3px 0 #5a000a,
+    0 7px 0 rgba(0, 0, 0, 0.28),
+    0 0 24px rgba(255, 42, 58, 0.45);
 }
 
 .bf-hero-title__line--hot {
   color: #ffe14a;
   text-shadow:
-    0 3px 0 #8b0000,
-    0 0 24px rgba(255, 225, 74, 0.65),
-    0 8px 18px rgba(0, 0, 0, 0.45);
+    0 3px 0 #5a000a,
+    0 0 28px rgba(255, 225, 74, 0.72),
+    0 10px 18px rgba(0, 0, 0, 0.35);
 }
 
 .bf-hero-title__pill {
   display: inline-block;
-  margin-top: 4px;
-  padding: 10px 22px 8px;
-  border-radius: 14px;
+  margin-top: 6px;
+  padding: 12px 26px 10px;
+  border-radius: 16px;
   font-family: 'Titan One', 'Lilita One', sans-serif;
-  font-size: clamp(1.35rem, 5.5vw, 2.15rem);
+  font-size: clamp(1.4rem, 5.8vw, 2.3rem);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #fff;
-  background:
-    linear-gradient(180deg, #ff3b4e 0%, #c40018 55%, #8b0000 100%);
-  border: 2px solid rgba(255, 255, 255, 0.55);
+  background: linear-gradient(180deg, #ff4d5f 0%, #d4001c 55%, #8b0000 100%);
+  border: 3px solid rgba(255, 255, 255, 0.78);
   box-shadow:
-    0 0 0 3px rgba(255, 42, 58, 0.35),
-    0 0 28px rgba(255, 60, 80, 0.55),
-    0 10px 0 rgba(0, 0, 0, 0.35);
+    0 0 0 4px rgba(255, 42, 58, 0.28),
+    0 0 34px rgba(255, 60, 80, 0.5),
+    0 12px 0 rgba(0, 0, 0, 0.28);
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.45);
   animation: bf-pill-pulse 2.4s ease-in-out infinite;
 }
 
 @keyframes bf-pill-pulse {
-  0%, 100% { transform: scale(1); filter: brightness(1); }
-  50% { transform: scale(1.03); filter: brightness(1.08); }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
 }
 
-.bf-hero-sub {
+/* White torn-paper ticket like the flyer */
+.bf-ticket {
+  position: relative;
+  z-index: 2;
   width: fit-content;
-  max-width: 92%;
+  max-width: min(94%, 540px);
   margin: 14px auto 8px;
-  padding: 10px 18px 8px;
-  border-radius: 999px;
+  padding: 14px 24px 12px;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+  font-weight: 900;
+  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: #8b0000;
+  color: #9a0016;
+  line-height: 1.2;
   background: #fff;
-  border-bottom: 4px solid #ff2a3a;
-  box-shadow:
-    0 8px 22px rgba(0, 0, 0, 0.35),
-    0 0 0 2px rgba(255, 255, 255, 0.2);
+  clip-path: polygon(
+    0% 16%, 2% 6%, 7% 12%, 11% 0%, 17% 10%, 23% 1%, 30% 11%, 37% 0%, 44% 10%, 51% 2%,
+    58% 12%, 65% 0%, 72% 11%, 79% 1%, 85% 12%, 91% 3%, 96% 12%, 100% 6%,
+    100% 84%, 97% 94%, 92% 88%, 86% 100%, 80% 90%, 73% 100%, 66% 89%, 59% 100%,
+    52% 90%, 45% 100%, 38% 89%, 31% 100%, 24% 90%, 17% 100%, 11% 90%, 6% 98%, 2% 88%, 0% 96%
+  );
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
+  transform: rotate(-1.4deg);
+  animation: bf-ticket-bob 3.6s ease-in-out infinite;
 }
 
-.bf-pitch {
+.bf-ticket::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 8px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #ff2a3a 18%, #ff2a3a 82%, transparent);
+}
+
+@keyframes bf-ticket-bob {
+  0%, 100% { transform: rotate(-1.4deg) translateY(0); }
+  50% { transform: rotate(-0.3deg) translateY(-4px); }
+}
+
+.bf-offer {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: 18px;
+  gap: 10px;
   align-items: center;
-  margin: 10px 0 18px;
-  padding: 18px 16px;
-  border-radius: 22px;
-  background:
-    linear-gradient(135deg, rgba(255, 42, 58, 0.22), rgba(0, 0, 0, 0.35)),
-    linear-gradient(180deg, rgba(20, 0, 4, 0.72), rgba(8, 0, 2, 0.88));
-  border: 2px solid rgba(255, 225, 74, 0.45);
-  box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  margin: 6px 0 0;
+  padding: 6px 8px 18px;
 }
 
-.bf-pitch__visual {
+.bf-offer__mascot {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 180px;
-  overflow: visible;
+  min-height: 190px;
 }
 
-.bf-pitch__mascot {
-  width: min(180px, 48vw);
+.bf-offer__yaavsti {
+  width: min(200px, 52vw);
   height: auto;
   transform-origin: center bottom;
-  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.45));
+  filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.45));
   animation: bf-yaavsti-walk 4.8s ease-in-out infinite;
   will-change: transform;
 }
 
 @keyframes bf-yaavsti-walk {
-  0% {
-    transform: translateX(-18%) translateY(0) rotate(-4deg) scaleX(1);
-  }
-  8% {
-    transform: translateX(-10%) translateY(-10px) rotate(3deg) scaleX(1);
-  }
-  16% {
-    transform: translateX(-2%) translateY(0) rotate(-3deg) scaleX(1);
-  }
-  24% {
-    transform: translateX(8%) translateY(-10px) rotate(4deg) scaleX(1);
-  }
-  32% {
-    transform: translateX(16%) translateY(0) rotate(-2deg) scaleX(1);
-  }
-  40% {
-    transform: translateX(22%) translateY(-8px) rotate(3deg) scaleX(1);
-  }
-  48% {
-    transform: translateX(24%) translateY(0) rotate(-1deg) scaleX(1);
-  }
-  50% {
-    transform: translateX(24%) translateY(0) rotate(0deg) scaleX(-1);
-  }
-  58% {
-    transform: translateX(16%) translateY(-10px) rotate(-3deg) scaleX(-1);
-  }
-  66% {
-    transform: translateX(6%) translateY(0) rotate(3deg) scaleX(-1);
-  }
-  74% {
-    transform: translateX(-4%) translateY(-10px) rotate(-4deg) scaleX(-1);
-  }
-  82% {
-    transform: translateX(-14%) translateY(0) rotate(2deg) scaleX(-1);
-  }
-  90% {
-    transform: translateX(-20%) translateY(-8px) rotate(-3deg) scaleX(-1);
-  }
-  98% {
-    transform: translateX(-18%) translateY(0) rotate(0deg) scaleX(-1);
-  }
-  100% {
-    transform: translateX(-18%) translateY(0) rotate(-4deg) scaleX(1);
-  }
+  0% { transform: translateX(-16%) translateY(0) rotate(-4deg) scaleX(1); }
+  8% { transform: translateX(-8%) translateY(-10px) rotate(3deg) scaleX(1); }
+  16% { transform: translateX(0%) translateY(0) rotate(-3deg) scaleX(1); }
+  24% { transform: translateX(10%) translateY(-10px) rotate(4deg) scaleX(1); }
+  32% { transform: translateX(18%) translateY(0) rotate(-2deg) scaleX(1); }
+  40% { transform: translateX(22%) translateY(-8px) rotate(3deg) scaleX(1); }
+  48% { transform: translateX(24%) translateY(0) rotate(-1deg) scaleX(1); }
+  50% { transform: translateX(24%) translateY(0) rotate(0deg) scaleX(-1); }
+  58% { transform: translateX(16%) translateY(-10px) rotate(-3deg) scaleX(-1); }
+  66% { transform: translateX(6%) translateY(0) rotate(3deg) scaleX(-1); }
+  74% { transform: translateX(-4%) translateY(-10px) rotate(-4deg) scaleX(-1); }
+  82% { transform: translateX(-12%) translateY(0) rotate(2deg) scaleX(-1); }
+  90% { transform: translateX(-18%) translateY(-8px) rotate(-3deg) scaleX(-1); }
+  98% { transform: translateX(-16%) translateY(0) rotate(0deg) scaleX(-1); }
+  100% { transform: translateX(-16%) translateY(0) rotate(-4deg) scaleX(1); }
 }
 
-.bf-pitch__chips {
+.bf-offer__chips {
   position: absolute;
-  inset: auto 0 8% 0;
+  inset: auto 0 2% 0;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -6066,19 +6024,17 @@ body.comisiones-viva .cm-footer__legal {
   animation: bf-chips-follow 4.8s ease-in-out infinite;
 }
 
-.bf-pitch__chips img {
-  width: clamp(54px, 16vw, 78px);
+.bf-offer__chips img {
+  width: clamp(56px, 16vw, 84px);
   height: auto;
   filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.4));
   animation: bf-chip-bounce 0.6s ease-in-out infinite;
 }
 
-.bf-pitch__chips img:last-child {
-  animation-delay: 0.3s;
-}
+.bf-offer__chips img:last-child { animation-delay: 0.3s; }
 
 @keyframes bf-chips-follow {
-  0%, 100% { transform: translateX(-10%); }
+  0%, 100% { transform: translateX(-8%); }
   50% { transform: translateX(12%); }
 }
 
@@ -6087,76 +6043,119 @@ body.comisiones-viva .cm-footer__legal {
   50% { transform: translateY(-6px) rotate(4deg); }
 }
 
-.bf-pitch__copy {
-  text-align: center;
-}
+.bf-offer__copy { text-align: center; }
 
-.bf-pitch__ops {
-  margin: 0 0 8px;
+.bf-offer__ops {
+  margin: 0 0 10px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   font-size: clamp(0.78rem, 2.4vw, 0.95rem);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #ffe14a;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.55);
 }
 
-.bf-pitch__badge {
-  margin: 0 0 12px;
-  padding: 14px 16px 12px;
-  border-radius: 18px;
+.bf-offer__burst {
+  margin: 0 auto 12px;
+  width: fit-content;
+  max-width: 100%;
+  padding: 20px 22px 18px;
   font-family: 'Titan One', 'Lilita One', sans-serif;
-  font-size: clamp(1.55rem, 6vw, 2.35rem);
+  font-size: clamp(1.45rem, 5.6vw, 2.2rem);
   line-height: 1.05;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #fff;
   background:
-    radial-gradient(circle at 30% 20%, #ff6b7a, transparent 45%),
-    linear-gradient(180deg, #ff2a3a, #8b0000);
+    radial-gradient(circle at 30% 20%, #ff7a88, transparent 42%),
+    linear-gradient(180deg, #ff2f42, #8b0000);
   border: 3px solid #ffe14a;
   box-shadow:
-    0 0 0 4px rgba(255, 42, 58, 0.35),
-    0 12px 0 rgba(0, 0, 0, 0.35),
-    0 0 28px rgba(255, 60, 80, 0.55);
-  clip-path: polygon(4% 0, 96% 0, 100% 18%, 98% 50%, 100% 82%, 96% 100%, 4% 100%, 0 82%, 2% 50%, 0 18%);
+    0 0 0 5px rgba(255, 42, 58, 0.28),
+    0 14px 0 rgba(0, 0, 0, 0.28),
+    0 0 36px rgba(255, 60, 80, 0.55);
+  clip-path: polygon(
+    50% 0%, 61% 9%, 74% 3%, 79% 16%, 92% 14%, 90% 28%, 100% 38%, 92% 48%, 100% 60%,
+    90% 70%, 94% 84%, 80% 82%, 74% 96%, 60% 90%, 50% 100%, 40% 90%, 26% 96%, 20% 82%,
+    6% 84%, 10% 70%, 0% 60%, 8% 48%, 0% 38%, 10% 28%, 8% 14%, 21% 16%, 26% 3%, 39% 9%
+  );
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.45);
+  animation: bf-burst-pop 2.8s ease-in-out infinite;
 }
 
-.bf-pitch__meta {
-  margin: 0;
+.bf-offer__burst span {
+  color: #ffe14a;
+  font-size: 1.18em;
+}
+
+@keyframes bf-burst-pop {
+  0%, 100% { transform: scale(1) rotate(-2deg); }
+  50% { transform: scale(1.045) rotate(1deg); }
+}
+
+.bf-offer__meta {
+  margin: 0 auto;
+  max-width: 28ch;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: clamp(0.88rem, 2.8vw, 1.02rem);
+  font-size: clamp(0.86rem, 2.7vw, 1rem);
   line-height: 1.35;
   color: #fff;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
 }
 
-.bf-beneficio {
+/* Diagonal torn paper rip */
+.bf-tear {
+  position: relative;
+  z-index: 3;
+  height: clamp(52px, 8vw, 78px);
+  margin: 0 -18px -1px;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
+}
+
+.bf-tear svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.bf-tear__shade { fill: rgba(0, 0, 0, 0.2); }
+.bf-tear__paper { fill: #fff8f2; }
+
+/* Bottom white torn sheet */
+.bf-sheet {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 14px;
-  margin: 0 0 22px;
-  padding: 16px;
-  border-radius: 22px;
-  background: linear-gradient(180deg, #fff 0%, #fff8f0 100%);
-  border: 3px solid #ff2a3a;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  margin: 0 -18px;
+  padding: 26px 22px 24px;
+  background:
+    linear-gradient(180deg, #fff8f2 0%, #ffe9df 100%);
+  clip-path: polygon(
+    0% 8%, 2% 2%, 6% 6%, 10% 0%, 15% 5%, 20% 1%, 26% 6%, 32% 0%, 38% 5%, 44% 1%,
+    50% 6%, 56% 0%, 62% 5%, 68% 1%, 74% 6%, 80% 0%, 86% 5%, 92% 1%, 96% 6%, 100% 2%,
+    100% 100%, 0% 100%
+  );
 }
 
-.bf-beneficio__recarga {
-  padding: 14px 12px;
-  border-radius: 16px;
+.bf-sheet__recarga {
+  padding: 16px 12px;
   text-align: center;
   color: #fff;
-  background:
-    linear-gradient(180deg, #ff3b4e 0%, #b00018 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: linear-gradient(180deg, #ff3b4e 0%, #b00018 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 10px 18px rgba(140, 0, 20, 0.25);
+  clip-path: polygon(
+    0% 8%, 4% 0%, 12% 6%, 20% 0%, 30% 7%, 40% 0%, 50% 6%, 60% 0%, 70% 7%, 80% 0%, 90% 6%, 96% 0%, 100% 8%,
+    100% 92%, 96% 100%, 90% 94%, 80% 100%, 70% 93%, 60% 100%, 50% 94%, 40% 100%, 30% 93%, 20% 100%, 12% 94%, 4% 100%, 0% 92%
+  );
 }
 
-.bf-beneficio__recarga p {
+.bf-sheet__recarga p {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
@@ -6166,26 +6165,24 @@ body.comisiones-viva .cm-footer__legal {
   line-height: 1.25;
 }
 
-.bf-beneficio__recarga strong {
+.bf-sheet__recarga strong {
   display: block;
   margin-top: 6px;
   font-family: 'Titan One', 'Lilita One', sans-serif;
-  font-size: clamp(2.4rem, 9vw, 3.4rem);
+  font-size: clamp(2.5rem, 9vw, 3.5rem);
   line-height: 1;
   color: #ffe14a;
-  text-shadow:
-    0 3px 0 #8b0000,
-    0 0 18px rgba(255, 225, 74, 0.45);
+  text-shadow: 0 3px 0 #8b0000, 0 0 18px rgba(255, 225, 74, 0.45);
 }
 
-.bf-beneficio__data {
+.bf-sheet__plan {
   display: grid;
   align-content: center;
   gap: 12px;
   text-align: center;
 }
 
-.bf-beneficio__gb {
+.bf-sheet__plan p {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
@@ -6195,12 +6192,12 @@ body.comisiones-viva .cm-footer__legal {
   text-transform: uppercase;
 }
 
-.bf-beneficio__gb span {
+.bf-sheet__plan span {
   color: #c40018;
   font-size: 1.15em;
 }
 
-.bf-beneficio__apps {
+.bf-sheet__apps {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -6209,7 +6206,7 @@ body.comisiones-viva .cm-footer__legal {
   font-size: 1.35rem;
 }
 
-.bf-beneficio__apps i {
+.bf-sheet__apps i {
   width: 2rem;
   height: 2rem;
   display: grid;
@@ -6219,26 +6216,36 @@ body.comisiones-viva .cm-footer__legal {
 }
 
 @media (max-width: 720px) {
-  .bf-pitch,
-  .bf-beneficio {
+  .bf-stage {
+    width: min(100%, 96vw);
+    padding: 16px 12px 0;
+    border-radius: 22px;
+  }
+
+  .bf-offer,
+  .bf-sheet {
     grid-template-columns: 1fr;
   }
 
-  .bf-pitch {
-    padding: 16px 12px 18px;
+  .bf-tear,
+  .bf-sheet {
+    margin-left: -12px;
+    margin-right: -12px;
   }
 
-  .bf-pitch__chips {
+  .bf-offer__chips {
     position: static;
-    margin-top: -8px;
+    margin-top: -4px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .bf-hero-title__pill,
-  .bf-pitch__mascot,
-  .bf-pitch__chips,
-  .bf-pitch__chips img {
+  .bf-ticket,
+  .bf-offer__yaavsti,
+  .bf-offer__chips,
+  .bf-offer__chips img,
+  .bf-offer__burst {
     animation: none;
   }
 }
