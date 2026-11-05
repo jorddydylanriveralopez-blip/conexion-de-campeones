@@ -7899,45 +7899,13 @@ body.bf-clean .bf-block {
   text-align: center;
 }
 
-body.bf-clean .bf-intro-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px 14px;
-  width: 100%;
-  margin: 4px auto 10px;
-}
-
-body.bf-clean .bf-intro-title__logo {
-  flex: 0 0 auto;
-  width: min(118px, 26vw);
-  height: auto;
-  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.4));
-  animation: bf-rise 0.75s ease both;
-}
-
 body.bf-clean .bf-block__banner {
   display: block;
-  width: min(420px, 70vw);
+  width: min(480px, 88vw);
   height: auto;
-  margin: 0;
+  margin: 4px auto 10px;
   filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.45));
-  animation: bf-rise 0.75s ease 0.05s both;
-}
-
-@media (max-width: 720px) {
-  body.bf-clean .bf-intro-title {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  body.bf-clean .bf-intro-title__logo {
-    width: min(96px, 28vw);
-  }
-
-  body.bf-clean .bf-block__banner {
-    width: min(360px, 88vw);
-  }
+  animation: bf-rise 0.75s ease both;
 }
 
 body.bf-clean .bf-block__lead {
