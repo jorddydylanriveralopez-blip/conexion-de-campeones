@@ -35,7 +35,7 @@
   <link rel="apple-touch-icon" href="favicon.png?v=1">
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Montserrat:wght@400;600;700;800;900&family=Titan+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="vinculaciones.css?v=bf16">
+  <link rel="stylesheet" href="vinculaciones.css?v=bf17">
 </head>
 <body class="vinculaciones-landing comisiones-landing comisiones-viva">
   <div class="cm-scene" aria-hidden="true">
@@ -121,52 +121,74 @@
   </div>
 
   <div class="page-wrap">
-    <div class="cm-hero">
-      <div class="cm-hero-stage">
+    <section class="bf-flyer" aria-label="Campaña Buen Fin">
+      <div class="bf-flyer__glow" aria-hidden="true"></div>
+
+      <div class="bf-flyer__top">
         <h1 class="bf-hero-title">
           <span class="bf-hero-title__line">CON YAAVS</span>
           <span class="bf-hero-title__line bf-hero-title__line--hot">¡TODO NOVIEMBRE!</span>
           <span class="bf-hero-title__pill">ES BUEN FIN</span>
         </h1>
-        <p class="bf-hero-sub">¡GANA MÁS DESDE LA 1ª VENTA!</p>
+
+        <p class="bf-hero-sub bf-paper bf-paper--ticket">
+          <span class="bf-paper__edge bf-paper__edge--top" aria-hidden="true"></span>
+          ¡GANA MÁS DESDE LA 1ª VENTA!
+          <span class="bf-paper__edge bf-paper__edge--bottom" aria-hidden="true"></span>
+        </p>
+
+        <div class="bf-pitch">
+          <div class="bf-pitch__visual">
+            <img class="bf-pitch__mascot" src="yaavsti-fiesta.png" alt="" aria-hidden="true">
+            <div class="bf-pitch__chips" aria-hidden="true">
+              <img src="chip-att.png" alt="">
+              <img src="chips-att-unefon.png" alt="">
+            </div>
+          </div>
+          <div class="bf-pitch__copy">
+            <p class="bf-pitch__ops">POR CADA ACTIVACIÓN AT&amp;T Y UNEFON</p>
+            <p class="bf-pitch__badge">¡HASTA $20 EXTRA!</p>
+            <p class="bf-pitch__meta">Yaavser, ¡iguala o supera tu meta de octubre y aumenta tus ganancias!</p>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div class="bf-rip" aria-hidden="true">
+        <svg class="bf-rip__svg" viewBox="0 0 1200 120" preserveAspectRatio="none" focusable="false">
+          <path class="bf-rip__shadow" d="M0,48 L28,62 52,40 78,70 110,38 142,66 176,44 210,72 248,36 286,68 320,42 358,74 396,40 434,66 472,38 510,70 548,44 586,72 624,40 662,68 700,42 738,74 776,46 814,70 852,38 890,66 928,44 966,72 1004,40 1042,68 1080,42 1118,70 1154,46 1200,64 L1200,120 L0,120 Z"/>
+          <path class="bf-rip__fill" d="M0,40 L28,54 52,32 78,62 110,30 142,58 176,36 210,64 248,28 286,60 320,34 358,66 396,32 434,58 472,30 510,62 548,36 586,64 624,32 662,60 700,34 738,66 776,38 814,62 852,30 890,58 928,36 966,64 1004,32 1042,60 1080,34 1118,62 1154,38 1200,56 L1200,120 L0,120 Z"/>
+          <path class="bf-rip__lip" d="M0,40 L28,54 52,32 78,62 110,30 142,58 176,36 210,64 248,28 286,60 320,34 358,66 396,32 434,58 472,30 510,62 548,36 586,64 624,32 662,60 700,34 738,66 776,38 814,62 852,30 890,58 928,36 966,64 1004,32 1042,60 1080,34 1118,62 1154,38 1200,56"/>
+        </svg>
+        <span class="bf-rip__flake bf-rip__flake--1"></span>
+        <span class="bf-rip__flake bf-rip__flake--2"></span>
+        <span class="bf-rip__flake bf-rip__flake--3"></span>
+        <span class="bf-rip__flake bf-rip__flake--4"></span>
+      </div>
+
+      <div class="bf-flyer__sheet">
+        <section class="bf-beneficio bf-paper bf-paper--sheet" aria-label="Beneficio de chips AT&amp;T">
+          <span class="bf-paper__fiber" aria-hidden="true"></span>
+          <div class="bf-beneficio__recarga">
+            <p>TUS CHIPS AT&amp;T INCLUYEN</p>
+            <p>RECARGA EXCLUSIVA DE</p>
+            <strong>$135</strong>
+          </div>
+          <div class="bf-beneficio__data">
+            <p class="bf-beneficio__gb"><span>8.1 GB</span> + RRSS ILIMITADAS × 21 DÍAS</p>
+            <div class="bf-beneficio__apps" aria-label="Facebook, Messenger, WhatsApp, Instagram, X y Waze">
+              <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+              <i class="fa-brands fa-facebook-messenger" aria-hidden="true"></i>
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+              <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+              <i class="fa-brands fa-waze" aria-hidden="true"></i>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
 
     <main class="container cm-main">
-      <section class="bf-pitch" aria-label="Oferta Buen Fin">
-        <div class="bf-pitch__visual">
-          <img class="bf-pitch__mascot" src="yaavsti-fiesta.png" alt="" aria-hidden="true">
-          <div class="bf-pitch__chips" aria-hidden="true">
-            <img src="chip-att.png" alt="">
-            <img src="chips-att-unefon.png" alt="">
-          </div>
-        </div>
-        <div class="bf-pitch__copy">
-          <p class="bf-pitch__ops">POR CADA ACTIVACIÓN AT&amp;T Y UNEFON</p>
-          <p class="bf-pitch__badge">¡HASTA $20 EXTRA!</p>
-          <p class="bf-pitch__meta">Yaavser, ¡iguala o supera tu meta de octubre y aumenta tus ganancias!</p>
-        </div>
-      </section>
-
-      <section class="bf-beneficio" aria-label="Beneficio de chips AT&amp;T">
-        <div class="bf-beneficio__recarga">
-          <p>TUS CHIPS AT&amp;T INCLUYEN</p>
-          <p>RECARGA EXCLUSIVA DE</p>
-          <strong>$135</strong>
-        </div>
-        <div class="bf-beneficio__data">
-          <p class="bf-beneficio__gb"><span>8.1 GB</span> + RRSS ILIMITADAS × 21 DÍAS</p>
-          <div class="bf-beneficio__apps" aria-label="Facebook, Messenger, WhatsApp, Instagram, X y Waze">
-            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
-            <i class="fa-brands fa-facebook-messenger" aria-hidden="true"></i>
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
-            <i class="fa-brands fa-waze" aria-hidden="true"></i>
-          </div>
-        </div>
-      </section>
-
       <div class="cm-lookup">
       <img class="cm-mascot cm-mascot--dinero" src="yaavsti-dinero.png" alt="" aria-hidden="true">
       <section class="section-card" id="consulta">
