@@ -5938,19 +5938,65 @@ body.comisiones-viva .cm-footer__legal {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 160px;
+  min-height: 180px;
+  overflow: visible;
 }
 
 .bf-pitch__mascot {
   width: min(180px, 48vw);
   height: auto;
+  transform-origin: center bottom;
   filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.45));
-  animation: bf-float 3.2s ease-in-out infinite;
+  animation: bf-yaavsti-walk 4.8s ease-in-out infinite;
+  will-change: transform;
 }
 
-@keyframes bf-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes bf-yaavsti-walk {
+  0% {
+    transform: translateX(-18%) translateY(0) rotate(-4deg) scaleX(1);
+  }
+  8% {
+    transform: translateX(-10%) translateY(-10px) rotate(3deg) scaleX(1);
+  }
+  16% {
+    transform: translateX(-2%) translateY(0) rotate(-3deg) scaleX(1);
+  }
+  24% {
+    transform: translateX(8%) translateY(-10px) rotate(4deg) scaleX(1);
+  }
+  32% {
+    transform: translateX(16%) translateY(0) rotate(-2deg) scaleX(1);
+  }
+  40% {
+    transform: translateX(22%) translateY(-8px) rotate(3deg) scaleX(1);
+  }
+  48% {
+    transform: translateX(24%) translateY(0) rotate(-1deg) scaleX(1);
+  }
+  50% {
+    transform: translateX(24%) translateY(0) rotate(0deg) scaleX(-1);
+  }
+  58% {
+    transform: translateX(16%) translateY(-10px) rotate(-3deg) scaleX(-1);
+  }
+  66% {
+    transform: translateX(6%) translateY(0) rotate(3deg) scaleX(-1);
+  }
+  74% {
+    transform: translateX(-4%) translateY(-10px) rotate(-4deg) scaleX(-1);
+  }
+  82% {
+    transform: translateX(-14%) translateY(0) rotate(2deg) scaleX(-1);
+  }
+  90% {
+    transform: translateX(-20%) translateY(-8px) rotate(-3deg) scaleX(-1);
+  }
+  98% {
+    transform: translateX(-18%) translateY(0) rotate(0deg) scaleX(-1);
+  }
+  100% {
+    transform: translateX(-18%) translateY(0) rotate(-4deg) scaleX(1);
+  }
 }
 
 .bf-pitch__chips {
@@ -5960,12 +6006,28 @@ body.comisiones-viva .cm-footer__legal {
   justify-content: center;
   gap: 10px;
   pointer-events: none;
+  animation: bf-chips-follow 4.8s ease-in-out infinite;
 }
 
 .bf-pitch__chips img {
   width: clamp(54px, 16vw, 78px);
   height: auto;
   filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.4));
+  animation: bf-chip-bounce 0.6s ease-in-out infinite;
+}
+
+.bf-pitch__chips img:last-child {
+  animation-delay: 0.3s;
+}
+
+@keyframes bf-chips-follow {
+  0%, 100% { transform: translateX(-10%); }
+  50% { transform: translateX(12%); }
+}
+
+@keyframes bf-chip-bounce {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-6px) rotate(4deg); }
 }
 
 .bf-pitch__copy {
@@ -6117,7 +6179,9 @@ body.comisiones-viva .cm-footer__legal {
 
 @media (prefers-reduced-motion: reduce) {
   .bf-hero-title__pill,
-  .bf-pitch__mascot {
+  .bf-pitch__mascot,
+  .bf-pitch__chips,
+  .bf-pitch__chips img {
     animation: none;
   }
 }
