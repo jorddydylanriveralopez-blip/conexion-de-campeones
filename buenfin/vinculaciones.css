@@ -8426,8 +8426,8 @@ body.bf-clean .bf-feat__right--center {
   place-items: center;
 }
 
-body.bf-clean .bf-feat--3 .bf-comision-85 {
-  margin: 0 auto;
+body.bf-clean .bf-feat__deal--85 {
+  width: min(380px, 92vw);
 }
 
 @media (prefers-reduced-motion: reduce) {
