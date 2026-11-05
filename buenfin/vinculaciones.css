@@ -6309,7 +6309,7 @@ body.bf-clean .cm-scene::after {
 }
 
 body.bf-clean.comisiones-landing.comisiones-viva {
-  background-color: #d4001c;
+  background-color: #8a0014;
   background-image: none;
 }
 
@@ -6319,8 +6319,10 @@ body.bf-clean.comisiones-landing.comisiones-viva::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-color: #d4001c;
-  background-image: url('fondo-buen-fin-rojo.jpg?v=7');
+  background-color: #8a0014;
+  background-image:
+    linear-gradient(rgba(40, 0, 8, 0.28), rgba(20, 0, 4, 0.38)),
+    url('fondo-buen-fin-rojo.jpg?v=7');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -7130,8 +7132,10 @@ body.bf-clean.comisiones-landing.comisiones-viva::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-color: #d4001c;
-  background-image: url('fondo-buen-fin-rojo.jpg?v=7');
+  background-color: #8a0014;
+  background-image:
+    linear-gradient(rgba(40, 0, 8, 0.28), rgba(20, 0, 4, 0.38)),
+    url('fondo-buen-fin-rojo.jpg?v=7');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
