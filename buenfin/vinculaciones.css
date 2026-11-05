@@ -7766,12 +7766,12 @@ body.bf-clean .bf-stage {
 body.bf-clean .cm-lookup {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(96px, 118px) minmax(0, 560px);
+  grid-template-columns: auto minmax(0, 560px);
   justify-content: center;
   align-items: end;
-  column-gap: 8px;
+  column-gap: 0;
   width: 100%;
-  max-width: 720px;
+  max-width: 700px;
   margin: 0 auto 22px;
   padding: 0 12px;
   z-index: 2;
@@ -7779,11 +7779,9 @@ body.bf-clean .cm-lookup {
 
 body.bf-clean .cm-lookup .cm-mascot--dinero {
   position: relative;
-  left: auto;
-  bottom: auto;
   z-index: 1;
-  width: min(118px, 100%);
-  margin: 0 0 2px;
+  width: min(124px, 26vw);
+  margin: 0 -6px 2px 0;
   justify-self: end;
   pointer-events: none;
   filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.45));
