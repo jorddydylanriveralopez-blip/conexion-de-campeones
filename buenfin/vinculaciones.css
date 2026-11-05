@@ -7469,7 +7469,7 @@ body.bf-clean .bf-hero-title {
   align-items: center;
   width: 100%;
   max-width: none;
-  margin: -36px auto 6px;
+  margin: -56px auto 4px;
   padding: 0;
   text-align: center;
   justify-items: center;
@@ -7523,7 +7523,7 @@ body.bf-clean .bf-kicker {
 
 @media (max-width: 720px) {
   body.bf-clean .bf-hero-title {
-    margin: -24px auto 4px;
+    margin: -40px auto 2px;
   }
 
   body.bf-clean .bf-hero-title__art {
