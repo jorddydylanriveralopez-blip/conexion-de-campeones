@@ -8942,6 +8942,10 @@ body.bf-clean #consulta .bf-avance--hit .bf-avance__total {
     width: min(100%, 300px);
   }
 
+  body.bf-clean .bf-feat__deal--135 {
+    width: min(100%, 96vw);
+  }
+
   body.bf-clean .bf-feat__porta {
     width: min(220px, 62vw);
     margin-top: 2px;
