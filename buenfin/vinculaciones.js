@@ -564,7 +564,7 @@ let cacheDatos = null;
 async function cargarDatos() {
   if (cacheDatos) return cacheDatos;
 
-  const res = await fetch('acelerador-noviembre.json?v=1', { cache: 'no-store' });
+  const res = await fetch('acelerador-noviembre.json?v=2', { cache: 'no-store' });
   if (!res.ok) throw new Error('No se pudo cargar el acelerador de noviembre.');
   const mapa = await res.json();
   cacheDatos = Object.entries(mapa).map(([clave, v]) => ({
