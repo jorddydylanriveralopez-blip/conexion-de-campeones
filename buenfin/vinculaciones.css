@@ -8506,6 +8506,216 @@ body.bf-clean .bf-feat__deal--85 {
 }
 
 /* ——— Mobile compact / easy to scan ——— */
+/* ——— Animated avance results panel ——— */
+body.bf-clean #consulta .bf-avance.desglose-orden--abierto {
+  margin-top: 16px;
+  padding: 16px 14px 14px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 225, 74, 0.28);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 60, 80, 0.22), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 40%),
+    rgba(8, 0, 4, 0.72);
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+body.bf-clean #consulta .bf-avance__head {
+  text-align: center;
+}
+
+body.bf-clean #consulta .bf-avance__resumen {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: clamp(0.88rem, 2.6vw, 1rem);
+  line-height: 1.35;
+  animation: bf-avance-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+body.bf-clean #consulta .bf-avance__groups {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+body.bf-clean #consulta .bf-avance__group {
+  padding: 12px 10px 10px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+body.bf-clean #consulta .bf-avance__group-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px 2px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+body.bf-clean #consulta .bf-avance__group-title span {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffe14a, #ffb000);
+  color: #1a0508;
+  font-size: 0.78rem;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28);
+}
+
+body.bf-clean #consulta .bf-avance__stats {
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 0;
+}
+
+body.bf-clean #consulta .bf-avance__card {
+  position: relative;
+  min-height: 96px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 80, 100, 0.55);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(255, 60, 80, 0.28), transparent 50%),
+    rgba(12, 0, 4, 0.72);
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+}
+
+body.bf-clean #consulta .bf-avance--in .bf-avance__card {
+  animation: bf-avance-card 0.55s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 70ms) both;
+}
+
+body.bf-clean #consulta .bf-avance__card::after {
+  content: '';
+  position: absolute;
+  inset: auto -20% -40% auto;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 225, 74, 0.18), transparent 70%);
+  pointer-events: none;
+}
+
+body.bf-clean #consulta .bf-avance__card--now {
+  border-color: rgba(94, 200, 255, 0.55);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(80, 180, 255, 0.28), transparent 50%),
+    rgba(4, 12, 36, 0.72);
+}
+
+body.bf-clean #consulta .bf-avance__card--extra {
+  border-color: rgba(255, 225, 74, 0.7);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(255, 210, 40, 0.32), transparent 52%),
+    rgba(20, 8, 0, 0.72);
+}
+
+body.bf-clean #consulta .bf-avance__card strong {
+  margin: 6px 0 4px;
+  font-size: clamp(1.55rem, 6vw, 2.1rem);
+  animation: bf-avance-num 0.7s cubic-bezier(0.22, 1, 0.36, 1) calc(0.15s + var(--i, 0) * 70ms) both;
+}
+
+body.bf-clean #consulta .bf-avance__meter {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.28);
+  animation: bf-avance-pop 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+body.bf-clean #consulta .bf-avance .oct-meter {
+  height: 16px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+body.bf-clean #consulta .bf-avance .oct-meter i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff4d5f, #ffe14a 55%, #fff4b0);
+  box-shadow: 0 0 18px rgba(255, 196, 0, 0.55);
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.bf-clean #consulta .bf-avance__total {
+  position: relative;
+  margin-top: 12px;
+  padding: 18px 16px 16px;
+  border-radius: 22px;
+  overflow: hidden;
+  animation: bf-avance-pop 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+}
+
+body.bf-clean #consulta .bf-avance__total::before {
+  content: '';
+  position: absolute;
+  inset: -40% -20%;
+  background: linear-gradient(110deg, transparent 40%, rgba(255, 255, 255, 0.45) 50%, transparent 60%);
+  animation: bf-avance-shine 2.8s ease-in-out 0.8s infinite;
+  pointer-events: none;
+}
+
+body.bf-clean #consulta .bf-avance--hit .bf-avance__total {
+  box-shadow:
+    0 0 0 3px rgba(255, 225, 74, 0.4),
+    0 0 36px rgba(255, 196, 0, 0.55);
+}
+
+@keyframes bf-avance-card {
+  from { opacity: 0; transform: translateY(16px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes bf-avance-num {
+  from { opacity: 0; transform: translateY(8px) scale(0.85); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes bf-avance-pop {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bf-avance-shine {
+  0%, 100% { transform: translateX(-30%) rotate(8deg); opacity: 0; }
+  40% { opacity: 0.55; }
+  60% { transform: translateX(30%) rotate(8deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.bf-clean #consulta .bf-avance--in .bf-avance__card,
+  body.bf-clean #consulta .bf-avance__card strong,
+  body.bf-clean #consulta .bf-avance__resumen,
+  body.bf-clean #consulta .bf-avance__meter,
+  body.bf-clean #consulta .bf-avance__total,
+  body.bf-clean #consulta .bf-avance__total::before {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (max-width: 720px) {
   body.bf-clean.comisiones-landing.comisiones-viva .page-wrap {
     width: calc(100% - 24px);
@@ -8591,6 +8801,24 @@ body.bf-clean .bf-feat__deal--85 {
   body.bf-clean .cm-lookup #consulta .btn-consultar {
     width: 100%;
     letter-spacing: 0.04em;
+  }
+
+  body.bf-clean #consulta .bf-avance.desglose-orden--abierto {
+    padding: 12px 10px 12px;
+    border-radius: 18px;
+  }
+
+  body.bf-clean #consulta .bf-avance__group {
+    padding: 10px 8px 8px;
+  }
+
+  body.bf-clean #consulta .bf-avance__card {
+    min-height: 84px;
+    padding: 10px;
+  }
+
+  body.bf-clean #consulta .bf-avance__card strong {
+    font-size: clamp(1.35rem, 7vw, 1.75rem);
   }
 
   body.bf-clean .bf-block {

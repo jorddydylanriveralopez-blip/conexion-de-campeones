@@ -550,10 +550,20 @@ function pintarResultados(row) {
   document.getElementById('oct-resumen')?.classList.toggle('oct-resumen--hit', supero);
   const caja = document.getElementById('oct-alcance-box');
   caja?.classList.toggle('oct-alcance--hit', supero);
+  const panel = document.getElementById('desglose-panel');
+  panel?.classList.toggle('bf-avance--hit', supero);
+  panel?.classList.remove('bf-avance--in');
+  void panel?.offsetWidth;
+  panel?.classList.add('bf-avance--in');
   const meter = document.getElementById('oct-meter');
   if (meter) {
+    meter.style.width = '0%';
     const pct = meta > 0 ? Math.max(0, Math.min(100, (actNov / meta) * 100)) : 0;
-    meter.style.width = `${pct}%`;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        meter.style.width = `${pct}%`;
+      });
+    });
   }
   abrirDesglosePanel();
 }
