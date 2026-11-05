@@ -497,16 +497,20 @@ function pickGanTotal(row) {
 
 function textoAlcance(row) {
   const meta = Number(row.meta) || 0;
-  const reales = Number(row.reales) || 0;
-  const faltan = Math.max(meta - reales, 0);
-  if (meta <= 0) return 'Así van tus activaciones de chips y portabilidades AT&T.';
+  const actNov = Number(row.actNov) || 0;
+  const faltan = Math.max(meta - actNov, 0);
+  if (meta <= 0) return 'Así van tus activaciones del acelerador de noviembre.';
   const deMeta = meta === 1 ? '1 activación' : `${formatoNumero(meta)} activaciones`;
-  const base = `Tu meta es de ${deMeta} de chips y portabilidades AT&T`;
-  if (reales >= meta) {
-    return `${base}. Ya las alcanzaste para generar comisiones extra.`;
+  const base = `Tu meta de octubre es de ${deMeta}`;
+  if (actNov >= meta) {
+    const extra = Number(row.adicionales) || Math.max(actNov - meta, 0);
+    if (extra > 0) {
+      return `${base}. Ya la superaste: llevas ${formatoNumero(extra)} adicional${extra === 1 ? '' : 'es'}.`;
+    }
+    return `${base}. Ya la igualaste para generar comisión.`;
   }
   const deFaltan = faltan === 1 ? 'te falta 1' : `te faltan ${formatoNumero(faltan)}`;
-  return `${base}, ${deFaltan} para generar comisiones extra.`;
+  return `${base}; ${deFaltan} para igualarla o superarla.`;
 }
 
 function pintarResultados(row) {
@@ -520,23 +524,24 @@ function pintarResultados(row) {
   };
 
   const meta = Number(row.meta) || 0;
-  const reales = Number(row.reales) || 0;
-  const supero = meta > 0 && reales >= meta;
+  const actNov = Number(row.actNov) || 0;
+  const adicionales = Number(row.adicionales) || Math.max(actNov - meta, 0);
+  const supero = meta > 0 && actNov >= meta;
   set('oct-nombre', row.nombre || 'Yaavser');
   set('oct-clave', row.clave || '—');
   set('oct-resumen', textoAlcance(row));
-  set('oct-act-sept', formatoNumero(row.actSept));
+  set('oct-act-sept', formatoNumero(row.actOctubre));
   set('oct-meta', formatoNumero(row.meta));
-  set('oct-act-oct', formatoNumero(row.actOct));
-  set('oct-exp', formatoNumero(row.expOct));
-  set('oct-reales', formatoNumero(row.reales));
-  const avance = meta > 0 ? `${formatoNumero(reales)} de ${formatoNumero(meta)}` : '—';
+  set('oct-act-oct', formatoNumero(row.actNov));
+  set('oct-exp', row.bracket || '—');
+  set('oct-reales', formatoNumero(adicionales));
+  const avance = meta > 0 ? `${formatoNumero(actNov)} de ${formatoNumero(meta)}` : '—';
   const nota = meta > 0
-    ? 'Las activaciones reales vs tu meta de octubre.'
+    ? 'Activaciones de noviembre vs tu meta de octubre.'
     : '';
   set('oct-alcance', avance);
   set('oct-alcance-nota', nota);
-  set('oct-lineas', formatoNumero(row.lineas));
+  set('oct-lineas', formatoMoneda(row.unitario));
   set('oct-total', formatoMoneda(row.total));
 
   const formClave = document.getElementById('form-clave');
@@ -547,7 +552,7 @@ function pintarResultados(row) {
   caja?.classList.toggle('oct-alcance--hit', supero);
   const meter = document.getElementById('oct-meter');
   if (meter) {
-    const pct = meta > 0 ? Math.max(0, Math.min(100, (reales / meta) * 100)) : 0;
+    const pct = meta > 0 ? Math.max(0, Math.min(100, (actNov / meta) * 100)) : 0;
     meter.style.width = `${pct}%`;
   }
   abrirDesglosePanel();
@@ -555,23 +560,23 @@ function pintarResultados(row) {
 
 let cacheDatos = null;
 
+/** LayOut Acelerador Noviembre.xlsx → acelerador-noviembre.json */
 async function cargarDatos() {
   if (cacheDatos) return cacheDatos;
 
-  const res = await fetch('/vinculaciones/dinamica-octubre.json?v=6', { cache: 'no-store' });
-  if (!res.ok) throw new Error('No se pudo cargar la dinámica de octubre.');
+  const res = await fetch('acelerador-noviembre.json?v=1', { cache: 'no-store' });
+  if (!res.ok) throw new Error('No se pudo cargar el acelerador de noviembre.');
   const mapa = await res.json();
   cacheDatos = Object.entries(mapa).map(([clave, v]) => ({
     clave,
     nombre: v[0],
-    actSept: v[1],
+    actOctubre: v[1],
     meta: v[2],
-    actOct: v[3],
-    expOct: v[4],
-    reales: v[5],
-    alcance: v[6],
-    lineas: v[7],
-    total: v[8],
+    actNov: v[3],
+    adicionales: v[4],
+    bracket: v[5],
+    unitario: v[6],
+    total: v[7],
   }));
   return cacheDatos;
 }
@@ -625,7 +630,7 @@ async function consultarVinculacion() {
   });
 
   btn.disabled = true;
-  mostrarStatus(status, 'info', 'Buscando tu avance de octubre…');
+  mostrarStatus(status, 'info', 'Buscando tu avance de noviembre…');
 
   try {
     const datos = await cargarDatos();
