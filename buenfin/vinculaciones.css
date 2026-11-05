@@ -8496,6 +8496,11 @@ body.bf-clean .bf-feat__deal--85 {
   width: min(380px, 92vw);
 }
 
+body.bf-clean .bf-feat__deal--135 {
+  width: min(480px, 100%);
+  margin: 0 auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   body.bf-clean .bf-feat,
   body.bf-clean .bf-feat__chip,
