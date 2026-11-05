@@ -6095,114 +6095,98 @@ body.comisiones-viva .cm-footer__legal {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
 }
 
-/* Diagonal torn paper rip */
-.bf-tear {
-  position: relative;
-  z-index: 3;
-  height: clamp(52px, 8vw, 78px);
-  margin: 0 0 -1px;
-  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
-}
-
-.bf-tear svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.bf-tear__shade { fill: rgba(0, 0, 0, 0.2); }
-.bf-tear__paper { fill: #fff8f2; }
-
-/* Bottom white torn sheet */
-.bf-sheet {
+/* Loose perk badges — no white paper box */
+.bf-perks {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
-  margin: 0;
-  padding: 26px 22px 24px;
-  background:
-    linear-gradient(180deg, #fff8f2 0%, #ffe9df 100%);
-  clip-path: polygon(
-    0% 8%, 2% 2%, 6% 6%, 10% 0%, 15% 5%, 20% 1%, 26% 6%, 32% 0%, 38% 5%, 44% 1%,
-    50% 6%, 56% 0%, 62% 5%, 68% 1%, 74% 6%, 80% 0%, 86% 5%, 92% 1%, 96% 6%, 100% 2%,
-    100% 100%, 0% 100%
-  );
+  margin: 8px 0 18px;
+  padding: 0 4px;
 }
 
-.bf-sheet__recarga {
-  padding: 16px 12px;
+.bf-perk {
   text-align: center;
-  color: #fff;
-  background: linear-gradient(180deg, #ff3b4e 0%, #b00018 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    0 10px 18px rgba(140, 0, 20, 0.25);
-  clip-path: polygon(
-    0% 8%, 4% 0%, 12% 6%, 20% 0%, 30% 7%, 40% 0%, 50% 6%, 60% 0%, 70% 7%, 80% 0%, 90% 6%, 96% 0%, 100% 8%,
-    100% 92%, 96% 100%, 90% 94%, 80% 100%, 70% 93%, 60% 100%, 50% 94%, 40% 100%, 30% 93%, 20% 100%, 12% 94%, 4% 100%, 0% 92%
-  );
+  padding: 16px 14px;
+  border-radius: 18px;
 }
 
-.bf-sheet__recarga p {
+.bf-perk--recarga {
+  color: #fff;
+  background:
+    linear-gradient(180deg, #ff3b4e 0%, #b00018 100%);
+  border: 2px solid rgba(255, 225, 74, 0.65);
+  box-shadow:
+    0 0 0 3px rgba(255, 42, 58, 0.22),
+    0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.bf-perk__kicker,
+.bf-perk__label {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
-  font-size: clamp(0.72rem, 2.2vw, 0.88rem);
-  letter-spacing: 0.03em;
+  font-size: clamp(0.7rem, 2.1vw, 0.84rem);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1.25;
 }
 
-.bf-sheet__recarga strong {
+.bf-perk__value {
   display: block;
   margin-top: 6px;
   font-family: 'Titan One', 'Lilita One', sans-serif;
-  font-size: clamp(2.5rem, 9vw, 3.5rem);
+  font-size: clamp(2.3rem, 8vw, 3.2rem);
   line-height: 1;
   color: #ffe14a;
-  text-shadow: 0 3px 0 #8b0000, 0 0 18px rgba(255, 225, 74, 0.45);
+  text-shadow:
+    0 3px 0 #8b0000,
+    0 0 16px rgba(255, 225, 74, 0.4);
 }
 
-.bf-sheet__plan {
+.bf-perk--plan {
   display: grid;
   align-content: center;
   gap: 12px;
-  text-align: center;
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(20, 0, 4, 0.72), rgba(8, 0, 2, 0.88));
+  border: 2px solid rgba(255, 225, 74, 0.45);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
 }
 
-.bf-sheet__plan p {
+.bf-perk__gb {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
-  font-size: clamp(0.95rem, 3vw, 1.15rem);
-  line-height: 1.25;
-  color: #8b0000;
+  font-size: clamp(0.9rem, 2.8vw, 1.08rem);
+  line-height: 1.3;
   text-transform: uppercase;
+  color: #fff;
 }
 
-.bf-sheet__plan span {
-  color: #c40018;
-  font-size: 1.15em;
+.bf-perk__gb span {
+  color: #ffe14a;
+  font-size: 1.12em;
 }
 
-.bf-sheet__apps {
+.bf-perk__apps {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  color: #8b0000;
-  font-size: 1.35rem;
+  gap: 8px;
+  color: #ffe14a;
+  font-size: 1.2rem;
 }
 
-.bf-sheet__apps i {
-  width: 2rem;
-  height: 2rem;
+.bf-perk__apps i {
+  width: 1.9rem;
+  height: 1.9rem;
   display: grid;
   place-items: center;
   border-radius: 999px;
-  background: rgba(255, 42, 58, 0.1);
+  background: rgba(255, 225, 74, 0.12);
 }
 
 @media (max-width: 720px) {
@@ -6212,7 +6196,7 @@ body.comisiones-viva .cm-footer__legal {
   }
 
   .bf-offer,
-  .bf-sheet {
+  .bf-perks {
     grid-template-columns: 1fr;
   }
 
