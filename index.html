@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descarga YAAVSTA</title>
+  <meta name="description" content="Descarga la app YAAVSTA para iPhone o Android.">
+  <meta name="theme-color" content="#8b0000">
+  <link rel="canonical" href="https://ganayaavs.com/app/">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <meta property="og:title" content="Descarga YAAVSTA">
+  <meta property="og:description" content="Escanea y abre la tienda de tu celular.">
+  <meta property="og:url" content="https://ganayaavs.com/app/">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Titan+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg0: #1a0505;
+      --bg1: #4a0a0a;
+      --gold: #f5c518;
+      --cream: #fff6e8;
+      --ink: #1a0a0a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100dvh;
+      font-family: Montserrat, system-ui, sans-serif;
+      color: var(--cream);
+      background:
+        radial-gradient(120% 80% at 50% -10%, #7a1212 0%, transparent 55%),
+        linear-gradient(165deg, var(--bg1), var(--bg0) 70%);
+      display: grid;
+      place-items: center;
+      padding: 2rem 1.25rem;
+    }
+
+    main {
+      width: min(26rem, 100%);
+      text-align: center;
+    }
+
+    .brand {
+      font-family: "Titan One", sans-serif;
+      font-size: clamp(2.4rem, 10vw, 3.4rem);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      color: var(--gold);
+      text-shadow: 0 0.08em 0 rgba(0, 0, 0, 0.35);
+      margin-bottom: 0.65rem;
+    }
+
+    h1 {
+      font-size: clamp(1.15rem, 4.2vw, 1.45rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 0.45rem;
+    }
+
+    .status {
+      font-size: 0.95rem;
+      font-weight: 500;
+      opacity: 0.88;
+      margin-bottom: 1.5rem;
+    }
+
+    .actions {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 3.15rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.98rem;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .btn:active { transform: scale(0.98); }
+    .btn:hover { filter: brightness(1.05); }
+
+    .btn--ios {
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    .btn--android {
+      background: linear-gradient(135deg, var(--gold), #ffe56a);
+      color: var(--ink);
+    }
+
+    .hint {
+      margin-top: 1.25rem;
+      font-size: 0.82rem;
+      opacity: 0.7;
+    }
+
+    [hidden] { display: none !important; }
+  </style>
+  <script>
+    (function () {
+      var IOS = 'https://apps.apple.com/mx/app/yaavsta/id6759346556';
+      var ANDROID = 'https://play.google.com/store/apps/details?id=mx.com.yaavsta.yaavsta';
+      var ua = navigator.userAgent || navigator.vendor || '';
+      var isIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var isAndroid = /Android/i.test(ua);
+
+      window.__YAAVSTA__ = { ios: IOS, android: ANDROID, isIOS: isIOS, isAndroid: isAndroid };
+
+      if (isIOS) {
+        window.location.replace(IOS);
+      } else if (isAndroid) {
+        window.location.replace(ANDROID);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <main>
+    <p class="brand">YAAVSTA</p>
+    <h1>Descarga la app</h1>
+    <p class="status" id="status">Elige tu tienda</p>
+
+    <div class="actions" id="actions">
+      <a class="btn btn--ios" id="btn-ios" href="https://apps.apple.com/mx/app/yaavsta/id6759346556">App Store - iPhone</a>
+      <a class="btn btn--android" id="btn-android" href="https://play.google.com/store/apps/details?id=mx.com.yaavsta.yaavsta">Play Store - Android</a>
+    </div>
+
+    <p class="hint" id="hint">Si no redirige solo, toca el boton de tu celular.</p>
+  </main>
+
+  <script>
+    (function () {
+      var cfg = window.__YAAVSTA__ || {};
+      var status = document.getElementById('status');
+      var hint = document.getElementById('hint');
+      var btnIos = document.getElementById('btn-ios');
+      var btnAndroid = document.getElementById('btn-android');
+
+      if (cfg.isIOS) {
+        status.textContent = 'Abriendo App Store...';
+        btnAndroid.hidden = true;
+        hint.textContent = 'Si no abre, toca App Store.';
+      } else if (cfg.isAndroid) {
+        status.textContent = 'Abriendo Play Store...';
+        btnIos.hidden = true;
+        hint.textContent = 'Si no abre, toca Play Store.';
+      } else {
+        status.textContent = 'Escanea el QR desde tu celular, o elige tienda:';
+      }
+    })();
+  </script>
+</body>
+</html>
+
