@@ -1,0 +1,25 @@
+NOTIFICACIONES SIN ONESIGNAL (Web Push + PHP)
+=============================================
+
+1) En tu computadora (con PHP 8.1+ y Composer instalados), en esta carpeta:
+     composer install
+   Sube al hosting la carpeta "vendor" completa junto al resto de archivos PHP.
+
+2) Genera claves VAPID y token de admin:
+     php push_vapid_generate.php
+   Eso crea data/push_vapid.local.php (NO lo compartas ni lo subas a GitHub público).
+
+3) Permisos: el servidor debe poder escribir data/push_subscribers.json
+   (se crea solo cuando alguien acepta notificaciones en la web).
+
+4) Abre tu sitio en HTTPS, acepta notificaciones (botón Descargar app / permiso del navegador).
+
+5) Apps Script (columna 23, etc.): en lugar de OneSignal, haz POST a:
+     https://TU-DOMINIO/push_admin_send.php
+   Cabecera: X-Push-Admin: (el admin_token de push_vapid.local.php)
+   Cuerpo JSON: {"title":"...","body":"...","url":"https://ganayaavs.com"}
+
+6) Cron de sorteos: sigue llamando notificaciones.php cada día (igual que antes).
+
+Nota iOS: las push web en iPhone suelen funcionar solo si la página está "Agregar a inicio"
+como app (PWA) y versión reciente de iOS.

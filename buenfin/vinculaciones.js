@@ -1,0 +1,1089 @@
+/**
+ * Ganancias extra por vinculación — consulta desde Google Sheets (CSV público).
+ *
+ * Publica tu hoja: Archivo → Compartir → Publicar en la web → CSV
+ * y pega la URL aquí:
+ */
+const URL_CSV_VINCULACIONES =
+  'https://docs.google.com/spreadsheets/d/e/2PACX-1vS2w41eevnV1hTtq1Fr4dGToReWKLlNRNDMfzlHlLzAE384PQS7yfZvJKysKuRdwAajK3fG4lIEaF64/pub?gid=2006712567&single=true&output=csv';
+
+/** Endpoint local que reenvía al Google Sheet (configurar enviar-formulario.php) */
+const URL_FORMULARIO_ENVIO = '/vinculaciones/enviar-formulario.php';
+
+/** Columnas Excel del CSV publicado (gid 2006712567) — J = Piso ATT */
+const COL_PISO_ATT = 'J';
+const COL_PISO_MOVI = 'L';
+/** G/H = avance mayo · M/N = vinculadas mayo (N = Vinculadas Movi; P = Acumulado Movi/ganancia) */
+const COL_AVANCE_ATT = 'G';
+const COL_AVANCE_MOVI = 'H';
+const COL_VINCULADO_ATT = 'M';
+const COL_VINCULADO_MOVI = 'N';
+/** O = Acumulado ATT, P = Acumulado Movi */
+const COL_GAN_ATT = 'O';
+const COL_GAN_MOVI = 'P';
+const COL_GAN_TOTAL = 'Q';
+
+/** Mes de la meta (piso) y del avance en el desglose */
+const MES_PISO_LABEL = 'abril';
+const MES_AVANCE_LABEL = 'mayo';
+const MES_META_LABEL = MES_PISO_LABEL;
+
+/** Datos de prueba mientras no hay hoja CSV conectada */
+const DEMO_DATOS = [
+  {
+    clave: 'DEMO',
+    sims: '24',
+    esims_vinculadas: '18',
+    piso_att: '5',
+    piso_movi: '5',
+    avance_att: '7',
+    vinculado_att: '6',
+    avance_movi: '5',
+    vinculado_movi: '4',
+    ganancia_att: '1250',
+    ganancia_movi: '980',
+    ganancia_total: '2230',
+  },
+  {
+    clave: 'YA12345',
+    sims: '31',
+    esims_vinculadas: '22',
+    piso_att: '8',
+    piso_movi: '6',
+    avance_att: '11',
+    vinculado_att: '10',
+    avance_movi: '9',
+    vinculado_movi: '8',
+    ganancia_att: '2100',
+    ganancia_movi: '1650',
+    ganancia_total: '3750',
+  },
+  {
+    clave: 'PRUEBA01',
+    sims: '12',
+    esims_vinculadas: '9',
+    piso_att: '4',
+    piso_movi: '4',
+    avance_att: '2',
+    vinculado_att: '2',
+    avance_movi: '3',
+    vinculado_movi: '3',
+    ganancia_att: '480',
+    ganancia_movi: '520',
+    ganancia_total: '1000',
+  },
+  {
+    clave: 'CAMPEON24',
+    sims: '45',
+    esims_vinculadas: '38',
+    piso_att: '10',
+    piso_movi: '10',
+    avance_att: '15',
+    vinculado_att: '14',
+    avance_movi: '14',
+    vinculado_movi: '13',
+    ganancia_att: '3200',
+    ganancia_movi: '2850',
+    ganancia_total: '6050',
+  },
+  {
+    clave: 'TESTATT',
+    sims: '20',
+    esims_vinculadas: '14',
+    piso_att: '3',
+    piso_movi: '7',
+    avance_att: '8',
+    vinculado_att: '7',
+    avance_movi: '1',
+    vinculado_movi: '1',
+    ganancia_att: '1890',
+    ganancia_movi: '310',
+    ganancia_total: '2200',
+  },
+  {
+    clave: 'TESTMOVI',
+    sims: '19',
+    esims_vinculadas: '11',
+    piso_att: '6',
+    piso_movi: '3',
+    avance_att: '1',
+    vinculado_att: '1',
+    avance_movi: '11',
+    vinculado_movi: '10',
+    ganancia_att: '420',
+    ganancia_movi: '1740',
+    ganancia_total: '2160',
+  },
+];
+
+const CLAVES_DEMO_LISTA = DEMO_DATOS.map((r) => r.clave).join(', ');
+
+function normalizarClave(s) {
+  return String(s ?? '')
+    .trim()
+    .toUpperCase()
+    .replace(/\s+/g, '');
+}
+
+function normalizarHeader(h) {
+  return String(h ?? '')
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_|_$/g, '');
+}
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let cell = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    const next = text[i + 1];
+
+    if (inQuotes) {
+      if (ch === '"' && next === '"') {
+        cell += '"';
+        i++;
+      } else if (ch === '"') {
+        inQuotes = false;
+      } else {
+        cell += ch;
+      }
+      continue;
+    }
+
+    if (ch === '"') {
+      inQuotes = true;
+      continue;
+    }
+    if (ch === ',') {
+      row.push(cell);
+      cell = '';
+      continue;
+    }
+    if (ch === '\n' || (ch === '\r' && next === '\n')) {
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = '';
+      if (ch === '\r') i++;
+      continue;
+    }
+    if (ch === '\r') {
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = '';
+      continue;
+    }
+    cell += ch;
+  }
+
+  if (cell.length || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+
+  return rows.filter((r) => r.some((c) => String(c).trim() !== ''));
+}
+
+function letraAIndice(letra) {
+  let n = 0;
+  for (const c of String(letra).trim().toUpperCase()) {
+    n = n * 26 + (c.charCodeAt(0) - 64);
+  }
+  return n - 1;
+}
+
+function valorCeldaPorLetra(cols, letra) {
+  const v = cols[letraAIndice(letra)];
+  return v !== undefined && String(v).trim() !== '' ? String(v).trim() : '';
+}
+
+function filasADatos(csvRows) {
+  if (csvRows.length < 2) return [];
+
+  const headers = csvRows[0].map(normalizarHeader);
+  const datos = [];
+
+  for (let i = 1; i < csvRows.length; i++) {
+    const cols = csvRows[i];
+    const obj = {};
+    headers.forEach((h, idx) => {
+      if (h) obj[h] = String(cols[idx] ?? '').trim();
+    });
+    obj.__col_j_piso_att = valorCeldaPorLetra(cols, COL_PISO_ATT);
+    obj.__col_l_piso_movi = valorCeldaPorLetra(cols, COL_PISO_MOVI);
+    obj.__col_g_avance_att = valorCeldaPorLetra(cols, COL_AVANCE_ATT);
+    obj.__col_h_avance_movi = valorCeldaPorLetra(cols, COL_AVANCE_MOVI);
+    obj.__col_m_vinculado_att = valorCeldaPorLetra(cols, COL_VINCULADO_ATT);
+    obj.__col_n_vinculado_movi = valorCeldaPorLetra(cols, COL_VINCULADO_MOVI);
+    obj.__col_o_gan_att = valorCeldaPorLetra(cols, COL_GAN_ATT);
+    obj.__col_p_gan_movi = valorCeldaPorLetra(cols, COL_GAN_MOVI);
+    obj.__col_q_gan_total = valorCeldaPorLetra(cols, COL_GAN_TOTAL);
+    datos.push(obj);
+  }
+  return datos;
+}
+
+function pick(obj, ...keys) {
+  for (const k of keys) {
+    const nk = normalizarHeader(k);
+    const v = obj[nk];
+    if (v !== undefined && String(v).trim() !== '') return String(v).trim();
+  }
+  return '—';
+}
+
+function pickPisoAtt(row) {
+  const col = row.__col_j_piso_att;
+  if (col) return col;
+  return pick(row, 'piso_att', 'piso att');
+}
+
+function pickPisoMovi(row) {
+  const col = row.__col_l_piso_movi;
+  if (col) return col;
+  return pick(row, 'piso_movi', 'piso movi', 'piso_movistar');
+}
+
+function claveDeFila(row) {
+  const raw = pick(
+    row,
+    'clave_unica',
+    'clave unica',
+    'clave',
+    'clave_cliente',
+    'idcliente',
+    'id',
+    'codigo',
+  );
+  return raw === '—' ? '' : normalizarClave(raw);
+}
+
+function buscarPorClave(datos, claveInput) {
+  const clave = normalizarClave(claveInput);
+  if (!clave) return null;
+  return datos.find((row) => claveDeFila(row) === clave) ?? null;
+}
+
+function formatoNumero(val) {
+  if (val === '—' || val === '' || val == null) return '—';
+  const n = Number(String(val).replace(/[^0-9.-]/g, ''));
+  if (Number.isFinite(n)) {
+    return n.toLocaleString('es-MX', { maximumFractionDigits: 2 });
+  }
+  return val;
+}
+
+function formatoMoneda(val) {
+  if (val === '—' || val === '' || val == null) return '—';
+  const n = Number(String(val).replace(/[^0-9.-]/g, ''));
+  if (Number.isFinite(n)) {
+    return n.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+  }
+  return val;
+}
+
+/** Avance = cantidad de eSIM activadas (solo el número en pantalla). */
+function formatoActivaciones(val) {
+  return formatoNumero(val === '—' || String(val).includes('%') ? '—' : val);
+}
+
+function mostrarStatus(el, tipo, mensaje) {
+  el.className = `status-msg visible status-msg--${tipo}`;
+  el.textContent = mensaje;
+  el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+function ocultarStatus(el) {
+  el.className = 'status-msg';
+  el.textContent = '';
+}
+
+const DESGLOSE_IDS = [
+  'oct-nombre',
+  'oct-clave',
+  'oct-resumen',
+  'oct-act-sept',
+  'oct-meta',
+  'oct-act-oct',
+  'oct-exp',
+  'oct-reales',
+  'oct-alcance',
+  'oct-alcance-nota',
+  'oct-lineas',
+  'oct-total',
+];
+
+function cerrarDesglosePanel() {
+  const panel = document.getElementById('desglose-panel');
+  if (panel) {
+    panel.classList.add('desglose-orden--cerrado');
+    panel.classList.remove('desglose-orden--abierto');
+    panel.setAttribute('aria-hidden', 'true');
+  }
+}
+
+function abrirDesglosePanel() {
+  const panel = document.getElementById('desglose-panel');
+  if (!panel) return;
+  panel.classList.remove('desglose-orden--cerrado');
+  panel.setAttribute('aria-hidden', 'false');
+  void panel.offsetHeight;
+  panel.classList.add('desglose-orden--abierto');
+  requestAnimationFrame(() => {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+}
+
+function numeroDeCelda(val) {
+  if (val === '—' || val === '' || val == null) return null;
+  const n = Number(String(val).replace(/[^0-9.-]/g, ''));
+  return Number.isFinite(n) ? n : null;
+}
+
+function actualizarEstadoPiso(row) {
+  const el = document.getElementById('desglose-estado-piso');
+  if (!el) return;
+
+  const operadores = [
+    {
+      nombre: 'AT&T · Unefon',
+      piso: pickPisoAtt(row),
+      avance: pickAvanceAtt(row),
+      vinculado: pickVinculadoAtt(row),
+    },
+    {
+      nombre: 'Movistar',
+      piso: pickPisoMovi(row),
+      avance: pickAvanceMovi(row),
+      vinculado: pickVinculadoMovi(row),
+    },
+  ];
+
+  const lineas = [];
+  for (const op of operadores) {
+    const piso = numeroDeCelda(op.piso);
+    const avance = numeroDeCelda(op.avance);
+    const vinculado = numeroDeCelda(op.vinculado);
+    if (piso == null) continue;
+
+    const ref = vinculado != null ? vinculado : avance;
+    if (ref == null) continue;
+
+    if (ref < piso) {
+      const faltan = piso - ref;
+      const faltanTxt =
+        op.nombre === 'Movistar'
+          ? `Te faltan ${faltan} para ganar el incentivo acumulado.`
+          : `Te faltan ${faltan} vinculaciones para ganar el incentivo acumulado.`;
+      lineas.push(
+        `${op.nombre}: En mayo llevas ${ref} activaciones vinculadas; tu piso de abril es de ${piso}. ${faltanTxt}`,
+      );
+    } else if (ref === piso) {
+      lineas.push(
+        `${op.nombre}: En mayo llevas ${ref} activaciones vinculadas; tu piso de abril es de ${piso}. Supera ese número en mayo para ganar el incentivo acumulado.`,
+      );
+    } else {
+      lineas.push(
+        `${op.nombre}: En mayo llevas ${ref} activaciones vinculadas; tu piso de abril era de ${piso}. Ya superaste tu meta y ganas incentivo acumulado.`,
+      );
+    }
+  }
+
+  el.replaceChildren();
+  for (const texto of lineas) {
+    const p = document.createElement('p');
+    p.className = 'desglose-orden__estado-linea';
+    p.textContent = texto;
+    el.appendChild(p);
+  }
+  el.className = 'desglose-orden__estado';
+  const hayPendiente = operadores.some((op) => {
+    const piso = numeroDeCelda(op.piso);
+    const ref = numeroDeCelda(op.vinculado) ?? numeroDeCelda(op.avance);
+    return piso != null && ref != null && ref <= piso;
+  });
+  if (hayPendiente && lineas.length) {
+    el.classList.add('desglose-orden__estado--pendiente');
+  } else if (lineas.length) {
+    el.classList.add('desglose-orden__estado--ok');
+  }
+}
+
+function resetConsultaValores() {
+  DESGLOSE_IDS.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '—';
+  });
+  const estadoPiso = document.getElementById('desglose-estado-piso');
+  if (estadoPiso) {
+    estadoPiso.textContent = '';
+    estadoPiso.className = 'desglose-orden__estado';
+  }
+  cerrarDesglosePanel();
+}
+
+function pickAvanceAtt(row) {
+  const col = row.__col_g_avance_att;
+  if (col) return col;
+  return pick(
+    row,
+    'at_t_real_may',
+    'att_real_may',
+    'at_t_real_mayo',
+    'incremental_att',
+    'incremental att',
+    'avance_att',
+    'avance att',
+  );
+}
+
+function pickAvanceMovi(row) {
+  const col = row.__col_h_avance_movi;
+  if (col) return col;
+  return pick(
+    row,
+    'movistar_real_may',
+    'movistar_real_mayo',
+    'incremental_movi',
+    'incremental movi',
+    'avance_movi',
+    'avance movi',
+  );
+}
+
+function pickVinculadoAtt(row) {
+  const col = row.__col_m_vinculado_att;
+  if (col) return col;
+  return pick(
+    row,
+    'vinculadas_att_mayo',
+    'vinculadas att mayo',
+    'vinculado_att',
+    'vinculado att',
+  );
+}
+
+function pickVinculadoMovi(row) {
+  const col = row.__col_n_vinculado_movi;
+  if (col) return col;
+  return pick(row, 'vinculadas_movi_mayo', 'vinculadas movi mayo', 'vinculado_movi', 'vinculado movi');
+}
+
+function pickGanAtt(row) {
+  const col = row.__col_o_gan_att;
+  if (col) return col;
+  return pick(row, 'acumulado_att', 'acumulado att', 'ganancia_att', 'ganancia att');
+}
+
+function pickGanMovi(row) {
+  const col = row.__col_p_gan_movi;
+  if (col) return col;
+  return pick(row, 'acumulado_movi', 'acumulado movi', 'ganancia_movi', 'ganancia movistar');
+}
+
+function pickGanTotal(row) {
+  const col = row.__col_q_gan_total;
+  if (col) return col;
+  return pick(row, 'acumulado_total', 'acumulado total', 'ganancia_total', 'ganancia total', 'total');
+}
+
+function textoAlcance(row) {
+  const meta = Number(row.meta) || 0;
+  const actNov = Number(row.actNov) || 0;
+  const faltan = Math.max(meta - actNov, 0);
+  if (meta <= 0) return 'Así van tus activaciones del acelerador de noviembre.';
+  const deMeta = meta === 1 ? '1 activación' : `${formatoNumero(meta)} activaciones`;
+  const base = `Tu meta de octubre es de ${deMeta}`;
+  if (actNov >= meta) {
+    const extra = Number(row.adicionales) || Math.max(actNov - meta, 0);
+    if (extra > 0) {
+      return `${base}. Ya la superaste: llevas ${formatoNumero(extra)} adicional${extra === 1 ? '' : 'es'}.`;
+    }
+    return `${base}. Ya la igualaste para generar comisión.`;
+  }
+  const deFaltan = faltan === 1 ? 'te falta 1' : `te faltan ${formatoNumero(faltan)}`;
+  return `${base}; ${deFaltan} para igualarla o superarla.`;
+}
+
+function pintarResultados(row) {
+  const set = (id, text) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = text;
+    el.classList.remove('is-updated');
+    void el.offsetWidth;
+    el.classList.add('is-updated');
+  };
+
+  const meta = Number(row.meta) || 0;
+  const actNov = Number(row.actNov) || 0;
+  const adicionales = Number(row.adicionales) || Math.max(actNov - meta, 0);
+  const supero = meta > 0 && actNov >= meta;
+  set('oct-nombre', row.nombre || 'Yaavser');
+  set('oct-clave', row.clave || '—');
+  set('oct-resumen', textoAlcance(row));
+  set('oct-act-sept', formatoNumero(row.actOctubre));
+  set('oct-meta', formatoNumero(row.meta));
+  set('oct-act-oct', formatoNumero(row.actNov));
+  set('oct-exp', row.bracket || '—');
+  set('oct-reales', formatoNumero(adicionales));
+  const avance = meta > 0 ? `${formatoNumero(actNov)} de ${formatoNumero(meta)}` : '—';
+  const nota = meta > 0
+    ? 'Activaciones de noviembre vs tu meta de octubre.'
+    : '';
+  set('oct-alcance', avance);
+  set('oct-alcance-nota', nota);
+  set('oct-lineas', formatoMoneda(row.unitario));
+  set('oct-total', formatoMoneda(row.total));
+
+  const formClave = document.getElementById('form-clave');
+  if (formClave && row.clave) formClave.value = row.clave;
+
+  document.getElementById('oct-resumen')?.classList.toggle('oct-resumen--hit', supero);
+  const caja = document.getElementById('oct-alcance-box');
+  caja?.classList.toggle('oct-alcance--hit', supero);
+  const panel = document.getElementById('desglose-panel');
+  panel?.classList.toggle('bf-avance--hit', supero);
+  panel?.classList.remove('bf-avance--in');
+  void panel?.offsetWidth;
+  panel?.classList.add('bf-avance--in');
+  const meter = document.getElementById('oct-meter');
+  if (meter) {
+    meter.style.width = '0%';
+    const pct = meta > 0 ? Math.max(0, Math.min(100, (actNov / meta) * 100)) : 0;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        meter.style.width = `${pct}%`;
+      });
+    });
+  }
+  abrirDesglosePanel();
+}
+
+let cacheDatos = null;
+
+/** LayOut Acelerador Noviembre.xlsx → acelerador-noviembre.json */
+async function cargarDatos() {
+  if (cacheDatos) return cacheDatos;
+
+  const res = await fetch('acelerador-noviembre.json?v=5', { cache: 'no-store' });
+  if (!res.ok) throw new Error('No se pudo cargar el acelerador de noviembre.');
+  const mapa = await res.json();
+  cacheDatos = Object.entries(mapa).map(([clave, v]) => ({
+    clave,
+    nombre: v[0],
+    actOctubre: v[1],
+    meta: v[2],
+    actNov: v[3],
+    adicionales: v[4],
+    bracket: v[5],
+    unitario: v[6],
+    total: v[7],
+  }));
+  return cacheDatos;
+}
+
+async function validarClaveEnBase(claveInput) {
+  const clave = claveInput?.trim();
+  if (!clave) {
+    return { ok: false, error: 'Escribe tu clave de cliente.' };
+  }
+
+  try {
+    const datos = await cargarDatos();
+    const row = buscarPorClave(datos, clave);
+    if (!row) {
+      return {
+        ok: false,
+        error: `No encontramos la clave «${clave}». Solo puedes enviar el formulario con una clave registrada.`,
+      };
+    }
+    return { ok: true, row };
+  } catch (err) {
+    return {
+      ok: false,
+      error:
+        err instanceof Error
+          ? err.message
+          : 'No se pudo verificar la clave. Intenta de nuevo.',
+    };
+  }
+}
+
+async function consultarVinculacion() {
+  const input = document.getElementById('clave-cliente');
+  const status = document.getElementById('consulta-status');
+  const btn = document.getElementById('btn-consultar');
+  const clave = input?.value?.trim();
+
+  ocultarStatus(status);
+
+  if (!clave) {
+    resetConsultaValores();
+    mostrarStatus(status, 'error', 'Escribe tu clave de cliente.');
+    input?.focus();
+    return;
+  }
+
+  cerrarDesglosePanel();
+  DESGLOSE_IDS.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '—';
+  });
+
+  btn.disabled = true;
+  mostrarStatus(status, 'info', 'Buscando tu avance de noviembre…');
+
+  try {
+    const datos = await cargarDatos();
+    const row = buscarPorClave(datos, clave);
+
+    if (!row) {
+      mostrarStatus(
+        status,
+        'error',
+        `No encontramos la clave «${clave}». Revisa que esté bien escrita o contacta a tu ejecutivo.`,
+      );
+      return;
+    }
+
+    pintarResultados(row);
+    ocultarStatus(status);
+  } catch (err) {
+    mostrarStatus(
+      status,
+      'error',
+      err instanceof Error ? err.message : 'Error al consultar. Intenta de nuevo.',
+    );
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+const BANCOS_CLABE = {
+  '002': { nombre: 'Citibanamex', marca: 'BNMX', color: '#003DA5' },
+  '006': { nombre: 'Bancomext', marca: 'EXT', color: '#0B3D2E' },
+  '009': { nombre: 'Banobras', marca: 'OBRAS', color: '#1B4F72' },
+  '012': { nombre: 'BBVA', marca: 'BBVA', color: '#004481' },
+  '014': { nombre: 'Santander', marca: 'SAN', color: '#EC0000' },
+  '019': { nombre: 'Banjercito', marca: 'JER', color: '#0A5C36' },
+  '021': { nombre: 'HSBC', marca: 'HSBC', color: '#DB0011' },
+  '030': { nombre: 'BanBajío', marca: 'BAJÍO', color: '#0033A0' },
+  '036': { nombre: 'Inbursa', marca: 'INBUR', color: '#0A2F5C' },
+  '042': { nombre: 'Mifel', marca: 'MIFEL', color: '#003366' },
+  '044': { nombre: 'Scotiabank', marca: 'SCOTIA', color: '#EC111A' },
+  '058': { nombre: 'Banregio', marca: 'BREG', color: '#E87722' },
+  '059': { nombre: 'Invex', marca: 'INVEX', color: '#6B2D5B' },
+  '060': { nombre: 'Bansi', marca: 'BANSI', color: '#0057A8' },
+  '062': { nombre: 'Afirme', marca: 'AFIR', color: '#00A3E0' },
+  '072': { nombre: 'Banorte', marca: 'BNT', color: '#E30613' },
+  '103': { nombre: 'American Express', marca: 'AMEX', color: '#016FD0' },
+  '113': { nombre: 'Banco Ve por Más', marca: 'BX+', color: '#E4002B' },
+  '127': { nombre: 'Banco Azteca', marca: 'AZTECA', color: '#78BE20', tinta: '#10215f' },
+  '128': { nombre: 'Autofin', marca: 'AUTO', color: '#1F4E79' },
+  '130': { nombre: 'Compartamos', marca: 'COMP', color: '#E4002B' },
+  '132': { nombre: 'Banco Multiva', marca: 'MULT', color: '#F36F21' },
+  '133': { nombre: 'Actinver', marca: 'ACTIN', color: '#0B3D91' },
+  '135': { nombre: 'Nafin', marca: 'NAFIN', color: '#006747' },
+  '136': { nombre: 'Intercam', marca: 'ICAM', color: '#005EB8' },
+  '137': { nombre: 'Bancoppel', marca: 'COPPEL', color: '#FFD100', tinta: '#10215f' },
+  '140': { nombre: 'Consubanco', marca: 'CONS', color: '#003865' },
+  '141': { nombre: 'Volkswagen Bank', marca: 'VW', color: '#001E50' },
+  '143': { nombre: 'CIBanco', marca: 'CIB', color: '#1B4F9C' },
+  '145': { nombre: 'BBASE', marca: 'BBASE', color: '#111111' },
+  '147': { nombre: 'Bankaool', marca: 'KOOL', color: '#00A99D' },
+  '148': { nombre: 'PagaTodo', marca: 'PAGO', color: '#6C2BD9' },
+  '152': { nombre: 'Bancrea', marca: 'CREA', color: '#C8102E' },
+  '154': { nombre: 'Banco Covalto', marca: 'COV', color: '#5B2C6F' },
+  '156': { nombre: 'Banco Sabadell', marca: 'SAB', color: '#0099D8' },
+  '166': { nombre: 'Banco del Bienestar', marca: 'BIEN', color: '#611232' },
+  '167': { nombre: 'Hey Banco', marca: 'HEY', color: '#00C389' },
+  '600': { nombre: 'GBM', marca: 'GBM', color: '#111111' },
+  '601': { nombre: 'Monex', marca: 'MONEX', color: '#E10600' },
+  '638': { nombre: 'Nu', marca: 'NU', color: '#820AD1' },
+  '646': { nombre: 'STP', marca: 'STP', color: '#1A1A1A' },
+  '699': { nombre: 'Fondeadora', marca: 'FOND', color: '#111111' },
+  '706': { nombre: 'Arcus', marca: 'ARC', color: '#0E6B4F' },
+  '710': { nombre: 'NVIO', marca: 'NVIO', color: '#111111' },
+  '722': { nombre: 'Mercado Pago', marca: 'MP', color: '#009EE3' },
+  '728': { nombre: 'Spin by OXXO', marca: 'SPIN', color: '#E30613' },
+};
+
+const BBVA = BANCOS_CLABE['012'];
+
+function bancoDesdeCuenta(digitos) {
+  if (digitos.length === 10) return BBVA.nombre;
+  if (digitos.length !== 18) return '';
+  return BANCOS_CLABE[digitos.slice(0, 3)]?.nombre || '';
+}
+
+function fichaBanco(digitos) {
+  if (digitos.length === 10) return BBVA;
+  if (digitos.length === 18) return BANCOS_CLABE[digitos.slice(0, 3)] || null;
+  return null;
+}
+
+function initCuentaBancaria() {
+  const clabe = document.getElementById('form-clabe');
+  const banco = document.getElementById('form-banco');
+  const chip = document.getElementById('banco-chip');
+  const icono = document.getElementById('banco-icon');
+  const nombre = document.getElementById('banco-nombre');
+  if (!clabe || !banco || !chip || !icono || !nombre) return;
+
+  const pintar = (ficha, error) => {
+    if (!ficha && !error) {
+      chip.hidden = true;
+      chip.classList.remove('banco-chip--error');
+      banco.value = '';
+      return;
+    }
+    chip.hidden = false;
+    chip.classList.toggle('banco-chip--error', Boolean(error));
+    icono.textContent = ficha ? ficha.marca : '···';
+    icono.style.background = ficha ? ficha.color : '#5c6b86';
+    icono.classList.toggle('is-dark', ficha?.tinta === '#10215f');
+    icono.style.color = ficha?.tinta || '#fff';
+    nombre.textContent = ficha ? ficha.nombre : 'No reconocemos este banco. Revisa los dígitos.';
+    banco.value = ficha ? ficha.nombre : '';
+  };
+
+  const aplicar = () => {
+    const digitos = clabe.value.replace(/\D/g, '').slice(0, 18);
+    if (clabe.value !== digitos) clabe.value = digitos;
+    if (digitos.length !== 10 && digitos.length !== 18) {
+      pintar(null, false);
+      return;
+    }
+    const ficha = fichaBanco(digitos);
+    pintar(ficha, !ficha);
+  };
+
+  clabe.addEventListener('input', aplicar);
+  clabe.form?.addEventListener('reset', () => {
+    window.setTimeout(aplicar, 0);
+  });
+}
+
+async function enviarFormulario(e) {
+  e.preventDefault();
+  const status = document.getElementById('form-status');
+  const btn = e.target.querySelector('.btn-enviar');
+  const data = {
+    nombre: document.getElementById('form-nombre')?.value?.trim(),
+    telefono: document.getElementById('form-telefono')?.value?.trim(),
+    clave: document.getElementById('form-clave')?.value?.trim(),
+    motivo: document.getElementById('form-motivo')?.value,
+    titular: document.getElementById('form-titular')?.value?.trim(),
+    banco: document.getElementById('form-banco')?.value?.trim(),
+    clabe: document.getElementById('form-clabe')?.value?.replace(/\D/g, '') || '',
+    mensaje: document.getElementById('form-mensaje')?.value?.trim(),
+    origen: 'ganayaavs.com/buenfin',
+  };
+  data.banco = bancoDesdeCuenta(data.clabe);
+
+  if (!data.nombre || !data.telefono || !data.clave) {
+    mostrarStatus(status, 'error', 'Completa nombre, teléfono y clave de cliente.');
+    return;
+  }
+
+  if (data.motivo === 'Datos bancarios para pago') {
+    if (!data.titular || !data.clabe) {
+      mostrarStatus(status, 'error', 'Para datos bancarios, completa el titular y la cuenta.');
+      return;
+    }
+    if (!data.banco) {
+      mostrarStatus(status, 'error', 'Escribe 10 dígitos de BBVA o 18 de una CLABE que reconozcamos.');
+      return;
+    }
+  }
+
+  if (btn) btn.disabled = true;
+  mostrarStatus(status, 'info', 'Verificando clave de cliente…');
+
+  const validacionClave = await validarClaveEnBase(data.clave);
+  if (!validacionClave.ok) {
+    mostrarStatus(status, 'error', validacionClave.error);
+    if (btn) btn.disabled = false;
+    return;
+  }
+
+  mostrarStatus(status, 'info', 'Enviando solicitud…');
+
+  try {
+    const res = await fetch(URL_FORMULARIO_ENVIO, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      body: JSON.stringify(data),
+      cache: 'no-store',
+    });
+
+    let json = null;
+    try {
+      json = await res.json();
+    } catch {
+      json = null;
+    }
+
+    if (!res.ok || !json?.ok) {
+      const msg =
+        json?.error ||
+        (res.status === 503
+          ? 'El formulario aún se está conectando al Google Sheet. Intenta en unos minutos.'
+          : 'No se pudo enviar. Intenta de nuevo.');
+      throw new Error(msg);
+    }
+
+    mostrarStatus(
+      status,
+      'ok',
+      '¡Listo! Tu solicitud quedó registrada. Te contactaremos si hace falta.',
+    );
+    e.target.reset();
+  } catch (err) {
+    mostrarStatus(
+      status,
+      'error',
+      err instanceof Error ? err.message : 'Error al enviar. Intenta de nuevo.',
+    );
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+/** Formulario visible desde el 1 de junio de 2026 (hora local del navegador). */
+const FORMULARIO_FECHA_INICIO = { year: 2026, month: 5, day: 1 };
+
+function fechaLocalSoloDia(year, month, day) {
+  const d = new Date(year, month, day);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+function formularioDisponibleHoy() {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const inicio = fechaLocalSoloDia(
+    FORMULARIO_FECHA_INICIO.year,
+    FORMULARIO_FECHA_INICIO.month,
+    FORMULARIO_FECHA_INICIO.day,
+  );
+  return hoy >= inicio;
+}
+
+function initFormularioPlegable() {
+  document.querySelectorAll('.formulario-toggle').forEach((toggle) => {
+    const panel = document.getElementById(toggle.getAttribute('aria-controls') || '');
+    const seccion = toggle.closest('section');
+    if (!panel) return;
+
+    toggle.addEventListener('click', () => {
+      const abierto = toggle.getAttribute('aria-expanded') === 'true';
+      const siguiente = !abierto;
+      toggle.setAttribute('aria-expanded', siguiente ? 'true' : 'false');
+      panel.hidden = !siguiente;
+      seccion?.classList.toggle('formulario-plegable--abierto', siguiente);
+      if (siguiente) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  });
+}
+
+function initFormularioPorFecha() {
+  const aviso = document.getElementById('formulario-aviso');
+  const contenido = document.getElementById('formulario-contenido');
+  const seccion = document.getElementById('formulario-section');
+  if (!aviso || !contenido) return;
+
+  const disponible = formularioDisponibleHoy();
+
+  if (disponible) {
+    aviso.hidden = true;
+    contenido.hidden = false;
+    seccion?.classList.remove('formulario--pendiente');
+  } else {
+    aviso.hidden = false;
+    contenido.hidden = true;
+    seccion?.classList.add('formulario--pendiente');
+  }
+}
+
+function activarPromoBanner(el) {
+  if (!el?.classList.contains('promo-banner-item')) return;
+  el.classList.add('is-visible');
+}
+
+function initPageEnter() {
+  const body = document.body;
+  if (!body) return;
+
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducido) {
+    body.classList.add('page-enter');
+    return;
+  }
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      body.classList.add('page-enter');
+    });
+  });
+}
+
+function initScrollReveal() {
+  const elementos = document.querySelectorAll('.scroll-reveal');
+  if (!elementos.length) return;
+
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const mostrar = (el) => {
+    el.classList.add('is-inview');
+    activarPromoBanner(el);
+  };
+
+  if (reducido) {
+    elementos.forEach(mostrar);
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          mostrar(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -6% 0px' },
+  );
+
+  elementos.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+      mostrar(el);
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+
+function etiquetaMes(s) {
+  const t = String(s ?? '').trim();
+  return t ? t.charAt(0).toUpperCase() + t.slice(1) : '';
+}
+
+function floresDelTitulo() {
+  const svg = document.querySelector('.cm-title-svg');
+  const layer = svg?.querySelector('.cm-title-blooms');
+  if (!svg || !layer) return;
+  const ns = 'http://www.w3.org/2000/svg';
+  layer.replaceChildren();
+  svg.querySelectorAll('.cm-title-svg__front').forEach((text) => {
+    const value = (text.querySelector('textPath')?.textContent || '').trim();
+    for (let i = 0; i < value.length; i += 1) {
+      const ch = value[i];
+      if (!'O¡!'.includes(ch)) continue;
+      let box;
+      let rot = 0;
+      try {
+        box = text.getExtentOfChar(i);
+        rot = text.getRotationOfChar(i) || 0;
+      } catch (err) {
+        continue;
+      }
+      const esLetra = ch === 'O';
+      const size = esLetra ? box.height * 1.05 : box.height * 0.38;
+      const cx = box.x + box.width / 2;
+      const cy = esLetra ? box.y + box.height * 0.52 : box.y + size * 0.35;
+      const g = document.createElementNS(ns, 'g');
+      g.setAttribute('transform', `translate(${cx} ${cy}) rotate(${rot})`);
+      const use = document.createElementNS(ns, 'use');
+      use.setAttribute('href', '#cmBloom');
+      use.setAttribute('x', -size / 2);
+      use.setAttribute('y', -size / 2);
+      use.setAttribute('width', size);
+      use.setAttribute('height', size);
+      g.appendChild(use);
+      layer.appendChild(g);
+    }
+  });
+}
+
+function initFooterTerminos() {
+  const btn = document.getElementById('footer-terminos');
+  const toggle = document.getElementById('terminos-toggle');
+  if (!btn || !toggle) return;
+  btn.addEventListener('click', () => {
+    const seccion = document.getElementById('terminos-section');
+    if (toggle.getAttribute('aria-expanded') !== 'true') toggle.click();
+    else seccion?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const mesAbril = document.getElementById('mes-tag-abril');
+  const mesMayo = document.getElementById('mes-tag-mayo');
+  if (mesAbril) mesAbril.textContent = etiquetaMes(MES_PISO_LABEL);
+  if (mesMayo) mesMayo.textContent = etiquetaMes(MES_AVANCE_LABEL);
+
+  initPageEnter();
+  initScrollReveal();
+  initFormularioPorFecha();
+  initFormularioPlegable();
+  initFooterTerminos();
+  initCuentaBancaria();
+  const pintarFlores = () => {
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(floresDelTitulo);
+    } else {
+      floresDelTitulo();
+    }
+  };
+  pintarFlores();
+  window.addEventListener('resize', floresDelTitulo);
+
+  document.getElementById('btn-consultar')?.addEventListener('click', consultarVinculacion);
+  document.getElementById('clave-cliente')?.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter') {
+      ev.preventDefault();
+      consultarVinculacion();
+    }
+  });
+  document.getElementById('form-vinculaciones')?.addEventListener('submit', enviarFormulario);
+
+  document.getElementById('form-clabe')?.addEventListener('input', (ev) => {
+    const input = ev.currentTarget;
+    const digitos = String(input.value || '').replace(/\D/g, '').slice(0, 18);
+    if (input.value !== digitos) input.value = digitos;
+  });
+
+  const adminNote = document.getElementById('admin-csv-note');
+  const demoHint = document.getElementById('demo-claves-hint');
+  const enModoDemo = !URL_CSV_VINCULACIONES;
+
+  if (adminNote && enModoDemo) {
+    adminNote.classList.add('visible');
+  }
+  if (demoHint) {
+    demoHint.hidden = !enModoDemo;
+  }
+
+  document.querySelectorAll('.demo-clave-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const input = document.getElementById('clave-cliente');
+      const clave = btn.getAttribute('data-clave') || '';
+      if (input) input.value = clave;
+      consultarVinculacion();
+    });
+  });
+});

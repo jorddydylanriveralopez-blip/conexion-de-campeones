@@ -1,0 +1,29 @@
+{
+  "name": "Con Yaavs, siempre ganas más",
+  "short_name": "YAAVS",
+  "description": "Yaavser, supera tu meta de septiembre. Consulta tus comisiones de chips y portabilidades AT&T.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06278f",
+  "theme_color": "#0b2fbe",
+  "icons": [
+    {
+      "src": "/vinculaciones/favicon.png?v=2",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/vinculaciones/icon-512.png?v=1",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/vinculaciones/icon-512.png?v=1",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
